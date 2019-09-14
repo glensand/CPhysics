@@ -42,5 +42,14 @@
     <ClInclude Include="Facade.h">
       <Filter>App</Filter>
     </ClInclude>
+    <ClInclude Include="Task4.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="Task3.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="Task.h">
+      <Filter>App</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
