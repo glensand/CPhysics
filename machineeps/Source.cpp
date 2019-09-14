@@ -41,8 +41,8 @@ int main()
 	std::cout << "max exp: " << computeMaxExp(eps1) << std::endl;
 	
 	double eps2 = 1;
-	std::cout << "double: " << std::endl;
-	std::cout << "eps, double: " << ComputePrecigion(eps2) << std::endl;
+	std::cout << "Real: " << std::endl;
+	std::cout << "eps, Real: " << ComputePrecigion(eps2) << std::endl;
 	std::cout << "min exp: " << computeMinExp(eps2) << std::endl;
 	std::cout << "max exp: " << computeMaxExp(eps2) << std::endl;
 

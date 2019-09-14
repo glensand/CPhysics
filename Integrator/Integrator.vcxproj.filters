@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="App">
+      <UniqueIdentifier>{5186859e-fbcb-49cd-b41e-ad326d7673ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Integrator">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SimpsonIntegrator.cpp">
+      <Filter>Integrator</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="TrapezeIntegrator.cpp">
+      <Filter>Integrator</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseIntegrator.cpp">
+      <Filter>Integrator</Filter>
+    </ClCompile>
+    <ClCompile Include="Facade.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Intergator.h">
+      <Filter>Integrator</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpsonIntegrator.h">
+      <Filter>Integrator</Filter>
+    </ClInclude>
+    <ClInclude Include="TrapezeIntegrator.h">
+      <Filter>Integrator</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseIntegrator.h">
+      <Filter>Integrator</Filter>
+    </ClInclude>
+    <ClInclude Include="Facade.h">
+      <Filter>App</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
