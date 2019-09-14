@@ -21,10 +21,7 @@ void Facade::Test(const TestParams& params)
 		std::cout << "count of intervals: " << std::to_string(i) << std::endl;
 
 		for(const auto& integrator : params.m_integrators)
-		{
-			if(!integrator->SuitableParams(leftX, rightX, i))
-				continue;
-			
+		{	
 			const auto result = integrator->Integrate(function, leftX, rightX, i);
 			std::cout << integrator->GetIntegratorType() << ": " << result;
 			std::cout << "; difference with analytical value: " << result - params.m_analyticalValue << std::endl;
