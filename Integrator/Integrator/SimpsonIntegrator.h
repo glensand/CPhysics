@@ -10,7 +10,7 @@ public:
 	SimpsonIntegrator() = default;
 	virtual ~SimpsonIntegrator() = default;
 
-	Real		Integrate(Function f, Real leftX, Real rightX, size_t intervals) const override;
+	Real		Integrate(OneDimensionalFunction f, Real leftX, Real rightX, size_t intervals) const override;
 
 	std::string	GetIntegratorType() const override;
 };

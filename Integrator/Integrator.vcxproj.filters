@@ -4,41 +4,41 @@
     <Filter Include="App">
       <UniqueIdentifier>{5186859e-fbcb-49cd-b41e-ad326d7673ff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Integrator">
+    <Filter Include="CPhysics">
+      <UniqueIdentifier>{09a9c599-6c60-40f6-b689-c857909cb965}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPhysics\Integrator">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="CPhysics\Solver">
+      <UniqueIdentifier>{e9ad53de-57fe-4acf-a322-4ddb49084bc5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SimpsonIntegrator.cpp">
-      <Filter>Integrator</Filter>
-    </ClCompile>
     <ClCompile Include="Source.cpp">
       <Filter>App</Filter>
-    </ClCompile>
-    <ClCompile Include="TrapezeIntegrator.cpp">
-      <Filter>Integrator</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseIntegrator.cpp">
-      <Filter>Integrator</Filter>
     </ClCompile>
     <ClCompile Include="Facade.cpp">
       <Filter>App</Filter>
     </ClCompile>
+    <ClCompile Include="Integrator\BaseIntegrator.cpp">
+      <Filter>CPhysics\Integrator</Filter>
+    </ClCompile>
+    <ClCompile Include="Integrator\SimpsonIntegrator.cpp">
+      <Filter>CPhysics\Integrator</Filter>
+    </ClCompile>
+    <ClCompile Include="Integrator\TrapezeIntegrator.cpp">
+      <Filter>CPhysics\Integrator</Filter>
+    </ClCompile>
+    <ClCompile Include="Solver\DichotomySolver.cpp">
+      <Filter>CPhysics\Solver</Filter>
+    </ClCompile>
+    <ClCompile Include="Solver\BaseSolver.cpp">
+      <Filter>CPhysics\Solver</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Intergator.h">
-      <Filter>Integrator</Filter>
-    </ClInclude>
-    <ClInclude Include="SimpsonIntegrator.h">
-      <Filter>Integrator</Filter>
-    </ClInclude>
-    <ClInclude Include="TrapezeIntegrator.h">
-      <Filter>Integrator</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseIntegrator.h">
-      <Filter>Integrator</Filter>
-    </ClInclude>
     <ClInclude Include="Facade.h">
       <Filter>App</Filter>
     </ClInclude>
@@ -49,6 +49,33 @@
       <Filter>App</Filter>
     </ClInclude>
     <ClInclude Include="Task.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="Solver\ISolver.h">
+      <Filter>CPhysics\Solver</Filter>
+    </ClInclude>
+    <ClInclude Include="Integrator\BaseIntegrator.h">
+      <Filter>CPhysics\Integrator</Filter>
+    </ClInclude>
+    <ClInclude Include="Integrator\Intergator.h">
+      <Filter>CPhysics\Integrator</Filter>
+    </ClInclude>
+    <ClInclude Include="Integrator\SimpsonIntegrator.h">
+      <Filter>CPhysics\Integrator</Filter>
+    </ClInclude>
+    <ClInclude Include="Integrator\TrapezeIntegrator.h">
+      <Filter>CPhysics\Integrator</Filter>
+    </ClInclude>
+    <ClInclude Include="Solver\DichotomySolver.h">
+      <Filter>CPhysics\Solver</Filter>
+    </ClInclude>
+    <ClInclude Include="Solver\BaseSolver.h">
+      <Filter>CPhysics\Solver</Filter>
+    </ClInclude>
+    <ClInclude Include="CPhysics.h">
+      <Filter>CPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="Task2.h">
       <Filter>App</Filter>
     </ClInclude>
   </ItemGroup>

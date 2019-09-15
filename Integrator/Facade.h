@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 
-#include "Intergator.h"
+#include "Integrator/Intergator.h"
 
 class Facade final
 {
@@ -12,7 +12,7 @@ public:
 	{
 		std::vector< CPhysics::IIntegrator*>	m_integrators;
 	
-		CPhysics::IIntegrator::Function			m_function;
+		CPhysics::OneDimensionalFunction		m_function;
 		const std::vector<size_t>				m_intervals;
 		const std::string						m_functionString;
 		

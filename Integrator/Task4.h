@@ -5,8 +5,8 @@
 #include <cmath>
 
 #include "Facade.h"
-#include "TrapezeIntegrator.h"
-#include "SimpsonIntegrator.h"
+#include "Integrator/TrapezeIntegrator.h"
+#include "Integrator/SimpsonIntegrator.h"
 
 #include "Task.h"
 

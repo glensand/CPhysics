@@ -23,6 +23,7 @@
     <ProjectGuid>{87A20480-2AB9-4540-ADDA-5FB54DD944AD}</ProjectGuid>
     <RootNamespace>Integrator</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>CPhysics</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -123,21 +124,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BaseIntegrator.cpp" />
     <ClCompile Include="Facade.cpp" />
-    <ClCompile Include="SimpsonIntegrator.cpp" />
+    <ClCompile Include="Integrator\BaseIntegrator.cpp" />
+    <ClCompile Include="Integrator\SimpsonIntegrator.cpp" />
+    <ClCompile Include="Integrator\TrapezeIntegrator.cpp" />
+    <ClCompile Include="Solver\BaseSolver.cpp" />
+    <ClCompile Include="Solver\DichotomySolver.cpp" />
     <ClCompile Include="Source.cpp" />
-    <ClCompile Include="TrapezeIntegrator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseIntegrator.h" />
+    <ClInclude Include="CPhysics.h" />
     <ClInclude Include="Facade.h" />
-    <ClInclude Include="Intergator.h" />
-    <ClInclude Include="SimpsonIntegrator.h" />
+    <ClInclude Include="Integrator\BaseIntegrator.h" />
+    <ClInclude Include="Integrator\Intergator.h" />
+    <ClInclude Include="Integrator\SimpsonIntegrator.h" />
+    <ClInclude Include="Integrator\TrapezeIntegrator.h" />
+    <ClInclude Include="Solver\BaseSolver.h" />
+    <ClInclude Include="Solver\DichotomySolver.h" />
+    <ClInclude Include="Solver\ISolver.h" />
     <ClInclude Include="Task.h" />
+    <ClInclude Include="Task2.h" />
     <ClInclude Include="Task3.h" />
     <ClInclude Include="Task4.h" />
-    <ClInclude Include="TrapezeIntegrator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

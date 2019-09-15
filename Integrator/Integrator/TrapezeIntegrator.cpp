@@ -3,7 +3,7 @@
 namespace CPhysics
 {
 	
-Real TrapezeIntegrator::Integrate(Function f, Real leftX, Real rightX, size_t intervals) const
+Real TrapezeIntegrator::Integrate(OneDimensionalFunction f, Real leftX, Real rightX, size_t intervals) const
 {
 	if (!SuitableParams(leftX, rightX, intervals)) return .0;
 

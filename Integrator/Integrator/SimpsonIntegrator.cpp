@@ -2,7 +2,7 @@
 
 namespace CPhysics
 {
-Real SimpsonIntegrator::Integrate(Function f, Real leftX, Real rightX, size_t intervals) const
+Real SimpsonIntegrator::Integrate(OneDimensionalFunction f, Real leftX, Real rightX, size_t intervals) const
 {
 	if (!SuitableParams(leftX, rightX, intervals)) return .0;
 
