@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "machineeps", "machineeps\machineeps.vcxproj", "{D6CA05AF-91E7-4D98-982C-4B462E13C6C2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Integrator", "Integrator\Integrator.vcxproj", "{87A20480-2AB9-4540-ADDA-5FB54DD944AD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CPhysics", "CPhysics\Integrator.vcxproj", "{87A20480-2AB9-4540-ADDA-5FB54DD944AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

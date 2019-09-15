@@ -37,6 +37,12 @@
     <ClCompile Include="Solver\BaseSolver.cpp">
       <Filter>CPhysics\Solver</Filter>
     </ClCompile>
+    <ClCompile Include="Solver\NewtonSolver.cpp">
+      <Filter>CPhysics\Solver</Filter>
+    </ClCompile>
+    <ClCompile Include="Solver\SimpleIterationsSolver.cpp">
+      <Filter>CPhysics\Solver</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Facade.h">
@@ -77,6 +83,12 @@
     </ClInclude>
     <ClInclude Include="Task2.h">
       <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="Solver\NewtonSolver.h">
+      <Filter>CPhysics\Solver</Filter>
+    </ClInclude>
+    <ClInclude Include="Solver\SimpleIterationsSolver.h">
+      <Filter>CPhysics\Solver</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

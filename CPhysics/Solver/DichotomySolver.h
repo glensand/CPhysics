@@ -11,9 +11,10 @@ public:
 	DichotomySolver() = default;
 	virtual ~DichotomySolver() = default;
 
-	std::string GetSolverType() const override;
+	std::string		GetSolverType() const override;
 
-	Real Solve(OneDimensionalFunction function, Real x0) const override;
+	Real			Solve(OneDimensionalFunction function, Real leftX, Real rightX) const override;
+
 };
 
 }

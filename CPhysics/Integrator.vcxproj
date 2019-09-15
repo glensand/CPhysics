@@ -130,6 +130,8 @@
     <ClCompile Include="Integrator\TrapezeIntegrator.cpp" />
     <ClCompile Include="Solver\BaseSolver.cpp" />
     <ClCompile Include="Solver\DichotomySolver.cpp" />
+    <ClCompile Include="Solver\NewtonSolver.cpp" />
+    <ClCompile Include="Solver\SimpleIterationsSolver.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +144,8 @@
     <ClInclude Include="Solver\BaseSolver.h" />
     <ClInclude Include="Solver\DichotomySolver.h" />
     <ClInclude Include="Solver\ISolver.h" />
+    <ClInclude Include="Solver\NewtonSolver.h" />
+    <ClInclude Include="Solver\SimpleIterationsSolver.h" />
     <ClInclude Include="Task.h" />
     <ClInclude Include="Task2.h" />
     <ClInclude Include="Task3.h" />

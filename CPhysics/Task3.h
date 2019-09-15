@@ -18,7 +18,7 @@ public:
 	Task3() = default;
 	virtual  ~Task3() = default;
 
-	void Run() const override
+	void Run(Params* params = nullptr) const override
 	{
 		const std::vector<size_t> intervals = { 4, 16, 32, 64, 128, 256, 512 };
 
