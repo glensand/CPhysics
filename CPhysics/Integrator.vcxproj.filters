@@ -19,12 +19,6 @@
     <ClCompile Include="Source.cpp">
       <Filter>App</Filter>
     </ClCompile>
-    <ClCompile Include="Facade.cpp">
-      <Filter>App</Filter>
-    </ClCompile>
-    <ClCompile Include="Integrator\BaseIntegrator.cpp">
-      <Filter>CPhysics\Integrator</Filter>
-    </ClCompile>
     <ClCompile Include="Integrator\SimpsonIntegrator.cpp">
       <Filter>CPhysics\Integrator</Filter>
     </ClCompile>
@@ -34,20 +28,23 @@
     <ClCompile Include="Solver\DichotomySolver.cpp">
       <Filter>CPhysics\Solver</Filter>
     </ClCompile>
-    <ClCompile Include="Solver\BaseSolver.cpp">
-      <Filter>CPhysics\Solver</Filter>
-    </ClCompile>
     <ClCompile Include="Solver\NewtonSolver.cpp">
       <Filter>CPhysics\Solver</Filter>
     </ClCompile>
     <ClCompile Include="Solver\SimpleIterationsSolver.cpp">
       <Filter>CPhysics\Solver</Filter>
     </ClCompile>
+    <ClCompile Include="Solver\OneDimensionalSolver.cpp">
+      <Filter>CPhysics\Solver</Filter>
+    </ClCompile>
+    <ClCompile Include="Integrator\OneDimensionalIntegrator.cpp">
+      <Filter>CPhysics\Integrator</Filter>
+    </ClCompile>
+    <ClCompile Include="OneDimensionalIntegratorFacade.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Facade.h">
-      <Filter>App</Filter>
-    </ClInclude>
     <ClInclude Include="Task4.h">
       <Filter>App</Filter>
     </ClInclude>
@@ -59,9 +56,6 @@
     </ClInclude>
     <ClInclude Include="Solver\ISolver.h">
       <Filter>CPhysics\Solver</Filter>
-    </ClInclude>
-    <ClInclude Include="Integrator\BaseIntegrator.h">
-      <Filter>CPhysics\Integrator</Filter>
     </ClInclude>
     <ClInclude Include="Integrator\Intergator.h">
       <Filter>CPhysics\Integrator</Filter>
@@ -75,9 +69,6 @@
     <ClInclude Include="Solver\DichotomySolver.h">
       <Filter>CPhysics\Solver</Filter>
     </ClInclude>
-    <ClInclude Include="Solver\BaseSolver.h">
-      <Filter>CPhysics\Solver</Filter>
-    </ClInclude>
     <ClInclude Include="CPhysics.h">
       <Filter>CPhysics</Filter>
     </ClInclude>
@@ -89,6 +80,15 @@
     </ClInclude>
     <ClInclude Include="Solver\SimpleIterationsSolver.h">
       <Filter>CPhysics\Solver</Filter>
+    </ClInclude>
+    <ClInclude Include="Solver\OneDimensionalSolver.h">
+      <Filter>CPhysics\Solver</Filter>
+    </ClInclude>
+    <ClInclude Include="Integrator\OneDimensionalIntegrator.h">
+      <Filter>CPhysics\Integrator</Filter>
+    </ClInclude>
+    <ClInclude Include="OneDimensionalIntegratorFacade.h">
+      <Filter>App</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
-#include "Facade.h"
+#include "OneDimensionalIntegratorFacade.h"
 #include <iostream>
  
-void Facade::Test(const TestParams& params)
+void OneDimensionalIntegratorFacade::Test(const TestParams& params)
 {
 	const auto& function = params.m_function;
 	const auto& leftX = params.m_leftX;

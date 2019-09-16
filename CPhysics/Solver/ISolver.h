@@ -7,6 +7,12 @@
 namespace CPhysics
 {
 
+struct SolverParams
+{
+	virtual ~SolverParams() = default;
+	Real	m_accuracy{ };
+};
+	
 class ISolver
 {
 public:
@@ -15,9 +21,9 @@ public:
 
 	virtual std::string		GetSolverType() const = 0;
 
-	virtual Real			Solve(OneDimensionalFunction function, Real leftX, Real rightX) const = 0;
+	virtual Real			Solve(SolverParams* params) const = 0;
 
-	virtual bool			SuitableParams(Real leftX, Real rightX) const = 0;
+	virtual bool			SuitableParams(SolverParams* params) const = 0;
 };
 
 }

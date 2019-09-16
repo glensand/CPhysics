@@ -7,10 +7,19 @@ std::string SimpleIterationsSolver::GetSolverType() const
 	return "Simple iterations method";
 }
 
-Real SimpleIterationsSolver::Solve(OneDimensionalFunction function, Real leftX, Real rightX) const
+Real SimpleIterationsSolver::Solve(SolverParams* params) const
 {
+	if (!SuitableParams(params)) return Real();
 
-	return Real();
+	const auto simpleIterationsSolverParams = reinterpret_cast<OneDimensionalParams*>(params);
+
+	const auto function = simpleIterationsSolverParams->m_function;
+	Real x = (simpleIterationsSolverParams->m_leftX + simpleIterationsSolverParams->m_rightX) / 2;
+	
+	for (; std::abs(function(x) - x) > simpleIterationsSolverParams->m_accuracy;)
+		x = function(x);
+
+	return x;
 }
 
 }

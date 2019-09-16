@@ -1,11 +1,11 @@
 #pragma once
 
-#include "BaseSolver.h"
+#include "OneDimensionalSolver.h"
 
 namespace CPhysics
 {
 
-class NewtonSolver : public BaseSolver
+class NewtonSolver : public OneDimensionalSolver
 {
 public:
 	NewtonSolver() = default;
@@ -13,7 +13,7 @@ public:
 
 	std::string		GetSolverType() const override;
 
-	Real			Solve(OneDimensionalFunction function, Real leftX, Real rightX) const override;
+	Real			Solve(SolverParams* params) const override;
 
 };
 

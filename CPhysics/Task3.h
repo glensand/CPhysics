@@ -4,7 +4,7 @@
 #include <memory>
 #include <cmath>
 
-#include "Facade.h"
+#include "OneDimensionalIntegratorFacade.h"
 #include "Integrator/TrapezeIntegrator.h"
 #include "Integrator/SimpsonIntegrator.h"
 
@@ -29,11 +29,11 @@ public:
 
 		const auto function1 = [](CPhysics::Real x) { return 1 / (1 + x * x); };
 
-		Facade::Test({ integrators, function1, intervals, "1 / (1 + x^2)", 0, -1, 1 });
+		OneDimensionalIntegratorFacade::Test({ integrators, function1, intervals, "1 / (1 + x^2)", 0, -1, 1 });
 
 		const auto function2 = [](CPhysics::Real x) { return std::pow(x, 1 / 3) * std::pow(EULER_C, std::sin(x)); };
 
-		Facade::Test({ integrators, function2, intervals, "x^(1/3) * exp(sin(x))", 0, 0, 1 });
+		OneDimensionalIntegratorFacade::Test({ integrators, function2, intervals, "x^(1/3) * exp(sin(x))", 0, 0, 1 });
 
 	}
 };

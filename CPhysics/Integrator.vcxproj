@@ -124,11 +124,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Facade.cpp" />
-    <ClCompile Include="Integrator\BaseIntegrator.cpp" />
+    <ClCompile Include="OneDimensionalIntegratorFacade.cpp" />
+    <ClCompile Include="Integrator\OneDimensionalIntegrator.cpp" />
     <ClCompile Include="Integrator\SimpsonIntegrator.cpp" />
     <ClCompile Include="Integrator\TrapezeIntegrator.cpp" />
-    <ClCompile Include="Solver\BaseSolver.cpp" />
+    <ClCompile Include="Solver\OneDimensionalSolver.cpp" />
     <ClCompile Include="Solver\DichotomySolver.cpp" />
     <ClCompile Include="Solver\NewtonSolver.cpp" />
     <ClCompile Include="Solver\SimpleIterationsSolver.cpp" />
@@ -136,12 +136,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPhysics.h" />
-    <ClInclude Include="Facade.h" />
-    <ClInclude Include="Integrator\BaseIntegrator.h" />
+    <ClInclude Include="OneDimensionalIntegratorFacade.h" />
+    <ClInclude Include="Integrator\OneDimensionalIntegrator.h" />
     <ClInclude Include="Integrator\Intergator.h" />
     <ClInclude Include="Integrator\SimpsonIntegrator.h" />
     <ClInclude Include="Integrator\TrapezeIntegrator.h" />
-    <ClInclude Include="Solver\BaseSolver.h" />
+    <ClInclude Include="Solver\OneDimensionalSolver.h" />
     <ClInclude Include="Solver\DichotomySolver.h" />
     <ClInclude Include="Solver\ISolver.h" />
     <ClInclude Include="Solver\NewtonSolver.h" />

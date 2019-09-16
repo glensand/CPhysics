@@ -1,9 +1,9 @@
 #pragma once
-#include "BaseIntegrator.h"
+#include "OneDimensionalIntegrator.h"
 
 namespace CPhysics
 {
-class TrapezeIntegrator : public BaseIntegrator
+class TrapezeIntegrator : public OneDimensionalIntegrator
 {
 public:
 	TrapezeIntegrator() = default;

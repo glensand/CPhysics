@@ -4,7 +4,7 @@
 #include <memory>
 #include <cmath>
 
-#include "Facade.h"
+#include "OneDimensionalIntegratorFacade.h"
 #include "Integrator/TrapezeIntegrator.h"
 #include "Integrator/SimpsonIntegrator.h"
 
@@ -34,14 +34,14 @@ public:
 			return std::sin(PI * x5) / (x5 * (1 - x));
 		};
 
-		Facade::Test({ integrators, function1, intervals, "sin(PI * x^5) / (x^5 * (1 - x)", 0, 0, 1 });
+		OneDimensionalIntegratorFacade::Test({ integrators, function1, intervals, "sin(PI * x^5) / (x^5 * (1 - x)", 0, 0, 1 });
 
 		const auto function2 = [](CPhysics::Real x)
 		{
 			return std::pow(EULER_C, -std::sqrt(x) + std::sin(x / 10));
 		};
 
-		Facade::Test({ integrators, function2, intervals, "exp(sqrt(x) + sin(x / 10))", 0, 0, 1 });
+		OneDimensionalIntegratorFacade::Test({ integrators, function2, intervals, "exp(sqrt(x) + sin(x / 10))", 0, 0, 1 });
 	}
 	
 };

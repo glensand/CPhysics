@@ -3,12 +3,12 @@
 
 namespace CPhysics
 {
-class BaseIntegrator : public IIntegrator
+class OneDimensionalIntegrator : public IIntegrator
 {
 public:
-	BaseIntegrator() = default;
+	OneDimensionalIntegrator() = default;
 	
-	virtual ~BaseIntegrator() = default;
+	virtual ~OneDimensionalIntegrator() = default;
 
 	bool SuitableParams(Real leftX, Real rightX, size_t intervals) const override;
 };

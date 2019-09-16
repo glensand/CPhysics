@@ -1,9 +1,9 @@
 #pragma once
-#include "BaseIntegrator.h"
+#include "OneDimensionalIntegrator.h"
 
 namespace CPhysics
 {
-class SimpsonIntegrator : public BaseIntegrator
+class SimpsonIntegrator : public OneDimensionalIntegrator
 {
 public:
 	

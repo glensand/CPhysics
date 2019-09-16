@@ -4,7 +4,7 @@
 
 #include "Integrator/Intergator.h"
 
-class Facade final
+class OneDimensionalIntegratorFacade final
 {
 public:
 
@@ -22,8 +22,8 @@ public:
 		const CPhysics::Real					m_rightX;
 	};
 	
-	Facade() = default;
-	~Facade() = default;
+	OneDimensionalIntegratorFacade() = default;
+	~OneDimensionalIntegratorFacade() = default;
 
 	static void Test(const TestParams& params);
 };
