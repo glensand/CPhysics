@@ -1,30 +1,35 @@
 #include "OneDimensionalIntegratorFacade.h"
 #include <iostream>
- 
-void OneDimensionalIntegratorFacade::Test(const TestParams& params)
+#include "Integrator/OneDimensionalIntegrator.h"
+
+void OneDimensionalIntegratorFacade::Test(const CPhysics::Params* params)
 {
-	const auto& function = params.m_function;
-	const auto& leftX = params.m_leftX;
-	const auto& rightX = params.m_rightX;
+	const auto oneDimensionalIntegratorTestParams = dynamic_cast<const OneDimensionalIntegratorTestParams*>(params);
+	if (params == nullptr) return;
+
+	const auto& leftX = oneDimensionalIntegratorTestParams->m_leftX;
+	const auto& rightX = oneDimensionalIntegratorTestParams->m_rightX;
 
 	std::cout << "//========================================================//" << std::endl;
-	std::cout << "Test function: " << params.m_functionString << std::endl;
+	std::cout << "Test function: " << oneDimensionalIntegratorTestParams->m_functionString << std::endl;
 	std::cout << "integrate from: " << std::to_string(leftX) << " to: " << std::to_string(rightX) << std::endl;
-	std::cout << "Analytical value: " << params.m_analyticalValue << std::endl;
+	std::cout << "Analytical value: " << oneDimensionalIntegratorTestParams->m_analyticalValue << std::endl;
 	
-	for(auto i : params.m_intervals)
+	for(auto i : oneDimensionalIntegratorTestParams->m_intervalsVector)
 	{
 		if(i == 0)
 			continue;
 
 		std::cout << "//----------------------------------------------" << std::endl;
 		std::cout << "count of intervals: " << std::to_string(i) << std::endl;
-
-		for(const auto& integrator : params.m_integrators)
+		const CPhysics::OneDimensionalIntervalsIntegratorParams oneDimensionalIntegratorParams
+		(leftX, rightX, oneDimensionalIntegratorTestParams->m_function, i);
+		
+		for(const auto& integrator : oneDimensionalIntegratorTestParams->m_integrators)
 		{	
-			const auto result = integrator->Integrate(function, leftX, rightX, i);
+			const auto result = integrator->Integrate(&oneDimensionalIntegratorParams);
 			std::cout << integrator->GetIntegratorType() << ": " << result;
-			std::cout << "; difference with analytical value: " << result - params.m_analyticalValue << std::endl;
+			std::cout << "; difference with analytical value: " << result - oneDimensionalIntegratorTestParams->m_analyticalValue << std::endl;
 		}
 	}
 }

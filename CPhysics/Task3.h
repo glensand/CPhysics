@@ -4,11 +4,11 @@
 #include <memory>
 #include <cmath>
 
-#include "OneDimensionalIntegratorFacade.h"
 #include "Integrator/TrapezeIntegrator.h"
 #include "Integrator/SimpsonIntegrator.h"
 
 #include "Task.h"
+#include "OneDimensionalIntegratorFacade.h"
 
 class Task3 : public Task
 {
@@ -29,11 +29,14 @@ public:
 
 		const auto function1 = [](CPhysics::Real x) { return 1 / (1 + x * x); };
 
-		OneDimensionalIntegratorFacade::Test({ integrators, function1, intervals, "1 / (1 + x^2)", 0, -1, 1 });
+		OneDimensionalIntegratorTestParams params1(integrators, intervals, "1 / (1 + x^2)", 0, -1, 1, function1);
+			
+		OneDimensionalIntegratorFacade::Test(&params1);
 
 		const auto function2 = [](CPhysics::Real x) { return std::pow(x, 1 / 3) * std::pow(EULER_C, std::sin(x)); };
 
-		OneDimensionalIntegratorFacade::Test({ integrators, function2, intervals, "x^(1/3) * exp(sin(x))", 0, 0, 1 });
+		OneDimensionalIntegratorTestParams params2(integrators, intervals, "x^(1/3) * exp(sin(x))", 0, 0, 1, function2);
+		OneDimensionalIntegratorFacade::Test(&params2);
 
 	}
 };

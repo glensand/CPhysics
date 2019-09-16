@@ -16,11 +16,11 @@ std::string NewtonSolver::GetSolverType() const
 	return "Newton method";
 }
 
-Real NewtonSolver::Solve(SolverParams* params) const
+Real NewtonSolver::Solve(const Params* params) const
 {
 	if (!SuitableParams(params)) return Real();
 
-	const auto dichotomySolverParams = reinterpret_cast<OneDimensionalParams*>(params);
+	const auto dichotomySolverParams = reinterpret_cast<const OneDimensionalParams*>(params);
 
 	Real a = dichotomySolverParams->m_leftX;
 	Real b = dichotomySolverParams->m_rightX;

@@ -5,8 +5,9 @@
 namespace CPhysics
 {
 
-struct OneDimensionalParams : public SolverParams
+struct OneDimensionalParams : Params
 {
+	Real					m_accuracy{ };
 	Real					m_leftX{ };
 	Real					m_rightX{ };
 	OneDimensionalFunction	m_function{ };
@@ -18,7 +19,7 @@ public:
 			OneDimensionalSolver() = default;
 	virtual	~OneDimensionalSolver() = default;
 
-	bool	SuitableParams(SolverParams* params) const override;
+	bool	SuitableParams(const Params* params) const override;
 
 };
 

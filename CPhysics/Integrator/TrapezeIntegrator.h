@@ -9,7 +9,7 @@ public:
 	TrapezeIntegrator() = default;
 	virtual ~TrapezeIntegrator() = default;
 
-	Real Integrate(OneDimensionalFunction f, Real leftX, Real rightX, size_t intervals) const override;
+	Real Integrate(const Params* params) const override;
 
 	std::string GetIntegratorType() const override;
 };

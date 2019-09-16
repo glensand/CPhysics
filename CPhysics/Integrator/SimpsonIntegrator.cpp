@@ -2,17 +2,22 @@
 
 namespace CPhysics
 {
-Real SimpsonIntegrator::Integrate(OneDimensionalFunction f, Real leftX, Real rightX, size_t intervals) const
+Real SimpsonIntegrator::Integrate(const Params* params) const
 {
-	if (!SuitableParams(leftX, rightX, intervals)) return .0;
+	if (!SuitableParams(params)) return .0;
 
+	const auto oneDimensionalIntegratorParams = reinterpret_cast<const OneDimensionalIntervalsIntegratorParams*>(params);
 	Real result = 0.;
-	const Real dx = (rightX - leftX) / (Real(intervals));
-	Real a = leftX;
 	
-	for (size_t i = 0; i < intervals - 1; ++i)
+	const Real dx = (oneDimensionalIntegratorParams->m_rightX - oneDimensionalIntegratorParams->m_leftX)
+	/ Real(oneDimensionalIntegratorParams->m_intervals);
+	const auto function = oneDimensionalIntegratorParams->m_function;
+	
+	Real a = oneDimensionalIntegratorParams->m_leftX;
+	
+	for (size_t i = 0; i < oneDimensionalIntegratorParams->m_intervals - 1; ++i)
 	{
-		result += f(a) + 4 * f((a + a + dx) / 2) + f(a + dx);
+		result += function(a) + 4 * function((a + a + dx) / 2) + function(a + dx);
 		a += dx;
 	}
 

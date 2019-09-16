@@ -13,7 +13,7 @@ public:
 
 	std::string		GetSolverType() const override;
 
-	Real			Solve(SolverParams* params) const override;
+	Real			Solve(const Params* params) const override;
 
 };
 

@@ -2,28 +2,37 @@
 #include <vector>
 #include <string>
 
-#include "Integrator/Intergator.h"
+#include "Integrator/OneDimensionalIntegrator.h"
+
+struct OneDimensionalIntegratorTestParams : CPhysics::OneDimensionalIntegratorParams
+{
+	OneDimensionalIntegratorTestParams(const std::vector< CPhysics::IIntegrator*> &integrators, const std::vector<size_t> &intervals,
+	const std::string &stringFunction, CPhysics::Real analyticalValue, CPhysics::Real leftX, CPhysics::Real rightX, 
+	CPhysics::OneDimensionalFunction function)
+	:
+	OneDimensionalIntegratorParams(leftX, rightX, function),
+	m_integrators(integrators),
+	m_intervalsVector(intervals),
+	m_functionString(stringFunction),
+	m_analyticalValue(analyticalValue)
+	{}
+	
+	virtual ~OneDimensionalIntegratorTestParams() = default;
+
+	std::vector< CPhysics::IIntegrator*>	m_integrators;
+
+	const std::vector<size_t>				m_intervalsVector;
+	const std::string						m_functionString;
+
+	const CPhysics::Real					m_analyticalValue{ };
+};
 
 class OneDimensionalIntegratorFacade final
 {
 public:
-
-	struct TestParams final
-	{
-		std::vector< CPhysics::IIntegrator*>	m_integrators;
-	
-		CPhysics::OneDimensionalFunction		m_function;
-		const std::vector<size_t>				m_intervals;
-		const std::string						m_functionString;
-		
-		const CPhysics::Real					m_analyticalValue;
-
-		const CPhysics::Real					m_leftX;
-		const CPhysics::Real					m_rightX;
-	};
 	
 	OneDimensionalIntegratorFacade() = default;
 	~OneDimensionalIntegratorFacade() = default;
 
-	static void Test(const TestParams& params);
+	static void Test(const CPhysics::Params* params);
 };

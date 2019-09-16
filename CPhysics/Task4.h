@@ -34,14 +34,16 @@ public:
 			return std::sin(PI * x5) / (x5 * (1 - x));
 		};
 
-		OneDimensionalIntegratorFacade::Test({ integrators, function1, intervals, "sin(PI * x^5) / (x^5 * (1 - x)", 0, 0, 1 });
-
+		OneDimensionalIntegratorTestParams params1(integrators, intervals, "sin(PI * x^5) / (x^5 * (1 - x)", 0, 0, 1, function1);
+		OneDimensionalIntegratorFacade::Test(&params1);
+		
 		const auto function2 = [](CPhysics::Real x)
 		{
 			return std::pow(EULER_C, -std::sqrt(x) + std::sin(x / 10));
 		};
 
-		OneDimensionalIntegratorFacade::Test({ integrators, function2, intervals, "exp(sqrt(x) + sin(x / 10))", 0, 0, 1 });
+		OneDimensionalIntegratorTestParams params2(integrators, intervals, "exp(sqrt(x) + sin(x / 10))", 0, 0, 1, function2);
+		OneDimensionalIntegratorFacade::Test(&params2);
 	}
 	
 };

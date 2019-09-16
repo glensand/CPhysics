@@ -3,9 +3,14 @@
 namespace CPhysics
 {
 	
-bool OneDimensionalIntegrator::SuitableParams(Real leftX, Real rightX, size_t intervals) const
+bool OneDimensionalIntegrator::SuitableParams(const Params* params) const
 {
-	return rightX > leftX && intervals > 0;
+	const auto oneDimensionalIntegratorParams = dynamic_cast<const OneDimensionalIntervalsIntegratorParams*>(params);
+	if (oneDimensionalIntegratorParams == nullptr)
+		return false;
+	
+	return oneDimensionalIntegratorParams->m_rightX > oneDimensionalIntegratorParams->m_leftX
+	&& oneDimensionalIntegratorParams->m_intervals > 0;
 }
 	
 }
