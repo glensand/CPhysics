@@ -2,7 +2,6 @@
 #include <string>
 
 #include "..//CPhysics.h"
-#include <vector>
 
 namespace CPhysics
 {

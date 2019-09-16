@@ -6,18 +6,19 @@ Real SimpsonIntegrator::Integrate(OneDimensionalFunction f, Real leftX, Real rig
 {
 	if (!SuitableParams(leftX, rightX, intervals)) return .0;
 
-	Real result1 = 0.;
-	Real result2 = 0.;
-
-	for (size_t i = 0; i < intervals - 1; i += 2)
+	Real result = 0.;
+	const Real dx = (rightX - leftX) / (Real(intervals));
+	Real a = leftX;
+	
+	for (size_t i = 0; i < intervals - 1; ++i)
 	{
-		result1 += f(leftX + (rightX - leftX) * (i + 1.0) / (2.0 * intervals));
-		result2 += f(leftX + (rightX - leftX) * (i + 2.0) / (2.0 * intervals));
+		result += f(a) + 4 * f((a + a + dx) / 2) + f(a + dx);
+		a += dx;
 	}
 
-	return (rightX - leftX) * (f(leftX) + f(rightX) + 2 * result2 + 4 * result1) / (6.0 * intervals);
+	return result * dx / 6;
 }
-
+	
 std::string SimpsonIntegrator::GetIntegratorType() const
 {
 	return "Simpson integrator";

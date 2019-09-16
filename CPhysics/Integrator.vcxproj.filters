@@ -69,9 +69,6 @@
     <ClInclude Include="Solver\DichotomySolver.h">
       <Filter>CPhysics\Solver</Filter>
     </ClInclude>
-    <ClInclude Include="CPhysics.h">
-      <Filter>CPhysics</Filter>
-    </ClInclude>
     <ClInclude Include="Task2.h">
       <Filter>App</Filter>
     </ClInclude>
@@ -89,6 +86,9 @@
     </ClInclude>
     <ClInclude Include="OneDimensionalIntegratorFacade.h">
       <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="CPhysics.h">
+      <Filter>CPhysics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
