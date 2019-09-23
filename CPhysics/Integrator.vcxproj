@@ -124,6 +124,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Interpolator\BaseInterpolator.cpp" />
+    <ClCompile Include="Interpolator\NewtonInterpolator.cpp" />
     <ClCompile Include="OneDimensionalIntegratorFacade.cpp" />
     <ClCompile Include="Integrator\OneDimensionalIntegrator.cpp" />
     <ClCompile Include="Integrator\SimpsonIntegrator.cpp" />
@@ -136,6 +138,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPhysics.h" />
+    <ClInclude Include="Interpolator\BaseInterpolator.h" />
+    <ClInclude Include="Interpolator\IInterpolator.h" />
+    <ClInclude Include="Interpolator\NewtonInterpolator.h" />
     <ClInclude Include="OneDimensionalIntegratorFacade.h" />
     <ClInclude Include="Integrator\OneDimensionalIntegrator.h" />
     <ClInclude Include="Integrator\Intergator.h" />

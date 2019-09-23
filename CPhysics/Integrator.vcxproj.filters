@@ -14,6 +14,9 @@
     <Filter Include="CPhysics\Solver">
       <UniqueIdentifier>{e9ad53de-57fe-4acf-a322-4ddb49084bc5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CPhysics\Interpolator">
+      <UniqueIdentifier>{7dd6dcdb-73a9-4b50-b72e-c6cc50b3c385}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -42,6 +45,12 @@
     </ClCompile>
     <ClCompile Include="OneDimensionalIntegratorFacade.cpp">
       <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="Interpolator\BaseInterpolator.cpp">
+      <Filter>CPhysics\Interpolator</Filter>
+    </ClCompile>
+    <ClCompile Include="Interpolator\NewtonInterpolator.cpp">
+      <Filter>CPhysics\Interpolator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +98,15 @@
     </ClInclude>
     <ClInclude Include="CPhysics.h">
       <Filter>CPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="Interpolator\IInterpolator.h">
+      <Filter>CPhysics\Interpolator</Filter>
+    </ClInclude>
+    <ClInclude Include="Interpolator\BaseInterpolator.h">
+      <Filter>CPhysics\Interpolator</Filter>
+    </ClInclude>
+    <ClInclude Include="Interpolator\NewtonInterpolator.h">
+      <Filter>CPhysics\Interpolator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
