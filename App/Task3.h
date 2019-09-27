@@ -4,11 +4,11 @@
 #include <memory>
 #include <cmath>
 
-#include "Integrator/TrapezeIntegrator.h"
-#include "Integrator/SimpsonIntegrator.h"
+#include <Integrator/TrapezeIntegrator.h>
+#include <Integrator/SimpsonIntegrator.h>
 
 #include "Task.h"
-#include "OneDimensionalIntegratorFacade.h"
+#include <OneDimensionalIntegratorFacade.h>
 
 class Task3 : public Task
 {

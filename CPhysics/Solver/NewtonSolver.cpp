@@ -33,8 +33,8 @@ Real NewtonSolver::Solve(const Params* params) const
 		Real x1 = x0 - function(x0) / dydx(function, x0, x0 + dichotomySolverParams->m_accuracy);
 		if (std::abs(x1 - x0) <= dichotomySolverParams->m_accuracy)
 			return (x1 - x0) / 2;
-		else
-			x0 = x1;
+
+		x0 = x1;
 	}
 }
 

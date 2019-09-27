@@ -38,22 +38,26 @@ public:
     {
         if (QPlotClass->objectName().isEmpty())
             QPlotClass->setObjectName(QString::fromUtf8("QPlotClass"));
-        QPlotClass->resize(888, 625);
+        QPlotClass->resize(1069, 783);
+        QPlotClass->setMaximumSize(QSize(1069, 783));
         centralWidget = new QWidget(QPlotClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
+        centralWidget->setMaximumSize(QSize(1069, 718));
         gridLayout = new QGridLayout(centralWidget);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         widget = new QCustomPlot(centralWidget);
         widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setEnabled(true);
+        widget->setMaximumSize(QSize(1047, 696));
 
         gridLayout->addWidget(widget, 0, 0, 1, 1);
 
         QPlotClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(QPlotClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 888, 26));
+        menuBar->setGeometry(QRect(0, 0, 1069, 26));
         menuQPlot = new QMenu(menuBar);
         menuQPlot->setObjectName(QString::fromUtf8("menuQPlot"));
         QPlotClass->setMenuBar(menuBar);

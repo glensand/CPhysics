@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="App">
-      <UniqueIdentifier>{5186859e-fbcb-49cd-b41e-ad326d7673ff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CPhysics">
       <UniqueIdentifier>{09a9c599-6c60-40f6-b689-c857909cb965}</UniqueIdentifier>
     </Filter>
@@ -19,9 +16,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
-      <Filter>App</Filter>
-    </ClCompile>
     <ClCompile Include="Integrator\SimpsonIntegrator.cpp">
       <Filter>CPhysics\Integrator</Filter>
     </ClCompile>
@@ -43,9 +37,6 @@
     <ClCompile Include="Integrator\OneDimensionalIntegrator.cpp">
       <Filter>CPhysics\Integrator</Filter>
     </ClCompile>
-    <ClCompile Include="OneDimensionalIntegratorFacade.cpp">
-      <Filter>App</Filter>
-    </ClCompile>
     <ClCompile Include="Interpolator\BaseInterpolator.cpp">
       <Filter>CPhysics\Interpolator</Filter>
     </ClCompile>
@@ -54,15 +45,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Task4.h">
-      <Filter>App</Filter>
-    </ClInclude>
-    <ClInclude Include="Task3.h">
-      <Filter>App</Filter>
-    </ClInclude>
-    <ClInclude Include="Task.h">
-      <Filter>App</Filter>
-    </ClInclude>
     <ClInclude Include="Solver\ISolver.h">
       <Filter>CPhysics\Solver</Filter>
     </ClInclude>
@@ -78,9 +60,6 @@
     <ClInclude Include="Solver\DichotomySolver.h">
       <Filter>CPhysics\Solver</Filter>
     </ClInclude>
-    <ClInclude Include="Task2.h">
-      <Filter>App</Filter>
-    </ClInclude>
     <ClInclude Include="Solver\NewtonSolver.h">
       <Filter>CPhysics\Solver</Filter>
     </ClInclude>
@@ -92,9 +71,6 @@
     </ClInclude>
     <ClInclude Include="Integrator\OneDimensionalIntegrator.h">
       <Filter>CPhysics\Integrator</Filter>
-    </ClInclude>
-    <ClInclude Include="OneDimensionalIntegratorFacade.h">
-      <Filter>App</Filter>
     </ClInclude>
     <ClInclude Include="CPhysics.h">
       <Filter>CPhysics</Filter>

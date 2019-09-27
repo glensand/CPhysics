@@ -1,14 +1,30 @@
-#include "QPlot.h"
+﻿#include "QPlot.h"
 #include <iostream>
 
-int main(int argc, char *argv[])
+int main()
 {
-	QPlotParams params;
-	params.m_test = 1;
+	Plotter::PlotParams params;
 
-	QPlot plot;
+	const double a = -1; 
+	const double b = 1; 
+	const double h = 0.1; 
 
-	plot.Plot(params);
+	const int N = (b - a) / h + 2;
+	Plotter::GraphInformation info;
+
+	info.m_x.reserve(N);
+	info.m_y.reserve(N);
+	
+	for (double X = a; X <= b; X += h)
+	{
+		info.m_x.emplace_back(X);
+		info.m_y.emplace_back(X * X);
+	}
+
+	params.m_functions.emplace_back(info);
+	Plotter::QPlot plot;
+	
+	plot.Plot(&params);
 
 	char c;
 	std::cin >> c;

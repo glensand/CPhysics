@@ -4,9 +4,9 @@
 
 #include "Task.h"
 
-#include "Solver/DichotomySolver.h"
-#include "Solver/SimpleIterationsSolver.h"
-#include "Solver/NewtonSolver.h"
+#include <Solver/DichotomySolver.h>
+#include <Solver/SimpleIterationsSolver.h>
+#include <Solver/NewtonSolver.h>
 
 class Task2 : public Task
 {

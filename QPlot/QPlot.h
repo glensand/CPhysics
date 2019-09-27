@@ -4,13 +4,10 @@
 #include <QThread>
 #include <QObject>
 
-struct QPlotParams
-{
-	QPlotParams() = default;
-	virtual ~QPlotParams() = default;
+#include "IPlot.h"
 
-	size_t	m_test{};
-};
+namespace Plotter
+{
 
 class QPlotInternal final : public QObject
 {
@@ -22,17 +19,17 @@ public:
 	QPlotInternal() = default;
 
 			// Sets params to be used for graphic plotting
-	void	SetParams(const QPlotParams &params);
-	
+	void	SetParams(const PlotParams* params);
+
 public slots:
 			// Plot the graphic using passed params
 	void	Plot();
 
 private:
-	QPlotParams	m_qPlotParams;	// Used to specify plotting graphic
+	PlotParams	m_qPlotParams;	// Used to specify plotting graphic
 };
 
-class QPlot final : public QObject
+class QPlot final : public QObject, IPlot
 {
 
 	Q_OBJECT
@@ -40,9 +37,9 @@ class QPlot final : public QObject
 public:
 
 	QPlot() = default;
-	~QPlot() = default;
+	virtual ~QPlot();
 
-	void	Plot(const QPlotParams &params);
+	void	Plot(const PlotParams* params) override;
 
 private:
 
@@ -50,4 +47,4 @@ private:
 
 	QPlotInternal*	m_qPlotInternal;	//	Instance of internal plotting class
 };
-
+}

@@ -6,17 +6,39 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>888</width>
-    <height>625</height>
+    <width>1069</width>
+    <height>783</height>
    </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1069</width>
+    <height>783</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>QPlot</string>
   </property>
   <widget class="QWidget" name="centralWidget">
+   <property name="maximumSize">
+    <size>
+     <width>1069</width>
+     <height>718</height>
+    </size>
+   </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QCustomPlot" name="widget" native="true"/>
+     <widget class="QCustomPlot" name="widget" native="true">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1047</width>
+        <height>696</height>
+       </size>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -25,7 +47,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>888</width>
+     <width>1069</width>
      <height>26</height>
     </rect>
    </property>
@@ -55,8 +77,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="QPlot.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

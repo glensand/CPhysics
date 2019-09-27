@@ -1,6 +1,6 @@
 #include "OneDimensionalIntegratorFacade.h"
 #include <iostream>
-#include "Integrator/OneDimensionalIntegrator.h"
+#include <Integrator/OneDimensionalIntegrator.h>
 
 void OneDimensionalIntegratorFacade::Test(const CPhysics::Params* params)
 {
