@@ -1,4 +1,14 @@
 #pragma once
+//------------------------------------------------------------------------------
+// ISolver.h
+// General equation solver interface
+//
+// Copyright (c) 2019 GlenSand
+// All rights reserved.
+//
+// Date: 27.09.2019
+// Author: Bezborodov Gleb
+//------------------------------------------------------------------------------
 #include <string>
 
 #include "..//CPhysics.h"

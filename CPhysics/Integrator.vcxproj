@@ -140,7 +140,7 @@
     <ClInclude Include="Interpolator\IInterpolator.h" />
     <ClInclude Include="Interpolator\NewtonInterpolator.h" />
     <ClInclude Include="Integrator\OneDimensionalIntegrator.h" />
-    <ClInclude Include="Integrator\Intergator.h" />
+    <ClInclude Include="Integrator\IIntergator.h" />
     <ClInclude Include="Integrator\SimpsonIntegrator.h" />
     <ClInclude Include="Integrator\TrapezeIntegrator.h" />
     <ClInclude Include="Solver\OneDimensionalSolver.h" />

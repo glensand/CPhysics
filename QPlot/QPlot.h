@@ -1,4 +1,14 @@
 #pragma once
+//------------------------------------------------------------------------------
+// QPlot.h
+// QPlot classes
+//
+// Copyright (c) 2019 GlenSand
+// All rights reserved.
+//
+// Date: 27.09.2019
+// Author: Bezborodov Gleb
+//------------------------------------------------------------------------------
 #include "qplotwidget.h"
 
 #include <QThread>

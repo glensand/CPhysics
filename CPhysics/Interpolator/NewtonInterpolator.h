@@ -1,4 +1,14 @@
 #pragma once
+//------------------------------------------------------------------------------
+// NewtonInterpolator.h
+// Class implement polynomial interpolation according to Newtons method 
+//
+// Copyright (c) 2019 GlenSand
+// All rights reserved.
+//
+// Date: 27.09.2019
+// Author: Bezborodov Gleb
+//------------------------------------------------------------------------------
 #include "BaseInterpolator.h"
 
 namespace CPhysics

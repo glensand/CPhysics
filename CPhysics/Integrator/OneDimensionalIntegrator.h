@@ -1,5 +1,16 @@
 #pragma once
-#include "Intergator.h"
+//------------------------------------------------------------------------------
+// OneDimensionalIntegrator.h
+// General one dimensional integrators abstract class
+// Also implements integrators params
+//
+// Copyright (c) 2019 GlenSand
+// All rights reserved.
+//
+// Date: 27.09.2019
+// Author: Bezborodov Gleb
+//------------------------------------------------------------------------------
+#include "IIntergator.h"
 
 namespace CPhysics
 {

@@ -1,4 +1,14 @@
 #pragma once
+//------------------------------------------------------------------------------
+// IInterpolator.h
+// General polynomial interpolation interface
+//
+// Copyright (c) 2019 GlenSand
+// All rights reserved.
+//
+// Date: 27.09.2019
+// Author: Bezborodov Gleb
+//------------------------------------------------------------------------------
 #include "../CPhysics.h"
 #include <string>
 #include <vector>

@@ -48,9 +48,6 @@
     <ClInclude Include="Solver\ISolver.h">
       <Filter>CPhysics\Solver</Filter>
     </ClInclude>
-    <ClInclude Include="Integrator\Intergator.h">
-      <Filter>CPhysics\Integrator</Filter>
-    </ClInclude>
     <ClInclude Include="Integrator\SimpsonIntegrator.h">
       <Filter>CPhysics\Integrator</Filter>
     </ClInclude>
@@ -83,6 +80,9 @@
     </ClInclude>
     <ClInclude Include="Interpolator\NewtonInterpolator.h">
       <Filter>CPhysics\Interpolator</Filter>
+    </ClInclude>
+    <ClInclude Include="Integrator\IIntergator.h">
+      <Filter>CPhysics\Integrator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
