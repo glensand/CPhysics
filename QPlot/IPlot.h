@@ -45,7 +45,6 @@ struct GraphInformation final
 
 	PlotStyle			m_style{ PlotStyle::LINE };					// Plot's graph style
 	Color				m_color{ 0, 0, 0, 255};		// Color to be used for graph plotting
-	AxisLabels			m_labels{ "x", "y" };			// Axis names
 };
 
 struct PlotParams
@@ -53,7 +52,9 @@ struct PlotParams
 	PlotParams() = default;
 	virtual ~PlotParams() = default;
 
-	std::vector<GraphInformation>	m_functions;	// All the functions to be plotted
+	AxisLabels						m_labels{ "x", "y" };	// Axis names
+	
+	std::vector<GraphInformation>	m_functions;						// All the functions to be plotted
 };
 
 class IPlot
