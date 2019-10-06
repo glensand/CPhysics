@@ -12,7 +12,7 @@ struct Point final
 void computeXY(const CPhysics::InterpolatorParams* params, std::vector<Point> &points)
 {
 	points.reserve(params->m_points.size());
-	for(size_t i = 0; i < params->m_points.size(); i++)
+	for (size_t i{ 0 }; i < params->m_points.size(); ++i)
 	{
 		points[i].m_x = params->m_fX(params->m_points[i]);
 		points[i].m_y = params->m_fY(params->m_points[i]);

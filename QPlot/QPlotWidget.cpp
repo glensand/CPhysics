@@ -11,7 +11,7 @@ QPlotWidget::QPlotWidget(const Plotter::PlotParams &plotParams, QWidget *parent)
 	
 	for (const auto& function : plotParams.m_functions)
 	{
-		static size_t i = 0;
+		static size_t i{ 0 };
 		m_ui.widget->addGraph();
 
 		m_ui.widget->graph(i)->setData(QVector<double>::fromStdVector(function.m_x), QVector<double>::fromStdVector(function.m_y));

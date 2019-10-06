@@ -20,7 +20,7 @@ public:
 
 	void Run(Params* params = nullptr) const override
 	{
-		const std::vector<size_t> intervals = { 4, 16, 32, 64, 128, 256, 512 };
+		const std::vector<size_t> intervals { 4, 16, 32, 64, 128, 256, 512 };
 
 		const auto simpsonIntegrator = std::make_shared<CPhysics::SimpsonIntegrator>();
 		const auto trapezeIntegrator = std::make_shared<CPhysics::TrapezeIntegrator>();

@@ -11,6 +11,8 @@
 // Author: Bezborodov Gleb
 //------------------------------------------------------------------------------
 #include "IIntergator.h"
+#include <IPlot.h>
+#include <functional>
 
 namespace CPhysics
 {
@@ -28,7 +30,8 @@ struct OneDimensionalIntegratorParams: Params
 	Real					m_leftX{ };
 	Real					m_rightX{ };
 	OneDimensionalFunction	m_function{ };
-	
+
+	Plotter::IPlot*			m_plotter{ };
 };
 
 struct OneDimensionalIntervalsIntegratorParams : OneDimensionalIntegratorParams
@@ -44,11 +47,16 @@ struct OneDimensionalIntervalsIntegratorParams : OneDimensionalIntegratorParams
 class OneDimensionalIntegrator : public IIntegrator
 {
 public:
-	OneDimensionalIntegrator() = default;
+				OneDimensionalIntegrator() = default;
 	
-	virtual ~OneDimensionalIntegrator() = default;
+	virtual		~OneDimensionalIntegrator() = default;
 
-	bool SuitableParams(const Params* params) const override;
+	bool		SuitableParams(const Params* params) const override;
+
+protected:
+
+	static void	visualize(Plotter::IPlot* plotter, const std::function<Real (Real)> &function,
+	                      Real leftX, Real dx, size_t intervals);
 };
 
 }
