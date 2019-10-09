@@ -6,9 +6,10 @@
 
 #include <Integrator/TrapezeIntegrator.h>
 #include <Integrator/SimpsonIntegrator.h>
+#include <Integrator/OneDimensionalIntegrator.h>
 
 #include "Task.h"
-#include <OneDimensionalIntegratorFacade.h>
+#include "OneDimensionalIntegratorFacade.h"
 
 class Task3 : public Task
 {
@@ -38,5 +39,15 @@ public:
 		OneDimensionalIntegratorTestParams params2(integrators, intervals, "x^(1/3) * exp(sin(x))", 0, 0, 1, function2);
 		OneDimensionalIntegratorFacade::Test(&params2);
 
+		CPhysics::OneDimensionalIntervalsIntegratorParams oneDimensionalIntegratorParams1{-1, 1, function1, 8};
+		CPhysics::OneDimensionalIntervalsIntegratorParams oneDimensionalIntegratorParams2{0, 1, function2, 8};
+
+		/*Plotter::QPlot plot1;
+		Plotter::QPlot plot2;
+
+		oneDimensionalIntegratorParams1.m_plotter = reinterpret_cast<Plotter::IPlot*>(&plot1);
+		oneDimensionalIntegratorParams2.m_plotter = reinterpret_cast<Plotter::IPlot*>(&plot2);
+
+		trapezeIntegrator->Integrate(&oneDimensionalIntegratorParams1);*/
 	}
 };

@@ -20,7 +20,7 @@ Real TrapezeIntegrator::Integrate(const Params* params) const
 		result += dx * (function(leftVal) + function(leftVal + dx)) / 2;
 
 	{
-		const auto trapezeFunction = [function](Real x)
+		const auto trapezeFunction = [function](Real x) -> Real
 		{
 			return function(x);
 		};

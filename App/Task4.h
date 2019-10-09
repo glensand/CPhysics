@@ -4,7 +4,7 @@
 #include <memory>
 #include <cmath>
 
-#include <OneDimensionalIntegratorFacade.h>
+#include "OneDimensionalIntegratorFacade.h"
 #include <Integrator/TrapezeIntegrator.h>
 #include <Integrator/SimpsonIntegrator.h>
 
