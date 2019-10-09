@@ -63,7 +63,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <OutputFile>$(OutDir)\$(ProjectName).exe;</OutputFile>
+      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(SolutionDir)/x64/Debug;%(AdditionalLibraryDirectories);</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>Plot.lib;CPhysics.lib</AdditionalDependencies>
@@ -80,7 +80,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <OutputFile>$(OutDir)\$(ProjectName).exe;</OutputFile>
+      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(SolutionDir)/x64/Debug;</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>Plot.lib;CPhysics.lib</AdditionalDependencies>
