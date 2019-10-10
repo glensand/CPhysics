@@ -36,12 +36,11 @@ std::vector<std::pair<Real, Real>> Euler2Solver::Solve(const Params* params) con
 	
 bool Euler2Solver::SuitableParams(const Params* params) const
 {
-	const auto Eparam = dynamic_cast<const Euler2Params*>(params);
-	if (Eparam)
-		return Eparam->m_rightX >= Eparam->m_leftX;
+	const auto eParam = dynamic_cast<const Euler2Params*>(params);
+	if (eParam)
+		return eParam->m_rightX >= eParam->m_leftX;
 
 	return false;
-
 }
 
 }

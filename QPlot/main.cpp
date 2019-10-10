@@ -3,15 +3,15 @@
 //
 //int main()
 //{
-//	Plotter::PlotParams params;
+//	Plotter::GraphParams params;
 //
 //	const double a = -1; 
 //	const double b = 1; 
 //	const double h = 0.1; 
 //
 //	const int N = (b - a) / h + 2;
-//	Plotter::GraphInformation info;
-//	Plotter::GraphInformation info2;
+//	Plotter::GraphParams info;
+//	Plotter::GraphParams info2;
 //
 //	info2.m_x.reserve(N);
 //	info2.m_y.reserve(N);
@@ -33,7 +33,7 @@
 //
 //	Plotter::QPlot plot;
 //	
-//	plot.Plot(&params);
+//	plot.AddGraphs(&params);
 //
 //	char c;
 //	std::cin >> c;

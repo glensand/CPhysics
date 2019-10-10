@@ -1,3 +1,13 @@
+//------------------------------------------------------------------------------
+// IPlot.h
+// General interface and params for all related plotting classes
+//
+// Copyright (c) 2019 GlenSand
+// All rights reserved.
+//
+// Date: 9.10.2019
+// Author: Bezborodov Gleb
+//------------------------------------------------------------------------------
 #pragma once
 #include <vector>
 #include <string>
@@ -35,26 +45,16 @@ struct Color final
 	ChanelColor		m_a{ };	// Alpha
 };
 
-struct GraphInformation final
+struct GraphParams final
 {
-	GraphInformation() = default;
-	~GraphInformation() = default;
+	GraphParams() = default;
+	~GraphParams() = default;
 
 	std::vector<double>	m_x;		// Vector of x's axis point
 	std::vector<double>	m_y;		// Vector of y's axis point
 
-	PlotStyle			m_style{ PlotStyle::LINE };					// Plot's graph style
+	PlotStyle			m_style{ PlotStyle::LINE };						// AddGraphs's graph style
 	Color				m_color{ 0, 0, 0, 255};		// Color to be used for graph plotting
-};
-
-struct PlotParams
-{
-	PlotParams() = default;
-	virtual ~PlotParams() = default;
-
-	AxisLabels						m_labels{ "x", "y" };	// Axis names
-	
-	std::vector<GraphInformation>	m_functions;						// All the functions to be plotted
 };
 
 class IPlot
@@ -64,8 +64,12 @@ public:
 	IPlot() = default;
 	virtual  ~IPlot() = default;
 
-					// Plot the graph using passed params
-	virtual void	Plot(const PlotParams* params) = 0;
+					// Add  the graph using passed params
+	virtual void	AddGraphs(const GraphParams* params) = 0;
+
+	virtual void	Release() = 0;
+
+	virtual void	Show() = 0;
 };
 }
 

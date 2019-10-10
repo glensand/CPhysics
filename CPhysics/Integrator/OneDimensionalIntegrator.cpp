@@ -18,8 +18,8 @@ void OneDimensionalIntegrator::visualize(Plotter::IPlot* plotter, const std::fun
 {
 	if (plotter == nullptr) return;
 	
-	Plotter::PlotParams plotParams;
-	Plotter::GraphInformation info;
+	Plotter::GraphParams plotParams;
+	Plotter::GraphParams info;
 
 	info.m_x.reserve(intervals);
 	info.m_y.reserve(intervals);
@@ -31,9 +31,7 @@ void OneDimensionalIntegrator::visualize(Plotter::IPlot* plotter, const std::fun
 		info.m_y.emplace_back(function(leftVal));
 	}
 
-	plotParams.m_functions.emplace_back(info);
-
-	plotter->Plot(&plotParams);
+	plotter->AddGraphs(&plotParams);
 }
 	
 }
