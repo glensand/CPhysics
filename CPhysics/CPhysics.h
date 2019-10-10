@@ -16,6 +16,10 @@ using Real = double;
 
 typedef Real(*OneDimensionalFunction)(Real x);
 
+//typedef Real(*FunctionOfXAndU)(Real x, OneDimensionalFunction u);
+
+typedef Real(*FunctionOfTwoArgs)(Real x, Real y);
+	
 struct Params
 {
 	virtual ~Params() = default;

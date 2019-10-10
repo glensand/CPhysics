@@ -10,6 +10,7 @@
 
 class Task2 : public Task
 {
+public:
 	Task2() = default;
 	virtual ~Task2() = default;
 
