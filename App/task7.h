@@ -41,7 +41,7 @@ public:
 		auto rkres = rksolver.Solve(prkParams);
 		for (size_t i = 0; i < eres.size(); ++i)
 		{
-			std::cout << eres[i].first << '\t' << eres[i].second << '\t' << rkres[i].second << std::endl;
+			std::cout << eres[i].first << "\t" << eres[i].second << "\t" << rkres[i].first << "\t" << rkres[i].second << std::endl;
 			
 		}
 		

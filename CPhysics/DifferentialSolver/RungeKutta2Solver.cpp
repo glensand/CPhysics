@@ -33,7 +33,7 @@ std::vector<std::pair<CPhysics::Real, CPhysics::Real>> RungeKutta2Solver::Solve(
 	for (size_t i = 1; i <= sdParams->m_knotAmount; ++i) 
 	{
 		Real x = res[i - 1].first + step;
-		Real y =	res[i - 1].first + step *
+		Real y =	res[i - 1].second + step *
 					(0.25 * sdParams->m_function(res[i - 1].first, res[i - 1].second) +
 					0.75 * sdParams->m_function(res[i - 1].first + 2 * step / 3, 
 					res[i - 1].second +	
