@@ -53,7 +53,7 @@ struct GraphParams final
 	std::vector<double>	m_x;		// Vector of x's axis point
 	std::vector<double>	m_y;		// Vector of y's axis point
 
-	PlotStyle			m_style{ PlotStyle::LINE };						// AddGraphs's graph style
+	PlotStyle			m_style{ PlotStyle::LINE };						// graph style
 	Color				m_color{ 0, 0, 0, 255};		// Color to be used for graph plotting
 };
 
@@ -64,7 +64,7 @@ public:
 	IPlot() = default;
 	virtual  ~IPlot() = default;
 
-					// Add  the graph using passed params
+					// Add the graph using passed params
 	virtual void	AddGraphs(const GraphParams* params) = 0;
 
 	virtual void	Release() = 0;

@@ -38,5 +38,8 @@
     <ClInclude Include="task7.h">
       <Filter>Tasks</Filter>
     </ClInclude>
+    <ClInclude Include="CVPlotExamples.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

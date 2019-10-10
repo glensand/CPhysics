@@ -44,13 +44,21 @@ private:
 
 	void		DrawLabels();
 	
-	bool			m_initialized{ };
 	std::string		m_plotName;
 	cv::Mat			m_plot;
-	cv::Size		m_plotSize{ };
+	cv::Size		m_plotSize{ 1300, 700 };
+	cv::Scalar		m_axisColor{ 255, 255, 255 };
 
-	const size_t	m_borderSize{ 30 };
+	const int		m_borderSize{ 30 };
 
+	float			m_minX{ 0 };
+	float			m_maxX{ 0 };
+	float			m_minY{ FLT_MAX };
+	float			m_maxY{ FLT_MIN };
+
+	float			m_scaleY{ 1.f };
+	float			m_scaleX{ 1.f };
+	
 	std::vector<GraphParams>		m_graphs;
 	AxisLabels						m_labels;
 };
