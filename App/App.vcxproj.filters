@@ -49,5 +49,8 @@
     <ClInclude Include="Task4.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="task7.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

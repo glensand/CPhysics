@@ -14,6 +14,9 @@
     <Filter Include="CPhysics\Interpolator">
       <UniqueIdentifier>{7dd6dcdb-73a9-4b50-b72e-c6cc50b3c385}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CPhysics\DifferentialSolver">
+      <UniqueIdentifier>{24d12b59-644c-4c1c-9f06-2c6b7489c9c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Integrator\SimpsonIntegrator.cpp">
@@ -42,6 +45,15 @@
     </ClCompile>
     <ClCompile Include="Interpolator\NewtonInterpolator.cpp">
       <Filter>CPhysics\Interpolator</Filter>
+    </ClCompile>
+    <ClCompile Include="DifferentialSolver\SimpleDifferentialSolver.cpp">
+      <Filter>CPhysics\DifferentialSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="DifferentialSolver\Euler2Solver.cpp">
+      <Filter>CPhysics\DifferentialSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="DifferentialSolver\RungeKutta2Solver.cpp">
+      <Filter>CPhysics\DifferentialSolver</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +95,15 @@
     </ClInclude>
     <ClInclude Include="Integrator\IIntergator.h">
       <Filter>CPhysics\Integrator</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentialSolver\SimpleDifferentialSolver.h">
+      <Filter>CPhysics\DifferentialSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentialSolver\Euler2Solver.h">
+      <Filter>CPhysics\DifferentialSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentialSolver\RungeKutta2Solver.h">
+      <Filter>CPhysics\DifferentialSolver</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

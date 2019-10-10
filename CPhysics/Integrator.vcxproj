@@ -156,6 +156,9 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DifferentialSolver\Euler2Solver.cpp" />
+    <ClCompile Include="DifferentialSolver\RungeKutta2Solver.cpp" />
+    <ClCompile Include="DifferentialSolver\SimpleDifferentialSolver.cpp" />
     <ClCompile Include="Interpolator\BaseInterpolator.cpp" />
     <ClCompile Include="Interpolator\NewtonInterpolator.cpp" />
     <ClCompile Include="Integrator\OneDimensionalIntegrator.cpp" />
@@ -168,6 +171,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPhysics.h" />
+    <ClInclude Include="DifferentialSolver\Euler2Solver.h" />
+    <ClInclude Include="DifferentialSolver\RungeKutta2Solver.h" />
+    <ClInclude Include="DifferentialSolver\SimpleDifferentialSolver.h" />
     <ClInclude Include="Interpolator\BaseInterpolator.h" />
     <ClInclude Include="Interpolator\IInterpolator.h" />
     <ClInclude Include="Interpolator\NewtonInterpolator.h" />
