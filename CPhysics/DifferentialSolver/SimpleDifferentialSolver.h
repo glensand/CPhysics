@@ -15,7 +15,7 @@ namespace CPhysics
 
 struct SimpleDifferentialParams : Params
 {
-	Real					m_accuracy{ };
+	size_t					m_knotAmount{ };
 	Real					m_leftX{ };
 	Real					m_rightX{ };
 	Real					m_leftCond{ }; // U(m_leftX) where U is the solution of the differential equation 

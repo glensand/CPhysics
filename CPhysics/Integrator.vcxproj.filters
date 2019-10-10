@@ -52,6 +52,9 @@
     <ClCompile Include="DifferentialSolver\Euler2Solver.cpp">
       <Filter>CPhysics\DifferentialSolver</Filter>
     </ClCompile>
+    <ClCompile Include="DifferentialSolver\RungeKutta2Solver.cpp">
+      <Filter>CPhysics\DifferentialSolver</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Solver\ISolver.h">
@@ -97,6 +100,9 @@
       <Filter>CPhysics\DifferentialSolver</Filter>
     </ClInclude>
     <ClInclude Include="DifferentialSolver\Euler2Solver.h">
+      <Filter>CPhysics\DifferentialSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentialSolver\RungeKutta2Solver.h">
       <Filter>CPhysics\DifferentialSolver</Filter>
     </ClInclude>
   </ItemGroup>

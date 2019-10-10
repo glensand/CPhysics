@@ -12,6 +12,7 @@ std::string Euler2Solver::GetSolverType() const
 	
 std::vector<std::pair<Real, Real>> Euler2Solver::Solve(const Params* params) const
 {
+	if (!SuitableParams(params)) return std::vector<std::pair<Real, Real>>{};
 	const auto eParams = reinterpret_cast<const Euler2Params*>(params);
 	const Real length = eParams->m_rightX - eParams->m_leftX;
 	const Real step = length / eParams->m_knotAmount;

@@ -1,6 +1,7 @@
 //------------------------------------------------------------------------------
-// OneDimensionalSolver.h
-// Base class for equation solvers with one argument
+// Euler2Solver.h
+// Class for solving ordinary differential equations numerically through
+// Euler's method of second accuracy order
 //
 // Copyright (c) 2019 Varumithu
 // All rights reserved.
@@ -44,7 +45,7 @@ public:
 
 	std::string		GetSolverType() const override;
 	bool	SuitableParams(const Params * params) const override;
-	virtual std::vector<std::pair<Real, Real>> Solve(const Params* params) const override;
+	std::vector<std::pair<Real, Real>> Solve(const Params* params) const override;
 };
 
 
