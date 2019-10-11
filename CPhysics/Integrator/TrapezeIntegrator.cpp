@@ -25,8 +25,8 @@ Real TrapezeIntegrator::Integrate(const Params* params) const
 			return function(x);
 		};
 
-		visualize(oneDimensionalIntegratorParams->m_plotter, trapezeFunction,
-			oneDimensionalIntegratorParams->m_leftX, dx, oneDimensionalIntegratorParams->m_intervals);
+		visualize(oneDimensionalIntegratorParams->m_plotter, trapezeFunction, oneDimensionalIntegratorParams->m_leftX, 
+			oneDimensionalIntegratorParams->m_rightX, oneDimensionalIntegratorParams->m_intervals);
 	}
 	
 	return result;

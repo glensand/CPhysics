@@ -56,7 +56,7 @@ public:
 protected:
 
 	static void	visualize(Plotter::IPlot* plotter, const std::function<Real (Real)> &function,
-	                      Real leftX, Real dx, size_t intervals);
+	                      Real leftX, Real rightX, size_t intervals);
 };
 
 }

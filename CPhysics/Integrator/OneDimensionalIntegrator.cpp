@@ -1,5 +1,10 @@
 #include "OneDimensionalIntegrator.h"
 
+namespace
+{
+const size_t INTERVALS_TO_BE_SMOTH{ 1000 };
+}
+
 namespace CPhysics
 {
 
@@ -14,24 +19,45 @@ bool OneDimensionalIntegrator::SuitableParams(const Params* params) const
 }
 
 void OneDimensionalIntegrator::visualize(Plotter::IPlot* plotter, const std::function<Real(Real)>& function,
-                                         Real leftX, Real dx, size_t intervals)
+                                         Real leftX, Real rightX, size_t intervals)
 {
 	if (plotter == nullptr) return;
 	
-	Plotter::GraphParams plotParams;
-	Plotter::GraphParams info;
-
-	info.m_x.reserve(intervals);
-	info.m_y.reserve(intervals);
+	Plotter::GraphParams graphParams;
+	Plotter::GraphParams originalFunctionParams;
+	
+	graphParams.m_x.reserve(intervals);
+	graphParams.m_y.reserve(intervals);
 
 	auto leftVal = leftX;
-	for (size_t i{ 0 }; i < intervals - 1; ++i, leftVal += dx)
+	const auto dx = (rightX - leftX) / static_cast<Real>(intervals);
+	
+	for (; leftVal < rightX; leftVal += dx)
 	{
-		info.m_x.emplace_back(leftVal);
-		info.m_y.emplace_back(function(leftVal));
+		const auto result = function(leftVal);
+		
+		graphParams.m_x.emplace_back(leftVal);
+		graphParams.m_y.emplace_back(result);
+
+		graphParams.m_x.emplace_back(leftVal);
+		graphParams.m_y.emplace_back(Real(0));
+
+		graphParams.m_x.emplace_back(leftVal);
+		graphParams.m_y.emplace_back(result);
 	}
 
-	plotter->AddGraphs(&plotParams);
+	leftVal = leftX;
+	const auto improvedDx = (rightX - leftX) / static_cast<Real>(INTERVALS_TO_BE_SMOTH);
+	for(; leftVal < rightX; leftVal += improvedDx)
+	{
+		originalFunctionParams.m_x.emplace_back(leftVal);
+		originalFunctionParams.m_y.emplace_back(function(leftVal));
+	}
+	
+	plotter->AddGraphs(&graphParams);
+	plotter->AddGraphs(&originalFunctionParams);
+	
+	plotter->Show();
 }
 	
 }
