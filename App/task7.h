@@ -28,28 +28,25 @@ public:
 	void Run(Params* params = nullptr) const override
 	{
 		using Real = CPhysics::Real;
-		CPhysics::Euler2Params Params(0., 3., 1., 20, 
-									[](const Real x, const Real u) { return -u; }, 
-									[](const Real x, const Real u) { return 0.0; }, 
-									[](const Real x, const Real u) { return -1.; });
+		CPhysics::Euler2Params Params(0., 3., 1., 20,
+				[](const Real x, const Real u) { return -u; },
+			[](const Real x, const Real u) { return 0.0; },
+			[](const Real x, const Real u) { return -1.; });
 
-		CPhysics::SimpleDifferentialParams rkParams	(0., 3., 1., 20, 
-													[](const Real x, const Real u) { return -u; });
+		CPhysics::SimpleDifferentialParams rkParams(0., 3., 1., 20,
+			[](const Real x, const Real u) { return -u; });
 
 		const auto prkParams = reinterpret_cast<CPhysics::Params*>(&rkParams);
 		const auto pParams = reinterpret_cast<CPhysics::Params*>(&Params);
-		
+
 		CPhysics::Euler2Solver solver;
 		CPhysics::RungeKutta2Solver rksolver;
-<<<<<<< HEAD
+
 
 		print_solution(pParams, &solver);
 		print_solution(prkParams, &rksolver);
-		
-=======
+
+
 		auto rkres = rksolver.Solve(prkParams);
-		for (size_t i = 0; i < eres.size(); ++i)
-			std::cout << eres[i].first << "\t" << eres[i].second << "\t" << rkres[i].first << "\t" << rkres[i].second << std::endl;	
->>>>>>> 4157781df8189afbb38c6825bfc342ca374e0d25
 	}
 };
