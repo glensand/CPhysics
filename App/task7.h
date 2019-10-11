@@ -9,7 +9,7 @@
 class Task7 final : public Task
 {
 
-	static void print_solution(const CPhysics::Params* params, CPhysics::ISimpleDifferentialSolver* pSolver)
+	static void PrintSolution(const CPhysics::Params* params, CPhysics::ISimpleDifferentialSolver* pSolver)
 	{
 		std::cout << "__________________________________" << std::endl;
 		auto res = pSolver->Solve(params);
@@ -43,8 +43,8 @@ public:
 		CPhysics::RungeKutta2Solver rksolver;
 
 
-		print_solution(pParams, &solver);
-		print_solution(prkParams, &rksolver);
+		PrintSolution(pParams, &solver);
+		PrintSolution(prkParams, &rksolver);
 
 
 		auto rkres = rksolver.Solve(prkParams);
