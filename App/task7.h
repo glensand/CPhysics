@@ -8,38 +8,45 @@
 
 class Task7 final : public Task
 {
+
+	static void print_solution(const CPhysics::Params* params, CPhysics::ISimpleDifferentialSolver* pSolver)
+	{
+		std::cout << "__________________________________" << std::endl;
+		auto res = pSolver->Solve(params);
+		for (auto it : res)
+		{
+			std::cout << it.first << '\t' << it.second << std::endl;
+		}
+		std::cout << std::endl;
+	}
 public:
 	Task7() = default;
 	virtual ~Task7() = default;
 
+
+
 	void Run(Params* params = nullptr) const override
 	{
 		using Real = CPhysics::Real;
-		CPhysics::Euler2Params Params;
-		Params.m_leftX = 0.;
-		Params.m_rightX = 3.;
-		Params.m_function = [](const Real x, const Real u) { return -u; };
-		Params.m_functionByX = [](const Real x, const Real u) { return 0.0; };
-		Params.m_functionByU = [](const Real x, const Real u) { return -1.; };
-		Params.m_knotAmount = 20;
-		Params.m_leftCond = 1.;
+		CPhysics::Euler2Params Params(0., 3., 1., 20,
+				[](const Real x, const Real u) { return -u; },
+			[](const Real x, const Real u) { return 0.0; },
+			[](const Real x, const Real u) { return -1.; });
 
-		CPhysics::SimpleDifferentialParams rkParams;
-		rkParams.m_leftX = 0.;
-		rkParams.m_rightX = 3.;
-		rkParams.m_function = [](const Real x, const Real u) { return -u; };
-		rkParams.m_knotAmount = 20;
-		rkParams.m_leftCond = 1.;
+		CPhysics::SimpleDifferentialParams rkParams(0., 3., 1., 20,
+			[](const Real x, const Real u) { return -u; });
 
-		auto prkParams = reinterpret_cast<CPhysics::Params*>(&rkParams);
-		auto pParams = reinterpret_cast<CPhysics::Params*>(&Params);
-		
+		const auto prkParams = reinterpret_cast<CPhysics::Params*>(&rkParams);
+		const auto pParams = reinterpret_cast<CPhysics::Params*>(&Params);
+
 		CPhysics::Euler2Solver solver;
-		auto eres = solver.Solve(pParams);
-		
 		CPhysics::RungeKutta2Solver rksolver;
+
+
+		print_solution(pParams, &solver);
+		print_solution(prkParams, &rksolver);
+
+
 		auto rkres = rksolver.Solve(prkParams);
-		for (size_t i = 0; i < eres.size(); ++i)
-			std::cout << eres[i].first << "\t" << eres[i].second << "\t" << rkres[i].first << "\t" << rkres[i].second << std::endl;	
 	}
 };

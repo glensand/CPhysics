@@ -1,11 +1,19 @@
+//------------------------------------------------------------------------------
+// SimpleDifferentialSolver.h
+// Interface for numerical solvers of single ordinary differential equation
+// as well as params class
+//
+// Copyright (c) 2019 Varumithu
+// All rights reserved.
+//
+// Date: 10.10.2019
+// Author: Bachurin Vladimir
+//------------------------------------------------------------------------------
+
 #pragma once
 
 #include "../Solver/ISolver.h"
 #include  <vector>
-//Кажется, все - таки нужен другой  интерфейс.
-//В ISolver метод солв возвращает Real,
-//то есть одну цифру, а численное решение задачи Коши
-//возвращает набор чисел - сетку и значения функции на каждом узле.
 
 
 
@@ -15,6 +23,12 @@ namespace CPhysics
 
 struct SimpleDifferentialParams : Params
 {
+	SimpleDifferentialParams(const Real left_x, const Real right_x, const Real left_cond,
+		const size_t knot_amount, const FunctionOfTwoArgs f) :
+			m_knotAmount(knot_amount), m_leftX(left_x), m_rightX(right_x),
+			m_leftCond(left_cond), m_function(f)
+	{}
+	SimpleDifferentialParams() = default;
 	size_t					m_knotAmount{ };
 	Real					m_leftX{ };
 	Real					m_rightX{ };
