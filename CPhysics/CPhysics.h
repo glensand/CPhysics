@@ -1,4 +1,3 @@
-#pragma once
 //------------------------------------------------------------------------------
 // CPhysics.h
 // General library header file, consists of very basic structs and typedefs 
@@ -9,6 +8,8 @@
 // Date: 27.09.2019
 // Author: Bezborodov Gleb
 //------------------------------------------------------------------------------
+#pragma once
+
 namespace CPhysics
 {
 

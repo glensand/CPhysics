@@ -41,10 +41,15 @@ public:
 		
 		CPhysics::Euler2Solver solver;
 		CPhysics::RungeKutta2Solver rksolver;
+<<<<<<< HEAD
 
 		print_solution(pParams, &solver);
 		print_solution(prkParams, &rksolver);
 		
+=======
+		auto rkres = rksolver.Solve(prkParams);
+		for (size_t i = 0; i < eres.size(); ++i)
+			std::cout << eres[i].first << "\t" << eres[i].second << "\t" << rkres[i].first << "\t" << rkres[i].second << std::endl;	
+>>>>>>> 4157781df8189afbb38c6825bfc342ca374e0d25
 	}
-
 };

@@ -12,7 +12,7 @@ T ComputePrecision(T eps)
 }
 //--------------------------------------------------------------
 template<typename T>
-int ComputeMaxExp(T eps)
+size_t ComputeMaxExp(T eps)
 {
 	size_t i{ 0 };
 	for (; eps < eps * 2; ++i)
@@ -22,7 +22,7 @@ int ComputeMaxExp(T eps)
 }
 //--------------------------------------------------------------
 template<typename T>
-int ComputeMinExp(T eps)
+size_t ComputeMinExp(T eps)
 {
 	size_t i{ 0 };
 	for (; eps/ 2 != 0; ++i)

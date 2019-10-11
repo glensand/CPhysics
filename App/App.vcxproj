@@ -15,6 +15,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CVPlotExamples.h" />
     <ClInclude Include="OneDimensionalIntegratorFacade.h" />
     <ClInclude Include="Task.h" />
     <ClInclude Include="Task2.h" />
@@ -58,7 +59,7 @@
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)\CPhysics;$(SolutionDir)\QPlot;.\GeneratedFiles\$(ConfigurationName);$(SolutionDir)/QPlot/GeneratedFiles;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CPhysics;$(OPENCV_DIR)\include;$(SolutionDir)\QPlot;.\GeneratedFiles\$(ConfigurationName);$(SolutionDir)/QPlot/GeneratedFiles;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -75,7 +76,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DebugInformationFormat />
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)\CPhysics;$(SolutionDir)\QPlot;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CPhysics;$(OPENCV_DIR)\include;$(SolutionDir)\QPlot;</AdditionalIncludeDirectories>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
