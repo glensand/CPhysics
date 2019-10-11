@@ -16,7 +16,7 @@ namespace Plotter
 {
 
 using ChanelColor = uint8_t;
-	
+//==============================================================================	
 enum class PlotStyle
 {
 	POINT = 0,		// Point styled graph
@@ -24,7 +24,7 @@ enum class PlotStyle
 
 	NONE			// Means count of styles
 };
-
+//==============================================================================
 struct AxisLabels final
 {
 	AxisLabels() = default;
@@ -33,7 +33,7 @@ struct AxisLabels final
 	std::string	m_arg{"x"};	// Name of the arguments axis
 	std::string	m_val{"y"};	// Name of the values axis
 };
-	
+//==============================================================================
 struct Color final
 {
 	Color() = default;
@@ -44,7 +44,7 @@ struct Color final
 	ChanelColor		m_b{ };	// Blue
 	ChanelColor		m_a{ };	// Alpha
 };
-
+//==============================================================================
 struct GraphParams final
 {
 	GraphParams() = default;
@@ -56,7 +56,7 @@ struct GraphParams final
 	PlotStyle			m_style{ PlotStyle::LINE };						// graph style
 	Color				m_color{ 0, 0, 0, 255};		// Color to be used for graph plotting
 };
-
+//==============================================================================
 class IPlot
 {
 public:
@@ -71,5 +71,6 @@ public:
 
 	virtual void	Show() = 0;
 };
+
 }
 

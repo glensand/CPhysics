@@ -2,11 +2,12 @@
 
 namespace CPhysics
 {
+//------------------------------------------------------------------------------
 std::string SimpleIterationsSolver::GetSolverType() const
 {
 	return "Simple iterations method";
 }
-
+//------------------------------------------------------------------------------
 Real SimpleIterationsSolver::Solve(const Params* params) const
 {
 	if (!SuitableParams(params)) return Real();
@@ -21,5 +22,5 @@ Real SimpleIterationsSolver::Solve(const Params* params) const
 
 	return x;
 }
-
+//------------------------------------------------------------------------------
 }

@@ -1,15 +1,12 @@
 #include "Euler2Solver.h"
 
-
 namespace CPhysics {
-
-
+//------------------------------------------------------------------------------
 std::string Euler2Solver::GetSolverType() const
 {
 	return "Euler method 2nd order simple differential equation solver";
 }
-
-	
+//------------------------------------------------------------------------------
 std::vector<std::pair<Real, Real>> Euler2Solver::Solve(const Params* params) const
 {
 	if (!SuitableParams(params)) return std::vector<std::pair<Real, Real>>{};
@@ -32,8 +29,7 @@ std::vector<std::pair<Real, Real>> Euler2Solver::Solve(const Params* params) con
 	}
 	return res;
 }
-	
-	
+//------------------------------------------------------------------------------
 bool Euler2Solver::SuitableParams(const Params* params) const
 {
 	const auto eParam = dynamic_cast<const Euler2Params*>(params);
@@ -42,5 +38,5 @@ bool Euler2Solver::SuitableParams(const Params* params) const
 
 	return false;
 }
-
+//------------------------------------------------------------------------------
 }

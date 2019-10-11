@@ -2,6 +2,7 @@
 
 namespace CPhysics
 {
+//------------------------------------------------------------------------------	
 Real SimpsonIntegrator::Integrate(const Params* params) const
 {
 	if (!SuitableParams(params)) return .0;
@@ -20,24 +21,19 @@ Real SimpsonIntegrator::Integrate(const Params* params) const
 		result += function(a) + 4 * function((a + a + dx) / 2) + function(a + dx);
 		a += dx;
 	}
-
-	{
-		const auto simpsonFunction = [dx, function](Real x)
-		{
-			return function(x) + 4 * function((x + x + dx) / 2) + function(x + dx);
-		};
-
-		visualize(oneDimensionalIntegratorParams->m_plotter, simpsonFunction,
-			oneDimensionalIntegratorParams->m_leftX, dx, oneDimensionalIntegratorParams->m_intervals);
-	}
 		
 	return result * dx / 6;
 }
-	
+//------------------------------------------------------------------------------
+std::vector<std::vector<Real>> SimpsonIntegrator::IntegrateByStep(const Params* params) const
+{
+	return std::vector<std::vector<Real>>{ };
+}
+//------------------------------------------------------------------------------
 std::string SimpsonIntegrator::GetIntegratorType() const
 {
 	return "Simpson integrator";
 }
-
+//------------------------------------------------------------------------------
 };
 

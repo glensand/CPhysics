@@ -15,7 +15,7 @@
 
 namespace CPhysics
 {
-
+//==============================================================================
 struct InterpolatorParams : Params
 {
 	virtual ~InterpolatorParams() = default;
@@ -32,7 +32,7 @@ struct InterpolatorParams : Params
 
 	std::vector<size_t>		m_points;	// Points set, 0...n ~N
 };
-	
+//==============================================================================	
 class IInterpolator
 {
 public:
@@ -48,5 +48,5 @@ public:
 								// Function interpolation, using points greed
 	virtual std::vector<Real>	Interpolate(const Params* params) const = 0;
 };
-
+//==============================================================================
 }

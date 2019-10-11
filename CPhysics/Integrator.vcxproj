@@ -97,16 +97,19 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)\QPlot</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
     </Link>
     <Lib>
-      <AdditionalDependencies>Plot.lib</AdditionalDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)/x64/Debug</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -159,11 +162,11 @@
     <ClCompile Include="DifferentialSolver\Euler2Solver.cpp" />
     <ClCompile Include="DifferentialSolver\RungeKutta2Solver.cpp" />
     <ClCompile Include="DifferentialSolver\SimpleDifferentialSolver.cpp" />
+    <ClCompile Include="Integrator\OneDimensional\OneDimensionalIntegrator.cpp" />
+    <ClCompile Include="Integrator\OneDimensional\SimpsonIntegrator.cpp" />
+    <ClCompile Include="Integrator\OneDimensional\TrapezeIntegrator.cpp" />
     <ClCompile Include="Interpolator\BaseInterpolator.cpp" />
     <ClCompile Include="Interpolator\NewtonInterpolator.cpp" />
-    <ClCompile Include="Integrator\OneDimensionalIntegrator.cpp" />
-    <ClCompile Include="Integrator\SimpsonIntegrator.cpp" />
-    <ClCompile Include="Integrator\TrapezeIntegrator.cpp" />
     <ClCompile Include="Solver\OneDimensionalSolver.cpp" />
     <ClCompile Include="Solver\DichotomySolver.cpp" />
     <ClCompile Include="Solver\NewtonSolver.cpp" />
@@ -174,13 +177,13 @@
     <ClInclude Include="DifferentialSolver\Euler2Solver.h" />
     <ClInclude Include="DifferentialSolver\RungeKutta2Solver.h" />
     <ClInclude Include="DifferentialSolver\SimpleDifferentialSolver.h" />
+    <ClInclude Include="Integrator\OneDimensional\OneDimensionalIntegrator.h" />
+    <ClInclude Include="Integrator\OneDimensional\SimpsonIntegrator.h" />
+    <ClInclude Include="Integrator\OneDimensional\TrapezeIntegrator.h" />
     <ClInclude Include="Interpolator\BaseInterpolator.h" />
     <ClInclude Include="Interpolator\IInterpolator.h" />
     <ClInclude Include="Interpolator\NewtonInterpolator.h" />
-    <ClInclude Include="Integrator\OneDimensionalIntegrator.h" />
     <ClInclude Include="Integrator\IIntergator.h" />
-    <ClInclude Include="Integrator\SimpsonIntegrator.h" />
-    <ClInclude Include="Integrator\TrapezeIntegrator.h" />
     <ClInclude Include="Solver\OneDimensionalSolver.h" />
     <ClInclude Include="Solver\DichotomySolver.h" />
     <ClInclude Include="Solver\ISolver.h" />

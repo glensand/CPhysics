@@ -1,6 +1,5 @@
 #include "SimpleDifferentialSolver.h"
 
-
 namespace CPhysics {
 
 bool ISimpleDifferentialSolver::SuitableParams(const Params* params) const
@@ -12,13 +11,4 @@ bool ISimpleDifferentialSolver::SuitableParams(const Params* params) const
 	return false;
 
 }
-
-
-
-
-
-
-
-	
-
 }

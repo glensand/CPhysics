@@ -13,7 +13,7 @@
 
 namespace CPhysics
 {
-
+//==============================================================================
 struct NewtonIterpolatorParams : InterpolatorParams
 {
 	NewtonIterpolatorParams(OneDimensionalFunction fx, OneDimensionalFunction fy, 
@@ -27,7 +27,7 @@ struct NewtonIterpolatorParams : InterpolatorParams
 
 	size_t	m_n; // Some awesome param, i cant explain
 };
-	
+//==============================================================================	
 class  NewtonInterpolator : public BaseInterpolator
 {
 public:
@@ -41,5 +41,5 @@ public:
 
 	bool				SuitableParams(const Params* params) const override;
 };
-
+//==============================================================================
 }

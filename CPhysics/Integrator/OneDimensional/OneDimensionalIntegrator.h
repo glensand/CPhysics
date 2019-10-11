@@ -1,4 +1,3 @@
-#pragma once
 //------------------------------------------------------------------------------
 // OneDimensionalIntegrator.h
 // General one dimensional integrators abstract class
@@ -10,13 +9,13 @@
 // Date: 27.09.2019
 // Author: Bezborodov Gleb
 //------------------------------------------------------------------------------
-#include "IIntergator.h"
-#include <IPlot.h>
-#include <functional>
+#pragma once
+
+#include "../IIntergator.h"
 
 namespace CPhysics
 {
-
+//==============================================================================
 struct OneDimensionalIntegratorParams: Params
 {
 	virtual					~OneDimensionalIntegratorParams() = default;
@@ -30,10 +29,8 @@ struct OneDimensionalIntegratorParams: Params
 	Real					m_leftX{ };
 	Real					m_rightX{ };
 	OneDimensionalFunction	m_function{ };
-
-	Plotter::IPlot*			m_plotter{ };
 };
-
+//==============================================================================
 struct OneDimensionalIntervalsIntegratorParams : OneDimensionalIntegratorParams
 {
 	OneDimensionalIntervalsIntegratorParams(Real leftX, Real rightX, OneDimensionalFunction function, size_t intervals)
@@ -43,7 +40,7 @@ struct OneDimensionalIntervalsIntegratorParams : OneDimensionalIntegratorParams
 
 	size_t	m_intervals{ };
 };
-	
+//==============================================================================
 class OneDimensionalIntegrator : public IIntegrator
 {
 public:
@@ -52,12 +49,7 @@ public:
 	virtual		~OneDimensionalIntegrator() = default;
 
 	bool		SuitableParams(const Params* params) const override;
-
-protected:
-
-	static void	visualize(Plotter::IPlot* plotter, const std::function<Real (Real)> &function,
-	                      Real leftX, Real rightX, size_t intervals);
 };
-
+//==============================================================================
 }
 

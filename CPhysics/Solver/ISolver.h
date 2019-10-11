@@ -15,13 +15,13 @@
 
 namespace CPhysics
 {
-
+//==============================================================================	
 struct SolverParams : Params
 {
 	virtual ~SolverParams() = default;
 	Real	m_accuracy{ };
 };
-	
+//==============================================================================	
 class ISolver
 {
 public:
@@ -34,5 +34,5 @@ public:
 
 	virtual bool			SuitableParams(const Params* params) const = 0;
 };
-
+//==============================================================================	
 }

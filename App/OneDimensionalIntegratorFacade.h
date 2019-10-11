@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 
-#include <Integrator/OneDimensionalIntegrator.h>
+#include <Integrator/OneDimensional/OneDimensionalIntegrator.h>
 
 struct OneDimensionalIntegratorTestParams : CPhysics::OneDimensionalIntegratorParams
 {

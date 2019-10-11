@@ -9,17 +9,13 @@
 // Date: 10.10.2019
 // Author: Bachurin Vladimir
 //------------------------------------------------------------------------------
-
 #pragma once
-
-
 
 #include "SimpleDifferentialSolver.h"
 
-
 namespace CPhysics
 {
-
+//==============================================================================
 struct Euler2Params : Params
 {
 	Euler2Params(const Real left_x, const Real right_x, const Real left_cond, 
@@ -31,13 +27,13 @@ struct Euler2Params : Params
 	Euler2Params() = default;
 	Real					m_leftX{ };
 	Real					m_rightX{ };
-	Real					m_leftCond{ }; // U(m_leftX) where U is the solution of the differential equation 
+	Real					m_leftCond{ };		// U(m_leftX) where U is the solution of the differential equation 
 	size_t					m_knotAmount{ };
-	FunctionOfTwoArgs		m_function{ }; // the right half of standard simple differential equation dU/dX = f(x, U(x))
-	FunctionOfTwoArgs		m_functionByX{ }; // partial derivative of function by x
-	FunctionOfTwoArgs		m_functionByU{ }; // partial derivative of function by u
+	FunctionOfTwoArgs		m_function{ };		// the right half of standard simple differential equation dU/dX = f(x, U(x))
+	FunctionOfTwoArgs		m_functionByX{ };	// partial derivative of function by x
+	FunctionOfTwoArgs		m_functionByU{ };	// partial derivative of function by u
 };
-	
+//==============================================================================	
 class Euler2Solver final : public ISimpleDifferentialSolver
 {
 public:
@@ -48,5 +44,5 @@ public:
 	bool	SuitableParams(const Params * params) const override;
 	std::vector<std::pair<Real, Real>> Solve(const Params* params) const override;
 };
-
+//==============================================================================
 }

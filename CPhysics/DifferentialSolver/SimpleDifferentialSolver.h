@@ -9,18 +9,14 @@
 // Date: 10.10.2019
 // Author: Bachurin Vladimir
 //------------------------------------------------------------------------------
-
 #pragma once
 
 #include "../Solver/ISolver.h"
 #include  <vector>
 
-
-
 namespace CPhysics
 {
-
-
+//==============================================================================
 struct SimpleDifferentialParams : Params
 {
 	SimpleDifferentialParams(const Real left_x, const Real right_x, const Real left_cond,
@@ -35,25 +31,18 @@ struct SimpleDifferentialParams : Params
 	Real					m_leftCond{ }; // U(m_leftX) where U is the solution of the differential equation 
 	FunctionOfTwoArgs	m_function{ }; // the right half of standard simple differential equation dU/dX = f(x, U(x))
 };
-
-
-
-	
+//==============================================================================
 class ISimpleDifferentialSolver
 {
 public:
 	ISimpleDifferentialSolver() = default;
 	virtual	~ISimpleDifferentialSolver() = default;
 
-	virtual bool SuitableParams(const Params * params) const;
+	virtual bool		SuitableParams(const Params * params) const;
 
-	virtual std::string		GetSolverType() const = 0;
+	virtual std::string	GetSolverType() const = 0;
 
 	virtual std::vector<std::pair<Real, Real>> Solve(const Params* params) const = 0;
-
-	
 };
-
-
-	
+//==============================================================================	
 }

@@ -17,12 +17,14 @@ class SimpsonIntegrator : public OneDimensionalIntegrator
 {
 public:
 	
-								SimpsonIntegrator() = default;
-	virtual						~SimpsonIntegrator() = default;
+									SimpsonIntegrator() = default;
+	virtual							~SimpsonIntegrator() = default;
 
-	Real						Integrate(const Params* params) const override;
+	Real							Integrate(const Params* params) const override;
 
-	[[nodiscard]] std::string	GetIntegratorType() const override;
+	std::vector<std::vector<Real>>	IntegrateByStep(const Params* params) const override;
+	
+	[[nodiscard]] std::string		GetIntegratorType() const override;
 };
 }
 

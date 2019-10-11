@@ -14,11 +14,11 @@ public:
 	Task2() = default;
 	virtual ~Task2() = default;
 
-	void Run(Params* params = nullptr) const override;
+	void Run(const Params* params = nullptr) const override;
 }
 ;
 
-inline void Task2::Run(Params* params) const
+inline void Task2::Run(const Params* params) const
 {	
 	const auto function1 = [](CPhysics::Real x)
 	{

@@ -2,6 +2,7 @@
 
 namespace CPhysics
 {
+//------------------------------------------------------------------------------
 bool OneDimensionalSolver::SuitableParams(const Params* params) const
 {
 	const auto oneDimensionalParams = dynamic_cast<const OneDimensionalParams*>(params);
@@ -10,4 +11,5 @@ bool OneDimensionalSolver::SuitableParams(const Params* params) const
 
 	return false;
 }
+//------------------------------------------------------------------------------
 }

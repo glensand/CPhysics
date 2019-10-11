@@ -6,16 +6,17 @@ inline CPhysics::Real dydx(CPhysics::OneDimensionalFunction function, CPhysics::
 {
 	return (function(x1) - function(x0)) / (x1 - x0);
 }
-	
+
 }
 
 namespace CPhysics
 {
+//------------------------------------------------------------------------------	
 std::string NewtonSolver::GetSolverType() const
 {
 	return "Newton method";
 }
-
+//------------------------------------------------------------------------------
 Real NewtonSolver::Solve(const Params* params) const
 {
 	if (!SuitableParams(params)) return Real();
@@ -37,5 +38,5 @@ Real NewtonSolver::Solve(const Params* params) const
 		x0 = x1;
 	}
 }
-
+//------------------------------------------------------------------------------
 }

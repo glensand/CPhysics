@@ -2,13 +2,13 @@
 
 namespace
 {
-
+//------------------------------------------------------------------------------
 struct Point final
 {
 	CPhysics::Real	m_x;
 	CPhysics::Real	m_y;
 };
-
+//------------------------------------------------------------------------------
 void computeXY(const CPhysics::InterpolatorParams* params, std::vector<Point> &points)
 {
 	points.reserve(params->m_points.size());
@@ -18,12 +18,12 @@ void computeXY(const CPhysics::InterpolatorParams* params, std::vector<Point> &p
 		points[i].m_y = params->m_fY(params->m_points[i]);
 	}
 }
-
+//------------------------------------------------------------------------------
 }
-
+//==============================================================================
 namespace CPhysics
 {
-
+//------------------------------------------------------------------------------
 std::vector<Real> NewtonInterpolator::Interpolate(const Params* params) const
 {
 	if (!SuitableParams(params)) return std::vector<Real>();
@@ -33,18 +33,17 @@ std::vector<Real> NewtonInterpolator::Interpolate(const Params* params) const
 
 	computeXY(interpolatorParams, points);
 
-	
 	return std::vector<Real>();
 }
-
+//------------------------------------------------------------------------------
 std::string NewtonInterpolator::GetInterpolatorType() const
 {
 	return "Newton interpolation";
 }
-
+//------------------------------------------------------------------------------
 bool NewtonInterpolator::SuitableParams(const Params* params) const
 {
 	return BaseInterpolator::SuitableParams(params) && dynamic_cast<const NewtonIterpolatorParams*>(params);
 }
-
+//------------------------------------------------------------------------------
 }

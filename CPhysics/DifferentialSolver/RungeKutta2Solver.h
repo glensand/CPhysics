@@ -9,7 +9,6 @@
 // Date: 10.10.2019
 // Author: Bachurin Vladimir
 //------------------------------------------------------------------------------
-
 #pragma once
 
 #include "SimpleDifferentialSolver.h"
@@ -23,9 +22,11 @@ public:
 	RungeKutta2Solver() = default;
 	virtual	~RungeKutta2Solver() = default;
 
-	std::string		GetSolverType() const override;
-	bool	SuitableParams(const Params * params) const override;
-	std::vector<std::pair<Real, Real>> Solve(const Params * params) const override;
+	std::string							GetSolverType() const override;
+
+	bool								SuitableParams(const Params * params) const override;
+
+	std::vector<std::pair<Real, Real>>	Solve(const Params * params) const override;
 };
 	
 }

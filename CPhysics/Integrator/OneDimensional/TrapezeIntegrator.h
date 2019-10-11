@@ -19,9 +19,11 @@ public:
 	TrapezeIntegrator() = default;
 	virtual ~TrapezeIntegrator() = default;
 
-	Real						Integrate(const Params* params) const override;
+	Real							Integrate(const Params* params) const override;
 
-	[[nodiscard]] std::string	GetIntegratorType() const override;
+	std::vector<std::vector<Real>>	IntegrateByStep(const Params* params) const override;
+	
+	[[nodiscard]] std::string		GetIntegratorType() const override;
 };
 
 }

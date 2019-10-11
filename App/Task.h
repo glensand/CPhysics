@@ -15,5 +15,5 @@ public:
 	Task() = default;
 	virtual ~Task() = default;
 	
-	virtual void Run(Params* params = nullptr) const = 0;
+	virtual void Run(const Params* params = nullptr) const = 0;
 };

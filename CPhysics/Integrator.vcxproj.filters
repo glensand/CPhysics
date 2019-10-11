@@ -17,14 +17,11 @@
     <Filter Include="CPhysics\DifferentialSolver">
       <UniqueIdentifier>{24d12b59-644c-4c1c-9f06-2c6b7489c9c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CPhysics\Integrator\OneDimensional">
+      <UniqueIdentifier>{a5363195-9c02-48f9-9466-8f1726eee5db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Integrator\SimpsonIntegrator.cpp">
-      <Filter>CPhysics\Integrator</Filter>
-    </ClCompile>
-    <ClCompile Include="Integrator\TrapezeIntegrator.cpp">
-      <Filter>CPhysics\Integrator</Filter>
-    </ClCompile>
     <ClCompile Include="Solver\DichotomySolver.cpp">
       <Filter>CPhysics\Solver</Filter>
     </ClCompile>
@@ -36,9 +33,6 @@
     </ClCompile>
     <ClCompile Include="Solver\OneDimensionalSolver.cpp">
       <Filter>CPhysics\Solver</Filter>
-    </ClCompile>
-    <ClCompile Include="Integrator\OneDimensionalIntegrator.cpp">
-      <Filter>CPhysics\Integrator</Filter>
     </ClCompile>
     <ClCompile Include="Interpolator\BaseInterpolator.cpp">
       <Filter>CPhysics\Interpolator</Filter>
@@ -55,16 +49,19 @@
     <ClCompile Include="DifferentialSolver\RungeKutta2Solver.cpp">
       <Filter>CPhysics\DifferentialSolver</Filter>
     </ClCompile>
+    <ClCompile Include="Integrator\OneDimensional\OneDimensionalIntegrator.cpp">
+      <Filter>CPhysics\Integrator\OneDimensional</Filter>
+    </ClCompile>
+    <ClCompile Include="Integrator\OneDimensional\SimpsonIntegrator.cpp">
+      <Filter>CPhysics\Integrator\OneDimensional</Filter>
+    </ClCompile>
+    <ClCompile Include="Integrator\OneDimensional\TrapezeIntegrator.cpp">
+      <Filter>CPhysics\Integrator\OneDimensional</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Solver\ISolver.h">
       <Filter>CPhysics\Solver</Filter>
-    </ClInclude>
-    <ClInclude Include="Integrator\SimpsonIntegrator.h">
-      <Filter>CPhysics\Integrator</Filter>
-    </ClInclude>
-    <ClInclude Include="Integrator\TrapezeIntegrator.h">
-      <Filter>CPhysics\Integrator</Filter>
     </ClInclude>
     <ClInclude Include="Solver\DichotomySolver.h">
       <Filter>CPhysics\Solver</Filter>
@@ -77,9 +74,6 @@
     </ClInclude>
     <ClInclude Include="Solver\OneDimensionalSolver.h">
       <Filter>CPhysics\Solver</Filter>
-    </ClInclude>
-    <ClInclude Include="Integrator\OneDimensionalIntegrator.h">
-      <Filter>CPhysics\Integrator</Filter>
     </ClInclude>
     <ClInclude Include="CPhysics.h">
       <Filter>CPhysics</Filter>
@@ -104,6 +98,15 @@
     </ClInclude>
     <ClInclude Include="DifferentialSolver\RungeKutta2Solver.h">
       <Filter>CPhysics\DifferentialSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Integrator\OneDimensional\OneDimensionalIntegrator.h">
+      <Filter>CPhysics\Integrator\OneDimensional</Filter>
+    </ClInclude>
+    <ClInclude Include="Integrator\OneDimensional\SimpsonIntegrator.h">
+      <Filter>CPhysics\Integrator\OneDimensional</Filter>
+    </ClInclude>
+    <ClInclude Include="Integrator\OneDimensional\TrapezeIntegrator.h">
+      <Filter>CPhysics\Integrator\OneDimensional</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

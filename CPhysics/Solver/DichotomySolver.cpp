@@ -2,11 +2,12 @@
 
 namespace CPhysics
 {
+//------------------------------------------------------------------------------
 std::string DichotomySolver::GetSolverType() const
 {
 	return "Dichotomy method";
 }
-
+//------------------------------------------------------------------------------
 Real DichotomySolver::Solve(const Params* params) const
 {
 	if (!SuitableParams(params)) return Real();
@@ -33,5 +34,5 @@ Real DichotomySolver::Solve(const Params* params) const
 	
 	return (a + b) / 2;
 }
-
+//------------------------------------------------------------------------------
 }
