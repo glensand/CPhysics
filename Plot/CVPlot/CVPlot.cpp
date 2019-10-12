@@ -2,6 +2,12 @@
 
 #include <opencv2/imgproc/imgproc_c.h>
 
+namespace
+{
+const Plotter::FontProperties	DEFAULT_FONT_PROPERTIES;
+const Plotter::AxisProperties	DEFAULT_AXIS_PROPERTIES;
+}
+
 namespace Plotter
 {
 
@@ -32,7 +38,8 @@ void CVPlot::Show()
 //------------------------------------------------------------------------------
 void CVPlot::Initialize()
 {
-	m_plot = cv::Mat::ones(m_plotSize.height, m_plotSize.width, CV_8UC3);
+	m_plot = cv::Mat(m_plotSize.height, m_plotSize.width, CV_8UC3, m_defaultBackgroundColor);
+	
 	// find maximum/minimum of axes
 	for(const auto &graph : m_graphs)
 	{
@@ -81,35 +88,37 @@ void CVPlot::DrawAxis()
 
 	// x axis
 	cv::line(m_plot, { m_borderSize, xAxisPos },
-		{ m_plotSize.width - m_borderSize, xAxisPos }, m_axisColor);
+		{ m_plotSize.width - m_borderSize, xAxisPos }, 
+		DEFAULT_AXIS_PROPERTIES.m_color, DEFAULT_AXIS_PROPERTIES.m_thickness);
 
 	// TODO:move y axis to (0; 0)
 	// y axis
 	cv::line(m_plot, { m_borderSize, m_plotSize.height - m_borderSize },
-		{  m_borderSize, m_borderSize }, m_axisColor);
+		{  m_borderSize, m_borderSize }, 
+		DEFAULT_AXIS_PROPERTIES.m_color, DEFAULT_AXIS_PROPERTIES.m_thickness);
 
 	// Write the scale of the y axis
-	const int chw = 6, chh = 10;
+	const int chw = 12, chh = 20;
 	if ((m_maxY - yRef) > 0.05 * (m_maxY - m_minY))
 		cv::putText(m_plot, std::to_string(m_maxY), cvPoint(m_borderSize / 5, m_borderSize - chh / 2),
-			cv::FONT_HERSHEY_PLAIN, 0.55, m_axisColor);
+			DEFAULT_FONT_PROPERTIES.m_type, DEFAULT_FONT_PROPERTIES.m_scale, DEFAULT_FONT_PROPERTIES.m_color);
 
 	if ((yRef - m_minY) > 0.05 * (m_maxX - m_minY))
 		cv::putText(m_plot, std::to_string(m_minY), cvPoint(m_borderSize / 5, m_plotSize.height - m_borderSize + chh),
-			cv::FONT_HERSHEY_PLAIN, 0.55, m_axisColor);
+			DEFAULT_FONT_PROPERTIES.m_type, DEFAULT_FONT_PROPERTIES.m_scale, DEFAULT_FONT_PROPERTIES.m_color);
 
 	// x axis
 	cv::putText(m_plot, std::to_string(yRef), cvPoint(m_borderSize / 5, xAxisPos + chh / 2),
-		cv::FONT_HERSHEY_PLAIN, 0.55, m_axisColor);
+		DEFAULT_FONT_PROPERTIES.m_type, DEFAULT_FONT_PROPERTIES.m_scale, DEFAULT_FONT_PROPERTIES.m_color);
 
 	// Write the scale of the x axis
 	const auto maxX = std::to_string(m_maxX);
 	cv::putText(m_plot, maxX, cvPoint(m_plotSize.width - maxX.size() * chw, xAxisPos + chh),
-		cv::FONT_HERSHEY_PLAIN, 0.55, m_axisColor);
+		DEFAULT_FONT_PROPERTIES.m_type, DEFAULT_FONT_PROPERTIES.m_scale, DEFAULT_FONT_PROPERTIES.m_color);
 
 	// x min
 	cv::putText(m_plot, std::to_string(m_minX), cvPoint(m_borderSize, xAxisPos + chh),
-		cv::FONT_HERSHEY_PLAIN, 0.55, m_axisColor);
+		DEFAULT_FONT_PROPERTIES.m_type, DEFAULT_FONT_PROPERTIES.m_scale, DEFAULT_FONT_PROPERTIES.m_color);
 }
 //------------------------------------------------------------------------------
 void CVPlot::DrawPlots()
@@ -125,12 +134,12 @@ void CVPlot::DrawPlots()
 			const CvPoint nextPoint = cvPoint(m_borderSize + x, 
 				m_plotSize.height - (m_borderSize + y));
 
-			cv::circle(m_plot, nextPoint, 1, m_axisColor, 1);
+			cv::circle(m_plot, nextPoint, 1, cv::Scalar(0, 0, 255), 1);
 
 			// draw a line between two points
 			if (i >= 1)
 				cv::line(m_plot, prevPoint,
-					nextPoint, m_axisColor, 1, CV_AA);
+					nextPoint, m_defaultGraphColor, 1, CV_AA);
 			prevPoint = nextPoint;
 		}
 	}
@@ -141,7 +150,7 @@ void CVPlot::DrawLabels()
 	// TODO::rework that shit
 
 	//CvFont font;
-	//cvInitFont(&font, CV_FONT_HERSHEY_PLAIN, 0.55, 1.0, 0, 1, CV_AA);
+	//cvInitFont(&font, CV_FONT_HERSHEY_PLAIN, 1.0, 1.0, 0, 1, CV_AA);
 
 	//// character size
 	//int chw = 6, chh = 8;

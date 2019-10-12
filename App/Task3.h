@@ -71,8 +71,7 @@ inline void Task3::Run(const Params* params) const
 	CPhysics::OneDimensionalIntervalsIntegratorParams oneDimensionalIntegratorParams1{-1, 1, function1, 4};
 	CPhysics::OneDimensionalIntervalsIntegratorParams oneDimensionalIntegratorParams2{0, 1, function2, 4};
 
-	// demonstratinion
-
+	// demonstration
 	Plotter::CVPlot plot1;
 	const auto functionOnGrid = trapezeIntegrator->IntegrateByStep(&oneDimensionalIntegratorParams1);
 

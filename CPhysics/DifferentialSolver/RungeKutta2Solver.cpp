@@ -3,12 +3,12 @@
 
 namespace CPhysics
 {
-
+//------------------------------------------------------------------------------
 std::string RungeKutta2Solver::GetSolverType() const
 {
 	return "Runge-Kutta second precision degree ordinary differential equation solver";
 }
-
+//------------------------------------------------------------------------------
 bool RungeKutta2Solver::SuitableParams(const Params* params) const
 {
 	const auto Eparam = dynamic_cast<const SimpleDifferentialParams*>(params);
@@ -17,7 +17,7 @@ bool RungeKutta2Solver::SuitableParams(const Params* params) const
 
 	return false;
 }
-
+//------------------------------------------------------------------------------
 std::vector<std::pair<CPhysics::Real, CPhysics::Real>> RungeKutta2Solver::Solve(
 	const Params* params) const
 {
@@ -42,7 +42,7 @@ std::vector<std::pair<CPhysics::Real, CPhysics::Real>> RungeKutta2Solver::Solve(
 	}
 	return res;
 }
-	
+//------------------------------------------------------------------------------
 }
 
 

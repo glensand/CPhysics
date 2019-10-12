@@ -3,7 +3,7 @@
 #include <string>
 
 #include <Integrator/OneDimensional/OneDimensionalIntegrator.h>
-
+//==============================================================================	
 struct OneDimensionalIntegratorTestParams : CPhysics::OneDimensionalIntegratorParams
 {
 	OneDimensionalIntegratorTestParams(const std::vector< CPhysics::IIntegrator*> &integrators, const std::vector<size_t> &intervals,
@@ -26,7 +26,7 @@ struct OneDimensionalIntegratorTestParams : CPhysics::OneDimensionalIntegratorPa
 
 	const CPhysics::Real					m_analyticalValue{ };
 };
-
+//==============================================================================	
 class OneDimensionalIntegratorFacade final
 {
 public:
@@ -36,3 +36,4 @@ public:
 
 	static void Test(const CPhysics::Params* params);
 };
+//==============================================================================	

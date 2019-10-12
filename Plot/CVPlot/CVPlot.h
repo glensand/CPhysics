@@ -21,7 +21,20 @@
 
 namespace Plotter
 {
-
+//==============================================================================
+struct FontProperties final
+{
+	double		m_scale{ .4 };
+	int			m_type{ cv::HersheyFonts::FONT_HERSHEY_SIMPLEX };
+	cv::Scalar	m_color{ 0, 0, 0 };
+};
+//==============================================================================
+struct AxisProperties final
+{
+	cv::Scalar	m_color {0, 0, 0};
+	int			m_thickness{ 2 };
+};
+//==============================================================================
 class CVPlot final : public IPlot
 {
 public:
@@ -47,7 +60,8 @@ private:
 	std::string		m_plotName;
 	cv::Mat			m_plot;
 	cv::Size		m_plotSize{ 1300, 700 };
-	cv::Scalar		m_axisColor{ 255, 255, 255 };
+	cv::Scalar		m_defaultGraphColor{ 255, 0, 0 };
+	cv::Scalar		m_defaultBackgroundColor{ 255, 255, 255 };
 
 	const int		m_borderSize{ 30 };
 
@@ -62,6 +76,6 @@ private:
 	std::vector<GraphParams>		m_graphs;
 	AxisLabels						m_labels;
 };
-
+//==============================================================================
 }
 
