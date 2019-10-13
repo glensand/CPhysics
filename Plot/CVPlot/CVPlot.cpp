@@ -40,7 +40,7 @@ void CVPlot::Initialize()
 {
 	m_plot = cv::Mat(m_plotSize.height, m_plotSize.width, CV_8UC3, m_defaultBackgroundColor);
 	
-	// find maximum/minimum of axes
+	// find maximum/minimum of axis
 	for(const auto &graph : m_graphs)
 	{
 		std::for_each(graph.m_x.begin(), graph.m_x.end(),

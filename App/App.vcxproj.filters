@@ -23,9 +23,6 @@
     <ClInclude Include="OneDimensionalIntegratorFacade.h">
       <Filter>Tasks</Filter>
     </ClInclude>
-    <ClInclude Include="Task.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
     <ClInclude Include="Task2.h">
       <Filter>Tasks</Filter>
     </ClInclude>
@@ -39,6 +36,12 @@
       <Filter>Tasks</Filter>
     </ClInclude>
     <ClInclude Include="CVPlotExamples.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="ITask.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="IntegratorsTaskBase.h">
       <Filter>Tasks</Filter>
     </ClInclude>
   </ItemGroup>

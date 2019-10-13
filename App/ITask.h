@@ -8,12 +8,12 @@ struct Params
 	virtual ~Params() = default;
 };
 
-class Task
+class ITask
 {
 public:
 	
-	Task() = default;
-	virtual ~Task() = default;
+	ITask() = default;
+	virtual ~ITask() = default;
 	
 	virtual void Run(const Params* params = nullptr) const = 0;
 };

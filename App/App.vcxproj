@@ -16,8 +16,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CVPlotExamples.h" />
+    <ClInclude Include="IntegratorsTaskBase.h" />
     <ClInclude Include="OneDimensionalIntegratorFacade.h" />
-    <ClInclude Include="Task.h" />
+    <ClInclude Include="ITask.h" />
     <ClInclude Include="Task2.h" />
     <ClInclude Include="Task3.h" />
     <ClInclude Include="Task4.h" />

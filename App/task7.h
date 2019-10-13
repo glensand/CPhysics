@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Task.h"
+#include "ITask.h"
 #include "DifferentialSolver/Euler2Solver.h"
 #include "DifferentialSolver/RungeKutta2Solver.h"
 #include "CVPlot/CVPlot.h"
@@ -8,7 +8,7 @@
 #include <iostream>
 #include <cmath>
 
-class Task7 final : public Task
+class Task7 final : public ITask
 {
 public:
 	Task7() = default;

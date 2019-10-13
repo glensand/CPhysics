@@ -10,10 +10,10 @@
 //------------------------------------------------------------------------------
 #pragma once
 
-#include "Task.h"
+#include "ITask.h"
 #include "CVPlot/CVPlot.h"
 
-class CVPlotExamples : public Task
+class CVPlotExamples : public ITask
 {
 public:
 
