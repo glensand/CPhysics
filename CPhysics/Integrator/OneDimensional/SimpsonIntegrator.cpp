@@ -41,7 +41,7 @@ std::vector<std::vector<Real>> SimpsonIntegrator::IntegrationGrid(const Params* 
 	std::vector<Real> interpolationX, interpolationY;
 
 	const Real internalIntervals = 20.; // yeeeeeah MOTHERFUCKER
-	for (size_t i{ 0 }; i < integratorParams->m_intervals - 1; ++i)
+	for (size_t i{ 0 }; i < integratorParams->m_intervals; ++i)
 	{
 		const Real f0 = function(a);
 		const Real f1 = function(a + h);
@@ -57,7 +57,7 @@ std::vector<std::vector<Real>> SimpsonIntegrator::IntegrationGrid(const Params* 
 		};
 
 		const Real dx = (h + h) / internalIntervals;
-		for(Real x = a; x <= a + h + h + DBL_EPSILON; x += dx)
+		for(Real x = a; x <= a + h + h; x += dx)
 		{
 			interpolationY.emplace_back(P2(x));
 			interpolationX.emplace_back(x);

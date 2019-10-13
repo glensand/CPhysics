@@ -50,13 +50,13 @@ inline void Task4::Run(const Params* params) const
 		params2(integrators, intervals, "exp(sqrt(x) + sin(x / 10))", 0., 0., 1., function2);
 	OneDimensionalIntegratorFacade::Test(&params2);
 
-	const CPhysics::OneDimensionalIntervalsIntegratorParams integratorParams1{ 0.1, 0.9, function1, 4 };
+	const CPhysics::OneDimensionalIntervalsIntegratorParams integratorParams1{ 0.01, 0.99, function1, 4 };
 	const CPhysics::OneDimensionalIntervalsIntegratorParams integratorParams2{ 0., 1., function2, 4 };
 
 	// demonstration
 	Demonstrate(trapezeIntegrator.get(), integratorParams1);
-	Demonstrate(trapezeIntegrator.get(), integratorParams2);
-
 	Demonstrate(simpsonIntegrator.get(), integratorParams1);
+	
+	Demonstrate(trapezeIntegrator.get(), integratorParams2);
 	Demonstrate(simpsonIntegrator.get(), integratorParams2);
 }

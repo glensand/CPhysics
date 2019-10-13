@@ -36,7 +36,7 @@ std::vector<std::vector<Real>> TrapezeIntegrator::IntegrationGrid(const Params* 
 	const auto dx = (integratorParams->m_rightX - integratorParams->m_leftX)
 	/ static_cast<Real>(integratorParams->m_intervals);
 
-	for (; leftVal < integratorParams->m_rightX; leftVal += dx)
+	for (; leftVal <= integratorParams->m_rightX + DBL_EPSILON; leftVal += dx)
 	{
 		const auto result = integratorParams->m_function(leftVal);
 
