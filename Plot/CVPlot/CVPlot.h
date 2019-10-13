@@ -42,7 +42,7 @@ public:
 				CVPlot() = default;
 	virtual		~CVPlot() = default;
 
-	void		AddGraphs(const GraphParams* params) override;
+	void		AddGraph(const GraphParams* params) override;
 
 	void		Release() override;
 

@@ -12,12 +12,12 @@ Real SimpleIterationsSolver::Solve(const Params* params) const
 {
 	if (!SuitableParams(params)) return Real();
 
-	const auto simpleIterationsSolverParams = reinterpret_cast<const OneDimensionalParams*>(params);
+	const auto solverParams = reinterpret_cast<const OneDimensionalParams*>(params);
 
-	const auto function = simpleIterationsSolverParams->m_function;
-	Real x = (simpleIterationsSolverParams->m_leftX + simpleIterationsSolverParams->m_rightX) / 2;
+	const auto function = solverParams->m_function;
+	Real x = (solverParams->m_leftX + solverParams->m_rightX) / 2;
 	
-	for (; std::abs(function(x) - x) > simpleIterationsSolverParams->m_accuracy;)
+	for (; std::abs(function(x) - x) > solverParams->m_accuracy;)
 		x = function(x);
 
 	return x;

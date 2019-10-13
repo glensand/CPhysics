@@ -51,8 +51,8 @@ inline void CVPlotExamples::Run(const Params*) const
 		info2.m_y.emplace_back(4 * X * X);
 	}
 
-	plotter.AddGraphs(&info);
-	plotter.AddGraphs(&info2);
+	plotter.AddGraph(&info);
+	plotter.AddGraph(&info2);
 
 	plotter.Show();
 }

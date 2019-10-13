@@ -26,6 +26,8 @@ private:
 
 	std::vector<std::vector<double>>	ComputeFunction(const CPhysics::OneDimensionalIntervalsIntegratorParams &params) const;
 
+	void	Demonstrate(const CPhysics::IIntegrator* integrator, const CPhysics::OneDimensionalIntervalsIntegratorParams& params) const;
+	
 	const size_t m_analyticalIntervals{ 10000 };	
 };
 //------------------------------------------------------------------------------
@@ -48,6 +50,32 @@ inline std::vector<std::vector<double>> Task3::ComputeFunction(
 	return { x, y };
 }
 //------------------------------------------------------------------------------
+inline void Task3::Demonstrate(const CPhysics::IIntegrator* integrator, 
+	const CPhysics::OneDimensionalIntervalsIntegratorParams& params) const
+{
+	Plotter::CVPlot plot1;
+	const auto functionOnGrid = integrator->IntegrationGrid(&params);
+
+	if (functionOnGrid.size() > 1)
+	{
+		Plotter::GraphParams graphParams;
+		graphParams.m_x = functionOnGrid[0];
+		graphParams.m_y = functionOnGrid[1];
+		plot1.AddGraph(&graphParams);
+	}
+
+	const auto analyticalFunction = ComputeFunction(params);
+	if (analyticalFunction.size() > 1)
+	{
+		Plotter::GraphParams graphParams;
+		graphParams.m_x = analyticalFunction[0];
+		graphParams.m_y = analyticalFunction[1];
+		plot1.AddGraph(&graphParams);
+	}
+
+	plot1.Show();
+}
+//------------------------------------------------------------------------------
 inline void Task3::Run(const Params* params) const
 {
 	const std::vector<size_t> intervals{4, 16, 32, 64, 128, 256, 512};
@@ -63,34 +91,18 @@ inline void Task3::Run(const Params* params) const
 
 	OneDimensionalIntegratorFacade::Test(&params1);
 
-	const auto function2 = [](CPhysics::Real x) { return std::pow(x, 1 / 3) * std::pow(EULER_C, std::sin(x)); };
+	const auto function2 = [](CPhysics::Real x) { return std::pow(x, 1.0 / 3.0) * std::pow(EULER_C, std::sin(x)); };
 
 	OneDimensionalIntegratorTestParams params2(integrators, intervals, "x^(1/3) * exp(sin(x))", 0, 0, 1, function2);
 	OneDimensionalIntegratorFacade::Test(&params2);
 
-	CPhysics::OneDimensionalIntervalsIntegratorParams oneDimensionalIntegratorParams1{-1, 1, function1, 4};
-	CPhysics::OneDimensionalIntervalsIntegratorParams oneDimensionalIntegratorParams2{0, 1, function2, 4};
+	const CPhysics::OneDimensionalIntervalsIntegratorParams integratorParams1{-1, 1, function1, 4};
+	const CPhysics::OneDimensionalIntervalsIntegratorParams integratorParams2{0, 1, function2, 4};
 
 	// demonstration
-	Plotter::CVPlot plot1;
-	const auto functionOnGrid = trapezeIntegrator->IntegrateByStep(&oneDimensionalIntegratorParams1);
+	Demonstrate(trapezeIntegrator.get(), integratorParams1);
+	Demonstrate(trapezeIntegrator.get(), integratorParams2);
 
-	if(functionOnGrid.size() > 1)
-	{
-		Plotter::GraphParams graphParams;
-		graphParams.m_x = functionOnGrid[0];
-		graphParams.m_y = functionOnGrid[1];
-		plot1.AddGraphs(&graphParams);
-	}
-
-	const auto analyticalFunction = ComputeFunction(oneDimensionalIntegratorParams1);
-	if(analyticalFunction.size() > 1)
-	{
-		Plotter::GraphParams graphParams;
-		graphParams.m_x = analyticalFunction[0];
-		graphParams.m_y = analyticalFunction[1];
-		plot1.AddGraphs(&graphParams);
-	}
-	
-	plot1.Show();
+	Demonstrate(simpsonIntegrator.get(), integratorParams1);
+	Demonstrate(simpsonIntegrator.get(), integratorParams2);
 }

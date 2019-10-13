@@ -21,6 +21,7 @@ enum class PlotStyle
 {
 	POINT = 0,		// Point styled graph
 	LINE,			// Line styled graph
+	POINT_LINE,		// Plots graph, with both of those elements
 
 	NONE			// Means count of styles
 };
@@ -65,12 +66,12 @@ public:
 	virtual  ~IPlot() = default;
 
 					// Add the graph using passed params
-	virtual void	AddGraphs(const GraphParams* params) = 0;
+	virtual void	AddGraph(const GraphParams* params) = 0;
 
 	virtual void	Release() = 0;
 
 	virtual void	Show() = 0;
 };
-
+//==============================================================================
 }
 

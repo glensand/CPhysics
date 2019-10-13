@@ -5,12 +5,12 @@ namespace CPhysics
 //------------------------------------------------------------------------------
 bool OneDimensionalIntegrator::SuitableParams(const Params* params) const
 {
-	const auto oneDimensionalIntegratorParams = dynamic_cast<const OneDimensionalIntervalsIntegratorParams*>(params);
-	if (oneDimensionalIntegratorParams == nullptr)
+	const auto integratorParams = dynamic_cast<const OneDimensionalIntervalsIntegratorParams*>(params);
+	if (integratorParams == nullptr)
 		return false;
 	
-	return oneDimensionalIntegratorParams->m_rightX > oneDimensionalIntegratorParams->m_leftX
-	&& oneDimensionalIntegratorParams->m_intervals > 0;
+	return integratorParams->m_rightX > integratorParams->m_leftX
+	&& integratorParams->m_intervals > 0;
 }
 //------------------------------------------------------------------------------	
 }

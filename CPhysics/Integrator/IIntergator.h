@@ -27,7 +27,7 @@ public:
 
 	virtual Real							Integrate(const Params* params) const = 0;
 
-	virtual std::vector<std::vector<Real>>	IntegrateByStep(const Params* params) const = 0;
+	virtual std::vector<std::vector<Real>>	IntegrationGrid(const Params* params) const = 0;
 
 	virtual bool							SuitableParams(const Params* params) const = 0;
 

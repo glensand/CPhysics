@@ -5,9 +5,9 @@ namespace CPhysics
 //------------------------------------------------------------------------------
 bool OneDimensionalSolver::SuitableParams(const Params* params) const
 {
-	const auto oneDimensionalParams = dynamic_cast<const OneDimensionalParams*>(params);
-	if (oneDimensionalParams)
-		return oneDimensionalParams->m_rightX >= oneDimensionalParams->m_leftX;
+	const auto solverParams = dynamic_cast<const OneDimensionalParams*>(params);
+	if (solverParams)
+		return solverParams->m_rightX >= solverParams->m_leftX;
 
 	return false;
 }

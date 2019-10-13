@@ -12,7 +12,7 @@ namespace Plotter
 {
 
 //------------------------------------------------------------------------------
-void CVPlot::AddGraphs(const GraphParams* params)
+void CVPlot::AddGraph(const GraphParams* params)
 {
 	m_graphs.emplace_back(*params);
 }
@@ -69,7 +69,7 @@ void CVPlot::Initialize()
 		m_maxY = m_maxY * 3 / 2;
 	}
 
-	if (m_maxX - m_minX > 1.f)
+	if (m_maxX - m_minX > 0.f)
 		m_scaleX = static_cast<float>(m_plotSize.width - m_borderSize * 2) / (m_maxX - m_minX);
 
 	m_scaleY = static_cast<float>(m_plotSize.height - m_borderSize * 2) / range;	

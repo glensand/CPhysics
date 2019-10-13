@@ -21,7 +21,7 @@ public:
 
 	Real							Integrate(const Params* params) const override;
 
-	std::vector<std::vector<Real>>	IntegrateByStep(const Params* params) const override;
+	std::vector<std::vector<Real>>	IntegrationGrid(const Params* params) const override;
 	
 	[[nodiscard]] std::string		GetIntegratorType() const override;
 };

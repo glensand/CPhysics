@@ -7,38 +7,38 @@ Real TrapezeIntegrator::Integrate(const Params* params) const
 {
 	if (!SuitableParams(params)) return .0;
 
-	const auto oneDimensionalIntegratorParams = reinterpret_cast<const OneDimensionalIntervalsIntegratorParams*>(params);
+	const auto integratorParams = reinterpret_cast<const OneDimensionalIntervalsIntegratorParams*>(params);
 	Real result = 0.;
 
-	const Real dx = (oneDimensionalIntegratorParams->m_rightX - oneDimensionalIntegratorParams->m_leftX)
-		/ Real(oneDimensionalIntegratorParams->m_intervals);
-	const auto function = oneDimensionalIntegratorParams->m_function;
+	const Real dx = (integratorParams->m_rightX - integratorParams->m_leftX)
+		/ Real(integratorParams->m_intervals);
+	const auto function = integratorParams->m_function;
 
-	auto leftVal = oneDimensionalIntegratorParams->m_leftX;
+	auto leftVal = integratorParams->m_leftX;
 	
-	for (size_t i{ 0 }; i < oneDimensionalIntegratorParams->m_intervals - 1; ++i, leftVal += dx)
+	for (size_t i{ 0 }; i < integratorParams->m_intervals - 1; ++i, leftVal += dx)
 		result += dx * (function(leftVal) + function(leftVal + dx)) / 2;
 	
 	return result;
 }
 //------------------------------------------------------------------------------
-std::vector<std::vector<Real>> TrapezeIntegrator::IntegrateByStep(const Params* params) const
+std::vector<std::vector<Real>> TrapezeIntegrator::IntegrationGrid(const Params* params) const
 {
 	if (!SuitableParams(params)) return std::vector<std::vector<Real>>{ };
 
-	const auto oneDimensionalIntegratorParams = reinterpret_cast<const OneDimensionalIntervalsIntegratorParams*>(params);
+	const auto integratorParams = reinterpret_cast<const OneDimensionalIntervalsIntegratorParams*>(params);
 
 	std::vector<Real> x, y;
-	x.reserve(oneDimensionalIntegratorParams->m_intervals);
-	y.reserve(oneDimensionalIntegratorParams->m_intervals);
+	x.reserve(integratorParams->m_intervals);
+	y.reserve(integratorParams->m_intervals);
 
-	auto leftVal = oneDimensionalIntegratorParams->m_leftX;
-	const auto dx = (oneDimensionalIntegratorParams->m_rightX - oneDimensionalIntegratorParams->m_leftX)
-	/ static_cast<Real>(oneDimensionalIntegratorParams->m_intervals);
+	auto leftVal = integratorParams->m_leftX;
+	const auto dx = (integratorParams->m_rightX - integratorParams->m_leftX)
+	/ static_cast<Real>(integratorParams->m_intervals);
 
-	for (; leftVal < oneDimensionalIntegratorParams->m_rightX; leftVal += dx)
+	for (; leftVal < integratorParams->m_rightX; leftVal += dx)
 	{
-		const auto result = oneDimensionalIntegratorParams->m_function(leftVal);
+		const auto result = integratorParams->m_function(leftVal);
 
 		x.emplace_back(leftVal);
 		y.emplace_back(result);
