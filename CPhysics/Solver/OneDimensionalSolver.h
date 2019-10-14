@@ -14,7 +14,7 @@
 namespace CPhysics
 {
 
-struct OneDimensionalParams : Params
+struct OneDimensionalSolverParams : Params
 {
 	Real					m_accuracy{ };
 	Real					m_leftX{ };

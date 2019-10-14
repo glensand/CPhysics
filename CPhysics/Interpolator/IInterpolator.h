@@ -12,6 +12,7 @@
 #include "../CPhysics.h"
 #include <string>
 #include <vector>
+#include <functional>
 
 namespace CPhysics
 {
@@ -20,17 +21,15 @@ struct InterpolatorParams : Params
 {
 	virtual ~InterpolatorParams() = default;
 
-			InterpolatorParams(OneDimensionalFunction fx, OneDimensionalFunction fy, const std::vector<size_t> &points)
-				:
-				m_fX(fx),
-				m_fY(fy),
-				m_points(points)
+			InterpolatorParams(OneDimensionalFunction fy, const std::vector<Real> &x, size_t n)
+				: m_fY(fy)
+				, m_x(x)
+				, m_n(n)
 				{}
 		
-	OneDimensionalFunction	m_fX{ };	// Function, is used for calculate point, to be interpolate in
 	OneDimensionalFunction	m_fY{ };	// Function, needs to be interpolated
-
-	std::vector<size_t>		m_points;	// Points set, 0...n ~N
+	std::vector<Real>		m_x;
+	size_t					m_n{ };
 };
 //==============================================================================	
 class IInterpolator
@@ -39,14 +38,14 @@ public:
 	IInterpolator() = default;
 	virtual ~IInterpolator() = default;
 
-								// Return name of interpolations algorithm 
-	virtual std::string			GetInterpolatorType() const = 0;
+										// Return name of interpolations algorithm 
+	virtual std::string					GetInterpolatorType() const = 0;
 
-								// Checkout passed in for compability
-	virtual bool				SuitableParams(const Params* params) const = 0;
+										// Checkout passed in for compability
+	virtual bool						SuitableParams(const Params* params) const = 0;
 
-								// Function interpolation, using points greed
-	virtual std::vector<Real>	Interpolate(const Params* params) const = 0;
+										// Function interpolation, using points greed
+	virtual std::function<Real(Real)>	Interpolate(const Params* params) const = 0;
 };
 //==============================================================================
 }

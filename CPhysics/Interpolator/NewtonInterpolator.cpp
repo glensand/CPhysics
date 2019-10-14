@@ -1,40 +1,45 @@
 #include "NewtonInterpolator.h"
+#include "../Differentiator/DividedDifference.h"
 
-namespace
-{
-//------------------------------------------------------------------------------
-struct Point final
-{
-	CPhysics::Real	m_x;
-	CPhysics::Real	m_y;
-};
-//------------------------------------------------------------------------------
-void computeXY(const CPhysics::InterpolatorParams* params, std::vector<Point> &points)
-{
-	points.reserve(params->m_points.size());
-	for (size_t i{ 0 }; i < params->m_points.size(); ++i)
-	{
-		points[i].m_x = params->m_fX(params->m_points[i]);
-		points[i].m_y = params->m_fY(params->m_points[i]);
-	}
-}
-//------------------------------------------------------------------------------
-}
-//==============================================================================
 namespace CPhysics
 {
 //------------------------------------------------------------------------------
-std::vector<Real> NewtonInterpolator::Interpolate(const Params* params) const
+std::function<Real(Real)> NewtonInterpolator::Interpolate(const Params* params) const
 {
-	if (!SuitableParams(params)) return std::vector<Real>();
+	if (!SuitableParams(params)) return std::function<Real(Real)>();
 
-	const auto interpolatorParams = reinterpret_cast<const InterpolatorParams*>(params);
-	std::vector<Point> points;
+	const auto iParams = reinterpret_cast<const InterpolatorParams*>(params);
+	const auto &fX = iParams->m_fY;
+	const auto &x = iParams->m_x;
 
-	computeXY(interpolatorParams, points);
+	std::vector<Real> coefficients;
+	coefficients.reserve(iParams->m_n);
 
-	return std::vector<Real>();
-}
+	const DividedDifference difference;
+	DividedDifferenceParams dDParams{x, fX, 2};
+	
+	coefficients.emplace_back(fX(x[0]));
+	for(size_t i{ 1 }; i < iParams->m_n; ++i)
+	{
+		dDParams.m_regularity = i + 1;
+		coefficients.emplace_back(difference.Differentiate(&dDParams));
+	}
+
+	return [coefficients, x](Real arg)
+	{
+		Real result{ coefficients[0] };
+		for(size_t i{ 1 }; i < coefficients.size(); ++i)
+		{
+			Real member = coefficients[i];
+			
+			for (size_t j{ 0 }; j < i; ++j)
+				member *= (arg - x[j]);
+			
+			result += member;
+		}
+		return result;
+	};
+}	
 //------------------------------------------------------------------------------
 std::string NewtonInterpolator::GetInterpolatorType() const
 {
@@ -43,7 +48,7 @@ std::string NewtonInterpolator::GetInterpolatorType() const
 //------------------------------------------------------------------------------
 bool NewtonInterpolator::SuitableParams(const Params* params) const
 {
-	return BaseInterpolator::SuitableParams(params) && dynamic_cast<const NewtonIterpolatorParams*>(params);
+	return BaseInterpolator::SuitableParams(params);
 }
 //------------------------------------------------------------------------------
 }

@@ -21,7 +21,7 @@ Real NewtonSolver::Solve(const Params* params) const
 {
 	if (!SuitableParams(params)) return Real();
 
-	const auto solverParams = reinterpret_cast<const OneDimensionalParams*>(params);
+	const auto solverParams = reinterpret_cast<const OneDimensionalSolverParams*>(params);
 
 	Real a = solverParams->m_leftX;
 	Real b = solverParams->m_rightX;

@@ -12,7 +12,7 @@ Real DichotomySolver::Solve(const Params* params) const
 {
 	if (!SuitableParams(params)) return Real();
 
-	const auto dichotomySolverParams = reinterpret_cast<const OneDimensionalParams*>(params);
+	const auto dichotomySolverParams = reinterpret_cast<const OneDimensionalSolverParams*>(params);
 
 	Real a = dichotomySolverParams->m_leftX;
 	Real b = dichotomySolverParams->m_rightX;

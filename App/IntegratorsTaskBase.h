@@ -14,7 +14,7 @@ public:
 	virtual		~IntegratorsTaskBase() = default;
 
 protected:
-	std::vector<std::vector<double>>	ComputeFunction(const CPhysics::OneDimensionalIntervalsIntegratorParams& params) const;
+	[[nodiscard]] std::vector<std::vector<double>>	ComputeFunction(const CPhysics::OneDimensionalIntervalsIntegratorParams& params) const;
 
 	void	Demonstrate(const CPhysics::IIntegrator* integrator, const CPhysics::OneDimensionalIntervalsIntegratorParams& params) const;
 

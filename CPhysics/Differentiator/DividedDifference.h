@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Differentiator1D.h
+// DividedDifference.h
 // General one dimensional integrators abstract class
 // Also implements integrators params
 //
@@ -11,32 +11,33 @@
 //------------------------------------------------------------------------------
 #pragma once
 
-#include "IDifferentiator.h"
+#include "IDividedDifference.h"
+#include <vector>
 
 namespace CPhysics
 {
 //==============================================================================
-struct Differentiator1DParams : Params
+struct DividedDifferenceParams : Params
 {
-	virtual					~Differentiator1DParams() = default;
-	Differentiator1DParams(Real x, Real h, OneDimensionalFunction function)
+	virtual					~DividedDifferenceParams() = default;
+	DividedDifferenceParams(const std::vector<Real> &x, OneDimensionalFunction function, size_t regularity)
 	:
 	m_x(x),
-	m_h(h),
+	m_regularity(regularity),
 	m_function(function)
 	{}
 	
-	Real					m_x{ };
-	Real					m_h{ };
+	std::vector<Real>		m_x{ };
+	size_t					m_regularity{ };
 	OneDimensionalFunction	m_function{ };
 };
 //==============================================================================
-class Differentiator1D : public IDifferentiator
+class DividedDifference : public IDividedDifference
 {
 public:
-				Differentiator1D() = default;
+				DividedDifference() = default;
 	
-	virtual		~Differentiator1D() = default;
+	virtual		~DividedDifference() = default;
 
 	bool		SuitableParams(const Params* params) const override;
 

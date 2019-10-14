@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// IDifferentiator.h
+// IDividedDifference.h
 // Differentiators interface
 //
 // Copyright (c) 2019 GlenSand
@@ -14,12 +14,12 @@
 
 namespace CPhysics
 {
-class IDifferentiator
+class IDividedDifference
 {
 public:
 
-				IDifferentiator() = default;
-	virtual		~IDifferentiator() = default;
+				IDividedDifference() = default;
+	virtual		~IDividedDifference() = default;
 
 	virtual Real	Differentiate(const Params* params) const = 0;
 

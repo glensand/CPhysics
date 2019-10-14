@@ -12,7 +12,7 @@ Real SimpleIterationsSolver::Solve(const Params* params) const
 {
 	if (!SuitableParams(params)) return Real();
 
-	const auto solverParams = reinterpret_cast<const OneDimensionalParams*>(params);
+	const auto solverParams = reinterpret_cast<const OneDimensionalSolverParams*>(params);
 
 	const auto function = solverParams->m_function;
 	Real x = (solverParams->m_leftX + solverParams->m_rightX) / 2;

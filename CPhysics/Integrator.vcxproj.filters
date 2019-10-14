@@ -61,11 +61,11 @@
     <ClCompile Include="Integrator\OneDimensional\TrapezeIntegrator.cpp">
       <Filter>CPhysics\Integrator\OneDimensional</Filter>
     </ClCompile>
-    <ClCompile Include="Differentiator\Differentiator1d.cpp">
-      <Filter>CPhysics\Differentiator</Filter>
-    </ClCompile>
     <ClCompile Include="DifferentialSolver\RungeKutta2SystemSolver.cpp">
       <Filter>CPhysics\DifferentialSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="Differentiator\DividedDifference.cpp">
+      <Filter>CPhysics\Differentiator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -117,17 +117,17 @@
     <ClInclude Include="Integrator\OneDimensional\TrapezeIntegrator.h">
       <Filter>CPhysics\Integrator\OneDimensional</Filter>
     </ClInclude>
-    <ClInclude Include="Differentiator\IDifferentiator.h">
-      <Filter>CPhysics\Differentiator</Filter>
-    </ClInclude>
-    <ClInclude Include="Differentiator\Differentiator1d.h">
-      <Filter>CPhysics\Differentiator</Filter>
-    </ClInclude>
     <ClInclude Include="DifferentialSolver\OrdinaryDifferentialSystemSolver.h">
       <Filter>CPhysics\DifferentialSolver</Filter>
     </ClInclude>
     <ClInclude Include="DifferentialSolver\RungeKutta2SystemSolver.h">
       <Filter>CPhysics\DifferentialSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Differentiator\DividedDifference.h">
+      <Filter>CPhysics\Differentiator</Filter>
+    </ClInclude>
+    <ClInclude Include="Differentiator\IDividedDifference.h">
+      <Filter>CPhysics\Differentiator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
