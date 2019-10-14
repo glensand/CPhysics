@@ -64,6 +64,9 @@
     <ClCompile Include="Differentiator\Differentiator1d.cpp">
       <Filter>CPhysics\Differentiator</Filter>
     </ClCompile>
+    <ClCompile Include="DifferentialSolver\RungeKutta2SystemSolver.cpp">
+      <Filter>CPhysics\DifferentialSolver</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Solver\ISolver.h">
@@ -119,6 +122,12 @@
     </ClInclude>
     <ClInclude Include="Differentiator\Differentiator1d.h">
       <Filter>CPhysics\Differentiator</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentialSolver\OrdinaryDifferentialSystemSolver.h">
+      <Filter>CPhysics\DifferentialSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentialSolver\RungeKutta2SystemSolver.h">
+      <Filter>CPhysics\DifferentialSolver</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
