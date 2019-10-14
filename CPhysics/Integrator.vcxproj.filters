@@ -20,6 +20,9 @@
     <Filter Include="CPhysics\Integrator\OneDimensional">
       <UniqueIdentifier>{a5363195-9c02-48f9-9466-8f1726eee5db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CPhysics\Differentiator">
+      <UniqueIdentifier>{c1d81e60-3683-4af3-82d7-c4e87c0402bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Solver\DichotomySolver.cpp">
@@ -57,6 +60,9 @@
     </ClCompile>
     <ClCompile Include="Integrator\OneDimensional\TrapezeIntegrator.cpp">
       <Filter>CPhysics\Integrator\OneDimensional</Filter>
+    </ClCompile>
+    <ClCompile Include="Differentiator\Differentiator1d.cpp">
+      <Filter>CPhysics\Differentiator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +113,12 @@
     </ClInclude>
     <ClInclude Include="Integrator\OneDimensional\TrapezeIntegrator.h">
       <Filter>CPhysics\Integrator\OneDimensional</Filter>
+    </ClInclude>
+    <ClInclude Include="Differentiator\IDifferentiator.h">
+      <Filter>CPhysics\Differentiator</Filter>
+    </ClInclude>
+    <ClInclude Include="Differentiator\Differentiator1d.h">
+      <Filter>CPhysics\Differentiator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
