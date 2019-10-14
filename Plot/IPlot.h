@@ -40,10 +40,9 @@ struct Color final
 	Color() = default;
 	~Color() = default;
 
-	ChanelColor		m_r{ };	// Red
-	ChanelColor		m_g{ };	// Green
-	ChanelColor		m_b{ };	// Blue
-	ChanelColor		m_a{ };	// Alpha
+	ChanelColor		m_b{ };	
+	ChanelColor		m_g{ };	
+	ChanelColor		m_r{ };	
 };
 //==============================================================================
 struct GraphParams final
@@ -55,7 +54,8 @@ struct GraphParams final
 	std::vector<double>	m_y;		// Vector of y's axis point
 
 	PlotStyle			m_style{ PlotStyle::LINE };						// graph style
-	Color				m_color{ 0, 0, 0, 255};		// Color to be used for graph plotting
+	Color				m_color{ 0, 0, 0};					// Color to be used for graph plotting
+	std::string			m_label{ "function" };
 };
 //==============================================================================
 class IPlot

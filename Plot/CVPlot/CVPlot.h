@@ -49,18 +49,19 @@ public:
 	void		Show() override;
 private:
 
-	void		Initialize();
+	void				Initialize();
 
-	void		DrawAxis();
+	void				DrawAxis();
 
-	void		DrawPlots();
+	void				DrawPlots();
 
-	void		DrawLabels();
+	void				DrawLabels();
+
+	static cv::Scalar	DeduceColor(const Color &color);
 	
 	std::string		m_plotName;
 	cv::Mat			m_plot;
 	cv::Size		m_plotSize{ 1300, 700 };
-	cv::Scalar		m_defaultGraphColor{ 255, 0, 0 };
 	cv::Scalar		m_defaultBackgroundColor{ 255, 255, 255 };
 
 	const int		m_borderSize{ 30 };

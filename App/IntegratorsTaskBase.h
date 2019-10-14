@@ -51,6 +51,7 @@ inline void IntegratorsTaskBase::Demonstrate(const CPhysics::IIntegrator* integr
 		Plotter::GraphParams graphParams;
 		graphParams.m_x = functionOnGrid[0];
 		graphParams.m_y = functionOnGrid[1];
+		graphParams.m_color = { 255, 0,0 };
 		plot1.AddGraph(&graphParams);
 	}
 
@@ -60,6 +61,7 @@ inline void IntegratorsTaskBase::Demonstrate(const CPhysics::IIntegrator* integr
 		Plotter::GraphParams graphParams;
 		graphParams.m_x = analyticalFunction[0];
 		graphParams.m_y = analyticalFunction[1];
+		graphParams.m_color = { 0, 0, 255 };
 		plot1.AddGraph(&graphParams);
 	}
 

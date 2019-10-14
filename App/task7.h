@@ -70,13 +70,11 @@ inline void Task7::PrintSolution(const CPhysics::Params* params, CPhysics::ISimp
 	graph_params2.m_x = CalculateAnalytical(10000).first;
 	graph_params2.m_y = CalculateAnalytical(10000).second;
 	Plotter::Color color;
-	color.m_a = 100;
 	color.m_g = 255;
 	graph_params2.m_color = color;
 	plot.AddGraph(&graph_params2);
 	
 	plot.Show();
-	
 }
 //------------------------------------------------------------------------------
 inline void Task7::Run(const Params* params) const

@@ -70,7 +70,6 @@ void CVPlot::Initialize()
 	}
 
 	m_scaleX = static_cast<float>(m_plotSize.width - m_borderSize * 2) / (m_maxX - m_minX);
-
 	m_scaleY = static_cast<float>(m_plotSize.height - m_borderSize * 2) / range;	
 }
 //------------------------------------------------------------------------------
@@ -125,6 +124,7 @@ void CVPlot::DrawPlots()
 	for(const auto &graph : m_graphs)
 	{
 		cv::Point prevPoint;
+		const auto color = DeduceColor(graph.m_color);
 		for(size_t i = 0; i < graph.m_x.size(); ++i)
 		{
 			const int y = cvRound((graph.m_y[i] - m_minY) * m_scaleY);
@@ -133,12 +133,13 @@ void CVPlot::DrawPlots()
 			const CvPoint nextPoint = cvPoint(m_borderSize + x, 
 				m_plotSize.height - (m_borderSize + y));
 
-			cv::circle(m_plot, nextPoint, 1, cv::Scalar(0, 0, 255), 1);
+			if(graph.m_style == PlotStyle::POINT || graph.m_style == PlotStyle::POINT_LINE)
+				cv::circle(m_plot, nextPoint, 1, color, 1);
 
 			// draw a line between two points
-			if (i >= 1)
+			if (graph.m_style == PlotStyle::LINE && i >= 1)
 				cv::line(m_plot, prevPoint,
-					nextPoint, m_defaultGraphColor, 1, CV_AA);
+					nextPoint, color, 1, CV_AA);
 			prevPoint = nextPoint;
 		}
 	}
@@ -146,32 +147,24 @@ void CVPlot::DrawPlots()
 //------------------------------------------------------------------------------
 void CVPlot::DrawLabels()
 {
-	// TODO::rework that shit
+	//// TODO::rework this shit
+	//const int chw = 12, chh = 20;
 
-	//CvFont font;
-	//cvInitFont(&font, CV_FONT_HERSHEY_PLAIN, 1.0, 1.0, 0, 1, CV_AA);
-
-	//// character size
-	//int chw = 6, chh = 8;
-
-	// plots == m_graphs
-	//for (std::vector<Series>::iterator iter = plots.begin();
-	//	iter != plots.end();
-	//	iter++)
+	//for(const auto& graph : m_graphs)
 	//{
-	//	std::string lbl = iter->label;
-	//	// draw label if one is available
-	//	if (lbl.length() > 0)
-	//	{
-	//		cvLine(output, cvPoint(posx, posy - chh / 2), cvPoint(posx + 15, posy - chh / 2),
-	//			iter->color, 2, CV_AA);
+	//	const auto color = DeduceColor(graph.m_color);
+	//	//cv::line(m_plot, prevPoint,	nextPoint, color, 1, CV_AA);
 
-	//		cvPutText(output, lbl.c_str(), cvPoint(posx + 20, posy),
-	//			&font, iter->color);
-
-	//		posy += int(chh * 1.5);
-	//	}
+	//	cv::putText(m_plot, graph.m_label, cvPoint(m_borderSize / 5, m_plotSize.height - m_borderSize + chh),
+	//		DEFAULT_FONT_PROPERTIES.m_type, DEFAULT_FONT_PROPERTIES.m_scale, color);
+	//	
+	//	//posy += int(chh * 1.5);
 	//}
+}
+//------------------------------------------------------------------------------
+cv::Scalar CVPlot::DeduceColor(const Color& color)
+{
+	return cv::Scalar(color.m_b, color.m_g, color.m_r);
 }
 //------------------------------------------------------------------------------
 }
