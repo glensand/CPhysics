@@ -10,6 +10,8 @@
 //------------------------------------------------------------------------------
 #pragma once
 
+#include <vector>
+
 namespace CPhysics
 {
 
@@ -20,6 +22,8 @@ typedef Real(*OneDimensionalFunction)(Real x);
 //typedef Real(*FunctionOfXAndU)(Real x, OneDimensionalFunction u);
 
 typedef Real(*FunctionOfTwoArgs)(Real x, Real y);
+
+typedef Real(*FunctionOfVector)(std::vector<Real> args);
 //==============================================================================	
 struct Params
 {
