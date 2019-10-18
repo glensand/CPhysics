@@ -4,6 +4,7 @@
 #include "Task5.h"
 #include "Task6.h"
 #include "task7.h"
+#include "Task8.h"
 
 #include "CVPlotExamples.h"
 
@@ -16,6 +17,7 @@ int main()
 	const auto task = std::make_shared<Task6>();
 	//const auto task = std::make_unique<Task7>();
 	//const auto task = std::make_unique<CVPlotExamples>();
+	const auto task = std::make_unique<Task8>();
 
 	task->Run();
 	
