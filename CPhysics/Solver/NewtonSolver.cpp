@@ -2,7 +2,7 @@
 
 namespace
 {
-inline CPhysics::Real dydx(CPhysics::OneDimensionalFunction function, CPhysics::Real x0, CPhysics::Real x1)
+inline CPhysics::Real dydx(CPhysics::Function1d function, CPhysics::Real x0, CPhysics::Real x1)
 {
 	return (function(x1) - function(x0)) / (x1 - x0);
 }

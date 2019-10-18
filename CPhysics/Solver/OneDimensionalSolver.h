@@ -19,7 +19,7 @@ struct OneDimensionalSolverParams : Params
 	Real					m_accuracy{ };
 	Real					m_leftX{ };
 	Real					m_rightX{ };
-	OneDimensionalFunction	m_function{ };
+	Function1d	m_function{ };
 };
 
 class OneDimensionalSolver : public ISolver

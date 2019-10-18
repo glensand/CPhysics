@@ -43,8 +43,8 @@ inline void Task3::Run(const Params* params) const
 	OneDimensionalIntegratorTestParams params2(integrators, intervals, "x^(1/3) * exp(sin(x))", 0, 0, 1, function2);
 	OneDimensionalIntegratorFacade::Test(&params2);
 
-	const CPhysics::OneDimensionalIntervalsIntegratorParams integratorParams1{-1, 1, function1, 4};
-	const CPhysics::OneDimensionalIntervalsIntegratorParams integratorParams2{0, 1, function2, 4};
+	const CPhysics::Integrator1dParamsIntervals integratorParams1{-1, 1, function1, 4};
+	const CPhysics::Integrator1dParamsIntervals integratorParams2{0, 1, function2, 4};
 
 	// demonstration
 	Demonstrate(trapezeIntegrator.get(), integratorParams1);

@@ -23,6 +23,7 @@
     <ClInclude Include="Task3.h" />
     <ClInclude Include="Task4.h" />
     <ClInclude Include="Task5.h" />
+    <ClInclude Include="Task6.h" />
     <ClInclude Include="task7.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

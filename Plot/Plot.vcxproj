@@ -157,9 +157,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CVPlot2\CVPlot2.cpp" />
     <ClCompile Include="CVPlot\CVPlot.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CVPlot2\CVPlot2.h" />
     <ClInclude Include="CVPlot\CVPlot.h" />
     <ClInclude Include="IPlot.h" />
   </ItemGroup>

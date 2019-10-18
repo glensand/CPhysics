@@ -4,13 +4,13 @@
 
 #include <Integrator/OneDimensional/OneDimensionalIntegrator.h>
 //==============================================================================	
-struct OneDimensionalIntegratorTestParams : CPhysics::OneDimensionalIntegratorParams
+struct OneDimensionalIntegratorTestParams : CPhysics::Integrator1dParams
 {
 	OneDimensionalIntegratorTestParams(const std::vector< CPhysics::IIntegrator*> &integrators, const std::vector<size_t> &intervals,
 	const std::string &stringFunction, CPhysics::Real analyticalValue, CPhysics::Real leftX, CPhysics::Real rightX, 
-	CPhysics::OneDimensionalFunction function)
+	CPhysics::Function1d function)
 	:
-	OneDimensionalIntegratorParams(leftX, rightX, function),
+	Integrator1dParams(leftX, rightX, function),
 	m_integrators(integrators),
 	m_intervalsVector(intervals),
 	m_functionString(stringFunction),

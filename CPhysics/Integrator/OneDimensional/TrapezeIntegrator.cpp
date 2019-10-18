@@ -7,7 +7,7 @@ Real TrapezeIntegrator::Integrate(const Params* params) const
 {
 	if (!SuitableParams(params)) return .0;
 
-	const auto integratorParams = reinterpret_cast<const OneDimensionalIntervalsIntegratorParams*>(params);
+	const auto integratorParams = reinterpret_cast<const Integrator1dParamsIntervals*>(params);
 	Real result = 0.;
 
 	const Real dx = (integratorParams->m_rightX - integratorParams->m_leftX)
@@ -26,7 +26,7 @@ std::vector<std::vector<Real>> TrapezeIntegrator::IntegrationGrid(const Params* 
 {
 	if (!SuitableParams(params)) return std::vector<std::vector<Real>>{ };
 
-	const auto integratorParams = reinterpret_cast<const OneDimensionalIntervalsIntegratorParams*>(params);
+	const auto integratorParams = reinterpret_cast<const Integrator1dParamsIntervals*>(params);
 
 	std::vector<Real> x, y;
 	x.reserve(integratorParams->m_intervals);

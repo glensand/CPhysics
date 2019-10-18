@@ -11,37 +11,35 @@
 //------------------------------------------------------------------------------
 #pragma once
 
-#include "IDividedDifference.h"
+#include "IDifferentiator.h"
 #include <vector>
 
 namespace CPhysics
 {
 //==============================================================================
-struct DividedDifferenceParams : Params
+struct DiffParams : Params
 {
-	virtual					~DividedDifferenceParams() = default;
-	DividedDifferenceParams(const std::vector<Real> &x, Function1d function, size_t regularity)
+	virtual					~DiffParams() = default;
+	DiffParams(const std::vector<Real> &x, const Function1d &function)
 	:
 	m_x(x),
-	m_regularity(regularity),
 	m_function(function)
 	{}
 	
 	std::vector<Real>		m_x{ };
-	size_t					m_regularity{ };
-	Function1d	m_function{ };
+	Function1d				m_function{ };
 };
 //==============================================================================
-class DividedDifference : public IDividedDifference
+class DIfferentiator : public IDifferentiator
 {
 public:
-				DividedDifference() = default;
+						DIfferentiator() = default;
 	
-	virtual		~DividedDifference() = default;
+	virtual				~DIfferentiator() = default;
 
-	bool		SuitableParams(const Params* params) const override;
+	bool				SuitableParams(const Params* params) const override;
 
-	Real		Differentiate(const Params* params) const override;
+	std::vector<Real>	Differentiate(const Params* params) const override;
 };
 //==============================================================================
 }

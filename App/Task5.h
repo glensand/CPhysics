@@ -53,10 +53,10 @@ inline void Task5::Run(const Params* params = nullptr) const
 	Plotter::CVPlot plot;
 	Plotter::GraphParams graphParams1;
 	graphParams1.m_x = x;
-	graphParams1.m_y = y;
+	graphParams1.m_y = p4;
 
 	//Plotter::GraphParams graphParams2;
-	//graphParams2.m_y = p4;
+	//graphParams2.m_y = y;
 	//graphParams2.m_x = x;
 	
 	plot.AddGraph(&graphParams1);

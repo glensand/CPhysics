@@ -14,15 +14,15 @@ public:
 	virtual		~IntegratorsTaskBase() = default;
 
 protected:
-	[[nodiscard]] std::vector<std::vector<double>>	ComputeFunction(const CPhysics::OneDimensionalIntervalsIntegratorParams& params) const;
+	[[nodiscard]] std::vector<std::vector<double>>	ComputeFunction(const CPhysics::Integrator1dParamsIntervals& params) const;
 
-	void	Demonstrate(const CPhysics::IIntegrator* integrator, const CPhysics::OneDimensionalIntervalsIntegratorParams& params) const;
+	void	Demonstrate(const CPhysics::IIntegrator* integrator, const CPhysics::Integrator1dParamsIntervals& params) const;
 
 	const size_t m_analyticalIntervals{ 10000 };
 };
 //------------------------------------------------------------------------------
 inline std::vector<std::vector<double>> IntegratorsTaskBase::ComputeFunction(
-	const CPhysics::OneDimensionalIntervalsIntegratorParams& params) const
+	const CPhysics::Integrator1dParamsIntervals& params) const
 {
 	std::vector<double> x, y;
 	x.reserve(params.m_intervals);
@@ -41,7 +41,7 @@ inline std::vector<std::vector<double>> IntegratorsTaskBase::ComputeFunction(
 }
 //------------------------------------------------------------------------------
 inline void IntegratorsTaskBase::Demonstrate(const CPhysics::IIntegrator* integrator,
-	const CPhysics::OneDimensionalIntervalsIntegratorParams& params) const
+	const CPhysics::Integrator1dParamsIntervals& params) const
 {
 	Plotter::CVPlot plot1;
 	const auto functionOnGrid = integrator->IntegrationGrid(&params);

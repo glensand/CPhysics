@@ -8,7 +8,7 @@ Real SimpsonIntegrator::Integrate(const Params* params) const
 {
 	if (!SuitableParams(params)) return .0;
 
-	const auto integratorParams = reinterpret_cast<const OneDimensionalIntervalsIntegratorParams*>(params);
+	const auto integratorParams = reinterpret_cast<const Integrator1dParamsIntervals*>(params);
 	Real result = 0.;
 	
 	const Real dx = (integratorParams->m_rightX - integratorParams->m_leftX)
@@ -30,7 +30,7 @@ std::vector<std::vector<Real>> SimpsonIntegrator::IntegrationGrid(const Params* 
 {
 	if (!SuitableParams(params)) return std::vector<std::vector<Real>>{ };
 
-	const auto integratorParams = reinterpret_cast<const OneDimensionalIntervalsIntegratorParams*>(params);
+	const auto integratorParams = reinterpret_cast<const Integrator1dParamsIntervals*>(params);
 
 	const Real h = (integratorParams->m_rightX - integratorParams->m_leftX)
 		/ (2 * Real(integratorParams->m_intervals));

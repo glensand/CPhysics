@@ -21,13 +21,13 @@ struct InterpolatorParams : Params
 {
 	virtual ~InterpolatorParams() = default;
 
-			InterpolatorParams(OneDimensionalFunction fy, const std::vector<Real> &x, size_t n)
+			InterpolatorParams(Function1d fy, const std::vector<Real> &x, size_t n)
 				: m_fY(fy)
 				, m_x(x)
 				, m_n(n)
 				{}
 		
-	OneDimensionalFunction	m_fY{ };	// Function, needs to be interpolated
+	Function1d	m_fY{ };	// Function, needs to be interpolated
 	std::vector<Real>		m_x;
 	size_t					m_n{ };
 };

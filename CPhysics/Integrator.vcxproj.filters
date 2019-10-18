@@ -67,6 +67,9 @@
     <ClCompile Include="Differentiator\DividedDifference.cpp">
       <Filter>CPhysics\Differentiator</Filter>
     </ClCompile>
+    <ClCompile Include="Differentiator\Differentiator.cpp">
+      <Filter>CPhysics\Differentiator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Solver\ISolver.h">
@@ -127,6 +130,12 @@
       <Filter>CPhysics\Differentiator</Filter>
     </ClInclude>
     <ClInclude Include="Differentiator\IDividedDifference.h">
+      <Filter>CPhysics\Differentiator</Filter>
+    </ClInclude>
+    <ClInclude Include="Differentiator\Differentiator.h">
+      <Filter>CPhysics\Differentiator</Filter>
+    </ClInclude>
+    <ClInclude Include="Differentiator\IDifferentiator.h">
       <Filter>CPhysics\Differentiator</Filter>
     </ClInclude>
   </ItemGroup>

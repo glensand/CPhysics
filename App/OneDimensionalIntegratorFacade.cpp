@@ -22,7 +22,7 @@ void OneDimensionalIntegratorFacade::Test(const CPhysics::Params* params)
 
 		std::cout << "//----------------------------------------------" << std::endl;
 		std::cout << "count of intervals: " << std::to_string(i) << std::endl;
-		const CPhysics::OneDimensionalIntervalsIntegratorParams oneDimensionalIntegratorParams
+		const CPhysics::Integrator1dParamsIntervals oneDimensionalIntegratorParams
 		(leftX, rightX, oneDimensionalIntegratorTestParams->m_function, i);
 		
 		for(const auto& integrator : oneDimensionalIntegratorTestParams->m_integrators)

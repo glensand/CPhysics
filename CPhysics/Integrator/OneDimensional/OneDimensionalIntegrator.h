@@ -16,10 +16,10 @@
 namespace CPhysics
 {
 //==============================================================================
-struct OneDimensionalIntegratorParams: Params
+struct Integrator1dParams: Params
 {
-	virtual					~OneDimensionalIntegratorParams() = default;
-	OneDimensionalIntegratorParams(Real leftX, Real rightX, OneDimensionalFunction function)
+	virtual					~Integrator1dParams() = default;
+	Integrator1dParams(Real leftX, Real rightX, Function1d function)
 	:
 	m_leftX(leftX),
 	m_rightX(rightX),
@@ -28,13 +28,13 @@ struct OneDimensionalIntegratorParams: Params
 	
 	Real					m_leftX{ };
 	Real					m_rightX{ };
-	OneDimensionalFunction	m_function{ };
+	Function1d				m_function{ };
 };
 //==============================================================================
-struct OneDimensionalIntervalsIntegratorParams : OneDimensionalIntegratorParams
+struct Integrator1dParamsIntervals : Integrator1dParams
 {
-	OneDimensionalIntervalsIntegratorParams(Real leftX, Real rightX, OneDimensionalFunction function, size_t intervals)
-	: OneDimensionalIntegratorParams(leftX, rightX, function)
+	Integrator1dParamsIntervals(Real leftX, Real rightX, Function1d function, size_t intervals)
+	: Integrator1dParams(leftX, rightX, function)
 	, m_intervals(intervals)
 	{}
 

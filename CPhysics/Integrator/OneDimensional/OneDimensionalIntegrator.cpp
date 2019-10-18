@@ -5,7 +5,7 @@ namespace CPhysics
 //------------------------------------------------------------------------------
 bool OneDimensionalIntegrator::SuitableParams(const Params* params) const
 {
-	const auto integratorParams = dynamic_cast<const OneDimensionalIntervalsIntegratorParams*>(params);
+	const auto integratorParams = dynamic_cast<const Integrator1dParamsIntervals*>(params);
 	if (integratorParams == nullptr)
 		return false;
 	

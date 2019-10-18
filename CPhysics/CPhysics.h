@@ -11,15 +11,17 @@
 #pragma once
 
 #include <vector>
+#include <functional>
 
 namespace CPhysics
 {
 
 using Real = double;
 
-typedef Real(*OneDimensionalFunction)(Real x);
+using Function1d = std::function<Real(Real)>;
 
-//typedef Real(*FunctionOfXAndU)(Real x, OneDimensionalFunction u);
+//typedef Real(*Function1d)(Real x);
+//typedef Real(*FunctionOfXAndU)(Real x, Function1d u);
 
 typedef Real(*FunctionOfTwoArgs)(Real x, Real y);
 
