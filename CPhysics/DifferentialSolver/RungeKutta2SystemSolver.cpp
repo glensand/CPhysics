@@ -25,20 +25,22 @@ RungeKutta2SystemSolver::ReturnType RungeKutta2SystemSolver::Solve(const Params*
 		for (size_t j = 0; j < sds_params->m_functions.size(); ++j)
 		{
 			std::vector<Real> args{};
-			args.push_back(x[i - 1]);
+			//args.push_back(x[i - 1]);
+			const Real x_n = x[i - 1];
 			for (auto it : Y)
 			{
 				args.push_back(it[i - 1]);
 			}
 			std::vector<Real> args_modified{};
-			args_modified.push_back(x[i - 1] + 2 * step / 3);
+			//args_modified.push_back(x[i - 1] + 2 * step / 3);
+			const Real x_n_modified = x[i - 1] + 2 * step / 3;
 			for (size_t k = 0; k < Y.size(); ++k)
 			{
-				args_modified.push_back(Y[k][i - 1] + 2 * step * sds_params->m_functions[k](args) / 3);
+				args_modified.push_back(Y[k][i - 1] + 2 * step * sds_params->m_functions[k](x_n, args) / 3);
 			}
 			Real y = Y[j][i - 1] + step *
-					(0.25 * sds_params->m_functions[j](args) +
-					0.75 * sds_params->m_functions[j](args_modified));
+					(0.25 * sds_params->m_functions[j](x_n, args) +
+					0.75 * sds_params->m_functions[j](x_n_modified, args_modified));
 			Y[j].push_back(y);
 		}
 	}	

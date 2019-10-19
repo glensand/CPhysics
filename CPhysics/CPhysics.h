@@ -23,9 +23,13 @@ using Function1d = std::function<Real(Real)>;
 //typedef Real(*Function1d)(Real x);
 //typedef Real(*FunctionOfXAndU)(Real x, Function1d u);
 
-typedef Real(*FunctionOfTwoArgs)(Real x, Real y);
+//typedef Real(*FunctionOfTwoArgs)(Real x, Real y);
 
-typedef Real(*FunctionOfVector)(std::vector<Real> args);
+using FunctionOfTwoArgs = std::function<Real(Real, Real)>;
+	
+//typedef Real(*FunctionOfVector)(std::vector<Real> args);
+using FunctionOfVector = std::function<Real(Real x, std::vector<Real>&)>;
+
 //==============================================================================	
 struct Params
 {
