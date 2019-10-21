@@ -50,5 +50,8 @@
     <ClInclude Include="Task6.h">
       <Filter>Tasks</Filter>
     </ClInclude>
+    <ClInclude Include="Task8.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

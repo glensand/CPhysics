@@ -25,6 +25,7 @@
     <ClInclude Include="Task5.h" />
     <ClInclude Include="Task6.h" />
     <ClInclude Include="task7.h" />
+    <ClInclude Include="Task8.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CD15BFEF-65B6-409C-ABC9-B58EDA47B321}</ProjectGuid>
