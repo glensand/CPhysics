@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
-// DividedDifference.h
-// General one dimensional integrators abstract class
-// Also implements integrators params
+// Differentiator.h
+// 
+// 
 //
 // Copyright (c) 2019 GlenSand
 // All rights reserved.
 //
-// Date: 27.09.2019
+// Date: 17.10.2019
 // Author: Bezborodov Gleb
 //------------------------------------------------------------------------------
 #pragma once
@@ -30,12 +30,12 @@ struct DiffParams : Params
 	Function1d				m_function{ };
 };
 //==============================================================================
-class DIfferentiator : public IDifferentiator
+class Differentiator : public IDifferentiator
 {
 public:
-						DIfferentiator() = default;
+						Differentiator() = default;
 	
-	virtual				~DIfferentiator() = default;
+	virtual				~Differentiator() = default;
 
 	bool				SuitableParams(const Params* params) const override;
 

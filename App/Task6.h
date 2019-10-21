@@ -9,6 +9,11 @@
 #include <functional>
 #include <cmath>
 #include <iostream>
+#include <fstream>
+
+#include <CVPlot/CVPlot.h>
+
+#define  _HALF_DEBUG
 
 class Task6 : public ITask
 {
@@ -25,6 +30,12 @@ private:
 	static std::vector<CPhysics::Real> ComputeDJDX(const CPhysics::Function1d& J, const std::vector<CPhysics::Real>& xes);
 	
 	static CPhysics::Function1d GetBessel(size_t m, const CPhysics::IIntegrator* integrator);
+	
+	static void DebugPrint(const std::vector<CPhysics::Real>& x, const std::vector<CPhysics::Real>& y, const std::string& outputFileName) noexcept;
+	
+	static void DebugPrint(const std::vector<CPhysics::Real>&, const std::string& outputFileName) noexcept;
+
+	static void Render(const std::vector<CPhysics::Real>& x, const std::vector<CPhysics::Real>& y1, const std::vector<CPhysics::Real>& y2) noexcept;
 };
 //------------------------------------------------------------------------------
 inline void Task6::Run(const Params* params) const
@@ -36,8 +47,8 @@ inline void Task6::Run(const Params* params) const
 
 	const CPhysics::Real leftX{ 0 };
 	CPhysics::Real x{ leftX };
-	const CPhysics::Real rightX{ 2 * 3.14 };
-	const size_t intervals{ 10000 };
+	const CPhysics::Real rightX{ 2 * 3.141592653589793238463 };
+	const size_t intervals{ 100 };
 	const CPhysics::Real dx = (rightX - leftX) / static_cast<CPhysics::Real>(intervals);
 
 	std::vector<CPhysics::Real> xes;
@@ -47,14 +58,28 @@ inline void Task6::Run(const Params* params) const
 	const auto vectorJ1 = ComputeJ(J1, xes);
 	const auto vectorDJ0 = ComputeDJDX(J0, xes);
 
-	const CPhysics::Real delta = 2e-10;
+#ifdef  _HALF_DEBUG
+	const auto debVec = ComputeJ(J0, xes);
+	DebugPrint(xes, vectorJ1, "J1.csv");
+	DebugPrint(xes, debVec, "J0.csv");
+	DebugPrint(xes, "xes.csv");
+
+	Render(xes, vectorJ1, vectorDJ0);
+
+#endif
+
+	const CPhysics::Real delta = 0.01;
 
 	for(size_t i{ 0 }; i < vectorDJ0.size() && i < vectorJ1.size(); ++i)
-		if(std::abs(vectorJ1[i] - vectorDJ0[i]) > delta)
+	{
+		const auto diff{ std::abs(vectorJ1[i] + vectorDJ0[i]) };
+
+		if (diff > delta)
 		{
-			std::cout << "wrong" << std::endl;
+			std::cout << i << ": wrong " << diff << std::endl;
 			break;
 		}
+	}
 }
 //------------------------------------------------------------------------------
 inline std::vector<CPhysics::Real> Task6::ComputeJ(const CPhysics::Function1d& J, const std::vector<CPhysics::Real> &xes)
@@ -69,9 +94,9 @@ inline std::vector<CPhysics::Real> Task6::ComputeJ(const CPhysics::Function1d& J
 //------------------------------------------------------------------------------
 inline std::vector<CPhysics::Real> Task6::ComputeDJDX(const CPhysics::Function1d& J, const std::vector<CPhysics::Real>& xes)
 {
-	const CPhysics::DIfferentiator differentiator;
+	const CPhysics::Differentiator differentiator;
 	const CPhysics::DiffParams params {xes, J};
-
+	
 	return differentiator.Differentiate(&params);
 }
 //------------------------------------------------------------------------------
@@ -83,10 +108,46 @@ inline CPhysics::Function1d Task6::GetBessel(size_t m, const CPhysics::IIntegrat
 		{
 			return std::cos(m * t - x * std::sin(t));
 		};
-		const CPhysics::Real PI{ 3.14 };
+		const CPhysics::Real PI{ 3.141592653589793238463 };
 		CPhysics::Integrator1dParamsIntervals params{ 0, PI, j, 10000 };
 		
 		return integrator->Integrate(&params) / PI;
 	};
+}
+//------------------------------------------------------------------------------
+inline void Task6::DebugPrint(const std::vector<CPhysics::Real>& x, const std::vector<CPhysics::Real>& y, const std::string& outputFileName) noexcept
+{
+	std::ofstream out(outputFileName);
+
+	for(size_t i{ 0 }; i < x.size() && i < y.size(); ++i)
+		out << x[i] << " " << y[i] << std::endl;
+}
+//------------------------------------------------------------------------------
+inline void Task6::DebugPrint(const std::vector<CPhysics::Real>& y, const std::string& outputFileName) noexcept
+{
+	std::ofstream out(outputFileName);
+
+	for (size_t i{ 0 }; i < y.size(); ++i)
+		out << y[i] << std::endl;
+}
+//------------------------------------------------------------------------------
+inline void Task6::Render(const std::vector<CPhysics::Real>& x, const std::vector<CPhysics::Real>& y1,
+	const std::vector<CPhysics::Real>& y2) noexcept
+{
+	Plotter::CVPlot plot;
+	
+	Plotter::GraphParams params1;
+	params1.m_color = { 255, 0, 0 };
+	params1.m_x = x;
+	params1.m_y = y2;
+
+	Plotter::GraphParams params2;
+	params2.m_color = { 0, 255, 0 };
+	params2.m_x = x;
+	params2.m_y = y1;
+
+	plot.AddGraph(&params2);
+	plot.AddGraph(&params1);
+	plot.Show();
 }
 //------------------------------------------------------------------------------

@@ -17,7 +17,7 @@ int main()
 	const auto task = std::make_shared<Task6>();
 	//const auto task = std::make_unique<Task7>();
 	//const auto task = std::make_unique<CVPlotExamples>();
-	const auto task = std::make_unique<Task8>();
+	//const auto task = std::make_unique<Task8>();
 
 	task->Run();
 	
