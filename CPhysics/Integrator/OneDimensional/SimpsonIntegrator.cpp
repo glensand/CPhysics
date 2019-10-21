@@ -17,7 +17,7 @@ Real SimpsonIntegrator::Integrate(const Params* params) const
 	
 	Real a = integratorParams->m_leftX;
 	
-	for (size_t i{ 0 }; i < integratorParams->m_intervals - 1; ++i)
+	for (size_t i{ 0 }; i < integratorParams->m_intervals; ++i)
 	{
 		result += function(a) + 4 * function((a + a + dx) / 2) + function(a + dx);
 		a += dx;

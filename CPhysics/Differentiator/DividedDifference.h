@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // DividedDifference.h
-// General one dimensional integrators abstract class
-// Also implements integrators params
+// 
+// 
 //
 // Copyright (c) 2019 GlenSand
 // All rights reserved.

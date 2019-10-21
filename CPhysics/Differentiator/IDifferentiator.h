@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// IDividedDifference.h
+// IDifferentiator.h
 // Differentiators interface
 //
 // Copyright (c) 2019 GlenSand
