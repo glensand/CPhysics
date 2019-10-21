@@ -19,9 +19,10 @@ public:
 
 inline void Task8::Run(const Params* params) const
 {
+	using Real = CPhysics::Real;
 // Test on one equation
 	//CPhysics::ODSParams odsparams;
-	//odsparams.m_functions = { [](std::vector<CPhysics::Real> args) { return -args[1]; } };
+	//odsparams.m_functions = { [](std::vector<CPhysics::Real> y_vector) { return -y_vector[1]; } };
 	//odsparams.m_conditions = { 1 };
 	//odsparams.m_left_x = 0;
 	//odsparams.m_right_x = 3;
@@ -34,15 +35,16 @@ inline void Task8::Run(const Params* params) const
 	//	std::cout << res[0][i] << '\t' << res[1][i] << std::endl;
 	//}
 	CPhysics::ODSParams odsparams;
+	CPhysics::Real a = 10., b = 2., c = 2., d = 10.;
 	
 	odsparams.m_functions = {
-								[](std::vector<CPhysics::Real> args) { return 10. * args[1] - 2. * args[1] * args[2]; },
-								[](std::vector<CPhysics::Real> args) { return 2. * args[1] * args[2] - 10. * args[2]; }
+								[a, b](Real x, std::vector<Real>& y_vector) { return a * y_vector[0] - b * y_vector[0] * y_vector[1]; },
+								[c, d](Real x, std::vector<Real>& y_vector) { return c * y_vector[0] * y_vector[1] - d * y_vector[1]; }
 							};
 	odsparams.m_left_x = 0;
 	odsparams.m_right_x = 1;
 	odsparams.m_knot_amount = 100;
-	odsparams.m_conditions = {10, 100};
+	odsparams.m_conditions = {10, 10};
 	auto res = solver.Solve(&odsparams);
 	
 	for (size_t i = 0; i < odsparams.m_knot_amount + 1; ++i)
