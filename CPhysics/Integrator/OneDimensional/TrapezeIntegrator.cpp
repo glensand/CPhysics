@@ -16,7 +16,7 @@ Real TrapezeIntegrator::Integrate(const Params* params) const
 
 	auto leftVal = integratorParams->m_leftX;
 	
-	for (size_t i{ 0 }; i < integratorParams->m_intervals - 1; ++i, leftVal += dx)
+	for (size_t i{ 0 }; i < integratorParams->m_intervals; ++i, leftVal += dx)
 		result += dx * (function(leftVal) + function(leftVal + dx)) / 2;
 	
 	return result;

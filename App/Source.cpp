@@ -14,7 +14,7 @@ int main()
 	//const auto task = std::make_unique<Task3>();
 	//const auto task = std::make_unique<Task4>();
 	//const auto task = std::make_unique<Task5>();
-	//const auto task = std::make_unique<Task6>();
+	const auto task = std::make_unique<Task6>();
 	//const auto task = std::make_unique<Task7>();
 	//const auto task = std::make_unique<CVPlotExamples>();
 	//const auto task = std::make_unique<Task8>();

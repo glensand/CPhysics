@@ -40,10 +40,11 @@ private:
 //------------------------------------------------------------------------------
 inline void Task6::Run(const Params* params) const
 {
-	CPhysics::SimpsonIntegrator simpsonIntegrator;
+	//CPhysics::SimpsonIntegrator integrator;
+	CPhysics::TrapezeIntegrator	integrator;
 	
-	const auto J0 = GetBessel(0, &simpsonIntegrator);
-	const auto J1 = GetBessel(1, &simpsonIntegrator);
+	const auto J0 = GetBessel(0, &integrator);
+	const auto J1 = GetBessel(1, &integrator);
 
 	const CPhysics::Real leftX{ 0 };
 	CPhysics::Real x{ leftX };
@@ -68,7 +69,7 @@ inline void Task6::Run(const Params* params) const
 
 #endif
 
-	const CPhysics::Real delta = 0.01;
+	const CPhysics::Real delta = 10e-10;
 
 	for(size_t i{ 0 }; i < vectorDJ0.size() && i < vectorJ1.size(); ++i)
 	{
@@ -109,7 +110,7 @@ inline CPhysics::Function1d Task6::GetBessel(size_t m, const CPhysics::IIntegrat
 			return std::cos(m * t - x * std::sin(t));
 		};
 		const CPhysics::Real PI{ 3.141592653589793238463 };
-		CPhysics::Integrator1dParamsIntervals params{ 0, PI, j, 10000 };
+		CPhysics::Integrator1dParamsIntervals params{ 0, PI, j, 100 };
 		
 		return integrator->Integrate(&params) / PI;
 	};
