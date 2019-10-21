@@ -3,6 +3,7 @@
 
 #include "../CPhysics/DifferentialSolver/RungeKutta2SystemSolver.h"
 #include "../CPhysics/DifferentialSolver/OrdinaryDifferentialSystemSolver.h"
+#include "CVPlot/CVPlot.h"
 
 #include <vector>
 #include <iostream>
@@ -55,4 +56,13 @@ inline void Task8::Run(const Params* params) const
 		}
 		std::cout << std::endl;
 	}
+
+	Plotter::CVPlot plotter;
+	Plotter::GraphParams gparams;
+	gparams.m_x = res[0];
+	gparams.m_y = res[1];
+	plotter.AddGraph(&gparams);
+	gparams.m_y = res[2];
+	plotter.AddGraph(&gparams);
+	plotter.Show();
 }
