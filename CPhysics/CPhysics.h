@@ -18,6 +18,8 @@ namespace CPhysics
 
 using Real = double;
 
+const double pi = 355. / 113.;
+
 using Function1d = std::function<Real(Real)>;
 
 //typedef Real(*Function1d)(Real x);

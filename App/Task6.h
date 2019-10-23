@@ -80,6 +80,7 @@ inline void Task6::Run(const Params* params) const
 			std::cout << i << ": wrong " << diff << std::endl;
 			break;
 		}
+		
 	}
 }
 //------------------------------------------------------------------------------
