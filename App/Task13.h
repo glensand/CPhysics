@@ -40,10 +40,10 @@ public:
 			y_squared_complex.emplace_back(it, 0);
 		}
 		auto fourier = fft.Transform(y_squared_complex);
-		std::vector<Real> fourier_mag{};
+		std::vector<Real> fourierMag{};
 		for (auto it : fourier)
 		{
-			fourier_mag.push_back(abs(it));
+			fourierMag.push_back(abs(it));
 		}
 		CPhysics::Hanna hanna;
 		auto y_squared_hanna = hanna.Window(N);
@@ -52,17 +52,22 @@ public:
 			y_squared_hanna[i] = y_squared_hanna[i] * y_squared[i];
 		}
 		auto fourier_hanna = fft.TransformReal(y_squared_hanna);
-		std::vector<Real> fourier_hanna_mag{};
+		std::vector<Real> fourierHannaMag{};
 		for (auto it : fourier_hanna)
 		{
-			fourier_hanna_mag.push_back(abs(it));
+			fourierHannaMag.push_back(abs(it));
 		}
 		Plotter::CVPlot plotter;
 		Plotter::GraphParams gparams;
 		gparams.m_x = t;
-		gparams.m_y = fourier_mag;
+		gparams.m_y = fourierMag;
+		gparams.m_style = Plotter::PlotStyle::LINE;
 		plotter.AddGraph(&gparams);
-		gparams.m_y = fourier_hanna_mag;
+		gparams.m_y = fourierHannaMag;
+		Plotter::Color color;
+		color.m_r = 255;
+		gparams.m_color = color;
+
 		plotter.AddGraph(&gparams);
 		plotter.Show();
 	}

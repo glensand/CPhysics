@@ -4,7 +4,6 @@
 namespace CPhysics
 {
 
-
 std::vector<std::complex<CPhysics::Real>> FFT::Transform(const std::vector<std::complex<Real>>& x) const
 {
 	std::vector<std::complex<CPhysics::Real>> res(x.size());
@@ -26,7 +25,6 @@ std::vector<std::complex<CPhysics::Real>> FFT::Transform(const std::vector<std::
 		}
 		return res;
 	}
-	
 	else 
 	{
 		for (size_t i = 0; i < x.size(); ++i)
