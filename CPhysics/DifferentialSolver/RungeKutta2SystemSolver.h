@@ -23,10 +23,7 @@ public:
 	RungeKutta2SystemSolver() = default;
 
 	//inline virtual bool SuitableParams(const Params * params) const;
-	std::string	GetSolverType() const override
-	{
-		return "Numerical solver of systems of ordinary differential equations, Runge-Kutta 2nd order method.";
-	}
+	[[nodiscard]] std::string GetSolverType() const override;
 
 	ReturnType Solve(const Params* params) const override;
 };

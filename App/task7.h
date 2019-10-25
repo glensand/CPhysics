@@ -17,9 +17,9 @@ public:
 	void Run(const Params* params = nullptr) const override;
 
 private:
-	static void PrintSolution(const CPhysics::Params* params, CPhysics::ISimpleDifferentialSolver* pSolver);
+	static void PrintSolution(const CPhysics::Params* params, const CPhysics::ISimpleDifferentialSolver* pSolver);
 	static std::pair<std::vector<CPhysics::Real>, std::vector<CPhysics::Real>>
-		SeparateVectors(const std::vector<std::pair<CPhysics::Real, CPhysics::Real>>& vec);
+		SeparateVectors(const std::vector<CPhysics::Point2D>& vec);
 
 	static std::pair<std::vector<CPhysics::Real>, std::vector<CPhysics::Real>>
 		CalculateAnalytical(const size_t knot_amount);
@@ -38,25 +38,27 @@ Task7::CalculateAnalytical(const size_t knot_amount)
 	return { x, y };
 }
 //------------------------------------------------------------------------------
-inline std::pair<std::vector<CPhysics::Real>, std::vector<CPhysics::Real>> Task7::SeparateVectors(
-	const std::vector<std::pair<CPhysics::Real, CPhysics::Real>>& vec)
+inline std::pair<std::vector<CPhysics::Real>, std::vector<CPhysics::Real>> Task7::SeparateVectors(const std::vector<CPhysics::Point2D> &vec)
 {
 	std::pair<std::vector<CPhysics::Real>, std::vector<CPhysics::Real>> res;
-	for (auto it : vec)
+	res.first.reserve(vec.size());
+	res.second.reserve(vec.size());
+	
+	for (const auto &it : vec)
 	{
-		res.first.emplace_back(it.first);
-		res.second.emplace_back(it.second);
+		res.first.emplace_back(it.m_x);
+		res.second.emplace_back(it.m_y);
 	}
 	return res;
 }
 //------------------------------------------------------------------------------
-inline void Task7::PrintSolution(const CPhysics::Params* params, CPhysics::ISimpleDifferentialSolver* pSolver)
+inline void Task7::PrintSolution(const CPhysics::Params* params, const CPhysics::ISimpleDifferentialSolver* pSolver)
 {
 	std::cout << "__________________________________" << std::endl;
 	auto res = pSolver->Solve(params);
 	for (const auto &it : res)
 	{
-		std::cout << it.first << '\t' << it.second << std::endl;
+		std::cout << it.m_x << '\t' << it.m_y << std::endl;
 	}
 	std::cout << std::endl;
 
@@ -91,8 +93,8 @@ inline void Task7::Run(const Params* params) const
 	const auto prkParams = reinterpret_cast<CPhysics::Params*>(&rkParams);
 	const auto pParams = reinterpret_cast<CPhysics::Params*>(&Params);
 
-	CPhysics::Euler2Solver solver;
-	CPhysics::RungeKutta2Solver rksolver;
+	const CPhysics::Euler2Solver solver;
+	const CPhysics::RungeKutta2Solver rksolver;
 
 	PrintSolution(pParams, &solver);
 	PrintSolution(prkParams, &rksolver);

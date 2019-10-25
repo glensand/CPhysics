@@ -1,8 +1,8 @@
 #pragma once
 #include "ITask.h"
 
-#include "../CPhysics/DifferentialSolver/RungeKutta2SystemSolver.h"
-#include "../CPhysics/DifferentialSolver/OrdinaryDifferentialSystemSolver.h"
+#include <DifferentialSolver/RungeKutta2SystemSolver.h>
+#include <DifferentialSolver/OrdinaryDifferentialSystemSolver.h>
 #include "CVPlot/CVPlot.h"
 
 #include <vector>
@@ -21,20 +21,9 @@ public:
 inline void Task8::Run(const Params* params) const
 {
 	using Real = CPhysics::Real;
-// Test on one equation
-	//CPhysics::ODSParams odsparams;
-	//odsparams.m_functions = { [](std::vector<CPhysics::Real> y_vector) { return -y_vector[1]; } };
-	//odsparams.m_conditions = { 1 };
-	//odsparams.m_left_x = 0;
-	//odsparams.m_right_x = 3;
-	//odsparams.m_knot_amount = 20;
 
 	CPhysics::RungeKutta2SystemSolver solver;
-	//auto res = solver.Solve(&odsparams);
-	//for (size_t i = 0; i < 20; ++i)
-	//{
-	//	std::cout << res[0][i] << '\t' << res[1][i] << std::endl;
-	//}
+
 	CPhysics::ODSParams odsparams;
 	CPhysics::Real a = 10., b = 2., c = 2., d = 10.;
 	
