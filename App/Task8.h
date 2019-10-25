@@ -23,9 +23,8 @@ inline void Task8::Run(const Params* params) const
 	using Real = CPhysics::Real;
 
 	CPhysics::RungeKutta2SystemSolver solver;
-
 	CPhysics::ODSParams odsparams;
-	CPhysics::Real a = 10., b = 2., c = 2., d = 10.;
+	CPhysics::Real a = 10., b = 3., c = 3, d = 10.;
 	
 	odsparams.m_functions = {
 								[a, b](Real x, std::vector<Real>& y_vector) { return a * y_vector[0] - b * y_vector[0] * y_vector[1]; },
@@ -48,10 +47,11 @@ inline void Task8::Run(const Params* params) const
 
 	Plotter::CVPlot plotter;
 	Plotter::GraphParams gparams;
-	gparams.m_x = res[0];
-	gparams.m_y = res[1];
-	plotter.AddGraph(&gparams);
+	gparams.m_x = res[1];
 	gparams.m_y = res[2];
 	plotter.AddGraph(&gparams);
+	//gparams.m_y = res[2];
+	//plotter.AddGraph(&gparams);
 	plotter.Show();
+
 }

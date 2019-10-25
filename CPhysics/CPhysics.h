@@ -22,6 +22,8 @@ struct Point3D;
 //==============================================================================	
 using Real = double;
 
+const double pi = 355. / 113.;
+
 using Function1d = std::function<Real(Real)>;
 
 using FunctionOfTwoArgs = std::function<Real(Real, Real)>;

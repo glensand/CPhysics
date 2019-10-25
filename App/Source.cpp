@@ -7,6 +7,7 @@
 #include "Task8.h"
 #include  "Steering.h"
 
+#include "Task13.h"
 #include "CVPlotExamples.h"
 
 int main()
@@ -21,6 +22,8 @@ int main()
 	//const auto task = std::make_unique<Task8>();
 	//const auto task = std::make_unique<Steering>();
 
+	const auto task = std::make_unique<Task13>();
+	
 	task->Run();
 	
 	return 0;

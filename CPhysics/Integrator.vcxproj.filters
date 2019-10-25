@@ -23,6 +23,12 @@
     <Filter Include="CPhysics\Differentiator">
       <UniqueIdentifier>{c1d81e60-3683-4af3-82d7-c4e87c0402bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CPhysics\Transform">
+      <UniqueIdentifier>{9c8f58fd-c5fa-43f7-93e0-038f779245ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPhysics\Window">
+      <UniqueIdentifier>{3e273d91-814c-4dff-90c5-8c45bbef474a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Solver\DichotomySolver.cpp">
@@ -69,6 +75,15 @@
     </ClCompile>
     <ClCompile Include="Differentiator\Differentiator.cpp">
       <Filter>CPhysics\Differentiator</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform\FFT.cpp">
+      <Filter>CPhysics\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform\iFFT.cpp">
+      <Filter>CPhysics\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\Hanna.cpp">
+      <Filter>CPhysics\Window</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +152,21 @@
     </ClInclude>
     <ClInclude Include="Differentiator\IDifferentiator.h">
       <Filter>CPhysics\Differentiator</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform\FFT.h">
+      <Filter>CPhysics\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform\iFFT.h">
+      <Filter>CPhysics\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform\ITransform.h">
+      <Filter>CPhysics\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\Hanna.h">
+      <Filter>CPhysics\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\IWindow.h">
+      <Filter>CPhysics\Window</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

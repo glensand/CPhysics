@@ -175,6 +175,9 @@
     <ClCompile Include="Solver\DichotomySolver.cpp" />
     <ClCompile Include="Solver\NewtonSolver.cpp" />
     <ClCompile Include="Solver\SimpleIterationsSolver.cpp" />
+    <ClCompile Include="Transform\FFT.cpp" />
+    <ClCompile Include="Transform\iFFT.cpp" />
+    <ClCompile Include="Window\Hanna.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPhysics.h" />
@@ -199,6 +202,11 @@
     <ClInclude Include="Solver\ISolver.h" />
     <ClInclude Include="Solver\NewtonSolver.h" />
     <ClInclude Include="Solver\SimpleIterationsSolver.h" />
+    <ClInclude Include="Transform\FFT.h" />
+    <ClInclude Include="Transform\iFFT.h" />
+    <ClInclude Include="Transform\ITransform.h" />
+    <ClInclude Include="Window\Hanna.h" />
+    <ClInclude Include="Window\IWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
