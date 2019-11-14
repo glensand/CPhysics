@@ -34,6 +34,7 @@ inline void Task4::Run(const Params* params) const
 	{
 		const CPhysics::Real x5 = std::pow(x, 5);
 
+		if (x == 0);
 		return std::sin(PI * x5) / (x5 * (1 - x));
 	};
 

@@ -1,8 +1,8 @@
 #pragma once
 #include "ITask.h"
 
-#include "../CPhysics/DifferentialSolver/RungeKutta2SystemSolver.h"
-#include "../CPhysics/DifferentialSolver/OrdinaryDifferentialSystemSolver.h"
+#include <DifferentialSolver/RungeKutta2SystemSolver.h>
+#include <DifferentialSolver/OrdinaryDifferentialSystemSolver.h>
 #include "CVPlot/CVPlot.h"
 
 #include <vector>
@@ -21,6 +21,7 @@ public:
 inline void Task8::Run(const Params* params) const
 {
 	using Real = CPhysics::Real;
+
 	CPhysics::RungeKutta2SystemSolver solver;
 	CPhysics::ODSParams odsparams;
 	CPhysics::Real a = 10., b = 3., c = 3, d = 10.;

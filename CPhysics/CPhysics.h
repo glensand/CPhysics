@@ -15,27 +15,43 @@
 
 namespace CPhysics
 {
-
+//==============================================================================	
+//	all forward declarations should be placed here 
+struct Point2D;
+struct Point3D;
+//==============================================================================	
 using Real = double;
 
 const double pi = 355. / 113.;
 
 using Function1d = std::function<Real(Real)>;
 
-//typedef Real(*Function1d)(Real x);
-//typedef Real(*FunctionOfXAndU)(Real x, Function1d u);
-
-//typedef Real(*FunctionOfTwoArgs)(Real x, Real y);
-
 using FunctionOfTwoArgs = std::function<Real(Real, Real)>;
-	
-//typedef Real(*FunctionOfVector)(std::vector<Real> args);
+
 using FunctionOfVector = std::function<Real(Real x, std::vector<Real>&)>;
 
 //==============================================================================	
 struct Params
 {
 	virtual ~Params() = default;
+};
+//==============================================================================
+struct Point2D final
+{
+	Point2D(Real x, Real y)
+		: m_x(x)
+		, m_y(y){}
+	~Point2D() = default;
+	
+	Real m_x;
+	Real m_y;
+};
+//==============================================================================	
+struct Point3D final
+{
+	Real m_x;
+	Real m_y;
+	Real m_z;
 };
 //==============================================================================	
 }

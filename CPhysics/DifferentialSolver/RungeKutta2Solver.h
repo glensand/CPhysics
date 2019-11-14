@@ -22,11 +22,11 @@ public:
 	RungeKutta2Solver() = default;
 	virtual	~RungeKutta2Solver() = default;
 
-	std::string							GetSolverType() const override;
+	[[nodiscard]] std::string	GetSolverType() const override;
 
-	bool								SuitableParams(const Params * params) const override;
+	std::vector<Point2D>		Solve(const Params* params) const override;
 
-	std::vector<std::pair<Real, Real>>	Solve(const Params * params) const override;
+	bool	SuitableParams(const Params* params) const override;
 };
 	
 }

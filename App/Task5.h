@@ -30,7 +30,7 @@ inline void Task5::Run(const Params* params = nullptr) const
 	for(size_t i{ 0 }; i < n; ++i)
 		xes.emplace_back(1 + static_cast<CPhysics::Real>(i) / static_cast<CPhysics::Real>(n));
 	
-	CPhysics::InterpolatorParams interpolatorParams{fX, xes, 4};
+	CPhysics::InterpolatorParams interpolatorParams{fX, xes, 3};
 	const auto P4 = interpolator.Interpolate(&interpolatorParams);
 
 	const size_t intervals{ 100 };
@@ -47,7 +47,7 @@ inline void Task5::Run(const Params* params = nullptr) const
 	{
 		x.emplace_back(leftX);
 		p4.emplace_back(P4(leftX) - std::log(leftX));
-		y.emplace_back(std::log(leftX));
+		y.emplace_back(P4(leftX));
 	}
 	
 	Plotter::CVPlot plot;
@@ -55,12 +55,12 @@ inline void Task5::Run(const Params* params = nullptr) const
 	graphParams1.m_x = x;
 	graphParams1.m_y = p4;
 
-	//Plotter::GraphParams graphParams2;
-	//graphParams2.m_y = y;
-	//graphParams2.m_x = x;
+	Plotter::GraphParams graphParams2;
+	graphParams2.m_y = y;
+	graphParams2.m_x = x;
 	
 	plot.AddGraph(&graphParams1);
-	//plot.AddGraph(&graphParams2);
+	plot.AddGraph(&graphParams2);
 	
 	plot.Show();
 }

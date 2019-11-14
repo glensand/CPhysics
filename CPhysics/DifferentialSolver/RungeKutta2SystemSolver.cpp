@@ -1,6 +1,10 @@
 #include "RungeKutta2SystemSolver.h"
 
 namespace CPhysics {
+std::string RungeKutta2SystemSolver::GetSolverType() const
+{
+	return "Numerical solver of systems of ordinary differential equations, Runge-Kutta 2nd order method.";
+}
 
 RungeKutta2SystemSolver::ReturnType RungeKutta2SystemSolver::Solve(const Params* params) const
 {

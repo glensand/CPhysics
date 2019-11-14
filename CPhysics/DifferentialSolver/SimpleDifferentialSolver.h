@@ -29,7 +29,7 @@ struct SimpleDifferentialParams : Params
 	Real					m_leftX{ };
 	Real					m_rightX{ };
 	Real					m_leftCond{ }; // U(m_leftX) where U is the solution of the differential equation 
-	FunctionOfTwoArgs	m_function{ }; // the right half of standard simple differential equation dU/dX = f(x, U(x))
+	FunctionOfTwoArgs		m_function{ }; // the right half of standard simple differential equation dU/dX = f(x, U(x))
 };
 //==============================================================================
 class ISimpleDifferentialSolver
@@ -42,7 +42,7 @@ public:
 
 	virtual std::string	GetSolverType() const = 0;
 
-	virtual std::vector<std::pair<Real, Real>> Solve(const Params* params) const = 0;
+	virtual std::vector<Point2D> Solve(const Params* params) const = 0;
 };
 //==============================================================================	
 }
