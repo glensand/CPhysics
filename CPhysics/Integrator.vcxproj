@@ -160,6 +160,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DifferentialSolver\Euler2Solver.cpp" />
+    <ClCompile Include="DifferentialSolver\EulerImplSysSolver.cpp" />
     <ClCompile Include="DifferentialSolver\RungeKutta2Solver.cpp" />
     <ClCompile Include="DifferentialSolver\RungeKutta2SystemSolver.cpp" />
     <ClCompile Include="DifferentialSolver\SimpleDifferentialSolver.cpp" />
@@ -174,6 +175,7 @@
     <ClCompile Include="Solver\DichotomySolver.cpp" />
     <ClCompile Include="Solver\NewtonSolver.cpp" />
     <ClCompile Include="Solver\SimpleIterationsSolver.cpp" />
+    <ClCompile Include="Solver\TridiagonalSolver.cpp" />
     <ClCompile Include="Transform\FFT.cpp" />
     <ClCompile Include="Transform\iFFT.cpp" />
     <ClCompile Include="Window\Hanna.cpp" />
@@ -181,6 +183,7 @@
   <ItemGroup>
     <ClInclude Include="CPhysics.h" />
     <ClInclude Include="DifferentialSolver\Euler2Solver.h" />
+    <ClInclude Include="DifferentialSolver\EulerImplSysSolver.h" />
     <ClInclude Include="DifferentialSolver\OrdinaryDifferentialSystemSolver.h" />
     <ClInclude Include="DifferentialSolver\RungeKutta2Solver.h" />
     <ClInclude Include="DifferentialSolver\RungeKutta2SystemSolver.h" />
@@ -201,6 +204,7 @@
     <ClInclude Include="Solver\ISolver.h" />
     <ClInclude Include="Solver\NewtonSolver.h" />
     <ClInclude Include="Solver\SimpleIterationsSolver.h" />
+    <ClInclude Include="Solver\TridiagonalSolver.h" />
     <ClInclude Include="Transform\FFT.h" />
     <ClInclude Include="Transform\iFFT.h" />
     <ClInclude Include="Transform\ITransform.h" />

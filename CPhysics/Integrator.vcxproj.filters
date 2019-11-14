@@ -85,6 +85,12 @@
     <ClCompile Include="Window\Hanna.cpp">
       <Filter>CPhysics\Window</Filter>
     </ClCompile>
+    <ClCompile Include="DifferentialSolver\EulerImplSysSolver.cpp">
+      <Filter>CPhysics\DifferentialSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="Solver\TridiagonalSolver.cpp">
+      <Filter>CPhysics\Solver</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Solver\ISolver.h">
@@ -167,6 +173,12 @@
     </ClInclude>
     <ClInclude Include="Window\IWindow.h">
       <Filter>CPhysics\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentialSolver\EulerImplSysSolver.h">
+      <Filter>CPhysics\DifferentialSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Solver\TridiagonalSolver.h">
+      <Filter>CPhysics\Solver</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

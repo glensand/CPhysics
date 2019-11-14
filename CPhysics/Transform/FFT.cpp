@@ -42,7 +42,7 @@ std::vector<std::complex<CPhysics::Real>> FFT::Transform(const std::vector<std::
 std::vector<std::complex<CPhysics::Real>> FFT::TransformReal(const std::vector<Real>& x) const
 {
 	std::vector<std::complex<Real>> res{};
-	for (auto it : x)
+	for (auto& it : x)
 	{
 		res.emplace_back(it, 0);
 	}
