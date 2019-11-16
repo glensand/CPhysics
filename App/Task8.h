@@ -23,6 +23,7 @@ inline void Task8::Run(const Params* params) const
 	using Real = CPhysics::Real;
 
 	CPhysics::RungeKutta2SystemSolver solver;
+
 	CPhysics::ODSParams odsparams;
 	CPhysics::Real a = 10., b = 3., c = 3, d = 10.;
 	

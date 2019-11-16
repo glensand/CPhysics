@@ -10,7 +10,7 @@
 // Author: Bezborodov Gleb
 //------------------------------------------------------------------------------
 #include <string>
-
+#include <memory>
 #include "..//CPhysics.h"
 
 namespace CPhysics
@@ -21,6 +21,11 @@ struct SolverParams : Params
 	virtual ~SolverParams() = default;
 	Real	m_accuracy{ };
 };
+//==============================================================================
+struct ByStepResult
+{
+	virtual ~ByStepResult() = default;
+};
 //==============================================================================	
 class ISolver
 {
@@ -28,11 +33,13 @@ public:
 			ISolver() = default;
 	virtual ~ISolver() = default;
 
-	virtual std::string		GetSolverType() const = 0;
+	[[nodiscard]] virtual std::string		GetSolverType() const = 0;
 
-	virtual Real			Solve(const Params* params) const = 0;
+	virtual Real							Solve(const Params* params) const = 0;
 
-	virtual bool			SuitableParams(const Params* params) const = 0;
+	virtual bool							SuitableParams(const Params* params) const = 0;
+
+	virtual std::unique_ptr<ByStepResult>	SolveByStep(const Params* params) const = 0;
 };
 //==============================================================================	
 }

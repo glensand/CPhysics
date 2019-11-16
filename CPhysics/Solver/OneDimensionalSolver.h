@@ -13,15 +13,31 @@
 
 namespace CPhysics
 {
+//==============================================================================
+struct ByStepD1Result : ByStepResult
+{
+	virtual ~ByStepD1Result() = default;
 
+	std::vector<Real>	m_xs{ };
+	std::vector<Real>	m_ys{ };
+
+	Real				m_res{ };
+};
+//==============================================================================
 struct OneDimensionalSolverParams : Params
 {
+	OneDimensionalSolverParams(Real accuracy, Real left, Real right, const Function1d &func)
+		: m_accuracy(accuracy)
+		, m_leftX(left)
+		, m_rightX(right)
+		, m_function(func)
+	{}
 	Real					m_accuracy{ };
 	Real					m_leftX{ };
 	Real					m_rightX{ };
-	Function1d	m_function{ };
+	Function1d				m_function{ };
 };
-
+//==============================================================================
 class OneDimensionalSolver : public ISolver
 {
 public:
@@ -31,5 +47,5 @@ public:
 	bool	SuitableParams(const Params* params) const override;
 
 };
-
+//==============================================================================
 }

@@ -20,10 +20,11 @@ public:
 	DichotomySolver() = default;
 	virtual ~DichotomySolver() = default;
 
-	std::string		GetSolverType() const override;
+	[[nodiscard]] std::string		GetSolverType() const override;
 
-	Real			Solve(const Params* params) const override;
+	Real							Solve(const Params* params) const override;
 
+	std::unique_ptr<ByStepResult>	SolveByStep(const Params* params) const override;
 };
 
 }

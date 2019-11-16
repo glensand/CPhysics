@@ -161,7 +161,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DifferentialSolver\Euler2Solver.cpp" />
-    <ClCompile Include="DifferentialSolver\EulerImplSysSolver.cpp" />
     <ClCompile Include="DifferentialSolver\RungeKutta2Solver.cpp" />
     <ClCompile Include="DifferentialSolver\RungeKutta2SystemSolver.cpp" />
     <ClCompile Include="DifferentialSolver\SimpleDifferentialSolver.cpp" />
@@ -184,7 +183,6 @@
   <ItemGroup>
     <ClInclude Include="CPhysics.h" />
     <ClInclude Include="DifferentialSolver\Euler2Solver.h" />
-    <ClInclude Include="DifferentialSolver\EulerImplSysSolver.h" />
     <ClInclude Include="DifferentialSolver\OrdinaryDifferentialSystemSolver.h" />
     <ClInclude Include="DifferentialSolver\RungeKutta2Solver.h" />
     <ClInclude Include="DifferentialSolver\RungeKutta2SystemSolver.h" />

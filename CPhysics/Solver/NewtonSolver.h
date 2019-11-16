@@ -14,16 +14,25 @@
 namespace CPhysics
 {
 
+//==============================================================================
+struct NewtonByStepResult : ByStepD1Result
+{
+	virtual ~NewtonByStepResult() = default;
+
+	std::vector<Real>	m_dy;
+};
+//==============================================================================
 class NewtonSolver : public OneDimensionalSolver
 {
 public:
 	NewtonSolver() = default;
 	virtual ~NewtonSolver() = default;
 
-	std::string		GetSolverType() const override;
+	[[nodiscard]] std::string		GetSolverType() const override;
 
-	Real			Solve(const Params* params) const override;
+	Real							Solve(const Params* params) const override;
 
+	std::unique_ptr<ByStepResult>	SolveByStep(const Params* params) const override;
 };
 
 }

@@ -15,12 +15,20 @@ Real SimpleIterationsSolver::Solve(const Params* params) const
 	const auto solverParams = reinterpret_cast<const OneDimensionalSolverParams*>(params);
 
 	const auto function = solverParams->m_function;
-	Real x = (solverParams->m_leftX + solverParams->m_rightX) / 2;
 	
-	for (; std::abs(function(x) - x) > solverParams->m_accuracy;)
-		x = function(x);
+	for (Real x = (solverParams->m_leftX + solverParams->m_rightX) / 2;;)
+	{
+		const auto res = function(x);
+		if (std::abs(res - x) < solverParams->m_accuracy) return x;
 
-	return x;
+		x = res;
+	}
+}
+//------------------------------------------------------------------------------
+std::unique_ptr<ByStepResult> SimpleIterationsSolver::SolveByStep(const Params* params) const
+{
+	// TODO: resolve 
+	return  std::make_unique<ByStepD1Result>();
 }
 //------------------------------------------------------------------------------
 }

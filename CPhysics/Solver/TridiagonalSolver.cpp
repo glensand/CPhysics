@@ -44,6 +44,10 @@ bool TridiagonalSolver::SuitableParams(Params* params)
 
 	return false;
 }
-	
+
+std::string TridiagonalSolver::GetSolverType()
+{
+	return "Tridiagonal Solver (метод прогонки)";
+}
 }
 	

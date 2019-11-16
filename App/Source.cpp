@@ -20,10 +20,10 @@ int main()
 	//const auto task = std::make_unique<Task7>();
 	//const auto task = std::make_unique<CVPlotExamples>();
 	//const auto task = std::make_unique<Task8>();
+	//const auto task = std::make_unique<Task13>();
+	
 	//const auto task = std::make_unique<Steering>();
 
-	const auto task = std::make_unique<Task13>();
-	
 	task->Run();
 	
 	return 0;
