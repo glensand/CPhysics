@@ -56,6 +56,7 @@ struct GraphParams final
 	PlotStyle			m_style{ PlotStyle::LINE };						// graph style
 	Color				m_color{ 0, 0, 0};					// Color to be used for graph plotting
 	std::string			m_label{ "function" };
+	size_t				m_pointRadius{ 2 };
 };
 //==============================================================================
 class IPlot

@@ -14,7 +14,7 @@
 
 namespace CPhysics {
 
-class RungeKutta2SystemSolver : public IDSSolver
+class RungeKutta2SystemSolver : public OrdinaryDifferentialSystemSolver
 {
 	
 public:
@@ -22,10 +22,9 @@ public:
 	virtual ~RungeKutta2SystemSolver() = default;
 	RungeKutta2SystemSolver() = default;
 
-	//inline virtual bool SuitableParams(const Params * params) const;
-	[[nodiscard]] std::string GetSolverType() const override;
+	[[nodiscard]] std::string	GetSolverType() const override;
 
-	ReturnType Solve(const Params* params) const override;
+	ReturnType					Solve(const Params* params) const override;
 };
 
 using RK2DSSolver = RungeKutta2SystemSolver;

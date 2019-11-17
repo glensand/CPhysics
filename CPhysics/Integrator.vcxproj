@@ -97,8 +97,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/LinearAlgebra</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -161,6 +160,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DifferentialSolver\Euler2Solver.cpp" />
+    <ClCompile Include="DifferentialSolver\ImplicitEuler2SystemSolver.cpp" />
+    <ClCompile Include="DifferentialSolver\OrdinaryDifferentialSystemSolver.cpp" />
     <ClCompile Include="DifferentialSolver\RungeKutta2Solver.cpp" />
     <ClCompile Include="DifferentialSolver\RungeKutta2SystemSolver.cpp" />
     <ClCompile Include="DifferentialSolver\SimpleDifferentialSolver.cpp" />
@@ -181,8 +182,12 @@
     <ClCompile Include="Window\Hanna.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\LinearAlgebra\Matrix22.h" />
+    <ClInclude Include="..\LinearAlgebra\Vector2.h" />
     <ClInclude Include="CPhysics.h" />
     <ClInclude Include="DifferentialSolver\Euler2Solver.h" />
+    <ClInclude Include="DifferentialSolver\IDifferentialSystemSolver.h" />
+    <ClInclude Include="DifferentialSolver\ImplicitEuler2SystemSolver.h" />
     <ClInclude Include="DifferentialSolver\OrdinaryDifferentialSystemSolver.h" />
     <ClInclude Include="DifferentialSolver\RungeKutta2Solver.h" />
     <ClInclude Include="DifferentialSolver\RungeKutta2SystemSolver.h" />
@@ -198,6 +203,7 @@
     <ClInclude Include="Interpolator\IInterpolator.h" />
     <ClInclude Include="Interpolator\NewtonInterpolator.h" />
     <ClInclude Include="Integrator\IIntergator.h" />
+    <ClInclude Include="Solver\Kramer2Solver.h" />
     <ClInclude Include="Solver\OneDimensionalSolver.h" />
     <ClInclude Include="Solver\DichotomySolver.h" />
     <ClInclude Include="Solver\ISolver.h" />

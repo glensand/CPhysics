@@ -33,11 +33,11 @@ inline void Task8::Run(const Params* params) const
 							};
 	odsparams.m_left_x = 0;
 	odsparams.m_right_x = 1;
-	odsparams.m_knot_amount = 100;
+	odsparams.m_knotAmount = 100;
 	odsparams.m_conditions = {10, 10};
 	auto res = solver.Solve(&odsparams);
 	
-	for (size_t i = 0; i < odsparams.m_knot_amount + 1; ++i)
+	for (size_t i = 0; i < odsparams.m_knotAmount + 1; ++i)
 	{
 		for (size_t j = 0; j < odsparams.m_functions.size() + 1; ++j)
 		{

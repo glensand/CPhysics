@@ -134,10 +134,10 @@ void CVPlot::DrawPlots()
 				m_plotSize.height - (m_borderSize + y));
 
 			if(graph.m_style == PlotStyle::POINT || graph.m_style == PlotStyle::POINT_LINE)
-				cv::circle(m_plot, nextPoint, 1, color, 1);
+				cv::circle(m_plot, nextPoint, graph.m_pointRadius, color, graph.m_pointRadius);
 
 			// draw a line between two points
-			if (graph.m_style == PlotStyle::LINE && i >= 1)
+			if ((graph.m_style == PlotStyle::LINE || graph.m_style == PlotStyle::POINT_LINE) && i >= 1)
 				cv::line(m_plot, prevPoint,
 					nextPoint, color, 1, CV_AA);
 			prevPoint = nextPoint;

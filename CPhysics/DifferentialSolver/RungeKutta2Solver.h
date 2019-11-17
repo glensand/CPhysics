@@ -26,7 +26,7 @@ public:
 
 	std::vector<Point2D>		Solve(const Params* params) const override;
 
-	bool	SuitableParams(const Params* params) const override;
+	bool						SuitableParams(const Params* params) const override;
 };
 	
 }

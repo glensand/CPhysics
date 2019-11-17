@@ -29,6 +29,9 @@
     <Filter Include="CPhysics\Window">
       <UniqueIdentifier>{3e273d91-814c-4dff-90c5-8c45bbef474a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LinearAlgebra">
+      <UniqueIdentifier>{83704df6-4df1-4920-8038-19f802907f29}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Solver\DichotomySolver.cpp">
@@ -88,6 +91,12 @@
     <ClCompile Include="Solver\TridiagonalSolver.cpp">
       <Filter>CPhysics\Solver</Filter>
     </ClCompile>
+    <ClCompile Include="DifferentialSolver\OrdinaryDifferentialSystemSolver.cpp">
+      <Filter>CPhysics\DifferentialSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="DifferentialSolver\ImplicitEuler2SystemSolver.cpp">
+      <Filter>CPhysics\DifferentialSolver</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Solver\ISolver.h">
@@ -138,9 +147,6 @@
     <ClInclude Include="Integrator\OneDimensional\TrapezeIntegrator.h">
       <Filter>CPhysics\Integrator\OneDimensional</Filter>
     </ClInclude>
-    <ClInclude Include="DifferentialSolver\OrdinaryDifferentialSystemSolver.h">
-      <Filter>CPhysics\DifferentialSolver</Filter>
-    </ClInclude>
     <ClInclude Include="DifferentialSolver\RungeKutta2SystemSolver.h">
       <Filter>CPhysics\DifferentialSolver</Filter>
     </ClInclude>
@@ -173,6 +179,24 @@
     </ClInclude>
     <ClInclude Include="Solver\TridiagonalSolver.h">
       <Filter>CPhysics\Solver</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentialSolver\IDifferentialSystemSolver.h">
+      <Filter>CPhysics\DifferentialSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentialSolver\OrdinaryDifferentialSystemSolver.h">
+      <Filter>CPhysics\DifferentialSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentialSolver\ImplicitEuler2SystemSolver.h">
+      <Filter>CPhysics\DifferentialSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Solver\Kramer2Solver.h">
+      <Filter>CPhysics\Solver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LinearAlgebra\Matrix22.h">
+      <Filter>LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LinearAlgebra\Vector2.h">
+      <Filter>LinearAlgebra</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
