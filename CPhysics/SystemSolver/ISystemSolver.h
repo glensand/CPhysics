@@ -11,7 +11,7 @@ class ISystemSolver
 {
 public:
 	ISystemSolver() = default;
-	~ISystemSolver() = default;
+	virtual ~ISystemSolver() = default;
 
 	virtual std::vector<Real> Solve(Params* params) = 0;
 

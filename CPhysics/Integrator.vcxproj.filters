@@ -32,6 +32,9 @@
     <Filter Include="LinearAlgebra">
       <UniqueIdentifier>{83704df6-4df1-4920-8038-19f802907f29}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CPhysics\SystemSolver">
+      <UniqueIdentifier>{7c2d9009-9d9f-45c2-9dd7-dfa6688e5279}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Solver\DichotomySolver.cpp">
@@ -88,14 +91,14 @@
     <ClCompile Include="Window\Hanna.cpp">
       <Filter>CPhysics\Window</Filter>
     </ClCompile>
-    <ClCompile Include="Solver\TridiagonalSolver.cpp">
-      <Filter>CPhysics\Solver</Filter>
-    </ClCompile>
     <ClCompile Include="DifferentialSolver\OrdinaryDifferentialSystemSolver.cpp">
       <Filter>CPhysics\DifferentialSolver</Filter>
     </ClCompile>
     <ClCompile Include="DifferentialSolver\ImplicitEuler2SystemSolver.cpp">
       <Filter>CPhysics\DifferentialSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemSolver\TridiagonalSolver.cpp">
+      <Filter>CPhysics\SystemSolver</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -177,9 +180,6 @@
     <ClInclude Include="Window\IWindow.h">
       <Filter>CPhysics\Window</Filter>
     </ClInclude>
-    <ClInclude Include="Solver\TridiagonalSolver.h">
-      <Filter>CPhysics\Solver</Filter>
-    </ClInclude>
     <ClInclude Include="DifferentialSolver\IDifferentialSystemSolver.h">
       <Filter>CPhysics\DifferentialSolver</Filter>
     </ClInclude>
@@ -198,8 +198,11 @@
     <ClInclude Include="..\LinearAlgebra\Vector2.h">
       <Filter>LinearAlgebra</Filter>
     </ClInclude>
-    <ClInclude Include="Solver\ISystemSolver.h">
-      <Filter>CPhysics\Solver</Filter>
+    <ClInclude Include="SystemSolver\ISystemSolver.h">
+      <Filter>CPhysics\SystemSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemSolver\TridiagonalSolver.h">
+      <Filter>CPhysics\SystemSolver</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

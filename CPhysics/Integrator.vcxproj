@@ -174,7 +174,7 @@
     <ClCompile Include="Solver\DichotomySolver.cpp" />
     <ClCompile Include="Solver\NewtonSolver.cpp" />
     <ClCompile Include="Solver\SimpleIterationsSolver.cpp" />
-    <ClCompile Include="Solver\TridiagonalSolver.cpp" />
+    <ClCompile Include="SystemSolver\TridiagonalSolver.cpp" />
     <ClCompile Include="Transform\FFT.cpp" />
     <ClCompile Include="Transform\iFFT.cpp" />
     <ClCompile Include="Window\Hanna.cpp" />
@@ -201,14 +201,14 @@
     <ClInclude Include="Interpolator\IInterpolator.h" />
     <ClInclude Include="Interpolator\NewtonInterpolator.h" />
     <ClInclude Include="Integrator\IIntergator.h" />
-    <ClInclude Include="Solver\ISystemSolver.h" />
     <ClInclude Include="Solver\Kramer2Solver.h" />
     <ClInclude Include="Solver\OneDimensionalSolver.h" />
     <ClInclude Include="Solver\DichotomySolver.h" />
     <ClInclude Include="Solver\ISolver.h" />
     <ClInclude Include="Solver\NewtonSolver.h" />
     <ClInclude Include="Solver\SimpleIterationsSolver.h" />
-    <ClInclude Include="Solver\TridiagonalSolver.h" />
+    <ClInclude Include="SystemSolver\ISystemSolver.h" />
+    <ClInclude Include="SystemSolver\TridiagonalSolver.h" />
     <ClInclude Include="Transform\FFT.h" />
     <ClInclude Include="Transform\iFFT.h" />
     <ClInclude Include="Transform\ITransform.h" />
