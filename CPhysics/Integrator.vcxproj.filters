@@ -198,5 +198,8 @@
     <ClInclude Include="..\LinearAlgebra\Vector2.h">
       <Filter>LinearAlgebra</Filter>
     </ClInclude>
+    <ClInclude Include="Solver\ISystemSolver.h">
+      <Filter>CPhysics\Solver</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

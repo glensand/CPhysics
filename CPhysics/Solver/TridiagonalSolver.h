@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../CPhysics.h"
+#include "ISystemSolver.h"
 
 #include <vector>
 
@@ -12,19 +13,18 @@ struct TridiagonalParams final : Params
 	std::vector<Real> d; //right side
 };
 
-//TODO make an interface for solver
 
-class TridiagonalSolver final
+class TridiagonalSolver final : public ISystemSolver
 {
 public:
 	TridiagonalSolver() = default;
 	~TridiagonalSolver() = default;
 	
-	std::vector<Real> Solve(Params* params);
+	std::vector<Real> Solve(Params* params) override;
 
-	static bool SuitableParams(Params* params);
+	bool SuitableParams(Params* params) override;
 
-	std::string GetSolverType();
+	std::string GetSolverType() override;
 };
 
 }

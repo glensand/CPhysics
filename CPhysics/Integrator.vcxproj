@@ -201,6 +201,7 @@
     <ClInclude Include="Interpolator\IInterpolator.h" />
     <ClInclude Include="Interpolator\NewtonInterpolator.h" />
     <ClInclude Include="Integrator\IIntergator.h" />
+    <ClInclude Include="Solver\ISystemSolver.h" />
     <ClInclude Include="Solver\Kramer2Solver.h" />
     <ClInclude Include="Solver\OneDimensionalSolver.h" />
     <ClInclude Include="Solver\DichotomySolver.h" />
