@@ -50,7 +50,7 @@ inline void Task2::Run(const Params* params) const
 	const auto newtonSolver = std::make_shared<CPhysics::NewtonSolver>();
 	const auto dichotomySolver = std::make_shared<CPhysics::DichotomySolver>();
 
-	const std::vector<CPhysics::ISolver*> solvers{ /*simpleIterationsSolver.get(),*/ newtonSolver.get(), dichotomySolver.get() };
+	const std::vector<CPhysics::ISolver*> solvers{ simpleIterationsSolver.get(), newtonSolver.get(), dichotomySolver.get() };
 	
 	const CPhysics::OneDimensionalSolverParams d1Params{0.0001, .0001, .99999, function1 };
 
@@ -63,6 +63,8 @@ inline void Task2::Compute(const std::vector<CPhysics::ISolver*>& solvers, const
 	for(const auto &solver : solvers)
 	{
 		const auto res = solver->SolveByStep(solverParams);
+
+		std::cout << solver->GetSolverType() << ": " << reinterpret_cast<const CPhysics::ByStepD1Result*>(res.get())->m_res << std::endl;
 		Demonstrate(res.get());
 	}
 }
