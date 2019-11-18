@@ -19,11 +19,11 @@ inline void Task9::Run(const Params* params) const
 	const CPhysics::ImplicitEuler2SystemSolver solver;
 
 	const CPhysics::Real	h{ 0.0001 };
-	const size_t			knotAmount{ 1000 };
+	const size_t			knotAmount{ 100000 };
 	const Matrix22			mat22(	1 - h * 998.	,	-1998. * h	,
-									1999. * h	,	1 + h * 999.	);
+									h * 999.		,	1 + 1999. * h);
 	
-	CPhysics::ImplicitEuler2SystemSolverParams iMParams{mat22, 0.1, 0.1, knotAmount};
+	CPhysics::ImplicitEuler2SystemSolverParams iMParams{mat22, 0.9, 0.9, knotAmount};
 	
 	const auto res = solver.Solve(&iMParams);
 

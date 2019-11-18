@@ -22,14 +22,19 @@ public:
 
 private:
 
-	static void	Compute(const std::vector<CPhysics::ISolver*>& solvers, const CPhysics::Params* solverParams);
+	using FX = std::tuple<std::vector<CPhysics::Real>, std::vector<CPhysics::Real>>;
 	
-	static void	Demonstrate(const CPhysics::ByStepResult* inf);
+	static void	Compute(const std::vector<CPhysics::ISolver*>& solvers, const CPhysics::Params* solverParams, const FX &fx);
+	
+	static void	Demonstrate(const CPhysics::ByStepResult* inf, const FX &fx);
 };
 //------------------------------------------------------------------------------
 inline void Task2::Run(const Params* params) const
 {
-	const auto A = 1.;
+
+	const auto a2 = 0.1;
+	const auto U0 = 20.;
+	const auto A = 2 * a2 * U0;
 	//-------------------------------------------------------
 	//		2 * m * a^2 * U0
 	// A = --------------------
@@ -51,13 +56,26 @@ inline void Task2::Run(const Params* params) const
 	const auto dichotomySolver = std::make_shared<CPhysics::DichotomySolver>();
 
 	const std::vector<CPhysics::ISolver*> solvers{ simpleIterationsSolver.get(), newtonSolver.get(), dichotomySolver.get() };
+	const auto rightX = 0.9/* - PI / (2 * a2 * U0)*/;
 	
-	const CPhysics::OneDimensionalSolverParams d1Params{0.0001, .0001, .99999, function1 };
+	const CPhysics::OneDimensionalSolverParams d1Params{0.0001, .0001, rightX, function1 };
 
-	Compute(solvers, &d1Params);
+	const size_t N = static_cast<size_t>((d1Params.m_rightX - d1Params.m_leftX) / d1Params.m_accuracy);
+	std::vector<CPhysics::Real> yXes;
+	std::vector<CPhysics::Real> xes;
+	yXes.reserve(N);
+	xes.reserve(N);
+
+	for(auto x{ 0.1 }; x < rightX; x += d1Params.m_accuracy)
+	{
+		xes.emplace_back(x);
+		yXes.emplace_back(function1(x));
+	}
+	
+	Compute(solvers, &d1Params, {xes, yXes});
 }
 //------------------------------------------------------------------------------
-inline void Task2::Compute(const std::vector<CPhysics::ISolver*>& solvers, const CPhysics::Params* solverParams)
+inline void Task2::Compute(const std::vector<CPhysics::ISolver*>& solvers, const CPhysics::Params* solverParams, const FX &fx)
 {
 	
 	for(const auto &solver : solvers)
@@ -65,11 +83,11 @@ inline void Task2::Compute(const std::vector<CPhysics::ISolver*>& solvers, const
 		const auto res = solver->SolveByStep(solverParams);
 
 		std::cout << solver->GetSolverType() << ": " << reinterpret_cast<const CPhysics::ByStepD1Result*>(res.get())->m_res << std::endl;
-		Demonstrate(res.get());
+		Demonstrate(res.get(), fx);
 	}
 }
 //------------------------------------------------------------------------------
-inline void Task2::Demonstrate(const CPhysics::ByStepResult* inf)
+inline void Task2::Demonstrate(const CPhysics::ByStepResult* inf, const FX& fx)
 {
 	const auto& res = dynamic_cast<const CPhysics::ByStepD1Result*>(inf);
 	if (res == nullptr) return;
@@ -87,7 +105,12 @@ inline void Task2::Demonstrate(const CPhysics::ByStepResult* inf)
 	Plotter::GraphParams graphParams{ res->m_xs, res->m_ys, Plotter::PlotStyle::POINT,
 		{ 0, 0, 255 }, "y", 3 };
 
+	const auto &[x, y] = fx;
+	Plotter::GraphParams graphParams2{ x, y, Plotter::PlotStyle::LINE,
+	{ 0, 255, 0 }, "y", 3 };
+	
 	plot.AddGraph(&graphParams);
+	plot.AddGraph(&graphParams2);
 	plot.Show();
 }
 

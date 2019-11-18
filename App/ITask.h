@@ -1,6 +1,7 @@
 #pragma once
 
 static const double EULER_C{ 2.6 };
+static const double PI{ 3.14156 };
 
 struct Params
 {

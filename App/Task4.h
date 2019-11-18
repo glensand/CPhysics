@@ -10,8 +10,6 @@
 
 #include "IntegratorsTaskBase.h"
 
-static const double PI{ 3.14 };
-
 class Task4 : public IntegratorsTaskBase
 {
 public:
