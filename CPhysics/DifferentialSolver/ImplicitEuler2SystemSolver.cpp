@@ -14,7 +14,7 @@ IDifferentialSystemSolver::ReturnType ImplicitEuler2SystemSolver::Solve(const Pa
 	if (!SuitableParams(params)) return ReturnType{};
 
 	const auto iDParams = dynamic_cast<const ImplicitEuler2SystemSolverParams*>(params);
-	const auto& matr22 = iDParams->m_m22;
+	const auto& mat22 = iDParams->m_m22;
 	
 	std::vector<Real> uXes;
 	std::vector<Real> vXes;
@@ -27,7 +27,7 @@ IDifferentialSystemSolver::ReturnType ImplicitEuler2SystemSolver::Solve(const Pa
 
 	for(size_t i{ 1 }; i < iDParams->m_knotAmount; ++i)
 	{
-		const auto [un1, vn1] = Kramer2Solver::Solve(matr22, { uXes[i - 1], vXes[i - 1] });
+		const auto [un1, vn1] = Kramer2Solver::Solve(mat22, { uXes[i - 1], vXes[i - 1] });
 		uXes.emplace_back(un1);
 		vXes.emplace_back(vn1);
 	}

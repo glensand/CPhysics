@@ -21,14 +21,15 @@ class IDifferentialSystemSolver
 {
 public:
 	using ReturnType = std::vector<std::vector<Real>>; //[0] is x axis, the rest are
-	virtual ~IDifferentialSystemSolver() = default;
-	IDifferentialSystemSolver() = default;
 
-	inline virtual bool					SuitableParams(const Params* params) const = 0;
+	virtual ~IDifferentialSystemSolver() = default;
+			IDifferentialSystemSolver() = default;
+
+	[[nodiscard]] inline virtual bool	SuitableParams(const Params* params) const = 0;
 	
 	[[nodiscard]] virtual std::string	GetSolverType() const = 0;
 
-	virtual ReturnType					Solve(const Params* params) const = 0;
+	[[nodiscard]] virtual ReturnType	Solve(const Params* params) const = 0;
 };
 
 using IDSSolver = IDifferentialSystemSolver;

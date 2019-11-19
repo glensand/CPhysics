@@ -4,11 +4,9 @@ namespace CPhysics {
 
 bool ISimpleDifferentialSolver::SuitableParams(const Params* params) const
 {
-	const auto SDparams = dynamic_cast<const SimpleDifferentialParams*>(params);
-	if (SDparams)
-		return SDparams->m_rightX >= SDparams->m_leftX;
+	const auto dParams = dynamic_cast<const SimpleDifferentialParams*>(params);
+	if (dParams) return dParams->m_rightX >= dParams->m_leftX;
 
 	return false;
-
 }
 }

@@ -32,8 +32,14 @@
     <Filter Include="LinearAlgebra">
       <UniqueIdentifier>{83704df6-4df1-4920-8038-19f802907f29}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CPhysics\SystemSolver">
+    <Filter Include="CPhysics\Solver\SystemSolver">
       <UniqueIdentifier>{7c2d9009-9d9f-45c2-9dd7-dfa6688e5279}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPhysics\DifferentialSolver\SystemSolver">
+      <UniqueIdentifier>{73a34089-f838-4420-a821-9be71705ee54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPhysics\DifferentialSolver\EquationSolver">
+      <UniqueIdentifier>{b312761c-32ce-4e1f-8484-2ecbdecdd730}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -55,15 +61,6 @@
     <ClCompile Include="Interpolator\NewtonInterpolator.cpp">
       <Filter>CPhysics\Interpolator</Filter>
     </ClCompile>
-    <ClCompile Include="DifferentialSolver\SimpleDifferentialSolver.cpp">
-      <Filter>CPhysics\DifferentialSolver</Filter>
-    </ClCompile>
-    <ClCompile Include="DifferentialSolver\Euler2Solver.cpp">
-      <Filter>CPhysics\DifferentialSolver</Filter>
-    </ClCompile>
-    <ClCompile Include="DifferentialSolver\RungeKutta2Solver.cpp">
-      <Filter>CPhysics\DifferentialSolver</Filter>
-    </ClCompile>
     <ClCompile Include="Integrator\OneDimensional\OneDimensionalIntegrator.cpp">
       <Filter>CPhysics\Integrator\OneDimensional</Filter>
     </ClCompile>
@@ -72,9 +69,6 @@
     </ClCompile>
     <ClCompile Include="Integrator\OneDimensional\TrapezeIntegrator.cpp">
       <Filter>CPhysics\Integrator\OneDimensional</Filter>
-    </ClCompile>
-    <ClCompile Include="DifferentialSolver\RungeKutta2SystemSolver.cpp">
-      <Filter>CPhysics\DifferentialSolver</Filter>
     </ClCompile>
     <ClCompile Include="Differentiator\DividedDifference.cpp">
       <Filter>CPhysics\Differentiator</Filter>
@@ -91,14 +85,29 @@
     <ClCompile Include="Window\Hanna.cpp">
       <Filter>CPhysics\Window</Filter>
     </ClCompile>
-    <ClCompile Include="DifferentialSolver\OrdinaryDifferentialSystemSolver.cpp">
-      <Filter>CPhysics\DifferentialSolver</Filter>
+    <ClCompile Include="SystemSolver\TridiagonalSolver.cpp">
+      <Filter>CPhysics\Solver\SystemSolver</Filter>
     </ClCompile>
     <ClCompile Include="DifferentialSolver\ImplicitEuler2SystemSolver.cpp">
-      <Filter>CPhysics\DifferentialSolver</Filter>
+      <Filter>CPhysics\DifferentialSolver\SystemSolver</Filter>
     </ClCompile>
-    <ClCompile Include="SystemSolver\TridiagonalSolver.cpp">
-      <Filter>CPhysics\SystemSolver</Filter>
+    <ClCompile Include="DifferentialSolver\OrdinaryDifferentialSystemSolver.cpp">
+      <Filter>CPhysics\DifferentialSolver\SystemSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="DifferentialSolver\RungeKutta2SystemSolver.cpp">
+      <Filter>CPhysics\DifferentialSolver\SystemSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="DifferentialSolver\Euler2Solver.cpp">
+      <Filter>CPhysics\DifferentialSolver\EquationSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="DifferentialSolver\RungeKutta2Solver.cpp">
+      <Filter>CPhysics\DifferentialSolver\EquationSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="DifferentialSolver\SimpleDifferentialSolver.cpp">
+      <Filter>CPhysics\DifferentialSolver\EquationSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="DifferentialSolver\CrankNicolsonDiffuseSolver.cpp">
+      <Filter>CPhysics\DifferentialSolver\SystemSolver</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -132,15 +141,6 @@
     <ClInclude Include="Integrator\IIntergator.h">
       <Filter>CPhysics\Integrator</Filter>
     </ClInclude>
-    <ClInclude Include="DifferentialSolver\SimpleDifferentialSolver.h">
-      <Filter>CPhysics\DifferentialSolver</Filter>
-    </ClInclude>
-    <ClInclude Include="DifferentialSolver\Euler2Solver.h">
-      <Filter>CPhysics\DifferentialSolver</Filter>
-    </ClInclude>
-    <ClInclude Include="DifferentialSolver\RungeKutta2Solver.h">
-      <Filter>CPhysics\DifferentialSolver</Filter>
-    </ClInclude>
     <ClInclude Include="Integrator\OneDimensional\OneDimensionalIntegrator.h">
       <Filter>CPhysics\Integrator\OneDimensional</Filter>
     </ClInclude>
@@ -149,9 +149,6 @@
     </ClInclude>
     <ClInclude Include="Integrator\OneDimensional\TrapezeIntegrator.h">
       <Filter>CPhysics\Integrator\OneDimensional</Filter>
-    </ClInclude>
-    <ClInclude Include="DifferentialSolver\RungeKutta2SystemSolver.h">
-      <Filter>CPhysics\DifferentialSolver</Filter>
     </ClInclude>
     <ClInclude Include="Differentiator\DividedDifference.h">
       <Filter>CPhysics\Differentiator</Filter>
@@ -180,15 +177,6 @@
     <ClInclude Include="Window\IWindow.h">
       <Filter>CPhysics\Window</Filter>
     </ClInclude>
-    <ClInclude Include="DifferentialSolver\IDifferentialSystemSolver.h">
-      <Filter>CPhysics\DifferentialSolver</Filter>
-    </ClInclude>
-    <ClInclude Include="DifferentialSolver\OrdinaryDifferentialSystemSolver.h">
-      <Filter>CPhysics\DifferentialSolver</Filter>
-    </ClInclude>
-    <ClInclude Include="DifferentialSolver\ImplicitEuler2SystemSolver.h">
-      <Filter>CPhysics\DifferentialSolver</Filter>
-    </ClInclude>
     <ClInclude Include="Solver\Kramer2Solver.h">
       <Filter>CPhysics\Solver</Filter>
     </ClInclude>
@@ -199,10 +187,34 @@
       <Filter>LinearAlgebra</Filter>
     </ClInclude>
     <ClInclude Include="SystemSolver\ISystemSolver.h">
-      <Filter>CPhysics\SystemSolver</Filter>
+      <Filter>CPhysics\Solver\SystemSolver</Filter>
     </ClInclude>
     <ClInclude Include="SystemSolver\TridiagonalSolver.h">
-      <Filter>CPhysics\SystemSolver</Filter>
+      <Filter>CPhysics\Solver\SystemSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentialSolver\IDifferentialSystemSolver.h">
+      <Filter>CPhysics\DifferentialSolver\SystemSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentialSolver\ImplicitEuler2SystemSolver.h">
+      <Filter>CPhysics\DifferentialSolver\SystemSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentialSolver\OrdinaryDifferentialSystemSolver.h">
+      <Filter>CPhysics\DifferentialSolver\SystemSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentialSolver\RungeKutta2SystemSolver.h">
+      <Filter>CPhysics\DifferentialSolver\SystemSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentialSolver\Euler2Solver.h">
+      <Filter>CPhysics\DifferentialSolver\EquationSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentialSolver\RungeKutta2Solver.h">
+      <Filter>CPhysics\DifferentialSolver\EquationSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentialSolver\SimpleDifferentialSolver.h">
+      <Filter>CPhysics\DifferentialSolver\EquationSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentialSolver\CrankNicolsonDiffuseSolver.h">
+      <Filter>CPhysics\DifferentialSolver\SystemSolver</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

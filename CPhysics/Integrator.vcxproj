@@ -159,6 +159,7 @@
   <ItemGroup>
     <ClCompile Include="DifferentialSolver\Euler2Solver.cpp" />
     <ClCompile Include="DifferentialSolver\ImplicitEuler2SystemSolver.cpp" />
+    <ClCompile Include="DifferentialSolver\CrankNicolsonDiffuseSolver.cpp" />
     <ClCompile Include="DifferentialSolver\OrdinaryDifferentialSystemSolver.cpp" />
     <ClCompile Include="DifferentialSolver\RungeKutta2Solver.cpp" />
     <ClCompile Include="DifferentialSolver\RungeKutta2SystemSolver.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="DifferentialSolver\Euler2Solver.h" />
     <ClInclude Include="DifferentialSolver\IDifferentialSystemSolver.h" />
     <ClInclude Include="DifferentialSolver\ImplicitEuler2SystemSolver.h" />
+    <ClInclude Include="DifferentialSolver\CrankNicolsonDiffuseSolver.h" />
     <ClInclude Include="DifferentialSolver\OrdinaryDifferentialSystemSolver.h" />
     <ClInclude Include="DifferentialSolver\RungeKutta2Solver.h" />
     <ClInclude Include="DifferentialSolver\RungeKutta2SystemSolver.h" />
