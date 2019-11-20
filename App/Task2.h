@@ -33,8 +33,8 @@ inline void Task2::Run(const Params* params) const
 {
 
 	const auto a2 = 0.1;
-	const auto U0 = 20.;
-	const auto A = 2 * a2 * U0;
+	const auto U0 = 200.;
+	const auto A = a2 * U0;
 	//-------------------------------------------------------
 	//		2 * m * a^2 * U0
 	// A = --------------------
@@ -56,9 +56,19 @@ inline void Task2::Run(const Params* params) const
 	const auto dichotomySolver = std::make_shared<CPhysics::DichotomySolver>();
 
 	const std::vector<CPhysics::ISolver*> solvers{ simpleIterationsSolver.get(), newtonSolver.get(), dichotomySolver.get() };
-	const auto rightX = 0.9/* - PI / (2 * a2 * U0)*/;
-	
-	const CPhysics::OneDimensionalSolverParams d1Params{0.0001, .0001, rightX, function1 };
+	CPhysics::Real rightX = 0;
+	for(size_t i{ 0 }; ; ++i)
+	{
+		if (1 - PI * PI * i * i / (a2 * U0) < 0)
+
+		{
+			rightX = 1 - PI * PI * (i - 1) * (i - 1) / (a2 * U0);
+			break;
+		}
+	}
+
+	const CPhysics::Real acc{ 0.0001 };
+	const CPhysics::OneDimensionalSolverParams d1Params{ acc, .0001, rightX, function1 };
 
 	const size_t N = static_cast<size_t>((d1Params.m_rightX - d1Params.m_leftX) / d1Params.m_accuracy);
 	std::vector<CPhysics::Real> yXes;
@@ -66,7 +76,7 @@ inline void Task2::Run(const Params* params) const
 	yXes.reserve(N);
 	xes.reserve(N);
 
-	for(auto x{ 0.1 }; x < rightX; x += d1Params.m_accuracy)
+	for(auto x{ 0.01 }; x < 2 * rightX / 3; x += d1Params.m_accuracy)
 	{
 		xes.emplace_back(x);
 		yXes.emplace_back(function1(x));
