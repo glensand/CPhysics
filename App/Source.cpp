@@ -9,13 +9,14 @@
 #include "Task12.h"
 #include "Task13.h"
 #include  "Steering.h"
+#include "Task10.h"
 
 #include "CVPlotExamples.h"
 
 
 int main()
 {
-	const auto task = std::make_unique<Task2>();
+	//const auto task = std::make_unique<Task2>();
 	//const auto task = std::make_unique<Task3>();
 	//const auto task = std::make_unique<Task4>();
 	//const auto task = std::make_unique<Task5>();
@@ -26,6 +27,7 @@ int main()
 	//const auto task = std::make_unique<Task9>();
 	//const auto task = std::make_unique<Task12>();
 	//const auto task = std::make_unique<Task13>();
+	const auto task = std::make_unique<Task10>();
 	
 	//const auto task = std::make_unique<Steering>();
 
