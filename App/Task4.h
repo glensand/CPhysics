@@ -21,32 +21,38 @@ public:
 
 inline void Task4::Run(const Params* params) const
 {
-	const std::vector<size_t> intervals = {4, 16, 32, 64, 128, 256, 512};
+	const std::vector<size_t> intervals = { 10000000 };
 
 	const auto simpsonIntegrator = std::make_shared<CPhysics::SimpsonIntegrator>();
 	const auto trapezeIntegrator = std::make_shared<CPhysics::TrapezeIntegrator>();
 
 	const std::vector<CPhysics::IIntegrator*> integrators = {simpsonIntegrator.get(), trapezeIntegrator.get()};
 
-	const auto function1 = [](CPhysics::Real x)
+	const CPhysics::Real eps{ 10e-9 };
+	
+	const auto function1 = [=](const CPhysics::Real x) ->CPhysics::Real
 	{
+		const CPhysics::Real absX{ std::abs(x) };
+		if (absX < eps) return PI;
+		if (absX < 1 + eps && absX > 1 - eps) return 0;
+		
 		const CPhysics::Real x5 = std::pow(x, 5);
 
-		if (x == 0);
 		return std::sin(PI * x5) / (x5 * (1 - x));
 	};
 
-	OneDimensionalIntegratorTestParams params1(integrators, intervals, "sin(PI * x^5) / (x^5 * (1 - x)", 0, 0, 1,
+	const OneDimensionalIntegratorTestParams params1(integrators, intervals, "sin(PI * x^5) / (x^5 * (1 - x)", 0, 10 * eps, 1,
 	                                           function1);
 	OneDimensionalIntegratorFacade::Test(&params1);
 
-	const auto function2 = [](CPhysics::Real x)
+	const auto function2 = [](CPhysics::Real x) -> CPhysics::Real
 	{
+		if (x < 0) return CPhysics::Real(0);
 		return std::pow(EULER_C, -std::sqrt(x) + std::sin(x / 10));
 	};
 
-	OneDimensionalIntegratorTestParams
-		params2(integrators, intervals, "exp(sqrt(x) + sin(x / 10))", 0., 0., 1., function2);
+	const OneDimensionalIntegratorTestParams
+		params2(integrators, intervals, "exp(sqrt(x) + sin(x / 10))", 0., 0., 19., function2);
 	OneDimensionalIntegratorFacade::Test(&params2);
 
 	const CPhysics::Integrator1dParamsIntervals integratorParams1{ 0.01, 0.99, function1, 4 };
