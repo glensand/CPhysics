@@ -10,8 +10,9 @@ class IWindow
 {
 public:
 	virtual ~IWindow() = default;
-	IWindow() = default;
-	virtual std::vector<double> Window(const size_t N) const = 0;
+			IWindow() = default;
+
+	[[nodiscard]] virtual std::vector<Real>	Window(const size_t N) const = 0;
 };
 	
 }

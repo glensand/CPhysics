@@ -74,5 +74,6 @@ inline void Task13::Run(const Params* params) const
 
 	plotter.AddGraph(&graphParams);
 	plotter.Show();
+	plotter.Close();
 }
 

@@ -52,7 +52,7 @@ inline void Task4::Run(const Params* params) const
 	};
 
 	const OneDimensionalIntegratorTestParams
-		params2(integrators, intervals, "exp(sqrt(x) + sin(x / 10))", 0., 0., 19., function2);
+		params2(integrators, intervals, "exp(sqrt(x) + sin(x / 10))", 0., 0., 400., function2);
 	OneDimensionalIntegratorFacade::Test(&params2);
 
 	const CPhysics::Integrator1dParamsIntervals integratorParams1{ 0.01, 0.99, function1, 4 };

@@ -77,6 +77,7 @@ inline void Task7::PrintSolution(const CPhysics::Params* params, const CPhysics:
 	plot.AddGraph(&graph_params2);
 	
 	plot.Show();
+	plot.Close();
 }
 //------------------------------------------------------------------------------
 inline void Task7::Run(const Params* params) const

@@ -32,7 +32,7 @@ private:
 inline void Task2::Run(const Params* params) const
 {
 
-	const auto a2 = 0.1;
+	const auto a2 = 1;
 	const auto U0 = 200.;
 	const auto A = a2 * U0;
 	//-------------------------------------------------------
@@ -122,6 +122,7 @@ inline void Task2::Demonstrate(const CPhysics::ByStepResult* inf, const FX& fx)
 	plot.AddGraph(&graphParams);
 	plot.AddGraph(&graphParams2);
 	plot.Show();
+	plot.Close();
 }
 
 

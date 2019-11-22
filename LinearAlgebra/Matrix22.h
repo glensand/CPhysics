@@ -11,6 +11,10 @@
 #pragma once
 #include "Vector2.h"
 
+namespace cm
+{
+	
+}
 class Matrix22 final
 {
 public:

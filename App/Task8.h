@@ -54,5 +54,5 @@ inline void Task8::Run(const Params* params) const
 	//gparams.m_y = res[2];
 	//plotter.AddGraph(&gparams);
 	plotter.Show();
-
+	plotter.Close();
 }

@@ -25,11 +25,13 @@ public:
 	CVPlot2() = default;
 	virtual  ~CVPlot2() = default;
 
-	void AddGraph(const GraphParams* params) override;
+	void	AddGraph(const GraphParams* params) override;
 
-	void Show() override;
+	void	Show() override;
 
-	void Release() override;
+	void	Release() override;
+
+	void	Close() override;
 
 private:
 	
