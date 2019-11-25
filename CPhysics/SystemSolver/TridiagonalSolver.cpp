@@ -6,6 +6,7 @@ namespace CPhysics
 //------------------------------------------------------------------------------
 std::vector<Real> TridiagonalSolver::Solve(const Params* params) const
 {
+	if (!SuitableParams(params)) return std::vector<Real>{};
 	const auto tParams = reinterpret_cast<const TridiagonalParams*>(params);
 	
 	std::vector<Real>

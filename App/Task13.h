@@ -79,6 +79,9 @@ inline void Task13::Run(const Params* params) const
 	}
 	Plotter::CVPlot plotter;
 	Plotter::GraphParams graphParams;
+	ftFreq.resize(40);
+	fourierHannaMag.resize(ftFreq.size());
+	fourierMag.resize(ftFreq.size());
 	graphParams.m_x = ftFreq;
 	graphParams.m_y = fourierMag;
 	graphParams.m_style = Plotter::PlotStyle::POINT_LINE;

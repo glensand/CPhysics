@@ -19,23 +19,25 @@ public:
 		using Real = CPhysics::Real;
 
 		const Real Pi = CPhysics::pi;
-		const size_t N = 1000;
-		const Real delta = Pi / 1000;
+		const size_t N = 100000;
+		const Real delta = Pi / N;
 
 		std::vector<Real> a(N, 1.);
 		std::vector<Real> b(N, -2.);
 		std::vector<Real> c(N, 1.);
 		std::vector<Real> d(N, 0);
 
-		a.front() = 0.;
-		c.back() = 0.;
+		a.back() = 0.;
+		c.front() = 0.;
 		b.front() = 1.;
-		b[N - 1] = 1.;
+		b.back() = 1.;
 
 		const Real delta2 = delta * delta;
 		for (size_t i = 0; i < N; ++i)
 			d[i] = delta2 * std::sin(delta * i);
-		
+
+		d.back() = 4.;
+		d[0] = -5;
 		CPhysics::TridiagonalParams tridiagonalParams { a, b, c, d};
 		
 		const CPhysics::TridiagonalSolver solver;
