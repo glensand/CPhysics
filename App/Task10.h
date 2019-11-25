@@ -17,29 +17,36 @@ public:
 	void Run(const Params* params = nullptr) const override
 	{
 		using Real = CPhysics::Real;
-		Real Pi = CPhysics::pi;
-		size_t N = 1000;
-		Real delta = Pi / 1000;
-		std::vector<Real> a(N - 1, 1.), b(N, -2.), c(N - 1, 1.), d(N, 0);
-		b[0] = 1.;
+
+		const Real Pi = CPhysics::pi;
+		const size_t N = 1000;
+		const Real delta = Pi / 1000;
+
+		std::vector<Real> a(N, 1.);
+		std::vector<Real> b(N, -2.);
+		std::vector<Real> c(N, 1.);
+		std::vector<Real> d(N, 0);
+
+		a.front() = 0.;
+		c.back() = 0.;
+		b.front() = 1.;
 		b[N - 1] = 1.;
+
+		const Real delta2 = delta * delta;
 		for (size_t i = 0; i < N; ++i)
-		{
-			d[i] = delta * delta * std::sin(delta * i);
-		}
-		CPhysics::TridiagonalParams Params;
-		Params.a = a;
-		Params.b = b;
-		Params.c = c;
-		Params.d = d;
-		CPhysics::TridiagonalSolver solver;
-		auto res = solver.Solve(&Params);
+			d[i] = delta2 * std::sin(delta * i);
+		
+		CPhysics::TridiagonalParams tridiagonalParams { a, b, c, d};
+		
+		const CPhysics::TridiagonalSolver solver;
+		const auto res = solver.Solve(&tridiagonalParams);
+
 		std::vector<Real> x(N, 0);
 		for (size_t i = 0; i < N; ++i)
-		{
 			x[i] = delta * i;
-		}
+		
 		Plotter::CVPlot plotter;
+
 		Plotter::GraphParams graph_params;
 		graph_params.m_style = Plotter::PlotStyle::LINE;
 		graph_params.m_x = x;
@@ -48,7 +55,6 @@ public:
 		plotter.AddGraph(&graph_params);
 
 		plotter.Show();
-
 		plotter.Close();
 	}
 };

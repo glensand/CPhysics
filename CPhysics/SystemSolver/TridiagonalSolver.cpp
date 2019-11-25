@@ -3,51 +3,43 @@
 
 namespace CPhysics
 {
-
-std::vector<CPhysics::Real> TridiagonalSolver::Solve(Params* params)
+//------------------------------------------------------------------------------
+std::vector<Real> TridiagonalSolver::Solve(const Params* params) const
 {
-	auto TParams = reinterpret_cast<TridiagonalParams*>(params);
+	const auto tParams = reinterpret_cast<const TridiagonalParams*>(params);
 	
-	std::vector<CPhysics::Real> x(TParams->b.size(), 0), a{TParams->a}, b{TParams->b},
-								c{TParams->c}, d{TParams->d};
-	c.push_back(0);
-	a.insert(a.begin(), 0);
+	std::vector<Real>
+		d{ tParams->m_d },
+		b{ tParams->m_b };
+
+	const auto &a = tParams->m_a;
+	const auto &c = tParams->m_c;
+
 	std::vector<Real> w(b.size(), 0);
 	for (size_t i = 1; i < b.size(); ++i)
 	{
-		w[i] = a[i] / b[i - 1];
-		b[i] = b[i] - w[i] * c[i - 1];
-		d[i] = d[i] - w[i] * d[i - 1];
-		a[i] = 0;
+		const Real xi = a[i] / b[i - 1];
+		b[i] -= xi * c[i - 1];
+		d[i] -= xi * d[i - 1];
 	}
 
-	x[b.size() - 1] = d[b.size() - 1] / b[b.size() - 1];
-	for (long int i = b.size() - 2; i >= 0; --i)
-	{
-		x[i] = (d[i] - c[i] * x[i + 1]) / b[i];
-	}
+	w.back() = d.back() / b.back();
+	for (int64_t i = b.size() - 2; i >= 0; --i)
+		w[i] = (d[i] - c[i] * w[i + 1]) / b[i];
 	
-	return x;
-	
+	return w;
 }
-
-bool TridiagonalSolver::SuitableParams(Params* params)
+//------------------------------------------------------------------------------
+bool TridiagonalSolver::SuitableParams(const Params* params) const
 {
 	const auto solverParams = dynamic_cast<const TridiagonalParams*>(params);
-	if (solverParams)
-		if ((solverParams->b.size() == solverParams->d.size()) || 
-			(solverParams->c.size() == solverParams->a.size()) || 
-			(solverParams->a.size() == solverParams->b.size() - 1)) 
-		{
-			return true;
-		}
-
-	return false;
+	return solverParams != nullptr;
 }
-
-std::string TridiagonalSolver::GetSolverType()
+//------------------------------------------------------------------------------
+std::string TridiagonalSolver::GetSolverType() const
 {
-	return "Tridiagonal Solver (метод прогонки)";
+	return "Tridiagonal Solver ";
 }
+//------------------------------------------------------------------------------
 }
 	

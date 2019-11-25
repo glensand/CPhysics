@@ -13,7 +13,7 @@
 
 namespace CPhysics
 {
-
+	
 class DichotomySolver : public OneDimensionalSolver
 {
 public:

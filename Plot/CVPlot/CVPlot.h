@@ -18,6 +18,7 @@
 #include "../IPlot.h"
 
 #include <string>
+#include <set>
 
 namespace Plotter
 {
@@ -59,7 +60,9 @@ private:
 
 	void				DrawLabels();
 
-	static cv::Scalar	DeduceColor(const Color &color);
+	Color				GenerateColorRand();
+	
+	cv::Scalar			DeduceColor(const Color &color);
 	
 	std::string		m_plotName;
 	cv::Mat			m_plot;
@@ -78,6 +81,8 @@ private:
 	
 	std::vector<GraphParams>		m_graphs;
 	AxisLabels						m_labels;
+
+	std::set<Color>					m_usedColors;
 };
 //==============================================================================
 }

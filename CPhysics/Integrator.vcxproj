@@ -164,6 +164,7 @@
     <ClCompile Include="DifferentialSolver\RungeKutta2Solver.cpp" />
     <ClCompile Include="DifferentialSolver\RungeKutta2SystemSolver.cpp" />
     <ClCompile Include="DifferentialSolver\SimpleDifferentialSolver.cpp" />
+    <ClCompile Include="DifferentialSolver\SpectralProblemSolver.cpp" />
     <ClCompile Include="Differentiator\Differentiator.cpp" />
     <ClCompile Include="Differentiator\DividedDifference.cpp" />
     <ClCompile Include="Integrator\OneDimensional\OneDimensionalIntegrator.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="DifferentialSolver\RungeKutta2Solver.h" />
     <ClInclude Include="DifferentialSolver\RungeKutta2SystemSolver.h" />
     <ClInclude Include="DifferentialSolver\SimpleDifferentialSolver.h" />
+    <ClInclude Include="DifferentialSolver\SpectralProblemSolver.h" />
     <ClInclude Include="Differentiator\Differentiator.h" />
     <ClInclude Include="Differentiator\DividedDifference.h" />
     <ClInclude Include="Differentiator\IDifferentiator.h" />

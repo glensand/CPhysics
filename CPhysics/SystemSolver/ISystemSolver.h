@@ -4,8 +4,8 @@
 
 #include <vector>
 
-namespace CPhysics {
-
+namespace CPhysics
+{
 
 class ISystemSolver
 {
@@ -13,11 +13,11 @@ public:
 	ISystemSolver() = default;
 	virtual ~ISystemSolver() = default;
 
-	virtual std::vector<Real> Solve(Params* params) = 0;
+	virtual std::vector<Real>			Solve(const Params* params) const = 0;
 
-	virtual bool SuitableParams(Params* params) = 0;
+	virtual bool						SuitableParams(const Params* params) const = 0;
 
-	virtual std::string GetSolverType() = 0;
+	[[nodiscard]] virtual std::string	GetSolverType() const = 0;
 };
 
 }

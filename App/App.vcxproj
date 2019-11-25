@@ -21,6 +21,7 @@
     <ClInclude Include="ITask.h" />
     <ClInclude Include="Steering.h" />
     <ClInclude Include="Task10.h" />
+    <ClInclude Include="Task11.h" />
     <ClInclude Include="Task12.h" />
     <ClInclude Include="Task13.h" />
     <ClInclude Include="Task2.h" />

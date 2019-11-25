@@ -1,11 +1,23 @@
 #include "CVPlot.h"
 
 #include <opencv2/imgproc/imgproc_c.h>
+#include <cctype>
+#include <random>
 
 namespace
 {
-const Plotter::FontProperties	DEFAULT_FONT_PROPERTIES;
-const Plotter::AxisProperties	DEFAULT_AXIS_PROPERTIES;
+const Plotter::FontProperties		DEFAULT_FONT_PROPERTIES;
+const Plotter::AxisProperties		DEFAULT_AXIS_PROPERTIES;
+
+const std::vector<Plotter::Color>	COLOR_RANGE{ {0, 0, 0}, {50, 50, 50}};
+const std::vector<Plotter::Color>	DEFAULT_COLORS{
+													{255, 0, 0},
+													{0, 255, 0},
+													{0, 0, 255},
+													{255, 255, 0},
+													{255, 0, 255},
+													{0, 255, 255}
+													};
 }
 
 namespace Plotter
@@ -167,9 +179,39 @@ void CVPlot::DrawLabels()
 	//}
 }
 //------------------------------------------------------------------------------
+Color CVPlot::GenerateColorRand()
+{
+	if(m_usedColors.size() < DEFAULT_COLORS.size())
+	{
+		const auto color = DEFAULT_COLORS[m_usedColors.size()];
+		m_usedColors.emplace(color);
+		return color;
+	}
+	
+	std::random_device rd;
+	std::mt19937 mt(rd());
+	const std::uniform_int_distribution<int> red(COLOR_RANGE[0].m_r, COLOR_RANGE[1].m_r);
+	const std::uniform_int_distribution<int> green(COLOR_RANGE[0].m_g, COLOR_RANGE[1].m_g);
+	const std::uniform_int_distribution<int> blue(COLOR_RANGE[0].m_b, COLOR_RANGE[1].m_b);
+
+	const size_t iterations = 100;
+	for (size_t i{ 0 }; i < iterations; ++i) {
+
+		const auto color = Color{ blue(mt), green(mt), red(mt) };
+		if (m_usedColors.count(color) == 0)
+		{
+			m_usedColors.emplace(color);
+			return color;
+		}
+	}
+
+	return Color{ 0, 0, 0 };
+}
+//------------------------------------------------------------------------------
 cv::Scalar CVPlot::DeduceColor(const Color& color)
 {
-	return cv::Scalar(color.m_b, color.m_g, color.m_r);
+	if (color.m_b == -1) return DeduceColor(GenerateColorRand());
+	return cv::Scalar( color.m_b, color.m_g, color.m_r );
 }
 //------------------------------------------------------------------------------
 }

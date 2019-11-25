@@ -6,10 +6,11 @@
 #include "task7.h"
 #include "Task8.h"
 #include "Task9.h"
+#include "Task10.h"
+#include "Task11.h"
 #include "Task12.h"
 #include "Task13.h"
 #include  "Steering.h"
-#include "Task10.h"
 
 #include "CVPlotExamples.h"
 
@@ -23,7 +24,6 @@ void help()
 	std::cout << "task << ";
 }
 }
-
 
 int main()
 {
@@ -39,7 +39,7 @@ int main()
 		std::make_shared<Task8>(),
 		std::make_shared<Task9>(),
 		std::make_shared<Task10>(),
-		nullptr, // Task11
+		std::make_shared<Task11>(),
 		std::make_shared<Task12>(),
 		std::make_shared<Task13>(),
 	};
@@ -53,8 +53,8 @@ int main()
 		std::cout << std::endl;
 		
 		if (task == 0) break;
-		if (task > tasks.size()) continue;
-
+		if (task > tasks.size() || tasks[task - 1] == nullptr) continue;
+		
 		tasks[task - 1]->Run();
 	}
 	

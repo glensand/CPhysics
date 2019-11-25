@@ -15,7 +15,7 @@
 namespace Plotter
 {
 
-using ChanelColor = uint8_t;
+using ChanelColor = int;
 //==============================================================================	
 enum class PlotStyle
 {
@@ -42,7 +42,17 @@ struct Color final
 
 	ChanelColor		m_b{ };	
 	ChanelColor		m_g{ };	
-	ChanelColor		m_r{ };	
+	ChanelColor		m_r{ };
+
+	bool operator==(const Color &rhs) const { return m_b == rhs.m_b && m_r == rhs.m_r && m_g == rhs.m_g; }
+	bool operator!=(const Color& rhs) const { return !(*this != rhs); }
+	bool operator<(const Color& rhs) const
+	{
+		if (m_b != rhs.m_b) return m_b < rhs.m_b;
+		if (m_g != rhs.m_g) return m_g < rhs.m_g;
+
+		return m_r < rhs.m_r;
+	}
 };
 //==============================================================================
 struct GraphParams final
@@ -54,9 +64,10 @@ struct GraphParams final
 	std::vector<double>	m_y;		// Vector of y's axis point
 
 	PlotStyle			m_style{ PlotStyle::LINE };						// graph style
-	Color				m_color{ 0, 0, 0};					// Color to be used for graph plotting
+	Color				m_color{ -1, -1, -1};					// Color to be used for graph plotting
 	std::string			m_label{ "function" };
 	size_t				m_pointRadius{ 2 };
+	bool				m_randomColor{ true };
 };
 //==============================================================================
 class IPlot
