@@ -30,28 +30,12 @@ inline void Task13::Run(const Params* params) const
 	{
 		t.push_back(step * i);
 		y.push_back(a0 * std::sin(t[i] * w0) + a1 * std::sin(t[i] * w1));
-		if (i < N / 2 + 1) {
-			ftFreq.push_back(i * frequency / 2);
-		}
-	}
-	std::vector<Real> ySquared{};
-	for (auto it : y)
-	{
-		ySquared.push_back(it * it);
+		if (i > N / 2)
+			ftFreq.push_back((static_cast<double>(i) - (static_cast<double>(N) / 2.)) * frequency / static_cast<double>(N));
 	}
 	const CPhysics::FFT fft{};
-	std::vector<std::complex<Real>> squaredComplex{};
-	for (auto it : ySquared)
-	{
-		squaredComplex.emplace_back(it, 0);
-	}
-	auto FourierOfSquaredY = fft.Transform(squaredComplex);
 	auto FourierOfY = fft.TransformReal(y);
 	std::vector<Real> fourierMag{};
-	//for (const auto& it : FourierOfSquaredY)
-	//{
-	//	fourierMag.push_back(abs(it));
-	//}
 
 	for (const auto& it : FourierOfY) 
 	{

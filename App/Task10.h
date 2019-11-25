@@ -36,8 +36,8 @@ public:
 		for (size_t i = 0; i < N; ++i)
 			d[i] = delta2 * std::sin(delta * i);
 
-		d.back() = 4.;
-		d[0] = -5;
+		d.back() = -2.;
+		d[0] = 2;
 		CPhysics::TridiagonalParams tridiagonalParams { a, b, c, d};
 		
 		const CPhysics::TridiagonalSolver solver;
