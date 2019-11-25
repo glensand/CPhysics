@@ -13,25 +13,50 @@
 
 #include "CVPlotExamples.h"
 
+namespace
+{
+void help()
+{
+	std::cout << std::endl << 
+		"//==============================================================================" << std::endl;
+	std::cout << "0 - exit" << std::endl;
+	std::cout << "task << ";
+}
+}
+
 
 int main()
 {
-	//const auto task = std::make_unique<Task2>();
-	//const auto task = std::make_unique<Task3>();
-	//const auto task = std::make_unique<Task4>();
-	//const auto task = std::make_unique<Task5>();
-	//const auto task = std::make_unique<Task6>();
-	//const auto task = std::make_unique<Task7>();
-	//const auto task = std::make_unique<CVPlotExamples>();
-	//const auto task = std::make_unique<Task8>();
-	//const auto task = std::make_unique<Task9>();
-	//const auto task = std::make_unique<Task12>();
-	//const auto task = std::make_unique<Task13>();
-	const auto task = std::make_unique<Task10>();
+	// tasks
+	const std::vector<std::shared_ptr<ITask>> tasks
+	{	nullptr, // Task 1
+		std::make_shared<Task2>(),
+		std::make_shared<Task3>(),
+		std::make_shared<Task4>(),
+		std::make_shared<Task5>(),
+		std::make_shared<Task6>(),
+		std::make_shared<Task7>(),
+		std::make_shared<Task8>(),
+		std::make_shared<Task9>(),
+		std::make_shared<Task10>(),
+		nullptr, // Task11
+		std::make_shared<Task12>(),
+		std::make_shared<Task13>(),
+	};
 	
-	//const auto task = std::make_unique<Steering>();
+	for(;;)
+	{
+		help();
+		
+		size_t task;
+		std::cin >> task;
+		std::cout << std::endl;
+		
+		if (task == 0) break;
+		if (task > tasks.size()) continue;
 
-	task->Run();
+		tasks[task - 1]->Run();
+	}
 	
 	return 0;
 }

@@ -72,6 +72,8 @@ public:
 	virtual void	Release() = 0;
 
 	virtual void	Show() = 0;
+
+	virtual void	Close() = 0;
 };
 //==============================================================================
 }

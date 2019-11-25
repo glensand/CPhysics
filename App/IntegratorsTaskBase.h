@@ -43,7 +43,7 @@ inline std::vector<std::vector<double>> IntegratorsTaskBase::ComputeFunction(
 inline void IntegratorsTaskBase::Demonstrate(const CPhysics::IIntegrator* integrator,
 	const CPhysics::Integrator1dParamsIntervals& params) const
 {
-	Plotter::CVPlot plot1;
+	Plotter::CVPlot plot;
 	const auto functionOnGrid = integrator->IntegrationGrid(&params);
 
 	if (functionOnGrid.size() > 1)
@@ -52,7 +52,7 @@ inline void IntegratorsTaskBase::Demonstrate(const CPhysics::IIntegrator* integr
 		graphParams.m_x = functionOnGrid[0];
 		graphParams.m_y = functionOnGrid[1];
 		graphParams.m_color = { 255, 0,0 };
-		plot1.AddGraph(&graphParams);
+		plot.AddGraph(&graphParams);
 	}
 
 	const auto analyticalFunction = ComputeFunction(params);
@@ -62,9 +62,10 @@ inline void IntegratorsTaskBase::Demonstrate(const CPhysics::IIntegrator* integr
 		graphParams.m_x = analyticalFunction[0];
 		graphParams.m_y = analyticalFunction[1];
 		graphParams.m_color = { 0, 0, 255 };
-		plot1.AddGraph(&graphParams);
+		plot.AddGraph(&graphParams);
 	}
 
-	plot1.Show();
+	plot.Show();
+	plot.Close();
 }
 //------------------------------------------------------------------------------

@@ -47,6 +47,8 @@ public:
 	void		Release() override;
 
 	void		Show() override;
+
+	void		Close() override;
 private:
 
 	void				Initialize();

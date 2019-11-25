@@ -63,5 +63,6 @@ inline void Task5::Run(const Params* params = nullptr) const
 	plot.AddGraph(&graphParams2);
 	
 	plot.Show();
+	plot.Close();
 }
 //------------------------------------------------------------------------------

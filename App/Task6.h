@@ -151,5 +151,6 @@ inline void Task6::Render(const std::vector<CPhysics::Real>& x, const std::vecto
 	plot.AddGraph(&params2);
 	plot.AddGraph(&params1);
 	plot.Show();
+	plot.Close();
 }
 //------------------------------------------------------------------------------

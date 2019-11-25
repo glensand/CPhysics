@@ -46,4 +46,5 @@ inline void Task9::Run(const Params* params) const
 	//plot.AddGraph(&graphParams3);
 
 	plot.Show();
+	plot.Close();
 }

@@ -44,8 +44,12 @@ public:
 		graph_params.m_style = Plotter::PlotStyle::LINE;
 		graph_params.m_x = x;
 		graph_params.m_y = res;
+
 		plotter.AddGraph(&graph_params);
+
 		plotter.Show();
+
+		plotter.Close();
 	}
 };
 

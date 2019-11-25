@@ -181,8 +181,12 @@
     <ClCompile Include="Window\Hanna.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\LinearAlgebra\Matrix22.h" />
-    <ClInclude Include="..\LinearAlgebra\Vector2.h" />
+    <ClInclude Include="..\LinearAlgebra\Matrix22.h">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="..\LinearAlgebra\Vector2.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="CPhysics.h" />
     <ClInclude Include="DifferentialSolver\Euler2Solver.h" />
     <ClInclude Include="DifferentialSolver\IDifferentialSystemSolver.h" />

@@ -36,6 +36,11 @@ void CVPlot::Show()
 	cv::waitKey(0);
 }
 //------------------------------------------------------------------------------
+void CVPlot::Close()
+{
+	cv::destroyWindow(m_plotName);
+}
+//------------------------------------------------------------------------------
 void CVPlot::Initialize()
 {
 	m_plot = cv::Mat(m_plotSize.height, m_plotSize.width, CV_8UC3, m_defaultBackgroundColor);
