@@ -21,7 +21,7 @@ inline void Task13::Run(const Params* params) const
 	using Real = CPhysics::Real;
 	Real T = 2 * CPhysics::pi;
 	Real step = T / N;
-	Real a0 = 1., a1 = 0.1, w0 = 5.1, w1 = 25.5;
+	Real a0 = 1., a1 = 0.5, w0 = 5.1, w1 = 25.1;
 
 	//signal_y = [a0 * math.sin(t * w0) + a1 * math.sin(t * w1) for t in signal_t]
 	std::vector<Real> y{}, t{}, ftFreq{};

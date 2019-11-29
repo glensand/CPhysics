@@ -50,6 +50,9 @@ public:
 	void		Show() override;
 
 	void		Close() override;
+
+	// own methods
+	void		EnableDebugPrint(bool enable) { m_debugPrint = enable; };
 private:
 
 	void				Initialize();
@@ -60,11 +63,16 @@ private:
 
 	void				DrawLabels();
 
+	void				Print(const std::string &text, int x, int y);
+	
 	Color				GenerateColorRand();
 	
 	cv::Scalar			DeduceColor(const Color &color);
-	
-	std::string		m_plotName;
+
+	static void			OnMouseHandle(int event, int x, int y, int, void* instance);
+	void				OnMouseHandleInner(int event, int x, int y);
+
+	std::string		m_plotName { "Plot" };
 	cv::Mat			m_plot;
 	cv::Size		m_plotSize{ 1300, 700 };
 	cv::Scalar		m_defaultBackgroundColor{ 255, 255, 255 };
@@ -78,6 +86,8 @@ private:
 
 	float			m_scaleY{ 1.f };
 	float			m_scaleX{ 1.f };
+
+	bool			m_debugPrint{ false };
 	
 	std::vector<GraphParams>		m_graphs;
 	AxisLabels						m_labels;

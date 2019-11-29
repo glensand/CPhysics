@@ -3,6 +3,7 @@
 #include <opencv2/imgproc/imgproc_c.h>
 #include <cctype>
 #include <random>
+#include <iostream>
 
 namespace
 {
@@ -18,11 +19,11 @@ const std::vector<Plotter::Color>	DEFAULT_COLORS{
 													{255, 0, 255},
 													{0, 255, 255}
 													};
+
 }
 
 namespace Plotter
 {
-
 //------------------------------------------------------------------------------
 void CVPlot::AddGraph(const GraphParams* params)
 {
@@ -44,6 +45,8 @@ void CVPlot::Show()
 	DrawLabels();
 
 	cv::namedWindow(m_plotName, cv::WINDOW_AUTOSIZE);
+	//cv::setOpenGlContext(m_plotName);
+	cv::setMouseCallback(m_plotName, OnMouseHandle, this);
 	cv::imshow(m_plotName, m_plot);
 	cv::waitKey(0);
 }
@@ -51,6 +54,30 @@ void CVPlot::Show()
 void CVPlot::Close()
 {
 	cv::destroyWindow(m_plotName);
+}
+//------------------------------------------------------------------------------
+void CVPlot::OnMouseHandle(int event, int x, int y, int, void* instance)
+{
+	if (instance == nullptr) return;
+	reinterpret_cast<CVPlot*>(instance)->OnMouseHandleInner(event, x, y);
+}
+//------------------------------------------------------------------------------
+void CVPlot::OnMouseHandleInner(int event, int x, int y)
+{
+	if (!m_debugPrint) return;
+	const double relX = m_maxX - static_cast<double>(x) / static_cast<double>(m_plotSize.width) * (m_maxX - m_minX);
+	const double relY = m_minY - static_cast<double>(y) / static_cast<double>(m_plotSize.width) * (m_maxY - m_minY);
+
+	std::cout << -relX << " " << relY << std::endl;
+	// TODO:: recompile opencv with opengl support
+	/*
+	cv::putText(m_plot, "x: " + std::to_string(relX), cvPoint(m_plotSize.width - 2 * m_borderSize, m_borderSize),
+		DEFAULT_FONT_PROPERTIES.m_type, DEFAULT_FONT_PROPERTIES.m_scale, DEFAULT_FONT_PROPERTIES.m_color);
+
+	cv::putText(m_plot, "y: " + std::to_string(relY), cvPoint(m_plotSize.width - 2 * m_borderSize, 2 * m_borderSize),
+		DEFAULT_FONT_PROPERTIES.m_type, DEFAULT_FONT_PROPERTIES.m_scale, DEFAULT_FONT_PROPERTIES.m_color);
+
+	cv::updateWindow(m_plotName);*/
 }
 //------------------------------------------------------------------------------
 void CVPlot::Initialize()
@@ -87,7 +114,7 @@ void CVPlot::Initialize()
 	}
 
 	m_scaleX = static_cast<float>(m_plotSize.width - m_borderSize * 2) / (m_maxX - m_minX);
-	m_scaleY = static_cast<float>(m_plotSize.height - m_borderSize * 2) / range;	
+	m_scaleY = static_cast<float>(m_plotSize.height - m_borderSize * 2) / range;
 }
 //------------------------------------------------------------------------------
 void CVPlot::DrawAxis()
@@ -177,6 +204,10 @@ void CVPlot::DrawLabels()
 	//	
 	//	//posy += int(chh * 1.5);
 	//}
+}
+//------------------------------------------------------------------------------
+void CVPlot::Print(const std::string& text, int x, int y)
+{
 }
 //------------------------------------------------------------------------------
 Color CVPlot::GenerateColorRand()
