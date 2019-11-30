@@ -16,14 +16,13 @@ public:
 
 inline void Task13::Run(const Params* params) const
 {
-	size_t N = 1000;
+	size_t N = 200;
 
 	using Real = CPhysics::Real;
 	Real T = 2 * CPhysics::pi;
-	Real step = T / N;
-	Real a0 = 1., a1 = 0.5, w0 = 5.1, w1 = 25.1;
+	Real step = 5 * T / N;
+	Real a0 = .1, a1 = 0.05, w0 = 5.1, w1 = 30.1;
 
-	//signal_y = [a0 * math.sin(t * w0) + a1 * math.sin(t * w1) for t in signal_t]
 	std::vector<Real> y{}, t{}, ftFreq{};
 	Real frequency = 2 * CPhysics::pi / step;
 	for (size_t i = 0; i < N; ++i)
@@ -62,21 +61,16 @@ inline void Task13::Run(const Params* params) const
 		fourierMagHalved[i] = fourierMag[i];
 	}
 	Plotter::CVPlot plotter;
-	Plotter::GraphParams graphParams;
-	ftFreq.resize(40);
+
 	fourierHannaMag.resize(ftFreq.size());
 	fourierMag.resize(ftFreq.size());
-	graphParams.m_x = ftFreq;
-	graphParams.m_y = fourierMag;
-	graphParams.m_style = Plotter::PlotStyle::POINT_LINE;
-	graphParams.m_pointRadius = 1;
-	plotter.AddGraph(&graphParams);
-	graphParams.m_y = fourierHannaMag;
-	Plotter::Color color;
-	color.m_r = 255;
-	graphParams.m_color = color;
 
-	plotter.AddGraph(&graphParams);
+	const Plotter::GraphParams graphParams1{ ftFreq, fourierMag, Plotter::PlotStyle::POINT_LINE };
+	plotter.AddGraph(&graphParams1);
+
+	const Plotter::GraphParams graphParams2{ ftFreq, fourierHannaMag, Plotter::PlotStyle::POINT_LINE };
+	plotter.AddGraph(&graphParams2);
+
 	plotter.Show();
 	plotter.Close();
 }
