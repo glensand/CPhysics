@@ -88,6 +88,7 @@ IDifferentialSystemSolver::ReturnType SpectralProblemSolver::Solve(const Params*
 
 		const auto E0 = normD2 / norm(d2);
 		result[0].emplace_back(E0);
+		//result.emplace_back(d2);
 		result.emplace_back(mult(d2, 1 / norm(d2)));
 	}
 	return result;

@@ -21,6 +21,7 @@ std::vector<CPhysics::Real> mult(const cv::Mat &mat, const std::vector<CPhysics:
 
 	return bRes;
 }
+	
 }
 
 namespace CPhysics
@@ -53,7 +54,7 @@ IDifferentialSystemSolver::ReturnType CrankNicolsonDiffuseSolver::Solve(const Pa
 		mat.at<Real>(i + 1, i) = -q / 2.;
 	}
 
-	cv::Mat inv = mat.inv();
+	const cv::Mat inv = mat.inv();
 
 	ReturnType resMat;
 	resMat.reserve(static_cast<size_t>((cParams->m_t + cParams->m_s) / cParams->m_s));
