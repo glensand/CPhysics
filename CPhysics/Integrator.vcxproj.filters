@@ -112,6 +112,9 @@
     <ClCompile Include="DifferentialSolver\SpectralProblemSolver.cpp">
       <Filter>CPhysics\DifferentialSolver\SystemSolver</Filter>
     </ClCompile>
+    <ClCompile Include="DifferentialSolver\RungeKuttaSystemSolver.cpp">
+      <Filter>CPhysics\DifferentialSolver\SystemSolver</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Solver\ISolver.h">
@@ -220,6 +223,9 @@
       <Filter>CPhysics\DifferentialSolver\SystemSolver</Filter>
     </ClInclude>
     <ClInclude Include="DifferentialSolver\SpectralProblemSolver.h">
+      <Filter>CPhysics\DifferentialSolver\SystemSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentialSolver\RungeKuttaSystemSolver.h">
       <Filter>CPhysics\DifferentialSolver\SystemSolver</Filter>
     </ClInclude>
   </ItemGroup>

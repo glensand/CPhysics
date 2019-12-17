@@ -33,7 +33,7 @@ inline void Task2::Run(const Params* params) const
 {
 
 	const auto a2 = 1;
-	const auto U0 = 200.;
+	const auto U0 = 2.;
 	const auto A = a2 * U0;
 	//-------------------------------------------------------
 	//		2 * m * a^2 * U0
