@@ -63,7 +63,7 @@ namespace CPhysics
 			for (size_t j = 0; j < sdsParams->m_functions.size(); ++j)
 			{
 				k4.push_back(sdsParams->m_functions[j](xN + step, k3_args));
-				Y[j].push_back(Y[j].back() + step * (k1[j] + k2[j] + k3[j] + k4[j]) / 6);
+				Y[j].push_back(Y[j].back() + step * (k1[j] + 2 * k2[j] + 2 * k3[j] + k4[j]) / 6);
 			}
 			
 			//for (size_t j = 0; j < sdsParams->m_functions.size(); ++j)
