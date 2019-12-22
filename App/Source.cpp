@@ -43,22 +43,20 @@ int main()
 		std::make_shared<Task11>(),
 		std::make_shared<Task12>(),
 		std::make_shared<Task13>(),
+		std::make_shared<bigtask17>() // executed with number 14
 	};
 	
-	//for(;;)
-	//{
-	//	help();
-	//	
-	//	size_t task;
-	//	std::cin >> task;
-	//	std::cout << std::endl;
-	//	
-	//	if (task == 0) break;
-	//	if (task > tasks.size() || tasks[task - 1] == nullptr) continue;
-	//	
-	//	tasks[task - 1]->Run();
-	//}
-	auto task = std::make_unique<bigtask17>();
-	task->Run();
-	return 0;
+	for(;;)
+	{
+		help();
+		
+		size_t task;
+		std::cin >> task;
+		std::cout << std::endl;
+		
+		if (task == 0) break;
+		if (task > tasks.size() || tasks[task - 1] == nullptr) continue;
+		
+		tasks[task - 1]->Run();
+	}
 }
