@@ -74,5 +74,8 @@
     <ClInclude Include="DTask2.h">
       <Filter>Tasks</Filter>
     </ClInclude>
+    <ClInclude Include="bigtask17.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

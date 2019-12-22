@@ -11,6 +11,7 @@
 #include "Task12.h"
 #include "Task13.h"
 #include  "Steering.h"
+#include "bigtask17.h"
 
 #include "CVPlotExamples.h"
 
@@ -44,19 +45,20 @@ int main()
 		std::make_shared<Task13>(),
 	};
 	
-	for(;;)
-	{
-		help();
-		
-		size_t task;
-		std::cin >> task;
-		std::cout << std::endl;
-		
-		if (task == 0) break;
-		if (task > tasks.size() || tasks[task - 1] == nullptr) continue;
-		
-		tasks[task - 1]->Run();
-	}
-	
+	//for(;;)
+	//{
+	//	help();
+	//	
+	//	size_t task;
+	//	std::cin >> task;
+	//	std::cout << std::endl;
+	//	
+	//	if (task == 0) break;
+	//	if (task > tasks.size() || tasks[task - 1] == nullptr) continue;
+	//	
+	//	tasks[task - 1]->Run();
+	//}
+	auto task = std::make_unique<bigtask17>();
+	task->Run();
 	return 0;
 }

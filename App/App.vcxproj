@@ -15,6 +15,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bigtask17.h" />
     <ClInclude Include="CVPlotExamples.h" />
     <ClInclude Include="DTask2.h" />
     <ClInclude Include="IntegratorsTaskBase.h" />
