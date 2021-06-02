@@ -80,5 +80,8 @@
     <ClInclude Include="Task14.h">
       <Filter>Tasks</Filter>
     </ClInclude>
+    <ClInclude Include="RuntimePlotExample.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

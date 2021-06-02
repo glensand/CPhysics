@@ -27,17 +27,18 @@ const std::vector<Plotter::Color>	DEFAULT_COLORS{
 
 namespace Plotter
 {
-//------------------------------------------------------------------------------
+
 void CVPlot::AddGraph(const GraphParams* params)
 {
-	m_graphs.emplace_back(*params);
+	m_graphs.emplace_back(params);
 }
-//------------------------------------------------------------------------------
+
 void CVPlot::Release()
 {
+
 }
-//------------------------------------------------------------------------------
-void CVPlot::Show()
+
+void CVPlot::Show(bool waitKey)
 {
 	Initialize();
 
@@ -51,20 +52,26 @@ void CVPlot::Show()
 	//cv::setOpenGlContext(m_plotName);
 	cv::setMouseCallback(m_plotName, OnMouseHandle, this);
 	cv::imshow(m_plotName, m_plot);
-	cv::waitKey(0);
+	const auto delay = waitKey ? 0 : 20;
+	cv::waitKey(delay);
 }
-//------------------------------------------------------------------------------
+
 void CVPlot::Close()
 {
 	cv::destroyWindow(m_plotName);
 }
-//------------------------------------------------------------------------------
+
+void CVPlot::Clear()
+{
+	m_graphs.clear();
+}
+
 void CVPlot::OnMouseHandle(int event, int x, int y, int, void* instance)
 {
 	if (instance == nullptr) return;
 	reinterpret_cast<CVPlot*>(instance)->OnMouseHandleInner(event, x, y);
 }
-//------------------------------------------------------------------------------
+
 void CVPlot::OnMouseHandleInner(int event, int x, int y)
 {
 	if (!m_debugPrint) return;
@@ -82,29 +89,44 @@ void CVPlot::OnMouseHandleInner(int event, int x, int y)
 
 	cv::updateWindow(m_plotName);*/
 }
-//------------------------------------------------------------------------------
+
+template<typename TContainer>
+void CVPlot::InitializeMinMax(const TContainer& x, const TContainer& y)
+{
+    // find maximum/minimum of axis
+    
+    std::for_each(x.begin(), x.end(),
+                  [this](const double x)
+                  {
+                      if (x < m_minX) m_minX = static_cast<float>(x);
+                      if (x > m_maxX) m_maxX = static_cast<float>(x);
+                  }
+    );
+	
+    std::for_each(y.begin(), y.end(),
+                  [this](const double y)
+                  {
+                      if (y < m_minY) m_minY = static_cast<float>(y);
+                      if (y > m_maxY) m_maxY = static_cast<float>(y);
+                  }
+    );
+}
+
 void CVPlot::Initialize()
 {
 	m_plot = cv::Mat(m_plotSize.height, m_plotSize.width, CV_8UC3, m_defaultBackgroundColor);
-	
-	// find maximum/minimum of axis
-	for(const auto &graph : m_graphs)
+
+	for (const auto& graph : m_graphs)
 	{
-		std::for_each(graph.X.begin(), graph.X.end(),
-			[this](const double x)
-			{
-				if (x < m_minX) m_minX = static_cast<float>(x);
-				if (x > m_maxX) m_maxX = static_cast<float>(x);
-			}
-		);
+		if(graph->UseDeque)
+		{
+			InitializeMinMax(graph->DequeX, graph->DequeY);
+		}
+		else
+		{
+			InitializeMinMax(graph->X, graph->Y);
+		}
 		
-		std::for_each(graph.Y.begin(), graph.Y.end(),
-			[this](const double y)
-			{
-				if (y < m_minY) m_minY = static_cast<float>(y);
-				if (y > m_maxY) m_maxY = static_cast<float>(y);
-			}
-		);
 	}
 
 	float range = m_maxY - m_minY;
@@ -119,7 +141,7 @@ void CVPlot::Initialize()
 	m_scaleX = static_cast<float>(m_plotSize.width - m_borderSize * 2) / (m_maxX - m_minX);
 	m_scaleY = static_cast<float>(m_plotSize.height - m_borderSize * 2) / range;
 }
-//------------------------------------------------------------------------------
+
 void CVPlot::DrawAxis()
 {
 	// draw the horizontal and vertical axis
@@ -165,33 +187,46 @@ void CVPlot::DrawAxis()
 	cv::putText(m_plot, std::to_string(m_minX), cvPoint(m_borderSize, xAxisPos + chh),
 		DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
 }
-//------------------------------------------------------------------------------
+
 void CVPlot::DrawPlots()
 {
 	for(const auto &graph : m_graphs)
 	{
 		cv::Point prevPoint;
-		const auto color = DeduceColor(graph.Color);
-		for(size_t i = 0; i < graph.X.size(); ++i)
-		{
-			const int y = cvRound((graph.Y[i] - m_minY) * m_scaleY);
-			const int x = cvRound((graph.X[i] - m_minX) * m_scaleX);
+		const auto color = DeduceColor(graph->Color);
+		std::size_t size = graph->UseDeque ? graph->DequeX.size() : graph->X.size();
 
+		for(size_t i = 0; i < size; ++i)
+		{
+			int x{ };
+			int y{ };
+
+			if(graph->UseDeque)
+			{
+				y = cvRound((graph->DequeX[i] - m_minY) * m_scaleY);
+				x = cvRound((graph->DequeY[i] - m_minX) * m_scaleX);
+			}
+			else
+			{
+				y = cvRound((graph->X[i] - m_minY) * m_scaleY);
+				x = cvRound((graph->Y[i] - m_minX) * m_scaleX);
+			}
+			
 			const CvPoint nextPoint = cvPoint(m_borderSize + x, 
 				m_plotSize.height - (m_borderSize + y));
 
-			if(graph.Style == PlotStyle::POINT || graph.Style == PlotStyle::POINT_LINE)
-				cv::circle(m_plot, nextPoint, graph.PointRadius, color, graph.PointRadius);
+			if(graph->Style == PlotStyle::POINT || graph->Style == PlotStyle::POINT_LINE)
+				cv::circle(m_plot, nextPoint, graph->PointRadius, color, graph->PointRadius);
 
 			// draw a line between two points
-			if ((graph.Style == PlotStyle::LINE || graph.Style == PlotStyle::POINT_LINE) && i >= 1)
+			if ((graph->Style == PlotStyle::LINE || graph->Style == PlotStyle::POINT_LINE) && i >= 1)
 				cv::line(m_plot, prevPoint,
 					nextPoint, color, 1, CV_AA);
 			prevPoint = nextPoint;
 		}
 	}
 }
-//------------------------------------------------------------------------------
+
 void CVPlot::DrawLabels()
 {
 	//// TODO::rework this shit
@@ -208,11 +243,11 @@ void CVPlot::DrawLabels()
 	//	//posy += int(chh * 1.5);
 	//}
 }
-//------------------------------------------------------------------------------
+
 void CVPlot::Print(const std::string& text, int x, int y)
 {
 }
-//------------------------------------------------------------------------------
+
 Color CVPlot::GenerateColorRand()
 {
 	if(m_usedColors.size() < DEFAULT_COLORS.size())
@@ -241,11 +276,12 @@ Color CVPlot::GenerateColorRand()
 
 	return Color{ 0, 0, 0 };
 }
-//------------------------------------------------------------------------------
+
 cv::Scalar CVPlot::DeduceColor(const Color& color)
 {
-	if (color.B == -1) return DeduceColor(GenerateColorRand());
+	if (color.B == -1) 
+		return DeduceColor(GenerateColorRand());
 	return cv::Scalar( color.B, color.G, color.R );
 }
-//------------------------------------------------------------------------------
+
 }

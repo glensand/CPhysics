@@ -4,7 +4,7 @@
 #include <cmath>
 #include <iostream>
 #include <vector>
-
+#include <chrono>
 #include <Solver/DichotomySolver.h>
 #include <Solver/SimpleIterationsSolver.h>
 #include <Solver/NewtonSolver.h>
@@ -123,7 +123,11 @@ inline void Task2::Demonstrate(const CPhysics::ByStepResult* inf, const FX& fx)
 	
 	plot.AddGraph(&graphParams);
 	plot.AddGraph(&graphParams2);
-	plot.Show();
+	while(true)
+	{
+		plot.Show();
+	}
+	
 	plot.Close();
 }
 

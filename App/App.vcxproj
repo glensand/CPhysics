@@ -21,6 +21,7 @@
     <ClInclude Include="IntegratorsTaskBase.h" />
     <ClInclude Include="OneDimensionalIntegratorFacade.h" />
     <ClInclude Include="ITask.h" />
+    <ClInclude Include="RuntimePlotExample.h" />
     <ClInclude Include="Steering.h" />
     <ClInclude Include="Task10.h" />
     <ClInclude Include="Task11.h" />

@@ -1,17 +1,14 @@
-//------------------------------------------------------------------------------
-// CVPlot.h
-// 
-// Copyright (c) 2019 GlenSand
-// All rights reserved.
-//
-// Date: 9.10.2019
-// Author: Bezborodov Gleb
-//------------------------------------------------------------------------------
+/* Copyright (C) 2019 - 2021 Gleb Bezborodov - All Rights Reserved
+ * You may use, distribute and modify this code under the
+ * terms of the MIT license.
+ *
+ * You should have received a copy of the MIT license with
+ * this file. If not, please write to: bezborodoff.gleb@gmail.com, or visit : https://github.com/glensand/CPhysics
+ */
+
 #pragma once
 
 #include <opencv2/core.hpp>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
 
 #include "../IPlot.h"
@@ -21,57 +18,51 @@
 
 namespace Plotter
 {
-//==============================================================================
+
 struct FontProperties final
 {
 	double		Scale{ .4 };
 	int			Type{ cv::HersheyFonts::FONT_HERSHEY_SIMPLEX };
 	cv::Scalar	Color{ 0, 0, 0 };
 };
-//==============================================================================
+
 struct AxisProperties final
 {
 	cv::Scalar	Color {0, 0, 0};
 	int			Thickness{ 2 };
 };
-//==============================================================================
+
 class CVPlot final : public IPlot
 {
 public:
 
 				CVPlot() = default;
-	virtual		~CVPlot() = default;
+	virtual		~CVPlot() override = default;
 
-	void		AddGraph(const GraphParams* params) override;
-
-	void		Release() override;
-
-	void		Show() override;
-
-	void		Close() override;
+	virtual void	AddGraph(const GraphParams* params) override;
+	virtual void	Release() override;
+	virtual void	Show(bool waitKey = true) override;
+	virtual void	Close() override;
+	virtual void	Clear() override;
 
 	// own methods
-	void		EnableDebugPrint(bool enable) { m_debugPrint = enable; };
+	void			EnableDebugPrint(bool enable) { m_debugPrint = enable; }
 private:
 
-	void				Initialize();
+	void			Initialize();
+	void			DrawAxis();
+	void			DrawPlots();
+	void			DrawLabels();
+	void			Print(const std::string &text, int x, int y);
+	Color			GenerateColorRand();
+	cv::Scalar		DeduceColor(const Color &color);
+	static void		OnMouseHandle(int event, int x, int y, int, void* instance);
+	void			OnMouseHandleInner(int event, int x, int y);
 
-	void				DrawAxis();
+	template<typename TContainer>
+    void InitializeMinMax(const TContainer& x, const TContainer& y);
 
-	void				DrawPlots();
-
-	void				DrawLabels();
-
-	void				Print(const std::string &text, int x, int y);
-	
-	Color				GenerateColorRand();
-	
-	cv::Scalar			DeduceColor(const Color &color);
-
-	static void			OnMouseHandle(int event, int x, int y, int, void* instance);
-	void				OnMouseHandleInner(int event, int x, int y);
-
-	std::string		m_plotName { "Plot" };
+                std::string		m_plotName { "Plot" };
 	cv::Mat			m_plot;
 	cv::Size		m_plotSize{ 1300, 700 };
 	cv::Scalar		m_defaultBackgroundColor{ 255, 255, 255 };
@@ -88,11 +79,11 @@ private:
 
 	bool			m_debugPrint{ false };
 	
-	std::vector<GraphParams>		m_graphs;
+	std::vector<const GraphParams*>		m_graphs;
 	AxisLabels						m_labels;
 
 	std::set<Color>					m_usedColors;
 };
-//==============================================================================
+
 }
 
