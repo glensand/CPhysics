@@ -1,6 +1,9 @@
 #include "CVPlot.h"
 
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/highgui.hpp>
 #include <opencv2/imgproc/imgproc_c.h>
+
 #include <cctype>
 #include <random>
 #include <iostream>
@@ -87,7 +90,7 @@ void CVPlot::Initialize()
 	// find maximum/minimum of axis
 	for(const auto &graph : m_graphs)
 	{
-		std::for_each(graph.m_x.begin(), graph.m_x.end(),
+		std::for_each(graph.X.begin(), graph.X.end(),
 			[this](const double x)
 			{
 				if (x < m_minX) m_minX = static_cast<float>(x);
@@ -95,7 +98,7 @@ void CVPlot::Initialize()
 			}
 		);
 		
-		std::for_each(graph.m_y.begin(), graph.m_y.end(),
+		std::for_each(graph.Y.begin(), graph.Y.end(),
 			[this](const double y)
 			{
 				if (y < m_minY) m_minY = static_cast<float>(y);
@@ -131,36 +134,36 @@ void CVPlot::DrawAxis()
 	// x axis
 	cv::line(m_plot, { m_borderSize, xAxisPos },
 		{ m_plotSize.width - m_borderSize, xAxisPos }, 
-		DEFAULT_AXIS_PROPERTIES.m_color, DEFAULT_AXIS_PROPERTIES.m_thickness);
+		DEFAULT_AXIS_PROPERTIES.Color, DEFAULT_AXIS_PROPERTIES.Thickness);
 
 	// TODO:move y axis to (0; 0)
 	// y axis
 	cv::line(m_plot, { m_borderSize, m_plotSize.height - m_borderSize },
 		{  m_borderSize, m_borderSize }, 
-		DEFAULT_AXIS_PROPERTIES.m_color, DEFAULT_AXIS_PROPERTIES.m_thickness);
+		DEFAULT_AXIS_PROPERTIES.Color, DEFAULT_AXIS_PROPERTIES.Thickness);
 
 	// Write the scale of the y axis
 	const int chw = 12, chh = 20;
 	if ((m_maxY - yRef) > 0.05 * (m_maxY - m_minY))
 		cv::putText(m_plot, std::to_string(m_maxY), cvPoint(m_borderSize / 5, m_borderSize - chh / 2),
-			DEFAULT_FONT_PROPERTIES.m_type, DEFAULT_FONT_PROPERTIES.m_scale, DEFAULT_FONT_PROPERTIES.m_color);
+			DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
 
 	if ((yRef - m_minY) > 0.05 * (m_maxX - m_minY))
 		cv::putText(m_plot, std::to_string(m_minY), cvPoint(m_borderSize / 5, m_plotSize.height - m_borderSize + chh),
-			DEFAULT_FONT_PROPERTIES.m_type, DEFAULT_FONT_PROPERTIES.m_scale, DEFAULT_FONT_PROPERTIES.m_color);
+			DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
 
 	// x axis
 	cv::putText(m_plot, std::to_string(yRef), cvPoint(m_borderSize / 5, xAxisPos + chh / 2),
-		DEFAULT_FONT_PROPERTIES.m_type, DEFAULT_FONT_PROPERTIES.m_scale, DEFAULT_FONT_PROPERTIES.m_color);
+		DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
 
 	// Write the scale of the x axis
 	const auto maxX = std::to_string(m_maxX);
 	cv::putText(m_plot, maxX, cvPoint(m_plotSize.width - maxX.size() * chw, xAxisPos + chh),
-		DEFAULT_FONT_PROPERTIES.m_type, DEFAULT_FONT_PROPERTIES.m_scale, DEFAULT_FONT_PROPERTIES.m_color);
+		DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
 
 	// x min
 	cv::putText(m_plot, std::to_string(m_minX), cvPoint(m_borderSize, xAxisPos + chh),
-		DEFAULT_FONT_PROPERTIES.m_type, DEFAULT_FONT_PROPERTIES.m_scale, DEFAULT_FONT_PROPERTIES.m_color);
+		DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
 }
 //------------------------------------------------------------------------------
 void CVPlot::DrawPlots()
@@ -168,20 +171,20 @@ void CVPlot::DrawPlots()
 	for(const auto &graph : m_graphs)
 	{
 		cv::Point prevPoint;
-		const auto color = DeduceColor(graph.m_color);
-		for(size_t i = 0; i < graph.m_x.size(); ++i)
+		const auto color = DeduceColor(graph.Color);
+		for(size_t i = 0; i < graph.X.size(); ++i)
 		{
-			const int y = cvRound((graph.m_y[i] - m_minY) * m_scaleY);
-			const int x = cvRound((graph.m_x[i] - m_minX) * m_scaleX);
+			const int y = cvRound((graph.Y[i] - m_minY) * m_scaleY);
+			const int x = cvRound((graph.X[i] - m_minX) * m_scaleX);
 
 			const CvPoint nextPoint = cvPoint(m_borderSize + x, 
 				m_plotSize.height - (m_borderSize + y));
 
-			if(graph.m_style == PlotStyle::POINT || graph.m_style == PlotStyle::POINT_LINE)
-				cv::circle(m_plot, nextPoint, graph.m_pointRadius, color, graph.m_pointRadius);
+			if(graph.Style == PlotStyle::POINT || graph.Style == PlotStyle::POINT_LINE)
+				cv::circle(m_plot, nextPoint, graph.PointRadius, color, graph.PointRadius);
 
 			// draw a line between two points
-			if ((graph.m_style == PlotStyle::LINE || graph.m_style == PlotStyle::POINT_LINE) && i >= 1)
+			if ((graph.Style == PlotStyle::LINE || graph.Style == PlotStyle::POINT_LINE) && i >= 1)
 				cv::line(m_plot, prevPoint,
 					nextPoint, color, 1, CV_AA);
 			prevPoint = nextPoint;
@@ -221,9 +224,9 @@ Color CVPlot::GenerateColorRand()
 	
 	std::random_device rd;
 	std::mt19937 mt(rd());
-	const std::uniform_int_distribution<int> red(COLOR_RANGE[0].m_r, COLOR_RANGE[1].m_r);
-	const std::uniform_int_distribution<int> green(COLOR_RANGE[0].m_g, COLOR_RANGE[1].m_g);
-	const std::uniform_int_distribution<int> blue(COLOR_RANGE[0].m_b, COLOR_RANGE[1].m_b);
+	const std::uniform_int_distribution<int> red(COLOR_RANGE[0].R, COLOR_RANGE[1].R);
+	const std::uniform_int_distribution<int> green(COLOR_RANGE[0].G, COLOR_RANGE[1].G);
+	const std::uniform_int_distribution<int> blue(COLOR_RANGE[0].B, COLOR_RANGE[1].B);
 
 	const size_t iterations = 100;
 	for (size_t i{ 0 }; i < iterations; ++i) {
@@ -241,8 +244,8 @@ Color CVPlot::GenerateColorRand()
 //------------------------------------------------------------------------------
 cv::Scalar CVPlot::DeduceColor(const Color& color)
 {
-	if (color.m_b == -1) return DeduceColor(GenerateColorRand());
-	return cv::Scalar( color.m_b, color.m_g, color.m_r );
+	if (color.B == -1) return DeduceColor(GenerateColorRand());
+	return cv::Scalar( color.B, color.G, color.R );
 }
 //------------------------------------------------------------------------------
 }

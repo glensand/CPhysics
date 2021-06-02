@@ -50,9 +50,9 @@ public:
 		Plotter::CVPlot plotter;
 
 		Plotter::GraphParams graph_params;
-		graph_params.m_style = Plotter::PlotStyle::LINE;
-		graph_params.m_x = x;
-		graph_params.m_y = res;
+		graph_params.Style = Plotter::PlotStyle::LINE;
+		graph_params.X = x;
+		graph_params.Y = res;
 
 		plotter.AddGraph(&graph_params);
 

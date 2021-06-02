@@ -52,12 +52,12 @@ inline void Task5::Run(const Params* params = nullptr) const
 	
 	Plotter::CVPlot plot;
 	Plotter::GraphParams graphParams1;
-	graphParams1.m_x = x;
-	graphParams1.m_y = p4;
+	graphParams1.X = x;
+	graphParams1.Y = p4;
 
 	Plotter::GraphParams graphParams2;
-	graphParams2.m_y = y;
-	graphParams2.m_x = x;
+	graphParams2.Y = y;
+	graphParams2.X = x;
 	
 	plot.AddGraph(&graphParams1);
 	plot.AddGraph(&graphParams2);

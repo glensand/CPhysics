@@ -36,19 +36,19 @@ inline void CVPlotExamples::Run(const Params*) const
 	Plotter::GraphParams info;
 	Plotter::GraphParams info2;
 
-	info2.m_x.reserve(N);
-	info2.m_y.reserve(N);
+	info2.X.reserve(N);
+	info2.Y.reserve(N);
 	
-	info.m_x.reserve(N);
-	info.m_y.reserve(N);
+	info.X.reserve(N);
+	info.Y.reserve(N);
 	
 	for (double X = a; X <= b; X += h)
 	{
-		info.m_x.emplace_back(X);
-		info.m_y.emplace_back(X * X);
+		info.X.emplace_back(X);
+		info.Y.emplace_back(X * X);
 
-		info2.m_x.emplace_back(X);
-		info2.m_y.emplace_back(4 * X * X);
+		info2.X.emplace_back(X);
+		info2.Y.emplace_back(4 * X * X);
 	}
 
 	plotter.AddGraph(&info);

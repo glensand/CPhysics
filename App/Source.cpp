@@ -10,9 +10,7 @@
 #include "Task11.h"
 #include "Task12.h"
 #include "Task13.h"
-#include  "Steering.h"
-
-#include "CVPlotExamples.h"
+#include "Task14.h"
 
 namespace
 {
@@ -42,6 +40,7 @@ int main()
 		std::make_shared<Task11>(),
 		std::make_shared<Task12>(),
 		std::make_shared<Task13>(),
+		std::make_shared<Task14>(),
 	};
 	
 	for(;;)

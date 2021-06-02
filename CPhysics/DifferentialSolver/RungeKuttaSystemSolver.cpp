@@ -1,6 +1,7 @@
 #include "RungeKuttaSystemSolver.h"
 
 #include <algorithm>
+#include <iterator>
 
 namespace CPhysics
 {

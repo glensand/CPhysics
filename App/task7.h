@@ -65,15 +65,15 @@ inline void Task7::PrintSolution(const CPhysics::Params* params, const CPhysics:
 	Plotter::CVPlot plot;
 	Plotter::GraphParams graph_params1;
 	Plotter::GraphParams graph_params2;
-	graph_params1.m_x = SeparateVectors(res).first;
-	graph_params1.m_y = SeparateVectors(res).second;
+	graph_params1.X = SeparateVectors(res).first;
+	graph_params1.Y = SeparateVectors(res).second;
 	plot.AddGraph(&graph_params1);
 
-	graph_params2.m_x = CalculateAnalytical(10000).first;
-	graph_params2.m_y = CalculateAnalytical(10000).second;
+	graph_params2.X = CalculateAnalytical(10000).first;
+	graph_params2.Y = CalculateAnalytical(10000).second;
 	Plotter::Color color;
-	color.m_g = 255;
-	graph_params2.m_color = color;
+	color.G = 255;
+	graph_params2.Color = color;
 	plot.AddGraph(&graph_params2);
 	
 	plot.Show();

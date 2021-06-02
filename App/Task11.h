@@ -47,7 +47,7 @@ inline void Task11::Run(const Params* params) const
 	b.reserve(n);
 	for (size_t i = { 0 }; i < n; ++i) b.emplace_back(1. / (dx * dx) + U(X[i]));
 	
-	const CPhysics::SpectralProblemSolverParams solverParams{ X,  a, b, c, N, 4};
+	const CPhysics::SpectralProblemSolverParams solverParams{ X,  a, b, c, N, 2};
 
 	const auto result = solver.Solve(&solverParams);
 	std::cout << "Energy levels: ";
@@ -58,8 +58,8 @@ inline void Task11::Run(const Params* params) const
 	for(size_t i{ 1 }; i < result.size(); ++i)
 	{
 		Plotter::GraphParams graphParams;
-		graphParams.m_x = X;
-		graphParams.m_y = result[i];
+		graphParams.X = X;
+		graphParams.Y = result[i];
 		
 		plot.AddGraph(&graphParams);
 	}

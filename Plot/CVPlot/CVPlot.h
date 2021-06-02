@@ -1,7 +1,6 @@
 //------------------------------------------------------------------------------
 // CVPlot.h
 // 
-//
 // Copyright (c) 2019 GlenSand
 // All rights reserved.
 //
@@ -25,15 +24,15 @@ namespace Plotter
 //==============================================================================
 struct FontProperties final
 {
-	double		m_scale{ .4 };
-	int			m_type{ cv::HersheyFonts::FONT_HERSHEY_SIMPLEX };
-	cv::Scalar	m_color{ 0, 0, 0 };
+	double		Scale{ .4 };
+	int			Type{ cv::HersheyFonts::FONT_HERSHEY_SIMPLEX };
+	cv::Scalar	Color{ 0, 0, 0 };
 };
 //==============================================================================
 struct AxisProperties final
 {
-	cv::Scalar	m_color {0, 0, 0};
-	int			m_thickness{ 2 };
+	cv::Scalar	Color {0, 0, 0};
+	int			Thickness{ 2 };
 };
 //==============================================================================
 class CVPlot final : public IPlot

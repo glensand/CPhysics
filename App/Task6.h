@@ -139,14 +139,14 @@ inline void Task6::Render(const std::vector<CPhysics::Real>& x, const std::vecto
 	Plotter::CVPlot plot;
 	
 	Plotter::GraphParams params1;
-	params1.m_color = { 255, 0, 0 };
-	params1.m_x = x;
-	params1.m_y = y2;
+	params1.Color = { 255, 0, 0 };
+	params1.X = x;
+	params1.Y = y2;
 
 	Plotter::GraphParams params2;
-	params2.m_color = { 0, 255, 0 };
-	params2.m_x = x;
-	params2.m_y = y1;
+	params2.Color = { 0, 255, 0 };
+	params2.X = x;
+	params2.Y = y1;
 
 	plot.AddGraph(&params2);
 	plot.AddGraph(&params1);

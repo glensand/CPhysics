@@ -48,8 +48,8 @@ inline void Steering::Run(const Params* params = nullptr) const
 	}
 
 	Plotter::GraphParams gParams;
-	gParams.m_x = x;
-	gParams.m_y = y;
+	gParams.X = x;
+	gParams.Y = y;
 
 	Plotter::CVPlot plot;
 	plot.AddGraph(&gParams);

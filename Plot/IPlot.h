@@ -31,8 +31,8 @@ struct AxisLabels final
 	AxisLabels() = default;
 	~AxisLabels() = default;
 
-	std::string	m_arg{"x"};	// Name of the arguments axis
-	std::string	m_val{"y"};	// Name of the values axis
+	std::string	Arg{"x"};	// Name of the arguments axis
+	std::string	Val{"y"};	// Name of the values axis
 };
 //==============================================================================
 struct Color final
@@ -40,18 +40,18 @@ struct Color final
 	Color() = default;
 	~Color() = default;
 
-	ChanelColor		m_b{ };	
-	ChanelColor		m_g{ };	
-	ChanelColor		m_r{ };
+	ChanelColor		B{ };	
+	ChanelColor		G{ };	
+	ChanelColor		R{ };
 
-	bool operator==(const Color &rhs) const { return m_b == rhs.m_b && m_r == rhs.m_r && m_g == rhs.m_g; }
+	bool operator==(const Color &rhs) const { return B == rhs.B && R == rhs.R && G == rhs.G; }
 	bool operator!=(const Color& rhs) const { return !(*this != rhs); }
 	bool operator<(const Color& rhs) const
 	{
-		if (m_b != rhs.m_b) return m_b < rhs.m_b;
-		if (m_g != rhs.m_g) return m_g < rhs.m_g;
+		if (B != rhs.B) return B < rhs.B;
+		if (G != rhs.G) return G < rhs.G;
 
-		return m_r < rhs.m_r;
+		return R < rhs.R;
 	}
 };
 //==============================================================================
@@ -60,14 +60,14 @@ struct GraphParams final
 	GraphParams() = default;
 	~GraphParams() = default;
 
-	std::vector<double>	m_x;		// Vector of x's axis point
-	std::vector<double>	m_y;		// Vector of y's axis point
+	std::vector<double>	X;		// Vector of x's axis point
+	std::vector<double>	Y;		// Vector of y's axis point
 
-	PlotStyle			m_style{ PlotStyle::LINE };						// graph style
-	Color				m_color{ -1, -1, -1};					// Color to be used for graph plotting
-	std::string			m_label{ "function" };
-	size_t				m_pointRadius{ 2 };
-	bool				m_randomColor{ true };
+	PlotStyle			Style{ PlotStyle::LINE };						// graph style
+	Color				Color{ -1, -1, -1};					// Color to be used for graph plotting
+	std::string			Label{ "function" };
+	size_t				PointRadius{ 2 };
+	bool				RandomColor{ true };
 };
 //==============================================================================
 class IPlot

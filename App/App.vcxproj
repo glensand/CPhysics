@@ -25,6 +25,7 @@
     <ClInclude Include="Task11.h" />
     <ClInclude Include="Task12.h" />
     <ClInclude Include="Task13.h" />
+    <ClInclude Include="Task14.h" />
     <ClInclude Include="Task2.h" />
     <ClInclude Include="Task3.h" />
     <ClInclude Include="Task4.h" />
