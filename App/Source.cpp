@@ -11,6 +11,7 @@
 #include "Task12.h"
 #include "Task13.h"
 #include "Task14.h"
+#include "bigtask17.h"
 
 namespace
 {
@@ -40,6 +41,7 @@ int main()
 		std::make_shared<Task11>(),
 		std::make_shared<Task12>(),
 		std::make_shared<Task13>(),
+		std::make_shared<bigtask17>(), // executed with number 14
 		std::make_shared<Task14>(),
 	};
 	
@@ -56,6 +58,4 @@ int main()
 		
 		tasks[task - 1]->Run();
 	}
-	
-	return 0;
 }
