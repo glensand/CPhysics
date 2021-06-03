@@ -65,10 +65,10 @@ inline void Task13::Run(const Params* params)
 	fourierHannaMag.resize(ftFreq.size());
 	fourierMag.resize(ftFreq.size());
 
-	const Plotter::GraphParams graphParams1{ ftFreq, fourierMag, Plotter::PlotStyle::POINT_LINE };
+	const Plotter::GraphParameters graphParams1{ ftFreq, fourierMag, Plotter::PlotStyle::POINT_LINE };
 	plotter.AddGraph(&graphParams1);
 
-	const Plotter::GraphParams graphParams2{ ftFreq, fourierHannaMag, Plotter::PlotStyle::POINT_LINE };
+	const Plotter::GraphParameters graphParams2{ ftFreq, fourierHannaMag, Plotter::PlotStyle::POINT_LINE };
 	plotter.AddGraph(&graphParams2);
 
 	plotter.Show();

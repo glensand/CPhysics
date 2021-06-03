@@ -142,7 +142,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\OpenCv\opencv\build\include;$(SolutionDir)/LinearAlgebra</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(OPENCV_DIR)\include;$(SolutionDir)/LinearAlgebra</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -150,10 +150,10 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opencv_world452.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(OPENCV_LIB)</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>C:\OpenCv\opencv\build\x64\vc15\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OPENCV_DIR)\x64\vc15\lib</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>

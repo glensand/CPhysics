@@ -13,7 +13,7 @@
 
 void plot(const std::vector<double>& x, const std::vector<double>& y)
 {
-    const Plotter::GraphParams graphParams{ x , y };
+    const Plotter::GraphParameters graphParams{ x , y };
 
     Plotter::CVPlot plot1;
     plot1.AddGraph(&graphParams);

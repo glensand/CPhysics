@@ -26,15 +26,15 @@ inline void CVPlotExamples::Run(const Params*)
 {	
 	Plotter::CVPlot plotter;
 
-	Plotter::GraphParams params;
+	Plotter::GraphParameters params;
 
 	const double a = -1; 
 	const double b = 1; 
 	const double h = 0.1; 
 
 	const int N = (b - a) / h + 2;
-	Plotter::GraphParams info;
-	Plotter::GraphParams info2;
+	Plotter::GraphParameters info;
+	Plotter::GraphParameters info2;
 
 	info2.X.reserve(N);
 	info2.Y.reserve(N);

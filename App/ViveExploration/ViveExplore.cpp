@@ -7,20 +7,20 @@ void ViveExplore::Run(const Params* params)
     RunPipeThread();
 
     Plotter::CVPlot plot;
-    Plotter::GraphParams graphParamsX;
+    Plotter::GraphParameters graphParamsX;
 
     graphParamsX.PointRadius = 1;
     graphParamsX.Style = Plotter::PlotStyle::POINT_LINE;
     graphParamsX.Color = Plotter::Color{0, 0, 255};
     graphParamsX.UseDeque = true;
 
-    Plotter::GraphParams graphParamsY;
+    Plotter::GraphParameters graphParamsY;
     graphParamsY.PointRadius = 1;
     graphParamsY.Style = Plotter::PlotStyle::POINT_LINE;
     graphParamsY.Color = Plotter::Color{ 255, 0, 0 };
     graphParamsY.UseDeque = true;
 
-    Plotter::GraphParams graphParamsZ;
+    Plotter::GraphParameters graphParamsZ;
     graphParamsZ.PointRadius = 1;
     graphParamsZ.Style = Plotter::PlotStyle::POINT_LINE;
     graphParamsZ.Color = Plotter::Color{ 0, 255, 0 };

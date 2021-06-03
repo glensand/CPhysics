@@ -49,7 +49,7 @@ public:
 		
 		Plotter::CVPlot plotter;
 
-		Plotter::GraphParams graph_params;
+		Plotter::GraphParameters graph_params;
 		graph_params.Style = Plotter::PlotStyle::LINE;
 		graph_params.X = x;
 		graph_params.Y = res;

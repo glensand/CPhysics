@@ -48,7 +48,7 @@ inline void IntegratorsTaskBase::Demonstrate(const CPhysics::IIntegrator* integr
 
 	if (functionOnGrid.size() > 1)
 	{
-		Plotter::GraphParams graphParams;
+		Plotter::GraphParameters graphParams;
 		graphParams.X = functionOnGrid[0];
 		graphParams.Y = functionOnGrid[1];
 		graphParams.Color = { 255, 0,0 };
@@ -58,7 +58,7 @@ inline void IntegratorsTaskBase::Demonstrate(const CPhysics::IIntegrator* integr
 	const auto analyticalFunction = ComputeFunction(params);
 	if (analyticalFunction.size() > 1)
 	{
-		Plotter::GraphParams graphParams;
+		Plotter::GraphParameters graphParams;
 		graphParams.X = analyticalFunction[0];
 		graphParams.Y = analyticalFunction[1];
 		graphParams.Color = { 0, 0, 255 };

@@ -108,17 +108,17 @@ inline void Task2::Demonstrate(const CPhysics::ByStepResult* inf, const FX& fx)
 
 	if (dynamic_cast<const CPhysics::NewtonByStepResult*>(res) != nullptr)
 	{
-		Plotter::GraphParams newtonGraphParams;
+		Plotter::GraphParameters newtonGraphParams;
 
 		const auto& newtonRes = dynamic_cast<const CPhysics::NewtonByStepResult*>(res);
 		// TODO:: add some related stuff
 	}
 
-	Plotter::GraphParams graphParams{ res->m_xs, res->m_ys, Plotter::PlotStyle::POINT,
+	Plotter::GraphParameters graphParams{ res->m_xs, res->m_ys, Plotter::PlotStyle::POINT,
 		{ 0, 0, 255 }, "y", 3 };
 
 	const auto &[x, y] = fx;
-	Plotter::GraphParams graphParams2{ x, y, Plotter::PlotStyle::LINE,
+	Plotter::GraphParameters graphParams2{ x, y, Plotter::PlotStyle::LINE,
 	{ 0, 255, 0 }, "y", 3 };
 	
 	plot.AddGraph(&graphParams);

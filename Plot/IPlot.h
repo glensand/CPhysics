@@ -39,9 +39,9 @@ struct Color final
 	Color() = default;
 	~Color() = default;
 
-	ChanelColor		B{ };	
-	ChanelColor		G{ };	
-	ChanelColor		R{ };
+	ChanelColor B{ };	
+	ChanelColor G{ };	
+	ChanelColor R{ };
 
 	bool operator==(const Color &rhs) const { return B == rhs.B && R == rhs.R && G == rhs.G; }
 	bool operator!=(const Color& rhs) const { return !(*this != rhs); }
@@ -54,10 +54,19 @@ struct Color final
 	}
 };
 
-struct GraphParams final
+struct GridProperties final
 {
-	GraphParams() = default;
-	~GraphParams() = default;
+	int HorizonThickness{ 1 };
+	int VerticalThickness{ 1 };
+	int HorizonLinesCount{ 10 };
+	int VerticalLinesCount{ 10 };
+    Color GridColor{ 200,203,200 };
+};
+
+struct GraphParameters final
+{
+	GraphParameters() = default;
+	~GraphParameters() = default;
 
 	std::vector<double>	X;		// Vector of x's axis point
 	std::vector<double>	Y;		// Vector of y's axis point
@@ -81,11 +90,12 @@ public:
 	virtual  ~IPlot() = default;
 
 					// Add the graph using passed params
-	virtual void	AddGraph(const GraphParams* params) = 0;
+	virtual void	AddGraph(const GraphParameters* params) = 0;
 	virtual void	Release() = 0;
 	virtual void	Show(bool waitKey = true) = 0;
 	virtual void	Clear() = 0;
 	virtual void	Close() = 0;
+	virtual void	SetGridProperties(const GridProperties& gridProperties) = 0;
 };
 
 }

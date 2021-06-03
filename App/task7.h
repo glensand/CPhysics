@@ -63,8 +63,8 @@ inline void Task7::PrintSolution(const CPhysics::Params* params, const CPhysics:
 	std::cout << std::endl;
 
 	Plotter::CVPlot plot;
-	Plotter::GraphParams graph_params1;
-	Plotter::GraphParams graph_params2;
+	Plotter::GraphParameters graph_params1;
+	Plotter::GraphParameters graph_params2;
 	graph_params1.X = SeparateVectors(res).first;
 	graph_params1.Y = SeparateVectors(res).second;
 	plot.AddGraph(&graph_params1);

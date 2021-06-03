@@ -28,7 +28,7 @@ const std::vector<Plotter::Color>	DEFAULT_COLORS{
 namespace Plotter
 {
 
-void CVPlot::AddGraph(const GraphParams* params)
+void CVPlot::AddGraph(const GraphParameters* params)
 {
 	m_graphs.emplace_back(params);
 }
@@ -38,23 +38,25 @@ void CVPlot::Release()
 
 }
 
+void CVPlot::Present(bool waitKey)
+{
+    cv::namedWindow(m_plotName, cv::WINDOW_AUTOSIZE);
+    //cv::setOpenGlContext(m_plotName);
+    cv::setMouseCallback(m_plotName, OnMouseHandle, this);
+    cv::imshow(m_plotName, m_plot);
+    static int rawDelay = 1;
+    const auto delay = waitKey ? 0 : rawDelay;
+    cv::waitKey(delay);
+}
+
 void CVPlot::Show(bool waitKey)
 {
 	Initialize();
-
 	DrawAxis();
-
+	DrawGrid();
 	DrawPlots();
-
 	DrawLabels();
-
-	cv::namedWindow(m_plotName, cv::WINDOW_AUTOSIZE);
-	//cv::setOpenGlContext(m_plotName);
-	cv::setMouseCallback(m_plotName, OnMouseHandle, this);
-	cv::imshow(m_plotName, m_plot);
-	static int rawDelay = 1;
-	const auto delay = waitKey ? 0 : rawDelay;
-	cv::waitKey(delay);
+	Present(waitKey);
 }
 
 void CVPlot::Close()
@@ -65,6 +67,11 @@ void CVPlot::Close()
 void CVPlot::Clear()
 {
 	m_graphs.clear();
+}
+
+void CVPlot::SetGridProperties(const GridProperties& gridProperties)
+{
+	m_gridProperties = gridProperties;
 }
 
 void CVPlot::OnMouseHandle(int event, int x, int y, int, void* instance)
@@ -130,7 +137,6 @@ void CVPlot::Initialize()
 		{
 			InitializeMinMax(graph->X, graph->Y);
 		}
-		
 	}
 
 	float range = m_maxY - m_minY;
@@ -150,9 +156,9 @@ void CVPlot::DrawAxis()
 {
 	// draw the horizontal and vertical axis
 	// let x, y axis cross at zero if possible.
-	float yRef = m_minY;
-	if (m_maxX > .0 && m_minY <= .0) 
-		yRef = .0;
+	float yRef = 0;
+	//if (m_maxX > .0 && m_minY <= .0) 
+	//	yRef = .0;
 
 	const int xAxisPos = m_plotSize.height - m_borderSize
 	- cvRound((yRef - m_minY) * m_scaleY);
@@ -190,6 +196,35 @@ void CVPlot::DrawAxis()
 	// x min
 	cv::putText(m_plot, std::to_string(m_minX), cvPoint(m_borderSize, xAxisPos + chh),
 		DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
+}
+
+void CVPlot::DrawGrid()
+{
+	auto&& gridColor = cv::Scalar(m_gridProperties.GridColor.B, m_gridProperties.GridColor.G, m_gridProperties.GridColor.R);
+
+	const int yStep = (m_plotSize.height - 2 * m_borderSize) / (m_gridProperties.HorizonLinesCount + 1);
+	int curY = m_borderSize;
+
+	for(int i{ 0 }; i < m_gridProperties.HorizonLinesCount + 2; ++i)
+	{
+		cv::line(m_plot, { m_borderSize, curY },
+			{ m_plotSize.width - m_borderSize, curY},
+			gridColor, m_gridProperties.HorizonThickness);
+
+		curY += yStep;
+	}
+
+	const int xStep = (m_plotSize.width - 2 * m_borderSize) / (m_gridProperties.VerticalLinesCount + 1);
+	int curX = m_borderSize;
+
+	for(int i{ 0 }; i < m_gridProperties.VerticalLinesCount + 2; ++i)
+	{
+		cv::line(m_plot, { curX, m_borderSize },
+			{ curX, m_plotSize.height - m_borderSize },
+			gridColor, m_gridProperties.VerticalThickness);
+
+		curX += xStep;
+	}
 }
 
 void CVPlot::DrawPlots()

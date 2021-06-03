@@ -51,11 +51,11 @@ inline void Task5::Run(const Params* params = nullptr)
 	}
 	
 	Plotter::CVPlot plot;
-	Plotter::GraphParams graphParams1;
+	Plotter::GraphParameters graphParams1;
 	graphParams1.X = x;
 	graphParams1.Y = p4;
 
-	Plotter::GraphParams graphParams2;
+	Plotter::GraphParameters graphParams2;
 	graphParams2.Y = y;
 	graphParams2.X = x;
 	

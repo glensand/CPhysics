@@ -47,7 +47,7 @@ inline void Task8::Run(const Params* params)
 	}
 
 	Plotter::CVPlot plotter;
-	Plotter::GraphParams gparams;
+	Plotter::GraphParameters gparams;
 	gparams.X = res[1];
 	gparams.Y = res[2];
 	plotter.AddGraph(&gparams);

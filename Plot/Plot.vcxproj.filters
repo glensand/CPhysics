@@ -10,16 +10,10 @@
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
       <ParseFiles>true</ParseFiles>
     </Filter>
-    <Filter Include="CVPlot2">
-      <UniqueIdentifier>{a6c52b60-d805-4356-856d-efca754914bb}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CVPlot\CVPlot.cpp">
       <Filter>CVPlot</Filter>
-    </ClCompile>
-    <ClCompile Include="CVPlot2\CVPlot2.cpp">
-      <Filter>CVPlot2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -28,9 +22,6 @@
     </ClInclude>
     <ClInclude Include="CVPlot\CVPlot.h">
       <Filter>CVPlot</Filter>
-    </ClInclude>
-    <ClInclude Include="CVPlot2\CVPlot2.h">
-      <Filter>CVPlot2</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

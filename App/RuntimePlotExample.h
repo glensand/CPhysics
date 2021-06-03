@@ -11,7 +11,7 @@ public:
 	virtual void Run(const Params* params = nullptr) override
 	{
 		Plotter::CVPlot plot;
-		Plotter::GraphParams graphParams;
+		Plotter::GraphParameters graphParams;
 		graphParams.PointRadius = 2;
 		graphParams.Style = Plotter::PlotStyle::POINT_LINE;
 		graphParams.Color = Plotter::Color{0, 0, 255};
@@ -24,6 +24,9 @@ public:
 			graphParams.DequeY.push_back(2 * ((double)rand() / RAND_MAX) - 1);
 		}
 
+		Plotter::GridProperties gridProperties;
+		gridProperties.HorizonLinesCount = 30;
+		plot.SetGridProperties(gridProperties);
 		plot.AddGraph(&graphParams);
 
 		std::size_t xCounter{ 100 };

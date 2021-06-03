@@ -51,7 +51,7 @@ inline void Task12::Run(const Params* params)
 		Y.emplace_back(max(v));
 
 	Plotter::CVPlot plot;
-	const Plotter::GraphParams graphParams{X, Y};
+	const Plotter::GraphParameters graphParams{X, Y};
 	
 	plot.AddGraph(&graphParams);
 	plot.Show();

@@ -47,7 +47,7 @@ inline void Steering::Run(const Params* params = nullptr)
 		x[i] = x[i] / (-LEFT);
 	}
 
-	Plotter::GraphParams gParams;
+	Plotter::GraphParameters gParams;
 	gParams.X = x;
 	gParams.Y = y;
 

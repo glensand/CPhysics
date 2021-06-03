@@ -116,7 +116,7 @@
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\OpenCv\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(OPENCV_DIR)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat />
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -130,10 +130,10 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>opencv_world452.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(OPENCV_LIB)</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>C:\OpenCv\opencv\build\x64\vc15\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OPENCV_DIR)\x64\vc15\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -157,11 +157,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CVPlot2\CVPlot2.cpp" />
     <ClCompile Include="CVPlot\CVPlot.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CVPlot2\CVPlot2.h" />
     <ClInclude Include="CVPlot\CVPlot.h" />
     <ClInclude Include="IPlot.h" />
   </ItemGroup>

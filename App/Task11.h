@@ -57,7 +57,7 @@ inline void Task11::Run(const Params* params)
 
 	for(size_t i{ 1 }; i < result.size(); ++i)
 	{
-		Plotter::GraphParams graphParams;
+		Plotter::GraphParameters graphParams;
 		graphParams.X = X;
 		graphParams.Y = result[i];
 		

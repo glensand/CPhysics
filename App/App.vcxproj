@@ -93,7 +93,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DebugInformationFormat />
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)\CPhysics;C:\OpenCv\opencv\build\include;$(SolutionDir)\Plot</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CPhysics;$(OPENCV_DIR)\include;$(SolutionDir)\Plot</AdditionalIncludeDirectories>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>

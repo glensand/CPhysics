@@ -83,7 +83,7 @@ inline void bigtask17::Run(const Params* params)
 
 	
 	Plotter::CVPlot plotter;
-	Plotter::GraphParams gparams;
+	Plotter::GraphParameters gparams;
 	//gparams.m_x = res[0];
 	//gparams.m_y = res[2];
 	//plotter.AddGraph(&gparams);

@@ -32,10 +32,10 @@ inline void Task9::Run(const Params* params)
 	for(size_t i{ 0 }; i < knotAmount; ++i) xes.emplace_back(static_cast<CPhysics::Real>(i) * h);
 	
 	Plotter::CVPlot plot;
-	Plotter::GraphParams graphParams1{ xes, res[0], Plotter::PlotStyle::POINT_LINE,
+	Plotter::GraphParameters graphParams1{ xes, res[0], Plotter::PlotStyle::POINT_LINE,
 		{ 0, 0, 255 }, "y", 1 };
 
-	Plotter::GraphParams graphParams2{ xes, res[1], Plotter::PlotStyle::POINT_LINE,
+	Plotter::GraphParameters graphParams2{ xes, res[1], Plotter::PlotStyle::POINT_LINE,
 	{ 0, 255, 0 }, "y", 1 };
 
 	//Plotter::GraphParams graphParams3{ res[0], res[1], Plotter::PlotStyle::POINT_LINE,

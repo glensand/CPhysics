@@ -34,23 +34,25 @@ struct AxisProperties final
 
 class CVPlot final : public IPlot
 {
+	using GraphList = std::vector<const GraphParameters*>;
 public:
 
 				CVPlot() = default;
 	virtual		~CVPlot() override = default;
 
-	virtual void	AddGraph(const GraphParams* params) override;
-	virtual void	Release() override;
-	virtual void	Show(bool waitKey = true) override;
-	virtual void	Close() override;
-	virtual void	Clear() override;
-
+	virtual void AddGraph(const GraphParameters* params) override;
+	virtual void Release() override;
+    virtual void Show(bool waitKey = true) override;
+	virtual void Close() override;
+	virtual void Clear() override;
+	virtual void SetGridProperties(const GridProperties& gridProperties) override;
 	// own methods
 	void			EnableDebugPrint(bool enable) { m_debugPrint = enable; }
 private:
-
+	void			Present(bool waitKey);
 	void			Initialize();
 	void			DrawAxis();
+	void			DrawGrid();
 	void			DrawPlots();
 	void			DrawLabels();
 	void			Print(const std::string &text, int x, int y);
@@ -62,27 +64,27 @@ private:
 	template<typename TContainer>
     void InitializeMinMax(const TContainer& x, const TContainer& y);
 
-                std::string		m_plotName { "Plot" };
-	cv::Mat			m_plot;
-	cv::Size		m_plotSize{ 1300, 700 };
-	cv::Scalar		m_defaultBackgroundColor{ 255, 255, 255 };
+    std::string m_plotName { "Plot" };
+	cv::Mat m_plot;
+	cv::Size m_plotSize{ 1300, 700 };
+	cv::Scalar m_defaultBackgroundColor{ 255, 255, 255 };
 
-	const int		m_borderSize{ 30 };
+	const int m_borderSize{ 30 };
 
-	float			m_minX{ 0 };
-	float			m_maxX{ 0 };
-	float			m_minY{ FLT_MAX };
-	float			m_maxY{ FLT_MIN };
+	float m_minX{ 0 };
+	float m_maxX{ 0 };
+	float m_minY{ FLT_MAX };
+	float m_maxY{ FLT_MIN };
 
-	float			m_scaleY{ 1.f };
-	float			m_scaleX{ 1.f };
+	float m_scaleY{ 1.f };
+	float m_scaleX{ 1.f };
 
-	bool			m_debugPrint{ false };
+    bool m_debugPrint{ false };
 	
-	std::vector<const GraphParams*>		m_graphs;
-	AxisLabels						m_labels;
-
-	std::set<Color>					m_usedColors;
+	GraphList m_graphs;
+	AxisLabels m_labels;
+	GridProperties m_gridProperties;
+	std::set<Color> m_usedColors;
 };
 
 }
