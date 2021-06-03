@@ -1,8 +1,8 @@
 #pragma once
 
+#include <mutex>
 #include <thread>
 
-#include "ProducerConsumerQueue.h"
 class Pipe;
 
 struct Point final
@@ -29,6 +29,24 @@ private:
 
     std::thread pipeThread;
 	Pipe* pipe{ nullptr };
-    std::atomic<Point> newPoint;
-    std::atomic_flag hasNewPoint;
+    std::mutex mu;
+    bool added{ false };
+
+    struct PointBuffer
+    {
+        Point Buffer1;
+        Point Buffer2;
+
+        Point* Front{ &Buffer1};
+        Point* Back{ &Buffer2 };
+
+        void Swap()
+        {
+            auto* temp = Front;
+            Front = Back;
+            Back = temp;
+        }
+    };
+
+    PointBuffer point;
 };

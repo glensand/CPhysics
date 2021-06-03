@@ -7,14 +7,28 @@ void ViveExplore::Run(const Params* params)
     RunPipeThread();
 
     Plotter::CVPlot plot;
-    Plotter::GraphParams graphParams;
-    graphParams.PointRadius = 2;
-    graphParams.Style = Plotter::PlotStyle::POINT_LINE;
-    graphParams.Color = Plotter::Color{0, 0, 255};
+    Plotter::GraphParams graphParamsX;
 
-    graphParams.UseDeque = true;
+    graphParamsX.PointRadius = 1;
+    graphParamsX.Style = Plotter::PlotStyle::POINT_LINE;
+    graphParamsX.Color = Plotter::Color{0, 0, 255};
+    graphParamsX.UseDeque = true;
 
-    plot.AddGraph(&graphParams);
+    Plotter::GraphParams graphParamsY;
+    graphParamsY.PointRadius = 1;
+    graphParamsY.Style = Plotter::PlotStyle::POINT_LINE;
+    graphParamsY.Color = Plotter::Color{ 255, 0, 0 };
+    graphParamsY.UseDeque = true;
+
+    Plotter::GraphParams graphParamsZ;
+    graphParamsZ.PointRadius = 1;
+    graphParamsZ.Style = Plotter::PlotStyle::POINT_LINE;
+    graphParamsZ.Color = Plotter::Color{ 0, 255, 0 };
+    graphParamsZ.UseDeque = true;
+
+    //plot.AddGraph(&graphParamsX);
+    plot.AddGraph(&graphParamsY);
+    //plot.AddGraph(&graphParamsZ);
 
     auto start = std::chrono::high_resolution_clock::now();
 
@@ -22,18 +36,37 @@ void ViveExplore::Run(const Params* params)
     {
         auto now = std::chrono::high_resolution_clock::now();
         auto&& deltaTime = (double)std::chrono::duration_cast<std::chrono::microseconds>(now - start).count() / 100000.0;
-        Point point{};
-        if(!hasNewPoint.test_and_set())
+
+        bool newAdded;
+        Point p{ };
         {
-            point = newPoint.load();
-            if (graphParams.DequeX.size() > 40)
+            std::lock_guard lock(mu);
+            newAdded = added;
+            p = *point.Front;
+        }
+
+        if(newAdded)
+        {
+            if (graphParamsX.DequeX.size() > 1000)
             {
-                graphParams.DequeX.pop_front();
-                graphParams.DequeY.pop_front();
+                graphParamsX.DequeX.pop_front();
+                graphParamsX.DequeY.pop_front();
+
+                graphParamsY.DequeX.pop_front();
+                graphParamsY.DequeY.pop_front();
+
+                graphParamsZ.DequeX.pop_front();
+                graphParamsZ.DequeY.pop_front();
             }
-            
-            graphParams.DequeX.push_back(deltaTime);
-            graphParams.DequeY.push_back((double)point.x);
+
+            graphParamsX.DequeX.push_back(deltaTime);
+            graphParamsX.DequeY.push_back(1000 * (double)p.x);
+
+            graphParamsY.DequeX.push_back(deltaTime);
+            graphParamsY.DequeY.push_back(1000 * (double)p.y);
+
+            graphParamsZ.DequeX.push_back(deltaTime);
+            graphParamsZ.DequeY.push_back(1000 * (double)p.z);
         }
 
         plot.Show(false);
@@ -47,10 +80,13 @@ void ViveExplore::RunPipeThread()
         {
             while(true)
             {
-                auto&& point = pipe->Read<Point>();
-                hasNewPoint.test_and_set();
-                newPoint.store(point);
-                hasNewPoint.clear();
+
+                point.Back->x = pipe->Read<float>();
+                point.Back->y = pipe->Read<float>();
+                point.Back->z = pipe->Read<float>();
+                std::lock_guard lock(mu);
+                point.Swap();
+                added = true;
             }
         });
 }

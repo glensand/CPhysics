@@ -97,6 +97,8 @@ void CVPlot::InitializeMinMax(const TContainer& x, const TContainer& y)
     // find maximum/minimum of axis
 	m_minX = FLT_MAX;
 	m_minY = FLT_MAX;
+	m_maxX = FLT_MIN;
+	m_maxY = FLT_MIN;
     std::for_each(x.begin(), x.end(),
                   [this](const double x)
                   {

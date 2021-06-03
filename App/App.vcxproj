@@ -38,7 +38,6 @@
     <ClInclude Include="Task8.h" />
     <ClInclude Include="Task9.h" />
     <ClInclude Include="ViveExploration\Pipe.h" />
-    <ClInclude Include="ViveExploration\ProducerConsumerQueue.h" />
     <ClInclude Include="ViveExploration\ViveExplore.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

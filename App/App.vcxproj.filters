@@ -92,9 +92,6 @@
     <ClInclude Include="ViveExploration\Pipe.h">
       <Filter>Tasks\ViveExploartion</Filter>
     </ClInclude>
-    <ClInclude Include="ViveExploration\ProducerConsumerQueue.h">
-      <Filter>Tasks\ViveExploartion</Filter>
-    </ClInclude>
     <ClInclude Include="ViveExploration\ViveExplore.h">
       <Filter>Tasks\ViveExploartion</Filter>
     </ClInclude>
