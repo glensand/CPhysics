@@ -12,10 +12,10 @@ public:
 	Task5() = default;
 	virtual ~Task5() = default;
 
-	void Run(const Params* params) const override;
+	void Run(const Params* params) override;
 };
 //------------------------------------------------------------------------------
-inline void Task5::Run(const Params* params = nullptr) const
+inline void Task5::Run(const Params* params = nullptr)
 {
 	CPhysics::NewtonInterpolator interpolator;
 	const size_t n{ 1000 };

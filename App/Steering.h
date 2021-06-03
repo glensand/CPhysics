@@ -10,10 +10,10 @@ public:
 	Steering() = default;
 	virtual ~Steering() = default;
 
-	void Run(const Params* params) const override;
+	void Run(const Params* params) override;
 };
 
-inline void Steering::Run(const Params* params = nullptr) const
+inline void Steering::Run(const Params* params = nullptr)
 {
 	const double N{ 2. };
 	const double FI_MAX{ 1.3 };

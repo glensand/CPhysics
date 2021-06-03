@@ -16,10 +16,10 @@ public:
 	Task4() = default;
 	virtual ~Task4() = default;
 
-	void Run(const Params* params = nullptr) const override;
+	void Run(const Params* params = nullptr) override;
 };
 
-inline void Task4::Run(const Params* params) const
+inline void Task4::Run(const Params* params)
 {
 	const std::vector<size_t> intervals = { 10000000 };
 

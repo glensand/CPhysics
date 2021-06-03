@@ -10,6 +10,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Tasks\ViveExploartion">
+      <UniqueIdentifier>{4f446e52-0b81-4eb0-995b-5c55aae35324}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OneDimensionalIntegratorFacade.cpp">
@@ -17,6 +20,9 @@
     </ClCompile>
     <ClCompile Include="Source.cpp">
       <Filter>Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="ViveExploration\ViveExplore.cpp">
+      <Filter>Tasks\ViveExploartion</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +88,15 @@
     </ClInclude>
     <ClInclude Include="RuntimePlotExample.h">
       <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="ViveExploration\Pipe.h">
+      <Filter>Tasks\ViveExploartion</Filter>
+    </ClInclude>
+    <ClInclude Include="ViveExploration\ProducerConsumerQueue.h">
+      <Filter>Tasks\ViveExploartion</Filter>
+    </ClInclude>
+    <ClInclude Include="ViveExploration\ViveExplore.h">
+      <Filter>Tasks\ViveExploartion</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

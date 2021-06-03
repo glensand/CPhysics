@@ -16,5 +16,5 @@ public:
 	ITask() = default;
 	virtual ~ITask() = default;
 	
-	virtual void Run(const Params* params = nullptr) const = 0;
+	virtual void Run(const Params* params = nullptr) = 0;
 };

@@ -11,10 +11,10 @@ class Task13 final :
 public:
 	Task13() = default;
 	~Task13() = default;
-	void Run(const Params* params = nullptr) const override;
+	void Run(const Params* params = nullptr) override;
 };
 
-inline void Task13::Run(const Params* params) const
+inline void Task13::Run(const Params* params)
 {
 	size_t N = 200;
 

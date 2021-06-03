@@ -14,7 +14,7 @@ public:
 	~Task10() = default;
 	Task10() = default;
 
-	void Run(const Params* params = nullptr) const override
+	void Run(const Params* params = nullptr) override
 	{
 		using Real = CPhysics::Real;
 

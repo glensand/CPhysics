@@ -52,7 +52,8 @@ void CVPlot::Show(bool waitKey)
 	//cv::setOpenGlContext(m_plotName);
 	cv::setMouseCallback(m_plotName, OnMouseHandle, this);
 	cv::imshow(m_plotName, m_plot);
-	const auto delay = waitKey ? 0 : 20;
+	static int rawDelay = 1;
+	const auto delay = waitKey ? 0 : rawDelay;
 	cv::waitKey(delay);
 }
 
@@ -94,7 +95,8 @@ template<typename TContainer>
 void CVPlot::InitializeMinMax(const TContainer& x, const TContainer& y)
 {
     // find maximum/minimum of axis
-    
+	m_minX = FLT_MAX;
+	m_minY = FLT_MAX;
     std::for_each(x.begin(), x.end(),
                   [this](const double x)
                   {
@@ -198,19 +200,11 @@ void CVPlot::DrawPlots()
 
 		for(size_t i = 0; i < size; ++i)
 		{
-			int x{ };
-			int y{ };
+			double rawX = graph->UseDeque ? graph->DequeX[i] : graph->X[i];
+			double rawY = graph->UseDeque ? graph->DequeY[i] : graph->Y[i];
 
-			if(graph->UseDeque)
-			{
-				y = cvRound((graph->DequeX[i] - m_minY) * m_scaleY);
-				x = cvRound((graph->DequeY[i] - m_minX) * m_scaleX);
-			}
-			else
-			{
-				y = cvRound((graph->X[i] - m_minY) * m_scaleY);
-				x = cvRound((graph->Y[i] - m_minX) * m_scaleX);
-			}
+			int x = cvRound((rawX - m_minX) * m_scaleX);
+			int y = cvRound((rawY - m_minY) * m_scaleY);
 			
 			const CvPoint nextPoint = cvPoint(m_borderSize + x, 
 				m_plotSize.height - (m_borderSize + y));

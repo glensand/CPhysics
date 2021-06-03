@@ -8,7 +8,7 @@ public:
 	RuntimePlotExample() = default;
 	virtual ~RuntimePlotExample() override = default;
 
-	virtual void Run(const Params* params = nullptr) const override
+	virtual void Run(const Params* params = nullptr) override
 	{
 		Plotter::CVPlot plot;
 		Plotter::GraphParams graphParams;
@@ -20,19 +20,22 @@ public:
 
 		for(std::size_t i{ 0 }; i < 100; ++i)
 		{
-			graphParams.DequeX.push_back(2 * ((double)rand() / RAND_MAX) - 1);
+			graphParams.DequeX.push_back((double)i / 100);
 			graphParams.DequeY.push_back(2 * ((double)rand() / RAND_MAX) - 1);
 		}
 
 		plot.AddGraph(&graphParams);
+
+		std::size_t xCounter{ 100 };
 
 		while(true)
 		{
 			plot.Show(false);
 			graphParams.DequeX.pop_front();
 			graphParams.DequeY.pop_front();
-			graphParams.DequeX.push_back(2 * ((double)rand() / RAND_MAX) - 1);
+			graphParams.DequeX.push_back((double)xCounter / 100);
 			graphParams.DequeY.push_back(2 * ((double)rand() / RAND_MAX) - 1);
+			++xCounter;
 		}
 	}
 };

@@ -18,7 +18,7 @@ public:
 	Task2() = default;
 	virtual ~Task2() = default;
 
-	void	Run(const Params* params = nullptr) const override;
+	void	Run(const Params* params = nullptr) override;
 
 private:
 
@@ -29,7 +29,7 @@ private:
 	static void	Demonstrate(const CPhysics::ByStepResult* inf, const FX &fx);
 };
 //------------------------------------------------------------------------------
-inline void Task2::Run(const Params* params) const
+inline void Task2::Run(const Params* params)
 {
 
 	const auto a2 = 1;

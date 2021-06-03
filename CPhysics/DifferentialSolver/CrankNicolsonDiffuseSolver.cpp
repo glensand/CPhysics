@@ -1,5 +1,5 @@
 #include "CrankNicolsonDiffuseSolver.h"
-#include <opencv2/core/mat.hpp >
+#include <opencv2/core.hpp>
 
 namespace
 {

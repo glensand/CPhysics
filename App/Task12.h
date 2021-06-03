@@ -10,7 +10,7 @@ public:
 	virtual ~Task12() = default;
 			Task12() = default;
 
-	void Run(const Params* params = nullptr) const override;
+	void Run(const Params* params = nullptr) override;
 };
 //------------------------------------------------------------------------------
 CPhysics::Real max(const std::vector<CPhysics::Real> &y)
@@ -23,7 +23,7 @@ CPhysics::Real max(const std::vector<CPhysics::Real> &y)
 	return maxVal;
 }
 //------------------------------------------------------------------------------
-inline void Task12::Run(const Params* params) const
+inline void Task12::Run(const Params* params)
 {
 	const CPhysics::CrankNicolsonDiffuseSolver solver;
 

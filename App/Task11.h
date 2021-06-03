@@ -13,10 +13,10 @@ public:
 	Task11() = default;
 	virtual ~Task11() = default;
 
-	void Run(const Params* params = nullptr) const override;
+	void Run(const Params* params = nullptr) override;
 };
 
-inline void Task11::Run(const Params* params) const
+inline void Task11::Run(const Params* params)
 {
 	const CPhysics::SpectralProblemSolver solver;
 

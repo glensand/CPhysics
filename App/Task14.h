@@ -45,7 +45,7 @@ public:
     Task14() = default;
     ~Task14() = default;
 
-    void Run(const Params* params = nullptr) const override;
+    void Run(const Params* params = nullptr) override;
 };
 
 class Kletka {
@@ -72,7 +72,7 @@ public:
 
 Kletka X[1000000][5];
 
-inline void Task14::Run(const Params* params) const
+inline void Task14::Run(const Params* params)
 {
 
     using namespace std;

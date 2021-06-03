@@ -19,10 +19,10 @@ public:
 
 	virtual ~CVPlotExamples() = default;
 
-	void Run(const Params* params = nullptr) const override;
+	void Run(const Params* params = nullptr) override;
 };
 
-inline void CVPlotExamples::Run(const Params*) const
+inline void CVPlotExamples::Run(const Params*)
 {	
 	Plotter::CVPlot plotter;
 

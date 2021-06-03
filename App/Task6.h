@@ -21,7 +21,7 @@ public:
 	Task6() = default;
 	~Task6() = default;
 
-	void Run(const Params* params = nullptr) const override;
+	void Run(const Params* params = nullptr) override;
 
 private:
 
@@ -38,7 +38,7 @@ private:
 	static void Render(const std::vector<CPhysics::Real>& x, const std::vector<CPhysics::Real>& y1, const std::vector<CPhysics::Real>& y2) noexcept;
 };
 //------------------------------------------------------------------------------
-inline void Task6::Run(const Params* params) const
+inline void Task6::Run(const Params* params)
 {
 	//CPhysics::SimpsonIntegrator integrator;
 	CPhysics::TrapezeIntegrator	integrator;

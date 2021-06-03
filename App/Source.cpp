@@ -13,6 +13,7 @@
 #include "Task14.h"
 #include "bigtask17.h"
 #include "RuntimePlotExample.h"
+#include "ViveExploration/ViveExplore.h"
 
 namespace
 {
@@ -45,6 +46,7 @@ int main()
 		std::make_shared<Task14>(),
 		std::make_shared<bigtask17>(), // executed with number 15
 		std::make_shared<RuntimePlotExample>(),
+		std::make_shared<ViveExplore>(),
 	};
 	
 	for(;;)

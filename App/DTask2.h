@@ -9,10 +9,10 @@ public:
 	virtual ~DTask2() = default;
 	DTask2() = default;
 
-	void Run(const Params* params = nullptr) const override;
+	void Run(const Params* params = nullptr) override;
 };
 //------------------------------------------------------------------------------
-inline void DTask2::Run(const Params* params) const
+inline void DTask2::Run(const Params* params)
 {
 	
 }

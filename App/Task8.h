@@ -15,10 +15,10 @@ public:
 	Task8() = default;
 	virtual ~Task8() = default;
 
-	inline void Run(const Params * params = nullptr) const override;
+	inline void Run(const Params * params = nullptr) override;
 };
 
-inline void Task8::Run(const Params* params) const
+inline void Task8::Run(const Params* params)
 {
 	using Real = CPhysics::Real;
 

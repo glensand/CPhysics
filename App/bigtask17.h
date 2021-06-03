@@ -14,10 +14,10 @@ public:
 	bigtask17() = default;
 	~bigtask17() = default;
 
-	void Run(const Params* params = nullptr) const override;
+	void Run(const Params* params = nullptr) override;
 };
 
-inline void bigtask17::Run(const Params* params) const
+inline void bigtask17::Run(const Params* params)
 {
 	using Real = CPhysics::Real;
 

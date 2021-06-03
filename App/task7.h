@@ -14,7 +14,7 @@ public:
 	Task7() = default;
 	virtual ~Task7() = default;
 
-	void Run(const Params* params = nullptr) const override;
+	void Run(const Params* params = nullptr) override;
 
 private:
 	static void PrintSolution(const CPhysics::Params* params, const CPhysics::ISimpleDifferentialSolver* pSolver);
@@ -80,7 +80,7 @@ inline void Task7::PrintSolution(const CPhysics::Params* params, const CPhysics:
 	plot.Close();
 }
 //------------------------------------------------------------------------------
-inline void Task7::Run(const Params* params) const
+inline void Task7::Run(const Params* params)
 {
 	using Real = CPhysics::Real;
 	CPhysics::Euler2Params Params(0., 3., 1., 20,
