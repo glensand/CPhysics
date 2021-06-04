@@ -72,7 +72,7 @@ private:
 	cv::Size m_plotSize{ 1300, 700 };
 	cv::Scalar m_defaultBackgroundColor{ 255, 255, 255 };
 
-	const int m_borderSize{ 50 };
+	const int m_borderSize{ 65 };
 
 	float m_minX{ 0 };
 	float m_maxX{ 0 };
