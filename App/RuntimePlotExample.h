@@ -25,7 +25,7 @@ public:
 		}
 
 		Plotter::GridProperties gridProperties;
-		gridProperties.HorizonLinesCount = 30;
+		gridProperties.HorizonLinesCount = 10;
 		plot.SetGridProperties(gridProperties);
 		plot.AddGraph(&graphParams);
 

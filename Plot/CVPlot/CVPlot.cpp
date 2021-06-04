@@ -184,15 +184,7 @@ void CVPlot::DrawAxis()
 		{  m_borderSize, m_borderSize }, 
 		DEFAULT_AXIS_PROPERTIES.Color, DEFAULT_AXIS_PROPERTIES.Thickness);
 
-	// Write the scale of the y axis
 	const int chw = 12, chh = 20;
-	if ((m_maxY - yRef) > 0.05 * (m_maxY - m_minY))
-		cv::putText(m_plot, Format(m_maxY), cvPoint(m_borderSize / 5, m_borderSize - chh / 2),
-			DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
-
-	if ((yRef - m_minY) > 0.05 * (m_maxX - m_minY))
-		cv::putText(m_plot, Format(m_minY), cvPoint(m_borderSize / 5, m_plotSize.height - m_borderSize + chh),
-			DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
 
 	// x axis
 	cv::putText(m_plot, Format(yRef), cvPoint(m_borderSize / 5, xAxisPos + chh / 2),
@@ -243,7 +235,7 @@ void CVPlot::DrawGrid()
 
 void CVPlot::DrawHorizonLineCoordinate(int yPos, int lineIndex)
 {
-	const auto y = m_maxY - (float)lineIndex * (m_maxY - m_minY) / (float)m_gridProperties.HorizonLinesCount;
+	const auto y = m_maxY - (float)lineIndex * (m_maxY - m_minY) / (float)(m_gridProperties.HorizonLinesCount + 1);
 	cv::putText(m_plot, Format(y), cvPoint(10, yPos),
 		DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
 }
@@ -251,7 +243,7 @@ void CVPlot::DrawHorizonLineCoordinate(int yPos, int lineIndex)
 void CVPlot::DrawVerticalLineCoordinate(int xPos, int lineIndex)
 {
 	auto chh = 12;
-	const auto x = (float)lineIndex * (m_maxX - m_minX) / (float)m_gridProperties.VerticalLinesCount;
+	const auto x = m_minX + (float)lineIndex * (m_maxX - m_minX) / (float)(m_gridProperties.VerticalLinesCount + 1);
     cv::putText(m_plot, Format(x), cvPoint(xPos + 1, m_plotSize.height - m_borderSize + chh + 3),
 			DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
 }
