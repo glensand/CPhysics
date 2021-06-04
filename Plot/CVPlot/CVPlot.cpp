@@ -7,6 +7,8 @@
 #include <cctype>
 #include <random>
 #include <iostream>
+#include <array>
+#include <charconv>
 
 namespace
 {
@@ -98,6 +100,14 @@ void CVPlot::OnMouseHandleInner(int event, int x, int y)
 	cv::updateWindow(m_plotName);*/
 }
 
+std::string CVPlot::Format(float value) const
+{
+	std::array<char, 10> buffer{};
+	auto&& [ptr, ec] = std::to_chars(buffer.data(), buffer.data() + buffer.size(), value,
+		std::chars_format::fixed, 3);
+	return std::string(buffer.data(), ptr);
+}
+
 template<typename TContainer>
 void CVPlot::InitializeMinMax(const TContainer& x, const TContainer& y)
 {
@@ -177,24 +187,24 @@ void CVPlot::DrawAxis()
 	// Write the scale of the y axis
 	const int chw = 12, chh = 20;
 	if ((m_maxY - yRef) > 0.05 * (m_maxY - m_minY))
-		cv::putText(m_plot, std::to_string(m_maxY), cvPoint(m_borderSize / 5, m_borderSize - chh / 2),
+		cv::putText(m_plot, Format(m_maxY), cvPoint(m_borderSize / 5, m_borderSize - chh / 2),
 			DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
 
 	if ((yRef - m_minY) > 0.05 * (m_maxX - m_minY))
-		cv::putText(m_plot, std::to_string(m_minY), cvPoint(m_borderSize / 5, m_plotSize.height - m_borderSize + chh),
+		cv::putText(m_plot, Format(m_minY), cvPoint(m_borderSize / 5, m_plotSize.height - m_borderSize + chh),
 			DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
 
 	// x axis
-	cv::putText(m_plot, std::to_string(yRef), cvPoint(m_borderSize / 5, xAxisPos + chh / 2),
+	cv::putText(m_plot, Format(yRef), cvPoint(m_borderSize / 5, xAxisPos + chh / 2),
 		DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
 
 	// Write the scale of the x axis
-	const auto maxX = std::to_string(m_maxX);
+	const auto maxX = Format(m_maxX);
 	cv::putText(m_plot, maxX, cvPoint(m_plotSize.width - maxX.size() * chw, xAxisPos + chh),
 		DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
 
 	// x min
-	cv::putText(m_plot, std::to_string(m_minX), cvPoint(m_borderSize, xAxisPos + chh),
+	cv::putText(m_plot, Format(m_minX), cvPoint(m_borderSize, xAxisPos + chh),
 		DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
 }
 
@@ -211,6 +221,8 @@ void CVPlot::DrawGrid()
 			{ m_plotSize.width - m_borderSize, curY},
 			gridColor, m_gridProperties.HorizonThickness);
 
+		DrawHorizonLineCoordinate(curY, i);
+
 		curY += yStep;
 	}
 
@@ -223,8 +235,25 @@ void CVPlot::DrawGrid()
 			{ curX, m_plotSize.height - m_borderSize },
 			gridColor, m_gridProperties.VerticalThickness);
 
+		DrawVerticalLineCoordinate(curX, i);
+
 		curX += xStep;
 	}
+}
+
+void CVPlot::DrawHorizonLineCoordinate(int yPos, int lineIndex)
+{
+	const auto y = m_maxY - (float)lineIndex * (m_maxY - m_minY) / (float)m_gridProperties.HorizonLinesCount;
+	cv::putText(m_plot, Format(y), cvPoint(10, yPos),
+		DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
+}
+
+void CVPlot::DrawVerticalLineCoordinate(int xPos, int lineIndex)
+{
+	auto chh = 12;
+	const auto x = (float)lineIndex * (m_maxX - m_minX) / (float)m_gridProperties.VerticalLinesCount;
+    cv::putText(m_plot, Format(x), cvPoint(xPos + 1, m_plotSize.height - m_borderSize + chh + 3),
+			DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
 }
 
 void CVPlot::DrawPlots()

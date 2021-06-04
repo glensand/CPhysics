@@ -53,6 +53,8 @@ private:
 	void			Initialize();
 	void			DrawAxis();
 	void			DrawGrid();
+	void			DrawHorizonLineCoordinate(int yPos, int lineIndex);
+	void			DrawVerticalLineCoordinate(int xPos, int lineIndex);
 	void			DrawPlots();
 	void			DrawLabels();
 	void			Print(const std::string &text, int x, int y);
@@ -60,6 +62,7 @@ private:
 	cv::Scalar		DeduceColor(const Color &color);
 	static void		OnMouseHandle(int event, int x, int y, int, void* instance);
 	void			OnMouseHandleInner(int event, int x, int y);
+	std::string		Format(float value) const;
 
 	template<typename TContainer>
     void InitializeMinMax(const TContainer& x, const TContainer& y);
@@ -69,7 +72,7 @@ private:
 	cv::Size m_plotSize{ 1300, 700 };
 	cv::Scalar m_defaultBackgroundColor{ 255, 255, 255 };
 
-	const int m_borderSize{ 30 };
+	const int m_borderSize{ 50 };
 
 	float m_minX{ 0 };
 	float m_maxX{ 0 };
