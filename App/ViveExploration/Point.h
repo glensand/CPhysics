@@ -8,21 +8,10 @@
 
 #pragma once
 
-#include "Matrix33.h"
-
-struct Point;
-
-class PointTransformer final
+struct Point final
 {
-public:
-    PointTransformer() = default;
-	~PointTransformer() = default;
-
-    void Initialize(const char* fileName);
-
-    Point Transform(const Point& p);
-
-private:
-    Matrix33 m_transformMatrix;
-    
+    float x;
+    float y;
+    float z;
+    float time;
 };

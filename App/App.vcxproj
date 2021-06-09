@@ -39,6 +39,7 @@
     <ClInclude Include="Task8.h" />
     <ClInclude Include="Task9.h" />
     <ClInclude Include="ViveExploration\Pipe.h" />
+    <ClInclude Include="ViveExploration\Point.h" />
     <ClInclude Include="ViveExploration\PointTransformer.h" />
     <ClInclude Include="ViveExploration\ViveExplore.h" />
   </ItemGroup>
@@ -95,7 +96,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DebugInformationFormat />
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)\CPhysics;$(OPENCV_DIR)\include;$(SolutionDir)\Plot</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CPhysics;$(OPENCV_DIR)\include;$(SolutionDir)\Plot;$(SolutionDir)\LinearAlgebra</AdditionalIncludeDirectories>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>

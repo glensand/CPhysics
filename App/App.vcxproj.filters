@@ -101,5 +101,8 @@
     <ClInclude Include="ViveExploration\PointTransformer.h">
       <Filter>Tasks\ViveExploartion</Filter>
     </ClInclude>
+    <ClInclude Include="ViveExploration\Point.h">
+      <Filter>Tasks\ViveExploartion</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

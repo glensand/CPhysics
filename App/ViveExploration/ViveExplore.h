@@ -13,15 +13,6 @@
 
 class Pipe;
 
-struct Point final
-{
-    float x;
-    float y;
-    float z;
-    float time;
-};
-
-
 #include "../ITask.h"
 
 class ViveExplore : public ITask
