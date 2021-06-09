@@ -11,9 +11,10 @@
 #include <mutex>
 #include <thread>
 
-class Pipe;
-
+#include "Point.h"
 #include "../ITask.h"
+
+class Pipe;
 
 class ViveExplore : public ITask
 {

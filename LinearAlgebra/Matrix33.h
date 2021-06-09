@@ -14,6 +14,7 @@
 class Matrix33 final
 {
 public:
+	Matrix33(const Vector3& x, const Vector3& y, const Vector3& z);
     Matrix33(Vector3* vec);
 	Matrix33() = default;
 	~Matrix33() = default;
@@ -25,11 +26,20 @@ public:
 	[[nodiscard]] Matrix33	Inv() const;
 	[[nodiscard]] Matrix33	Transpose() const;
 	[[nodiscard]] Vector3	operator*(const Vector3& vec) const;
+	[[nodiscard]] Matrix33	operator*(const Matrix33& mat) const;
 	[[nodiscard]] bool		operator==(const Matrix33& rhs) const;
 
 private:
 	Vector3 m_matrix[3];
 };
+
+inline
+Matrix33::Matrix33(const Vector3& x, const Vector3& y, const Vector3& z)
+{
+	m_matrix[0] = x;
+	m_matrix[1] = y;
+	m_matrix[2] = z;
+}
 
 inline
 Matrix33::Matrix33(Vector3* vec)
@@ -110,6 +120,20 @@ Vector3 Matrix33::operator*(const Vector3& vec) const
 		result[i] = m_matrix[i] * vec;
 		
 	return result;
+}
+
+inline
+Matrix33 Matrix33::operator*(const Matrix33& mat) const
+{
+	auto&& column0 = Vector3(mat[0][0], mat[1][0], mat[2][0]);
+	auto&& column1 = Vector3(mat[0][1], mat[1][1], mat[2][1]);
+	auto&& column2 = Vector3(mat[0][2], mat[1][2], mat[2][2]);
+
+	return Matrix33(
+		Vector3(mat[0] * column0, mat[0] * column1, mat[0] * column2),
+		Vector3(mat[1] * column0, mat[1] * column1, mat[1] * column2),
+		Vector3(mat[2] * column0, mat[2] * column1, mat[2] * column2)
+	);
 }
 
 inline
