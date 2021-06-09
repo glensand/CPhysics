@@ -10,6 +10,7 @@ struct Point final
     float x;
     float y;
     float z;
+    float time;
 };
 
 

@@ -26,17 +26,16 @@ void ViveExplore::Run(const Params* params)
     graphParamsZ.Color = Plotter::Color{ 0, 255, 0 };
     graphParamsZ.UseDeque = true;
 
+    Plotter::GridProperties gridProperties;
+    gridProperties.HorizonLinesCount = 20;
+    plot.SetGridProperties(gridProperties);
+
     //plot.AddGraph(&graphParamsX);
     plot.AddGraph(&graphParamsY);
     //plot.AddGraph(&graphParamsZ);
 
-    auto start = std::chrono::high_resolution_clock::now();
-
     while (true)
     {
-        auto now = std::chrono::high_resolution_clock::now();
-        auto&& deltaTime = (double)std::chrono::duration_cast<std::chrono::microseconds>(now - start).count() / 100000.0;
-
         bool newAdded;
         Point p{ };
         {
@@ -59,13 +58,13 @@ void ViveExplore::Run(const Params* params)
                 graphParamsZ.DequeY.pop_front();
             }
 
-            graphParamsX.DequeX.push_back(deltaTime);
+            graphParamsX.DequeX.push_back((double)p.time);
             graphParamsX.DequeY.push_back(1000 * (double)p.x);
 
-            graphParamsY.DequeX.push_back(deltaTime);
+            graphParamsY.DequeX.push_back((double)p.time);
             graphParamsY.DequeY.push_back(1000 * (double)p.y);
 
-            graphParamsZ.DequeX.push_back(deltaTime);
+            graphParamsZ.DequeX.push_back((double)p.time);
             graphParamsZ.DequeY.push_back(1000 * (double)p.z);
         }
 
@@ -84,6 +83,7 @@ void ViveExplore::RunPipeThread()
                 point.Back->x = pipe->Read<float>();
                 point.Back->y = pipe->Read<float>();
                 point.Back->z = pipe->Read<float>();
+                point.Back->time = pipe->Read<float>();
                 std::lock_guard lock(mu);
                 point.Swap();
                 added = true;
