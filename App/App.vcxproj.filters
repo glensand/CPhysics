@@ -24,6 +24,9 @@
     <ClCompile Include="ViveExploration\ViveExplore.cpp">
       <Filter>Tasks\ViveExploartion</Filter>
     </ClCompile>
+    <ClCompile Include="ViveExploration\PointTransformer.cpp">
+      <Filter>Tasks\ViveExploartion</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OneDimensionalIntegratorFacade.h">
@@ -93,6 +96,9 @@
       <Filter>Tasks\ViveExploartion</Filter>
     </ClInclude>
     <ClInclude Include="ViveExploration\ViveExplore.h">
+      <Filter>Tasks\ViveExploartion</Filter>
+    </ClInclude>
+    <ClInclude Include="ViveExploration\PointTransformer.h">
       <Filter>Tasks\ViveExploartion</Filter>
     </ClInclude>
   </ItemGroup>

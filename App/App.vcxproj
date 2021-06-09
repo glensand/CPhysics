@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="OneDimensionalIntegratorFacade.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="ViveExploration\PointTransformer.cpp" />
     <ClCompile Include="ViveExploration\ViveExplore.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -38,6 +39,7 @@
     <ClInclude Include="Task8.h" />
     <ClInclude Include="Task9.h" />
     <ClInclude Include="ViveExploration\Pipe.h" />
+    <ClInclude Include="ViveExploration\PointTransformer.h" />
     <ClInclude Include="ViveExploration\ViveExplore.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

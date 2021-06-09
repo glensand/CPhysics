@@ -228,5 +228,11 @@
     <ClInclude Include="DifferentialSolver\RungeKuttaSystemSolver.h">
       <Filter>CPhysics\DifferentialSolver\SystemSolver</Filter>
     </ClInclude>
+    <ClInclude Include="..\LinearAlgebra\Vector3.h">
+      <Filter>LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LinearAlgebra\Matrix33.h">
+      <Filter>LinearAlgebra</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

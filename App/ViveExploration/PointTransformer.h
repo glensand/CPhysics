@@ -1,4 +1,4 @@
-/* Copyright (C) 2019 - 2021 Gleb Bezborodov - All Rights Reserved
+/* Copyright (C) 2021 Gleb Bezborodov - All Rights Reserved
  * You may use, distribute and modify this code under the
  * terms of the MIT license.
  *
@@ -8,19 +8,19 @@
 
 #pragma once
 
-class Vector2 final
+struct Point;
+
+class PointTransformer final
 {
 public:
-	Vector2(double x1, double x2)
-		: m_x{ x1, x2 } {}
-	~Vector2() = default;
+    PointTransformer() = default;
+	~PointTransformer() = default;
 
-	[[nodiscard]] double At(size_t i) const;
+    void Initialize(const char* fileName);
+
+    Point Transform(const Point& p);
+
 private:
-	double	m_x[2];
-};
 
-inline double Vector2::At(size_t i) const
-{
-	return m_x[i];
-}
+    
+};
