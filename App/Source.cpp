@@ -47,6 +47,7 @@ int main()
 		std::make_shared<bigtask17>(), // executed with number 15
 		std::make_shared<RuntimePlotExample>(),
 		std::make_shared<ViveExplore>(),
+		std::make_shared<ViveExplore>(true),
 	};
 	
 	for(;;)

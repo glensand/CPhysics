@@ -19,7 +19,7 @@ class Pipe;
 class ViveExplore : public ITask
 {
 public:
-    ViveExplore() = default;
+    ViveExplore(bool useMinMax = false);
 	virtual ~ViveExplore() override = default;
 
     virtual void Run(const Params* params = nullptr) override;
@@ -49,5 +49,6 @@ private:
         }
     };
 
+    bool m_useMinMax;
     PointBuffer point;
 };

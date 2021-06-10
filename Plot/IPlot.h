@@ -75,6 +75,7 @@ struct GraphParameters final
 	Color				Color{ -1, -1, -1};					// Color to be used for graph plotting
 	std::string			Label{ "function" };
 	size_t				PointRadius{ 2 };
+	unsigned			LineThickness{ 1 };
 	bool				RandomColor{ true };
 
 	std::deque<double>	DequeX;	// Deque of x's axis point

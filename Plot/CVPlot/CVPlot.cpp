@@ -112,10 +112,6 @@ template<typename TContainer>
 void CVPlot::InitializeMinMax(const TContainer& x, const TContainer& y)
 {
     // find maximum/minimum of axis
-	m_minX = FLT_MAX;
-	m_minY = FLT_MAX;
-	m_maxX = FLT_MIN;
-	m_maxY = FLT_MIN;
     std::for_each(x.begin(), x.end(),
                   [this](const double x)
                   {
@@ -136,6 +132,11 @@ void CVPlot::InitializeMinMax(const TContainer& x, const TContainer& y)
 void CVPlot::Initialize()
 {
 	m_plot = cv::Mat(m_plotSize.height, m_plotSize.width, CV_8UC3, m_defaultBackgroundColor);
+
+	m_minX = FLT_MAX;
+	m_minY = FLT_MAX;
+	m_maxX = FLT_MIN;
+	m_maxY = FLT_MIN;
 
 	for (const auto& graph : m_graphs)
 	{
@@ -273,7 +274,7 @@ void CVPlot::DrawPlots()
 			// draw a line between two points
 			if ((graph->Style == PlotStyle::LINE || graph->Style == PlotStyle::POINT_LINE) && i >= 1)
 				cv::line(m_plot, prevPoint,
-					nextPoint, color, 1, CV_AA);
+					nextPoint, color, graph->LineThickness, CV_AA);
 			prevPoint = nextPoint;
 		}
 	}
