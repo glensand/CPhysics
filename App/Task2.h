@@ -18,8 +18,8 @@ public:
 	Task2() = default;
 	virtual ~Task2() = default;
 
-	void	Run(const Params* params = nullptr) override;
-
+	virtual void Run(const Params* params = nullptr) override;
+	virtual void Clear() override{}
 private:
 
 	using FX = std::tuple<std::vector<CPhysics::Real>, std::vector<CPhysics::Real>>;
@@ -28,7 +28,7 @@ private:
 	
 	static void	Demonstrate(const CPhysics::ByStepResult* inf, const FX &fx);
 };
-//------------------------------------------------------------------------------
+
 inline void Task2::Run(const Params* params)
 {
 
@@ -86,7 +86,7 @@ inline void Task2::Run(const Params* params)
 	
 	Compute(solvers, &d1Params, {xes, yXes});
 }
-//------------------------------------------------------------------------------
+
 inline void Task2::Compute(const std::vector<CPhysics::ISolver*>& solvers, const CPhysics::Params* solverParams, const FX &fx)
 {
 	
@@ -98,7 +98,7 @@ inline void Task2::Compute(const std::vector<CPhysics::ISolver*>& solvers, const
 		Demonstrate(res.get(), fx);
 	}
 }
-//------------------------------------------------------------------------------
+
 inline void Task2::Demonstrate(const CPhysics::ByStepResult* inf, const FX& fx)
 {
 	const auto& res = dynamic_cast<const CPhysics::ByStepD1Result*>(inf);

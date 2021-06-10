@@ -20,9 +20,10 @@ public:
 	Task3() = default;
 	virtual  ~Task3() = default;
 
-	void Run(const Params* params = nullptr) override;	
+	void Run(const Params* params = nullptr) override;
+	virtual void Clear() override {}
 };
-//------------------------------------------------------------------------------
+
 inline void Task3::Run(const Params* params)
 {
 	const std::vector<size_t> intervals{4, 16, 32, 64, 128, 256, 512};

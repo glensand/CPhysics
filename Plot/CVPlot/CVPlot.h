@@ -47,7 +47,9 @@ public:
 	virtual void Clear() override;
 	virtual void SetGridProperties(const GridProperties& gridProperties) override;
 	// own methods
-	void			EnableDebugPrint(bool enable) { m_debugPrint = enable; }
+	void EnableDebugPrint(bool enable) { m_debugPrint = enable; }
+    int	 GetLastKey() const { return m_lastKey; }
+
 private:
 	void			Present(bool waitKey);
 	void			Initialize();
@@ -83,7 +85,9 @@ private:
 	float m_scaleX{ 1.f };
 
     bool m_debugPrint{ false };
-	
+
+	int m_lastKey;
+
 	GraphList m_graphs;
 	AxisLabels m_labels;
 	GridProperties m_gridProperties;

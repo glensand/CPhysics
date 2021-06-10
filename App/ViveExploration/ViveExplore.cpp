@@ -1,7 +1,7 @@
 #include "ViveExplore.h"
 
 #include <iomanip>
-#include <iostream>
+#include <numeric>
 
 #include "Pipe.h"
 #include "CVPlot/CVPlot.h"
@@ -9,24 +9,135 @@
 namespace
 {
 
-Plotter::GraphParameters GenerateSliceParams(const Plotter::Color& color)
+constexpr std::size_t PointsCount{ 1000 };
+constexpr std::size_t IndexBeginCompare{ 3000 };
+constexpr std::size_t PointToAverageCount{ 100 };
+
+}
+
+ViveExplore::ViveExplore(PlotStyle style)
+    : m_style(style)
+{
+    m_sliceMin = GenerateSliceParameters({ 0, 255, 0 });
+    m_sliceMedian = GenerateSliceParameters({ 0, 0, 0 });
+    m_sliceMax = GenerateSliceParameters({ 0, 0, 255 });
+    m_figure = GeneratePlotParameters();
+
+    m_lastPoints.reserve(PointToAverageCount);
+}
+
+void ViveExplore::ProcessNewPoint(std::size_t curIndex)
+{
+    bool newAdded;
+    Point p{ };
+    {
+        std::lock_guard lock(mu);
+        newAdded = added;
+        p = *m_point.Front;
+    }
+
+    if(newAdded)
+    {
+        if (m_style == PlotStyle::AllTimeFixed)
+            UpdateAllTimeFixed(curIndex, p);
+        else
+            UpdateAdaptiveRange(curIndex, p);
+    }
+}
+
+void ViveExplore::UpdateAdaptiveRange(std::size_t curIndex, const Point& p)
+{
+    auto pYMm = p.y * 1000;
+    auto front = m_figure.DequeY.front();
+
+    m_figure.DequeX.pop_front();
+    m_figure.DequeY.pop_front();
+    m_curMedian += p.y;
+    m_curMedian -= front / 1000;
+
+    m_figure.DequeX.push_back((double)p.time);
+    m_figure.DequeY.push_back(pYMm);
+
+    if (curIndex > IndexBeginCompare)
+    {
+        if (pYMm < m_curMin)
+            m_curMin = pYMm;
+
+        if (m_curMax < pYMm)
+            m_curMax = pYMm;
+    }
+    else
+    {
+        m_curMax = m_curMin = m_curMedian;
+    }
+
+    m_sliceMin.Y[0] = m_sliceMin.Y[1] = (double)m_curMin;
+    m_sliceMax.Y[0] = m_sliceMax.Y[1] = (double)m_curMax;
+    m_sliceMedian.Y[0] = m_sliceMedian.Y[1] = (double)m_curMedian;
+    m_sliceMin.X[0] = m_sliceMax.X[0] = m_sliceMedian.X[0] = m_figure.DequeX.front();
+    m_sliceMin.X[1] = m_sliceMax.X[1] = m_sliceMedian.X[1] = m_figure.DequeX.back();
+}
+
+void ViveExplore::UpdateAllTimeFixed(std::size_t curIndex, const Point& p)
+{
+    m_lastPoints.emplace_back(p);
+
+    if(m_lastPoints.size() == PointToAverageCount)
+    {
+        double sumY = 0;
+        double sumT = 0;
+        for(auto&& point : m_lastPoints)
+        {
+            sumT += point.time;
+            sumY += point.y;
+        }
+
+        auto&& averageT = sumT / PointToAverageCount;
+        auto&& [min, max] = std::minmax_element(std::begin(m_lastPoints), std::end(m_lastPoints),
+            [](const Point& p1, const Point& p2) { return p1.y < p2.y; });
+        m_sliceMax.X.push_back(averageT);
+        
+        m_sliceMax.Y.push_back(1000 * max->y);
+        m_sliceMin.X.push_back(averageT);
+        m_sliceMin.Y.push_back(1000 * min->y);
+        m_figure.X.push_back(averageT);
+        m_figure.Y.push_back(1000 * sumY / PointToAverageCount);
+
+        m_lastPoints.clear();
+    }
+}
+
+Plotter::GraphParameters ViveExplore::GeneratePlotParameters()
+{
+    Plotter::GraphParameters graphParams;
+    graphParams.PointRadius = 1;
+    graphParams.Style = m_style != PlotStyle::AllTimeFixed ? Plotter::PlotStyle::POINT_LINE : Plotter::PlotStyle::LINE;
+    graphParams.Color = Plotter::Color{ 255, 0, 0 };
+    graphParams.UseDeque = m_style != PlotStyle::AllTimeFixed;
+
+    if(m_style != PlotStyle::AllTimeFixed)
+    {
+        graphParams.DequeX.resize(PointsCount, 0);
+        graphParams.DequeY.resize(PointsCount, 0);
+    }
+
+    return graphParams;
+}
+
+Plotter::GraphParameters ViveExplore::GenerateSliceParameters(const Plotter::Color& color)
 {
     Plotter::GraphParameters sliceParameters;
     sliceParameters.Style = Plotter::PlotStyle::LINE;
     sliceParameters.Color = color;
-    sliceParameters.LineThickness = 2;
-    sliceParameters.X.resize(2, 0);
-    sliceParameters.Y.resize(2, 0);
 
+    if(m_style != PlotStyle::AllTimeFixed)
+    {
+        sliceParameters.LineThickness = 2;
+        sliceParameters.X.resize(2, 0);
+        sliceParameters.Y.resize(2, 0);
+    }
+    
     return sliceParameters;
-}
-
-}
-
-ViveExplore::ViveExplore(bool useMinMax)
-    : m_useMinMax(useMinMax)
-{
-
 }
 
 void ViveExplore::Run(const Params* params)
@@ -35,121 +146,36 @@ void ViveExplore::Run(const Params* params)
 
     Plotter::CVPlot plot;
 
-    auto&& sliceMin = GenerateSliceParams({ 0, 255, 0 });
-    auto&& sliceMedian = GenerateSliceParams({ 0, 0, 0 });
-    auto&& sliceMax = GenerateSliceParams({ 0, 0, 255 });
-
-    Plotter::GraphParameters graphParamsY;
-    graphParamsY.PointRadius = 1;
-    graphParamsY.Style = Plotter::PlotStyle::POINT_LINE;
-    graphParamsY.Color = Plotter::Color{ 255, 0, 0 };
-    graphParamsY.UseDeque = true;
-    graphParamsY.DequeX.resize(1000, 0);
-    graphParamsY.DequeY.resize(1000, 0);
-
     Plotter::GridProperties gridProperties;
     gridProperties.HorizonLinesCount = 20;
     plot.SetGridProperties(gridProperties);
 
-    if(m_useMinMax)
+    if(m_style == PlotStyle::MinMaxFixed || m_style == PlotStyle::AllTimeFixed)
     {
-        plot.AddGraph(&sliceMax);
-        plot.AddGraph(&sliceMin);
+        plot.AddGraph(&m_sliceMax);
+        plot.AddGraph(&m_sliceMin);
     }
 
-    plot.AddGraph(&sliceMedian);
-    plot.AddGraph(&graphParamsY);
+    if(m_style != PlotStyle::AllTimeFixed)
+    {
+        plot.AddGraph(&m_sliceMedian);
+    }
 
-    float curMin{ FLT_MAX };
-    float curMax{ FLT_MIN };
-    float curMedian{ 0 };
-
-    float localMin{ FLT_MAX };
-    float localMax{ FLT_MIN };
+    plot.AddGraph(&m_figure);
 
     std::size_t curIndex{ 0 };
-    constexpr std::size_t IndexBeginCompare{ 3000 };
 
-    while (true)
+    int lastKey = 0;
+
+    while (lastKey != SpaceCode)
     {
-        bool newAdded;
-        Point p{ };
-        {
-            std::lock_guard lock(mu);
-            newAdded = added;
-            p = *point.Front;
-        }
-
-        if(newAdded)
-        {
-            auto front = graphParamsY.DequeY.front();
-
-            graphParamsY.DequeX.pop_front();
-            graphParamsY.DequeY.pop_front();
-            curMedian += p.y;
-            curMedian -= front / 1000;
-
-            auto pYMm = p.y * 1000;
-
-            graphParamsY.DequeX.push_back((double)p.time);
-            graphParamsY.DequeY.push_back(pYMm);
-            
-            if (curIndex > IndexBeginCompare)
-            {
-                if (pYMm < curMin)
-                    curMin = pYMm;
-
-                if (curMax < pYMm)
-                    curMax = pYMm;
-
-                if (std::abs(front - localMin) < DBL_EPSILON)
-                {
-                    localMin = *std::min_element(std::begin(graphParamsY.DequeY), std::end(graphParamsY.DequeY));
-                }
-                else
-                {
-                    if (pYMm < localMin)
-                        localMin = pYMm;
-                }
-
-                if (std::abs(front - localMax) < DBL_EPSILON)
-                {
-                    localMax = *std::max_element(std::begin(graphParamsY.DequeY), std::end(graphParamsY.DequeY));
-                }
-                else
-                {
-                    if (pYMm > localMax)
-                        localMax = pYMm;
-                }
-            }
-            else
-            {
-                curMax = curMin = curMedian;
-                localMax = localMin = curMedian;
-            }
-
-            system("cls");
-
-//            std::cout << std::string(100, '\n');
-            //std::cout << "Global Min: " << std::setprecision(6) << curMin << std::endl;
-            //std::cout << "Global Max: " << std::setprecision(6) << curMax << std::endl;
-            //std::cout << "Global Diff: " << std::setprecision(6) << curMax - curMin << std::endl;
-
-            //std::cout << "Last 1000 points Min: " << std::setprecision(6) << localMin << std::endl;
-            //std::cout << "Last 1000 points Max: " << std::setprecision(6) << localMax << std::endl;
-            //std::cout << "Last 1000 points Diff: " << std::setprecision(6) << localMax - localMin << std::endl;
-
-            sliceMin.Y[0] = sliceMin.Y[1] = (double)curMin;
-            sliceMax.Y[0] = sliceMax.Y[1] = (double)curMax;
-            sliceMedian.Y[0] = sliceMedian.Y[1] = (double)curMedian;
-            sliceMin.X[0] = sliceMax.X[0] = sliceMedian.X[0] = graphParamsY.DequeX.front();
-            sliceMin.X[1] = sliceMax.X[1] = sliceMedian.X[1] = graphParamsY.DequeX.back();
-
-            ++curIndex;
-        }
-
+        ProcessNewPoint(curIndex);
+        curIndex++;
         plot.Show(false);
+        lastKey = plot.GetLastKey();
     }
+
+    plot.Close();
 }
 
 void ViveExplore::RunPipeThread()
@@ -160,12 +186,12 @@ void ViveExplore::RunPipeThread()
             while(true)
             {
 
-                point.Back->x = pipe->Read<float>();
-                point.Back->y = pipe->Read<float>();
-                point.Back->z = pipe->Read<float>();
-                point.Back->time = pipe->Read<float>();
+                m_point.Back->x = pipe->Read<float>();
+                m_point.Back->y = pipe->Read<float>();
+                m_point.Back->z = pipe->Read<float>();
+                m_point.Back->time = pipe->Read<float>();
                 std::lock_guard lock(mu);
-                point.Swap();
+                m_point.Swap();
                 added = true;
             }
         });

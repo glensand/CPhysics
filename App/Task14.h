@@ -45,6 +45,7 @@ public:
     Task14() = default;
     ~Task14() = default;
 
+    virtual void Clear() override {}
     void Run(const Params* params = nullptr) override;
 };
 

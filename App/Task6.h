@@ -22,7 +22,7 @@ public:
 	~Task6() = default;
 
 	void Run(const Params* params = nullptr) override;
-
+	virtual void Clear() override {}
 private:
 
 	static std::vector<CPhysics::Real> ComputeJ(const CPhysics::Function1d& J, const std::vector<CPhysics::Real>& xes);
@@ -37,7 +37,7 @@ private:
 
 	static void Render(const std::vector<CPhysics::Real>& x, const std::vector<CPhysics::Real>& y1, const std::vector<CPhysics::Real>& y2) noexcept;
 };
-//------------------------------------------------------------------------------
+
 inline void Task6::Run(const Params* params)
 {
 	//CPhysics::SimpsonIntegrator integrator;
@@ -83,7 +83,7 @@ inline void Task6::Run(const Params* params)
 		
 	}
 }
-//------------------------------------------------------------------------------
+
 inline std::vector<CPhysics::Real> Task6::ComputeJ(const CPhysics::Function1d& J, const std::vector<CPhysics::Real> &xes)
 {
 	std::vector<CPhysics::Real> y;
@@ -93,7 +93,7 @@ inline std::vector<CPhysics::Real> Task6::ComputeJ(const CPhysics::Function1d& J
 
 	return y;
 }
-//------------------------------------------------------------------------------
+
 inline std::vector<CPhysics::Real> Task6::ComputeDJDX(const CPhysics::Function1d& J, const std::vector<CPhysics::Real>& xes)
 {
 	const CPhysics::Differentiator differentiator;
@@ -101,7 +101,7 @@ inline std::vector<CPhysics::Real> Task6::ComputeDJDX(const CPhysics::Function1d
 	
 	return differentiator.Differentiate(&params);
 }
-//------------------------------------------------------------------------------
+
 inline CPhysics::Function1d Task6::GetBessel(size_t m, const CPhysics::IIntegrator *integrator)
 {
 	return [m, integrator](CPhysics::Real x)
@@ -116,7 +116,7 @@ inline CPhysics::Function1d Task6::GetBessel(size_t m, const CPhysics::IIntegrat
 		return integrator->Integrate(&params) / PI;
 	};
 }
-//------------------------------------------------------------------------------
+
 inline void Task6::DebugPrint(const std::vector<CPhysics::Real>& x, const std::vector<CPhysics::Real>& y, const std::string& outputFileName) noexcept
 {
 	std::ofstream out(outputFileName);
@@ -124,7 +124,7 @@ inline void Task6::DebugPrint(const std::vector<CPhysics::Real>& x, const std::v
 	for(size_t i{ 0 }; i < x.size() && i < y.size(); ++i)
 		out << x[i] << " " << y[i] << std::endl;
 }
-//------------------------------------------------------------------------------
+
 inline void Task6::DebugPrint(const std::vector<CPhysics::Real>& y, const std::string& outputFileName) noexcept
 {
 	std::ofstream out(outputFileName);
@@ -132,7 +132,7 @@ inline void Task6::DebugPrint(const std::vector<CPhysics::Real>& y, const std::s
 	for (size_t i{ 0 }; i < y.size(); ++i)
 		out << y[i] << std::endl;
 }
-//------------------------------------------------------------------------------
+
 inline void Task6::Render(const std::vector<CPhysics::Real>& x, const std::vector<CPhysics::Real>& y1,
 	const std::vector<CPhysics::Real>& y2) noexcept
 {
@@ -153,4 +153,3 @@ inline void Task6::Render(const std::vector<CPhysics::Real>& x, const std::vecto
 	plot.Show();
 	plot.Close();
 }
-//------------------------------------------------------------------------------

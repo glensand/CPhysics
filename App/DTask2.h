@@ -10,6 +10,7 @@ public:
 	DTask2() = default;
 
 	void Run(const Params* params = nullptr) override;
+	virtual void Clear() override {}
 };
 //------------------------------------------------------------------------------
 inline void DTask2::Run(const Params* params)

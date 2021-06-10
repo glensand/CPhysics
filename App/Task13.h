@@ -11,7 +11,9 @@ class Task13 final :
 public:
 	Task13() = default;
 	~Task13() = default;
+
 	void Run(const Params* params = nullptr) override;
+	virtual void Clear() override {}
 };
 
 inline void Task13::Run(const Params* params)

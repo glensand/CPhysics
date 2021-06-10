@@ -14,6 +14,7 @@ public:
 	bigtask17() = default;
 	~bigtask17() = default;
 
+	virtual void Clear() override {}
 	void Run(const Params* params = nullptr) override;
 };
 

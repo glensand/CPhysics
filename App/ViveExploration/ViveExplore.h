@@ -11,22 +11,35 @@
 #include <mutex>
 #include <thread>
 
+#include "IPlot.h"
 #include "Point.h"
 #include "../ITask.h"
 
 class Pipe;
 
+enum class PlotStyle
+{
+    MinMaxFixed,
+    AdaptiveRange,
+    AllTimeFixed,
+};
+
 class ViveExplore : public ITask
 {
 public:
-    ViveExplore(bool useMinMax = false);
-	virtual ~ViveExplore() override = default;
+    ViveExplore(PlotStyle style = PlotStyle::AdaptiveRange);
+    virtual ~ViveExplore() override = default;
 
     virtual void Run(const Params* params = nullptr) override;
-
+    virtual void Clear() override {}
 private:
 
     void RunPipeThread();
+    void ProcessNewPoint(std::size_t curIndex);
+    void UpdateAdaptiveRange(std::size_t curIndex, const Point& p);
+    void UpdateAllTimeFixed(std::size_t curIndex, const Point& p);
+    Plotter::GraphParameters GeneratePlotParameters();
+    Plotter::GraphParameters GenerateSliceParameters(const Plotter::Color& color);
 
     std::thread pipeThread;
 	Pipe* pipe{ nullptr };
@@ -49,6 +62,19 @@ private:
         }
     };
 
-    bool m_useMinMax;
-    PointBuffer point;
+    PlotStyle m_style;
+    PointBuffer m_point;
+
+    float m_curMin{ FLT_MAX };
+    float m_curMax{ FLT_MIN };
+    float m_curMedian{ 0 };
+
+    std::vector<Point> m_lastPoints;
+
+    Plotter::GraphParameters m_sliceMin;
+    Plotter::GraphParameters m_sliceMax;
+    Plotter::GraphParameters m_sliceMedian;
+    Plotter::GraphParameters m_figure;
+
+    constexpr static std::size_t SpaceCode{ 32 };
 };

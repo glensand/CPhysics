@@ -46,9 +46,9 @@ void CVPlot::Present(bool waitKey)
     //cv::setOpenGlContext(m_plotName);
     cv::setMouseCallback(m_plotName, OnMouseHandle, this);
     cv::imshow(m_plotName, m_plot);
-    static int rawDelay = 1;
+    static int rawDelay = 10;
     const auto delay = waitKey ? 0 : rawDelay;
-    cv::waitKey(delay);
+	m_lastKey = cv::waitKey(delay);
 }
 
 void CVPlot::Show(bool waitKey)

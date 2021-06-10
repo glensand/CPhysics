@@ -8,6 +8,8 @@ public:
 	RuntimePlotExample() = default;
 	virtual ~RuntimePlotExample() override = default;
 
+	virtual void Clear() override{}
+
 	virtual void Run(const Params* params = nullptr) override
 	{
 		Plotter::CVPlot plot;

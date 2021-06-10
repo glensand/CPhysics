@@ -15,7 +15,8 @@ public:
 	Task8() = default;
 	virtual ~Task8() = default;
 
-	inline void Run(const Params * params = nullptr) override;
+	virtual void Run(const Params * params = nullptr) override;
+	virtual void Clear() override {}
 };
 
 inline void Task8::Run(const Params* params)

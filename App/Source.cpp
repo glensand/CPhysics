@@ -46,8 +46,9 @@ int main()
 		std::make_shared<Task14>(),
 		std::make_shared<bigtask17>(), // executed with number 15
 		std::make_shared<RuntimePlotExample>(),
-		std::make_shared<ViveExplore>(),
-		std::make_shared<ViveExplore>(true),
+		std::make_shared<ViveExplore>(PlotStyle::AdaptiveRange),
+		std::make_shared<ViveExplore>(PlotStyle::AllTimeFixed),
+		std::make_shared<ViveExplore>(PlotStyle::MinMaxFixed),
 	};
 	
 	for(;;)
@@ -58,8 +59,10 @@ int main()
 		std::cin >> task;
 		std::cout << std::endl;
 		
-		if (task == 0) break;
-		if (task > tasks.size() || tasks[task - 1] == nullptr) continue;
+		if (task == 0) 
+			break;
+		if (task > tasks.size() || tasks[task - 1] == nullptr) 
+			continue;
 		
 		tasks[task - 1]->Run();
 	}

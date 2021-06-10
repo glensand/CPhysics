@@ -19,6 +19,7 @@ public:
 
 	virtual ~CVPlotExamples() = default;
 
+	virtual void Clear() override {}
 	void Run(const Params* params = nullptr) override;
 };
 

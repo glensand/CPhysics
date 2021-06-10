@@ -15,7 +15,7 @@ public:
 	virtual ~Task7() = default;
 
 	void Run(const Params* params = nullptr) override;
-
+	virtual void Clear() override {}
 private:
 	static void PrintSolution(const CPhysics::Params* params, const CPhysics::ISimpleDifferentialSolver* pSolver);
 	static std::pair<std::vector<CPhysics::Real>, std::vector<CPhysics::Real>>
@@ -24,7 +24,7 @@ private:
 	static std::pair<std::vector<CPhysics::Real>, std::vector<CPhysics::Real>>
 		CalculateAnalytical(const size_t knot_amount);
 };
-//------------------------------------------------------------------------------
+
 inline std::pair<std::vector<CPhysics::Real>, std::vector<CPhysics::Real>>
 Task7::CalculateAnalytical(const size_t knot_amount)
 {
@@ -37,7 +37,7 @@ Task7::CalculateAnalytical(const size_t knot_amount)
 	}
 	return { x, y };
 }
-//------------------------------------------------------------------------------
+
 inline std::pair<std::vector<CPhysics::Real>, std::vector<CPhysics::Real>> Task7::SeparateVectors(const std::vector<CPhysics::Point2D> &vec)
 {
 	std::pair<std::vector<CPhysics::Real>, std::vector<CPhysics::Real>> res;
@@ -51,7 +51,7 @@ inline std::pair<std::vector<CPhysics::Real>, std::vector<CPhysics::Real>> Task7
 	}
 	return res;
 }
-//------------------------------------------------------------------------------
+
 inline void Task7::PrintSolution(const CPhysics::Params* params, const CPhysics::ISimpleDifferentialSolver* pSolver)
 {
 	std::cout << "__________________________________" << std::endl;
@@ -79,7 +79,7 @@ inline void Task7::PrintSolution(const CPhysics::Params* params, const CPhysics:
 	plot.Show();
 	plot.Close();
 }
-//------------------------------------------------------------------------------
+
 inline void Task7::Run(const Params* params)
 {
 	using Real = CPhysics::Real;

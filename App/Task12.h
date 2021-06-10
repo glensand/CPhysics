@@ -10,9 +10,10 @@ public:
 	virtual ~Task12() = default;
 			Task12() = default;
 
+	virtual void Clear() override {}
 	void Run(const Params* params = nullptr) override;
 };
-//------------------------------------------------------------------------------
+
 CPhysics::Real max(const std::vector<CPhysics::Real> &y)
 {
 	auto maxVal{ DBL_MIN };
@@ -22,7 +23,7 @@ CPhysics::Real max(const std::vector<CPhysics::Real> &y)
 
 	return maxVal;
 }
-//------------------------------------------------------------------------------
+
 inline void Task12::Run(const Params* params)
 {
 	const CPhysics::CrankNicolsonDiffuseSolver solver;

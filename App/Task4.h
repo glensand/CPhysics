@@ -17,6 +17,7 @@ public:
 	virtual ~Task4() = default;
 
 	void Run(const Params* params = nullptr) override;
+	virtual void Clear() override {}
 };
 
 inline void Task4::Run(const Params* params)

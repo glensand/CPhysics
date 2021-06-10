@@ -12,8 +12,9 @@ public:
 	virtual ~Task9() = default;
 
 	void Run(const Params* params = nullptr) override;
+	virtual void Clear() override {}
 };
-//------------------------------------------------------------------------------	
+
 inline void Task9::Run(const Params* params)
 {
 	const CPhysics::ImplicitEuler2SystemSolver solver;

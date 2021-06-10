@@ -13,8 +13,9 @@ public:
 	virtual ~Task5() = default;
 
 	void Run(const Params* params) override;
+	virtual void Clear() override {}
 };
-//------------------------------------------------------------------------------
+
 inline void Task5::Run(const Params* params = nullptr)
 {
 	CPhysics::NewtonInterpolator interpolator;
@@ -65,4 +66,3 @@ inline void Task5::Run(const Params* params = nullptr)
 	plot.Show();
 	plot.Close();
 }
-//------------------------------------------------------------------------------
