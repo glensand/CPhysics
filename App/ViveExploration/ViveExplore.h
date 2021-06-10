@@ -34,6 +34,7 @@ public:
     virtual void Clear() override {}
 private:
 
+    void ProcessKey(int keyCode);
     void RunPipeThread();
     void ProcessNewPoint(std::size_t curIndex);
     void UpdateAdaptiveRange(std::size_t curIndex, const Point& p);
@@ -77,4 +78,16 @@ private:
     Plotter::GraphParameters m_figure;
 
     constexpr static std::size_t SpaceCode{ 32 };
+
+    struct Key final
+    {
+        const int Key1;
+        const int Key2;
+        bool operator==(int key) const
+        {
+            return Key1 == key || Key2 == key;
+        }
+    };
+
+    constexpr static Key Calibrate{ 99, 67 };
 };

@@ -166,9 +166,9 @@ void ViveExplore::Run(const Params* params)
     std::size_t curIndex{ 0 };
 
     int lastKey = 0;
-
     while (lastKey != SpaceCode)
     {
+        ProcessKey(lastKey);
         ProcessNewPoint(curIndex);
         curIndex++;
         plot.Show(false);
@@ -176,6 +176,14 @@ void ViveExplore::Run(const Params* params)
     }
 
     plot.Close();
+}
+
+void ViveExplore::ProcessKey(int keyCode)
+{
+    if(Calibrate == keyCode)
+    {
+        //calibrate point1, then 2, then 3
+    }
 }
 
 void ViveExplore::RunPipeThread()
