@@ -20,8 +20,10 @@ public:
     virtual void Run() = 0;
     bool IsPassed() const;
 
-private:
+protected:
     void Assert(bool expressionResult);
+
+private:
     bool m_passed{ true };
 };
 
@@ -53,6 +55,7 @@ class GroupName##TestName final : public Test \
     virtual void Run() override \
     {   \
         std::cout << TEST_NAME_STR(GroupName##TestName) << ": "; \
+        RunImpl(); \
     }   \
     void RunImpl(); \
 };\
