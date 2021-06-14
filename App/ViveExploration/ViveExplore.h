@@ -37,11 +37,13 @@ private:
 
     void ProcessKey(int keyCode);
     void RunPipeThread();
+    void StopPipeThread();
     void ProcessNewPoint(std::size_t curIndex);
     void UpdateAdaptiveRange(std::size_t curIndex);
     void UpdateAllTimeFixed();
     Plotter::GraphParameters GeneratePlotParameters();
     Plotter::GraphParameters GenerateSliceParameters(const Plotter::Color& color);
+    void RunDrawing();
 
     std::thread pipeThread;
 	Pipe* pipe{ nullptr };
@@ -93,5 +95,6 @@ private:
         }
     };
 
+    std::atomic_bool m_pipeActive;
     constexpr static Key Calibrate{ 99, 67 };
 };

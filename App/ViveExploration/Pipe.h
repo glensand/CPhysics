@@ -51,6 +51,12 @@ public:
         return result;
     }
 
+    void Close()
+    {
+        DisconnectNamedPipe(hPipe);
+        hPipe = INVALID_HANDLE_VALUE;
+    }
+
 private:
     HANDLE hPipe;
 };

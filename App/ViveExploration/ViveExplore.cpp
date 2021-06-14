@@ -22,7 +22,7 @@ ViveExplore::ViveExplore(PlotStyle style)
     m_sliceMedian = GenerateSliceParameters({ 0, 0, 0 });
     m_sliceMax = GenerateSliceParameters({ 0, 0, 255 });
     m_figure = GeneratePlotParameters();
-
+    m_pipeActive = false;
     m_lastPoints.reserve(PointToAverageCount);
 }
 
@@ -149,10 +149,8 @@ Plotter::GraphParameters ViveExplore::GenerateSliceParameters(const Plotter::Col
     return sliceParameters;
 }
 
-void ViveExplore::Run(const Params* params)
+void ViveExplore::RunDrawing()
 {
-    RunPipeThread();
-
     Plotter::CVPlot plot;
 
     Plotter::GridProperties gridProperties;
@@ -187,6 +185,13 @@ void ViveExplore::Run(const Params* params)
     plot.Close();
 }
 
+void ViveExplore::Run(const Params* params)
+{
+    RunPipeThread();
+    RunDrawing();
+    StopPipeThread();
+}
+
 void ViveExplore::ProcessKey(int keyCode)
 {
     if(Calibrate == keyCode)
@@ -204,18 +209,24 @@ void ViveExplore::ProcessKey(int keyCode)
 void ViveExplore::RunPipeThread()
 {
     pipe = new Pipe();
+    m_pipeActive.store(true);
     pipeThread = std::thread([this]
+    {
+        while(m_pipeActive.load(std::memory_order_acquire))
         {
-            while(true)
-            {
+            m_point.Back->x = pipe->Read<float>();
+            m_point.Back->y = pipe->Read<float>();
+            m_point.Back->z = pipe->Read<float>();
+            m_point.Back->time = pipe->Read<float>();
+            std::lock_guard lock(mu);
+            m_point.Swap();
+            added = true;
+        }
+    });
+}
 
-                m_point.Back->x = pipe->Read<float>();
-                m_point.Back->y = pipe->Read<float>();
-                m_point.Back->z = pipe->Read<float>();
-                m_point.Back->time = pipe->Read<float>();
-                std::lock_guard lock(mu);
-                m_point.Swap();
-                added = true;
-            }
-        });
+void ViveExplore::StopPipeThread()
+{
+    m_pipeActive.store(false, std::memory_order_release);
+    pipeThread.join();
 }
