@@ -29,33 +29,42 @@ ViveExplore::ViveExplore(PlotStyle style)
 void ViveExplore::ProcessNewPoint(std::size_t curIndex)
 {
     bool newAdded;
-    Point p{ };
     {
         std::lock_guard lock(mu);
         newAdded = added;
-        p = *m_point.Front;
+        m_lastPoint = *m_point.Front;
     }
 
     if(newAdded)
     {
+        if(m_transformer.IsInitialized())
+        {
+            auto&& transformed = m_transformer.Transform(
+                Vector3(m_lastPoint.x, m_lastPoint.y, m_lastPoint.z)
+            );
+            m_lastPoint.x = transformed[0];
+            m_lastPoint.y = transformed[1];
+            m_lastPoint.z = transformed[2];
+        }
+
         if (m_style == PlotStyle::AllTimeFixed)
-            UpdateAllTimeFixed(curIndex, p);
+            UpdateAllTimeFixed();
         else
-            UpdateAdaptiveRange(curIndex, p);
+            UpdateAdaptiveRange(curIndex);
     }
 }
 
-void ViveExplore::UpdateAdaptiveRange(std::size_t curIndex, const Point& p)
+void ViveExplore::UpdateAdaptiveRange(std::size_t curIndex)
 {
-    auto pYMm = p.y * 1000;
+    auto pYMm = m_lastPoint.y * 1000;
     auto front = m_figure.DequeY.front();
 
     m_figure.DequeX.pop_front();
     m_figure.DequeY.pop_front();
-    m_curMedian += p.y;
+    m_curMedian += m_lastPoint.y;
     m_curMedian -= front / 1000;
 
-    m_figure.DequeX.push_back((double)p.time);
+    m_figure.DequeX.push_back((double)m_lastPoint.time);
     m_figure.DequeY.push_back(pYMm);
 
     if (curIndex > IndexBeginCompare)
@@ -78,9 +87,9 @@ void ViveExplore::UpdateAdaptiveRange(std::size_t curIndex, const Point& p)
     m_sliceMin.X[1] = m_sliceMax.X[1] = m_sliceMedian.X[1] = m_figure.DequeX.back();
 }
 
-void ViveExplore::UpdateAllTimeFixed(std::size_t curIndex, const Point& p)
+void ViveExplore::UpdateAllTimeFixed()
 {
-    m_lastPoints.emplace_back(p);
+    m_lastPoints.emplace_back(m_lastPoint);
 
     if(m_lastPoints.size() == PointToAverageCount)
     {
@@ -182,7 +191,13 @@ void ViveExplore::ProcessKey(int keyCode)
 {
     if(Calibrate == keyCode)
     {
-        //calibrate point1, then 2, then 3
+        m_planeList.emplace_back(m_lastPoint.x, m_lastPoint.y, m_lastPoint.z);
+
+        if(m_planeList.size() == 3)
+        {
+            m_transformer.Initialize(m_planeList);
+            m_planeList.clear();
+        }
     }
 }
 

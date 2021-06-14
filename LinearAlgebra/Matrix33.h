@@ -130,9 +130,9 @@ Matrix33 Matrix33::operator*(const Matrix33& mat) const
 	auto&& column2 = Vector3(mat[0][2], mat[1][2], mat[2][2]);
 
 	return Matrix33(
-		Vector3(mat[0] * column0, mat[0] * column1, mat[0] * column2),
-		Vector3(mat[1] * column0, mat[1] * column1, mat[1] * column2),
-		Vector3(mat[2] * column0, mat[2] * column1, mat[2] * column2)
+		Vector3(m_matrix[0] * column0, m_matrix[0] * column1, m_matrix[0] * column2),
+		Vector3(m_matrix[1] * column0, m_matrix[1] * column1, m_matrix[1] * column2),
+		Vector3(m_matrix[2] * column0, m_matrix[2] * column1, m_matrix[2] * column2)
 	);
 }
 

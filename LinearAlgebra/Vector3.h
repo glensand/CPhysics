@@ -28,6 +28,9 @@ public:
 	[[nodiscard]] friend Vector3 Cross(const Vector3& left, const Vector3& right);
 	[[nodiscard]] friend double Dot(const Vector3& left, const Vector3& right);
 	[[nodiscard]] friend double operator*(const Vector3& left, const Vector3& right);
+	[[nodiscard]] friend Vector3 operator*(const Vector3& left, double value);
+	[[nodiscard]] friend Vector3 operator+(const Vector3& left, const Vector3& right);
+	[[nodiscard]] friend Vector3 operator-(const Vector3& left, const Vector3& right);
 
 private:
 	double	m_x[3];
@@ -49,6 +52,24 @@ inline
 double operator*(const Vector3& left, const Vector3& right)
 {
 	return Dot(left, right);
+}
+
+inline
+Vector3 operator*(const Vector3& left, double value)
+{
+	return Vector3(left[0] * value, left[1] * value, left[2] * value);
+}
+
+inline
+Vector3 operator+(const Vector3& left, const Vector3& right)
+{
+	return Vector3(left[0] + right[0], left[1] + right[1], left[2] + right[2]);
+}
+
+inline
+Vector3 operator-(const Vector3& left, const Vector3& right)
+{
+	return Vector3(right[0] - left[0], right[1] - left[1], right[2] - left[2]);
 }
 
 inline

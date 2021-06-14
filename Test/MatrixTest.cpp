@@ -69,7 +69,7 @@ TEST(MatrixTest, ZeroMatrixDet)
 
 TEST(MatrixTest, EqualMatrixDet)
 {
-    OPEN_ASSERT(ZeroMatrix.Det() == 1);
+    OPEN_ASSERT(EqualMatrix.Det() == 1);
 }
 
 TEST(MatrixTest, AverageMatrixDet)

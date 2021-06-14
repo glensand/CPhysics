@@ -13,6 +13,7 @@
 
 #include "IPlot.h"
 #include "Point.h"
+#include "PointTransformer.h"
 #include "../ITask.h"
 
 class Pipe;
@@ -37,8 +38,8 @@ private:
     void ProcessKey(int keyCode);
     void RunPipeThread();
     void ProcessNewPoint(std::size_t curIndex);
-    void UpdateAdaptiveRange(std::size_t curIndex, const Point& p);
-    void UpdateAllTimeFixed(std::size_t curIndex, const Point& p);
+    void UpdateAdaptiveRange(std::size_t curIndex);
+    void UpdateAllTimeFixed();
     Plotter::GraphParameters GeneratePlotParameters();
     Plotter::GraphParameters GenerateSliceParameters(const Plotter::Color& color);
 
@@ -71,6 +72,9 @@ private:
     float m_curMedian{ 0 };
 
     std::vector<Point> m_lastPoints;
+    Point m_lastPoint;
+    PointTransformer m_transformer;
+    std::vector<Vector3> m_planeList;
 
     Plotter::GraphParameters m_sliceMin;
     Plotter::GraphParameters m_sliceMax;

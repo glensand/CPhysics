@@ -1,12 +1,6 @@
 #include "PointTransformer.h"
-#include "Point.h"
 
-void PointTransformer::Initialize(const char* fileName)
+Vector3 PointTransformer::Transform(const Vector3& p) const
 {
-
-}
-
-Point PointTransformer::Transform(const Point& p)
-{
-    return {};
+    return m_inverseTransformMatrix * p;
 }
