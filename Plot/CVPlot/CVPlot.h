@@ -9,89 +9,45 @@
 #pragma once
 
 #include <opencv2/core.hpp>
-#include <opencv2/imgproc.hpp>
 
-#include "../IPlot.h"
-
-#include <string>
-#include <set>
+#include "Interface/Plot.h"
 
 namespace Plotter
 {
+class Figure;
+struct Color;
 
-struct FontProperties final
+class CvPlot final : public Plot
 {
-	double		Scale{ .4 };
-	int			Type{ cv::HersheyFonts::FONT_HERSHEY_SIMPLEX };
-	cv::Scalar	Color{ 0, 0, 0 };
-};
-
-struct AxisProperties final
-{
-	cv::Scalar	Color {0, 0, 0};
-	int			Thickness{ 2 };
-};
-
-class CVPlot final : public IPlot
-{
-	using GraphList = std::vector<const GraphParameters*>;
 public:
 
-				CVPlot() = default;
-	virtual		~CVPlot() override = default;
+	CvPlot() = default;
+	virtual	~CvPlot() override = default;
 
-	virtual void AddGraph(const GraphParameters* params) override;
-	virtual void Release() override;
+	virtual const FigureList& CreateFigure(std::size_t cols, std::size_t rows) override;
     virtual void Show(bool waitKey = true) override;
 	virtual void Close() override;
 	virtual void Clear() override;
-	virtual void SetGridProperties(const GridProperties& gridProperties) override;
-	// own methods
-	void EnableDebugPrint(bool enable) { m_debugPrint = enable; }
-    int	 GetLastKey() const { return m_lastKey; }
+
+	virtual void EnableDebugPrint(bool enable) override{ m_debugPrint = enable; }
+    virtual int	 GetLastKey() const override { return m_lastKey; }
 
 private:
-	void			Present(bool waitKey);
-	void			Initialize();
-	void			DrawAxis();
-	void			DrawGrid();
-	void			DrawHorizonLineCoordinate(int yPos, int lineIndex);
-	void			DrawVerticalLineCoordinate(int xPos, int lineIndex);
-	void			DrawPlots();
-	void			DrawLabels();
-	void			Print(const std::string &text, int x, int y);
-	Color			GenerateColorRand();
-	cv::Scalar		DeduceColor(const Color &color);
-	static void		OnMouseHandle(int event, int x, int y, int, void* instance);
-	void			OnMouseHandleInner(int event, int x, int y);
-	std::string		Format(float value) const;
+	void Present(bool waitKey);
+	static void OnMouseHandle(int event, int x, int y, int, void* instance);
+	void OnMouseHandleInner(int event, int x, int y);
 
-	template<typename TContainer>
-    void InitializeMinMax(const TContainer& x, const TContainer& y);
+    const std::string m_plotName { "Plot" };
+	const cv::Size m_plotSize{ 1400, 800 };
+	const cv::Scalar m_defaultBackgroundColor{ 255, 255, 255 };
+	const int m_borderSize{ 15 };
 
-    std::string m_plotName { "Plot" };
+	FigureList m_figures;
+
 	cv::Mat m_plot;
-	cv::Size m_plotSize{ 1300, 700 };
-	cv::Scalar m_defaultBackgroundColor{ 255, 255, 255 };
-
-	const int m_borderSize{ 65 };
-
-	float m_minX{ 0 };
-	float m_maxX{ 0 };
-	float m_minY{ FLT_MAX };
-	float m_maxY{ FLT_MIN };
-
-	float m_scaleY{ 1.f };
-	float m_scaleX{ 1.f };
-
-    bool m_debugPrint{ false };
 
 	int m_lastKey;
-
-	GraphList m_graphs;
-	AxisLabels m_labels;
-	GridProperties m_gridProperties;
-	std::set<Color> m_usedColors;
+	bool m_debugPrint{ false };
 };
 
 }

@@ -5,19 +5,21 @@
 #include "Interface/FigureProperties.h"
 #include "Interface/Figure.h"
 
-class RuntimePlotExample : public ITask
+class RuntimeMultiPlotExample : public ITask
 {
 public:
-	RuntimePlotExample() = default;
-	virtual ~RuntimePlotExample() override = default;
+	RuntimeMultiPlotExample() = default;
+	virtual ~RuntimeMultiPlotExample() override = default;
 
 	virtual void Clear() override{}
 
 	virtual void Run(const Params* params = nullptr) override
 	{
 		Plotter::CvPlot plot;
-		auto&& figures = plot.CreateFigure(1, 1);
-		auto* figure = figures[0];
+		auto&& figures = plot.CreateFigure(1, 3);
+		auto* figure1 = figures[0];
+		auto* figure2 = figures[1];
+		auto* figure3 = figures[2];
 
 		Plotter::GraphParameters graphParams;
 		graphParams.PointRadius = 2;
@@ -32,10 +34,9 @@ public:
 			graphParams.DequeY.push_back(2 * ((double)rand() / RAND_MAX) - 1);
 		}
 
-		Plotter::GridProperties gridProperties;
-		gridProperties.HorizonLinesCount = 10;
-		figure->SetGridProperties(gridProperties);
-		figure->AddGraph(&graphParams);
+		figure1->AddGraph(&graphParams);
+		figure2->AddGraph(&graphParams);
+		figure3->AddGraph(&graphParams);
 
 		std::size_t xCounter{ 100 };
 

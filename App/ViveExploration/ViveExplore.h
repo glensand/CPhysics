@@ -11,7 +11,7 @@
 #include <mutex>
 #include <thread>
 
-#include "IPlot.h"
+#include "Interface/FigureProperties.h"
 #include "Point.h"
 #include "PointTransformer.h"
 #include "../ITask.h"

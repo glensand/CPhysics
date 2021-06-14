@@ -5,22 +5,34 @@
       <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
       <Extensions>ui</Extensions>
     </Filter>
-    <Filter Include="CVPlot\Interface">
+    <Filter Include="Interface">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
       <ParseFiles>true</ParseFiles>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CVPlot\CVPlot.cpp">
+    <ClCompile Include="CVPlot\CvPlot.cpp">
+      <Filter>CVPlot</Filter>
+    </ClCompile>
+    <ClCompile Include="CVPlot\CvFigure.cpp">
       <Filter>CVPlot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IPlot.h">
-      <Filter>CVPlot\Interface</Filter>
+    <ClInclude Include="CVPlot\CvPlot.h">
+      <Filter>CVPlot</Filter>
     </ClInclude>
-    <ClInclude Include="CVPlot\CVPlot.h">
+    <ClInclude Include="Interface\Figure.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\Plot.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\FigureProperties.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="CVPlot\CvFigure.h">
       <Filter>CVPlot</Filter>
     </ClInclude>
   </ItemGroup>

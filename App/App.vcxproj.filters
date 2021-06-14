@@ -13,6 +13,9 @@
     <Filter Include="Tasks\ViveExploartion">
       <UniqueIdentifier>{4f446e52-0b81-4eb0-995b-5c55aae35324}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tasks\PlotterTest">
+      <UniqueIdentifier>{3ff583b0-3689-40a5-a2c7-4f8c24ba1809}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OneDimensionalIntegratorFacade.cpp">
@@ -103,6 +106,18 @@
     </ClInclude>
     <ClInclude Include="ViveExploration\Point.h">
       <Filter>Tasks\ViveExploartion</Filter>
+    </ClInclude>
+    <ClInclude Include="RuntimeMultiPlotExample.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="PlotterTest\SinglePlotTest.h">
+      <Filter>Tasks\PlotterTest</Filter>
+    </ClInclude>
+    <ClInclude Include="PlotterTest\DoubleRowTestBase.h">
+      <Filter>Tasks\PlotterTest</Filter>
+    </ClInclude>
+    <ClInclude Include="PlotterTest\DoubleDoubleTest.h">
+      <Filter>Tasks\PlotterTest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-/* Copyright (C) 2019 - 2021 Gleb Bezborodov - All Rights Reserved
+/* Copyright (C) 2021 Gleb Bezborodov - All Rights Reserved
  * You may use, distribute and modify this code under the
  * terms of the MIT license.
  *
@@ -81,22 +81,6 @@ struct GraphParameters final
 	std::deque<double>	DequeX;	// Deque of x's axis point
 	std::deque<double>	DequeY;	// Deque of y's axis point
 	bool UseDeque{ false };
-};
-
-class IPlot
-{
-public:
-
-	IPlot() = default;
-	virtual  ~IPlot() = default;
-
-					// Add the graph using passed params
-	virtual void	AddGraph(const GraphParameters* params) = 0;
-	virtual void	Release() = 0;
-	virtual void	Show(bool waitKey = true) = 0;
-	virtual void	Clear() = 0;
-	virtual void	Close() = 0;
-	virtual void	SetGridProperties(const GridProperties& gridProperties) = 0;
 };
 
 }

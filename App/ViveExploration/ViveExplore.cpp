@@ -4,7 +4,8 @@
 #include <numeric>
 
 #include "Pipe.h"
-#include "CVPlot/CVPlot.h"
+#include "CVPlot/CvPlot.h"
+#include "Interface/Figure.h"
 
 namespace
 {
@@ -151,24 +152,25 @@ Plotter::GraphParameters ViveExplore::GenerateSliceParameters(const Plotter::Col
 
 void ViveExplore::RunDrawing()
 {
-    Plotter::CVPlot plot;
-
+    Plotter::CvPlot plot;
+    auto&& figures = plot.CreateFigure(1, 1);
+    auto* figure1 = figures[0];
     Plotter::GridProperties gridProperties;
     gridProperties.HorizonLinesCount = 20;
-    plot.SetGridProperties(gridProperties);
+    figure1->SetGridProperties(gridProperties);
 
     if(m_style == PlotStyle::MinMaxFixed || m_style == PlotStyle::AllTimeFixed)
     {
-        plot.AddGraph(&m_sliceMax);
-        plot.AddGraph(&m_sliceMin);
+        figure1->AddGraph(&m_sliceMax);
+        figure1->AddGraph(&m_sliceMin);
     }
 
     if(m_style != PlotStyle::AllTimeFixed)
     {
-        plot.AddGraph(&m_sliceMedian);
+        figure1->AddGraph(&m_sliceMedian);
     }
 
-    plot.AddGraph(&m_figure);
+    figure1->AddGraph(&m_figure);
 
     std::size_t curIndex{ 0 };
 
