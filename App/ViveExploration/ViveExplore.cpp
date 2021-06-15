@@ -51,43 +51,41 @@ void ViveExplore::ProcessNewPoint(std::size_t curIndex)
         if (m_style == PlotStyle::AllTimeFixed)
             UpdateAllTimeFixed();
         else
-            UpdateAdaptiveRange(curIndex);
+            UpdateAdaptiveRange();
     }
 }
 
-void ViveExplore::UpdateAdaptiveRange(std::size_t curIndex)
+void ViveExplore::UpdateAdaptiveRange()
 {
-    auto pYMm = m_lastPoint.y * 1000;
-    auto frontX = m_figureX.DequeY.front();
-    auto frontY = m_figureY.DequeY.front();
-    auto frontZ = m_figureZ.DequeY.front();
+    UpdateAdaptiveRangeFigure(
+        m_figureX.DequeX, m_figureX.DequeY,
+        m_curMedian.x, m_lastPoint.x
+    );
 
-    m_figureY.DequeX.pop_front();
-    m_figureY.DequeY.pop_front();
-    m_curMedianY += m_lastPoint.y;
-    m_curMedianY -= frontY / 1000;
+    UpdateAdaptiveRangeFigure(
+        m_figureY.DequeX, m_figureY.DequeY,
+        m_curMedian.y, m_lastPoint.y
+    );
 
-    m_figureY.DequeX.push_back((double)m_lastPoint.time);
-    m_figureY.DequeY.push_back(pYMm);
+    UpdateAdaptiveRangeFigure(
+        m_figureZ.DequeX, m_figureZ.DequeY,
+        m_curMedian.z, m_lastPoint.z
+    );
+}
 
-    if (curIndex > IndexBeginCompare)
-    {
-        if (pYMm < m_curMin)
-            m_curMin = pYMm;
+void ViveExplore::UpdateAdaptiveRangeFigure(std::deque<double>& x, std::deque<double>& y, 
+    float& median, float curValue)
+{
+    auto pYMm = curValue * 1000;
+    auto frontY = y.front();
 
-        if (m_curMax < pYMm)
-            m_curMax = pYMm;
-    }
-    else
-    {
-        m_curMax = m_curMin = m_curMedianY;
-    }
+    x.pop_front();
+    y.pop_front();
+    median += curValue;
+    median -= frontY / 1000;
 
-    m_sliceMinY.Y[0] = m_sliceMinY.Y[1] = (double)m_curMin;
-    m_sliceMaxY.Y[0] = m_sliceMaxY.Y[1] = (double)m_curMax;
-    m_sliceMedianY.Y[0] = m_sliceMedianY.Y[1] = (double)m_curMedianY;
-    m_sliceMinY.X[0] = m_sliceMaxY.X[0] = m_sliceMedianY.X[0] = m_figureY.DequeX.front();
-    m_sliceMinY.X[1] = m_sliceMaxY.X[1] = m_sliceMedianY.X[1] = m_figureY.DequeX.back();
+    x.push_back((double)m_lastPoint.time);
+    y.push_back(pYMm);
 }
 
 void ViveExplore::AddSliceGraphPoint(Graph3Set&& graph, double averageT, const Point& point)

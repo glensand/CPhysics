@@ -47,7 +47,8 @@ private:
     void RunPipeThread();
     void StopPipeThread();
     void ProcessNewPoint(std::size_t curIndex);
-    void UpdateAdaptiveRange(std::size_t curIndex);
+    void UpdateAdaptiveRange();
+    void UpdateAdaptiveRangeFigure(std::deque<double>& x, std::deque<double>& y, float& median, float curValue);
     void AddSliceGraphPoint(Graph3Set&& graph, double averageT, const Point& point);
     void UpdateAllTimeFixed();
     void InitializeFigures(Plotter::Plot& plot);
@@ -81,7 +82,7 @@ private:
 
     Point m_curMin{ FLT_MAX, FLT_MAX, FLT_MAX };
     Point m_curMax{ FLT_MIN, FLT_MIN, FLT_MIN };
-    Point m_curMedianY{ 0, 0, 0 };
+    Point m_curMedian{ 0, 0, 0 };
 
     std::vector<Point> m_lastPoints;
     Point m_lastPoint;
