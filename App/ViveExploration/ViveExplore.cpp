@@ -19,10 +19,10 @@ constexpr std::size_t PointToAverageCount{ 100 };
 ViveExplore::ViveExplore(PlotStyle style)
     : m_style(style)
 {
-    m_sliceMin = GenerateSliceParameters({ 0, 255, 0 });
-    m_sliceMedian = GenerateSliceParameters({ 0, 0, 0 });
-    m_sliceMax = GenerateSliceParameters({ 0, 0, 255 });
-    m_figure = GeneratePlotParameters();
+    m_sliceMinY = GenerateSliceParameters({ 0, 255, 0 });
+    m_sliceMedianY = GenerateSliceParameters({ 0, 0, 0 });
+    m_sliceMaxY = GenerateSliceParameters({ 0, 0, 255 });
+    m_figureY = GeneratePlotParameters();
     m_pipeActive = false;
     m_lastPoints.reserve(PointToAverageCount);
 }
@@ -58,15 +58,17 @@ void ViveExplore::ProcessNewPoint(std::size_t curIndex)
 void ViveExplore::UpdateAdaptiveRange(std::size_t curIndex)
 {
     auto pYMm = m_lastPoint.y * 1000;
-    auto front = m_figure.DequeY.front();
+    auto frontX = m_figureX.DequeY.front();
+    auto frontY = m_figureY.DequeY.front();
+    auto frontZ = m_figureZ.DequeY.front();
 
-    m_figure.DequeX.pop_front();
-    m_figure.DequeY.pop_front();
-    m_curMedian += m_lastPoint.y;
-    m_curMedian -= front / 1000;
+    m_figureY.DequeX.pop_front();
+    m_figureY.DequeY.pop_front();
+    m_curMedianY += m_lastPoint.y;
+    m_curMedianY -= frontY / 1000;
 
-    m_figure.DequeX.push_back((double)m_lastPoint.time);
-    m_figure.DequeY.push_back(pYMm);
+    m_figureY.DequeX.push_back((double)m_lastPoint.time);
+    m_figureY.DequeY.push_back(pYMm);
 
     if (curIndex > IndexBeginCompare)
     {
@@ -78,14 +80,24 @@ void ViveExplore::UpdateAdaptiveRange(std::size_t curIndex)
     }
     else
     {
-        m_curMax = m_curMin = m_curMedian;
+        m_curMax = m_curMin = m_curMedianY;
     }
 
-    m_sliceMin.Y[0] = m_sliceMin.Y[1] = (double)m_curMin;
-    m_sliceMax.Y[0] = m_sliceMax.Y[1] = (double)m_curMax;
-    m_sliceMedian.Y[0] = m_sliceMedian.Y[1] = (double)m_curMedian;
-    m_sliceMin.X[0] = m_sliceMax.X[0] = m_sliceMedian.X[0] = m_figure.DequeX.front();
-    m_sliceMin.X[1] = m_sliceMax.X[1] = m_sliceMedian.X[1] = m_figure.DequeX.back();
+    m_sliceMinY.Y[0] = m_sliceMinY.Y[1] = (double)m_curMin;
+    m_sliceMaxY.Y[0] = m_sliceMaxY.Y[1] = (double)m_curMax;
+    m_sliceMedianY.Y[0] = m_sliceMedianY.Y[1] = (double)m_curMedianY;
+    m_sliceMinY.X[0] = m_sliceMaxY.X[0] = m_sliceMedianY.X[0] = m_figureY.DequeX.front();
+    m_sliceMinY.X[1] = m_sliceMaxY.X[1] = m_sliceMedianY.X[1] = m_figureY.DequeX.back();
+}
+
+void ViveExplore::AddSliceGraphPoint(Graph3Set&& graph, double averageT, const Point& point)
+{
+    graph.X.X.push_back(averageT);
+    graph.X.Y.push_back(1000 * point.x);
+    graph.Y.X.push_back(averageT);
+    graph.Y.Y.push_back(1000 * point.y);
+    graph.Z.X.push_back(averageT);
+    graph.Z.Y.push_back(1000 * point.z);
 }
 
 void ViveExplore::UpdateAllTimeFixed()
@@ -94,25 +106,39 @@ void ViveExplore::UpdateAllTimeFixed()
 
     if(m_lastPoints.size() == PointToAverageCount)
     {
+        double sumX = 0;
         double sumY = 0;
+        double sumZ = 0;
         double sumT = 0;
+
         for(auto&& point : m_lastPoints)
         {
             sumT += point.time;
+            sumX += point.x;
             sumY += point.y;
+            sumZ += point.z;
         }
 
         auto&& averageT = sumT / PointToAverageCount;
-        auto&& [min, max] = std::minmax_element(std::begin(m_lastPoints), std::end(m_lastPoints),
-            [](const Point& p1, const Point& p2) { return p1.y < p2.y; });
-        m_sliceMax.X.push_back(averageT);
-        
-        m_sliceMax.Y.push_back(1000 * max->y);
-        m_sliceMin.X.push_back(averageT);
-        m_sliceMin.Y.push_back(1000 * min->y);
-        m_figure.X.push_back(averageT);
-        m_figure.Y.push_back(1000 * sumY / PointToAverageCount);
 
+        auto&& [minX, maxX] = std::minmax_element(std::begin(m_lastPoints), std::end(m_lastPoints),
+            [](const Point& p1, const Point& p2) { return p1.x < p2.x; });
+
+        auto&& [minY, maxY] = std::minmax_element(std::begin(m_lastPoints), std::end(m_lastPoints),
+            [](const Point& p1, const Point& p2) { return p1.y < p2.y; });
+
+        auto&& [minZ, maxZ] = std::minmax_element(std::begin(m_lastPoints), std::end(m_lastPoints),
+            [](const Point& p1, const Point& p2) { return p1.z < p2.z; });
+
+        auto&& maxPoint = Point{ maxX->x, maxY->y, maxZ->z };
+        AddSliceGraphPoint({ m_sliceMaxX, m_sliceMaxY, m_sliceMaxZ }, averageT, maxPoint);
+
+        auto&& minPoint = Point{ minX->x, minY->y, minZ->z };
+        AddSliceGraphPoint({ m_sliceMinX, m_sliceMinY, m_sliceMinZ }, averageT, minPoint);
+
+        auto&& figurePoint = Point{ (float)sumX / PointToAverageCount , (float)sumY / PointToAverageCount, (float)sumZ / PointToAverageCount };
+        AddSliceGraphPoint({ m_figureX, m_figureY, m_figureZ}, averageT, figurePoint);
+       
         m_lastPoints.clear();
     }
 }
@@ -150,30 +176,44 @@ Plotter::GraphParameters ViveExplore::GenerateSliceParameters(const Plotter::Col
     return sliceParameters;
 }
 
-void ViveExplore::RunDrawing()
+void ViveExplore::InitializeFigures(Plotter::Plot& plot)
 {
-    Plotter::CvPlot plot;
-    auto&& figures = plot.CreateFigure(1, 1);
+    auto&& figures = plot.CreateFigure(1, 3);
     auto* figure1 = figures[0];
-    Plotter::GridProperties gridProperties;
-    gridProperties.HorizonLinesCount = 20;
-    figure1->SetGridProperties(gridProperties);
+    auto* figure2 = figures[0];
+    auto* figure3 = figures[0];
 
     if(m_style == PlotStyle::MinMaxFixed || m_style == PlotStyle::AllTimeFixed)
     {
-        figure1->AddGraph(&m_sliceMax);
-        figure1->AddGraph(&m_sliceMin);
+        figure1->AddGraph(&m_sliceMaxX);
+        figure1->AddGraph(&m_sliceMinX);
+
+        figure2->AddGraph(&m_sliceMaxY);
+        figure2->AddGraph(&m_sliceMinY);
+
+        figure3->AddGraph(&m_sliceMaxZ);
+        figure3->AddGraph(&m_sliceMinZ);
     }
 
     if(m_style != PlotStyle::AllTimeFixed)
     {
-        figure1->AddGraph(&m_sliceMedian);
+        figure1->AddGraph(&m_sliceMedianX);
+        figure2->AddGraph(&m_sliceMedianY);
+        figure3->AddGraph(&m_sliceMedianZ);
     }
 
-    figure1->AddGraph(&m_figure);
+    figure1->AddGraph(&m_figureX);
+    figure2->AddGraph(&m_figureY);
+    figure3->AddGraph(&m_figureZ);
+}
+
+void ViveExplore::RunDrawing()
+{
+    Plotter::CvPlot plot;
+
+    InitializeFigures(plot);
 
     std::size_t curIndex{ 0 };
-
     int lastKey = 0;
     while (lastKey != SpaceCode)
     {

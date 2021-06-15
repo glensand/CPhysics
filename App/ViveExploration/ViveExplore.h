@@ -12,6 +12,7 @@
 #include <thread>
 
 #include "Interface/FigureProperties.h"
+#include "Interface/Plot.h"
 #include "Point.h"
 #include "PointTransformer.h"
 #include "../ITask.h"
@@ -27,6 +28,13 @@ enum class PlotStyle
 
 class ViveExplore : public ITask
 {
+    struct Graph3Set final
+    {
+        Plotter::GraphParameters& X;
+        Plotter::GraphParameters& Y;
+        Plotter::GraphParameters& Z;
+    };
+
 public:
     ViveExplore(PlotStyle style = PlotStyle::AdaptiveRange);
     virtual ~ViveExplore() override = default;
@@ -40,17 +48,19 @@ private:
     void StopPipeThread();
     void ProcessNewPoint(std::size_t curIndex);
     void UpdateAdaptiveRange(std::size_t curIndex);
+    void AddSliceGraphPoint(Graph3Set&& graph, double averageT, const Point& point);
     void UpdateAllTimeFixed();
+    void InitializeFigures(Plotter::Plot& plot);
+    void RunDrawing();
     Plotter::GraphParameters GeneratePlotParameters();
     Plotter::GraphParameters GenerateSliceParameters(const Plotter::Color& color);
-    void RunDrawing();
 
     std::thread pipeThread;
 	Pipe* pipe{ nullptr };
     std::mutex mu;
     bool added{ false };
 
-    struct PointBuffer
+    struct PointBuffer final
     {
         Point Buffer1;
         Point Buffer2;
@@ -69,19 +79,30 @@ private:
     PlotStyle m_style;
     PointBuffer m_point;
 
-    float m_curMin{ FLT_MAX };
-    float m_curMax{ FLT_MIN };
-    float m_curMedian{ 0 };
+    Point m_curMin{ FLT_MAX, FLT_MAX, FLT_MAX };
+    Point m_curMax{ FLT_MIN, FLT_MIN, FLT_MIN };
+    Point m_curMedianY{ 0, 0, 0 };
 
     std::vector<Point> m_lastPoints;
     Point m_lastPoint;
     PointTransformer m_transformer;
     std::vector<Vector3> m_planeList;
 
-    Plotter::GraphParameters m_sliceMin;
-    Plotter::GraphParameters m_sliceMax;
-    Plotter::GraphParameters m_sliceMedian;
-    Plotter::GraphParameters m_figure;
+    Plotter::GraphParameters m_sliceMinY;
+    Plotter::GraphParameters m_sliceMinX;
+    Plotter::GraphParameters m_sliceMinZ;
+
+    Plotter::GraphParameters m_sliceMaxY;
+    Plotter::GraphParameters m_sliceMaxX;
+    Plotter::GraphParameters m_sliceMaxZ;
+
+    Plotter::GraphParameters m_sliceMedianY;
+    Plotter::GraphParameters m_sliceMedianZ;
+    Plotter::GraphParameters m_sliceMedianX;
+
+    Plotter::GraphParameters m_figureY;
+    Plotter::GraphParameters m_figureX;
+    Plotter::GraphParameters m_figureZ;
 
     constexpr static std::size_t SpaceCode{ 32 };
 
