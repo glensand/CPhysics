@@ -54,13 +54,13 @@ private:
 	const int m_borderXSize{ 55 };
 	const int m_borderYSize{ 10 };
 
-	float m_minX{ 0 };
-	float m_maxX{ 0 };
-	float m_minY{ FLT_MAX };
-	float m_maxY{ FLT_MIN };
+	double m_minX{ 0 };
+	double m_maxX{ 0 };
+	double m_minY{ FLT_MAX };
+	double m_maxY{ FLT_MIN };
 
-	float m_scaleY{ 1.f };
-	float m_scaleX{ 1.f };
+	double m_scaleY{ 1.f };
+	double m_scaleX{ 1.f };
 
 	GraphList m_graphs;
 	GridProperties m_gridProperties;

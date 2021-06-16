@@ -61,6 +61,8 @@ struct GridProperties final
 	int HorizonLinesCount{ 10 };
 	int VerticalLinesCount{ 10 };
     Color GridColor{ 200,203,200 };
+
+	bool DrawAxis{ true };
 };
 
 struct GraphParameters final
@@ -71,15 +73,17 @@ struct GraphParameters final
 	std::vector<double>	X;		// Vector of x's axis point
 	std::vector<double>	Y;		// Vector of y's axis point
 
-	PlotStyle			Style{ PlotStyle::LINE };						// graph style
-	Color				Color{ -1, -1, -1};					// Color to be used for graph plotting
-	std::string			Label{ "function" };
-	size_t				PointRadius{ 2 };
-	unsigned			LineThickness{ 1 };
-	bool				RandomColor{ true };
-
 	std::deque<double>	DequeX;	// Deque of x's axis point
 	std::deque<double>	DequeY;	// Deque of y's axis point
+
+	std::string Label{ "function" };
+
+	PlotStyle Style{ PlotStyle::LINE };						// graph style
+	Color Color{ -1, -1, -1 };					// Color to be used for graph plotting
+	size_t PointRadius{ 2 };
+    unsigned LineThickness{ 1 };
+    bool RandomColor{ true };
+
 	bool UseDeque{ false };
 };
 

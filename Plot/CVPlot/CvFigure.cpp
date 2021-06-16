@@ -84,26 +84,29 @@ void CvFigure::InitializeMinMax(const TContainer& x, const TContainer& y)
 	std::for_each(x.begin(), x.end(),
 		[this](const double x)
 		{
-			if (x < m_minX) m_minX = static_cast<float>(x);
-			if (x > m_maxX) m_maxX = static_cast<float>(x);
+			if (x < m_minX) m_minX = x;
+			if (x > m_maxX) m_maxX = x;
 		}
 	);
 
 	std::for_each(y.begin(), y.end(),
 		[this](const double y)
 		{
-			if (y < m_minY) m_minY = static_cast<float>(y);
-			if (y > m_maxY) m_maxY = static_cast<float>(y);
+			if (y < m_minY) 
+				m_minY = y;
+			if (y > m_maxY) 
+				m_maxY = y;
 		}
 	);
 }
 
 void CvFigure::Initialize()
 {
-	m_minX = FLT_MAX;
-	m_minY = FLT_MAX;
-	m_maxX = FLT_MIN;
-	m_maxY = FLT_MIN;
+	m_minX = DBL_MAX;
+	m_minY = DBL_MAX;
+
+	m_maxX = -100000000000000000.0;
+	m_maxY = -100000000000000000.0;
 
 	for (const auto& graph : m_graphs)
 	{
@@ -117,21 +120,24 @@ void CvFigure::Initialize()
 		}
 	}
 
-	float range = m_maxY - m_minY;
-	const float eps = 1e-9f;
+	auto range = m_maxY - m_minY;
+	const double eps = 1e-9;
 	if (range <= eps)
 	{
-		range = 1.f;
+		range = 1.;
 		m_minY = m_maxY / 2;
 		m_maxY = m_maxY * 3 / 2;
 	}
 
-	m_scaleX = static_cast<float>(m_figureSize.width - m_borderXSize * 2) / (m_maxX - m_minX);
-	m_scaleY = static_cast<float>(m_figureSize.height - m_borderYSize * 2) / range;
+	m_scaleX = double(m_figureSize.width - m_borderXSize * 2) / (m_maxX - m_minX);
+	m_scaleY = double(m_figureSize.height - m_borderYSize * 2) / range;
 }
 
 void CvFigure::DrawAxis()
 {
+	if(!m_gridProperties.DrawAxis)
+		return;
+
 	float yRef = 0;
 
 	const int xAxisPos = m_figureSize.height + m_zero.Y - m_borderYSize

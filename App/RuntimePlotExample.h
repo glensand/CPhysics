@@ -23,16 +23,16 @@ public:
 		graphParams.PointRadius = 2;
 		graphParams.Style = Plotter::PlotStyle::POINT_LINE;
 		graphParams.Color = Plotter::Color{0, 0, 255};
-	
 		graphParams.UseDeque = true;
 
 		for(std::size_t i{ 0 }; i < 100; ++i)
 		{
 			graphParams.DequeX.push_back((double)i / 100);
-			graphParams.DequeY.push_back(2 * ((double)rand() / RAND_MAX) - 1);
+			graphParams.DequeY.push_back(2 * ((double)rand() / RAND_MAX) - 100);
 		}
 
 		Plotter::GridProperties gridProperties;
+		gridProperties.DrawAxis = false;
 		gridProperties.HorizonLinesCount = 10;
 		figure->SetGridProperties(gridProperties);
 		figure->AddGraph(&graphParams);
@@ -45,7 +45,7 @@ public:
 			graphParams.DequeX.pop_front();
 			graphParams.DequeY.pop_front();
 			graphParams.DequeX.push_back((double)xCounter / 100);
-			graphParams.DequeY.push_back(2 * ((double)rand() / RAND_MAX) - 1);
+			graphParams.DequeY.push_back(2 * ((double)rand() / RAND_MAX) - 100);
 			++xCounter;
 		}
 	}
