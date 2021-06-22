@@ -13,7 +13,7 @@ void CvPlot::Present(bool waitKey)
     cv::imshow(m_plotName, m_plot);
     static int rawDelay = 1;
     const auto delay = waitKey ? 0 : rawDelay;
-    cv::waitKey(delay);
+	m_lastKey = cv::waitKey(delay);
 }
 
 const Plot::FigureList& CvPlot::CreateFigure(std::size_t cols, std::size_t rows)

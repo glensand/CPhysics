@@ -40,7 +40,7 @@ public:
     virtual ~ViveExplore() override = default;
 
     virtual void Run(const Params* params = nullptr) override;
-    virtual void Clear() override {}
+    virtual void Clear() override;
 private:
 
     void ProcessKey(int keyCode);
@@ -56,8 +56,8 @@ private:
     Plotter::GraphParameters GeneratePlotParameters();
     Plotter::GraphParameters GenerateSliceParameters(const Plotter::Color& color);
 
-    std::thread pipeThread;
-	Pipe* pipe{ nullptr };
+    std::thread m_pipeThread;
+	Pipe* m_pipe{ nullptr };
     std::mutex mu;
     bool added{ false };
 
@@ -80,8 +80,6 @@ private:
     PlotStyle m_style;
     PointBuffer m_point;
 
-    Point m_curMin{ FLT_MAX, FLT_MAX, FLT_MAX };
-    Point m_curMax{ FLT_MIN, FLT_MIN, FLT_MIN };
     Point m_curMedian{ 0, 0, 0 };
 
     std::vector<Point> m_lastPoints;

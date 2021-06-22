@@ -16,15 +16,32 @@ constexpr std::size_t PointToAverageCount{ 100 };
 
 }
 
-ViveExplore::ViveExplore(PlotStyle style)
-    : m_style(style)
+void ViveExplore::Clear()
 {
+    m_sliceMinX = GenerateSliceParameters({ 0, 255, 0 });
+    m_sliceMedianX = GenerateSliceParameters({ 0, 0, 0 });
+    m_sliceMaxX = GenerateSliceParameters({ 0, 0, 255 });
+
     m_sliceMinY = GenerateSliceParameters({ 0, 255, 0 });
     m_sliceMedianY = GenerateSliceParameters({ 0, 0, 0 });
     m_sliceMaxY = GenerateSliceParameters({ 0, 0, 255 });
+
+    m_sliceMinZ = GenerateSliceParameters({ 0, 255, 0 });
+    m_sliceMedianZ = GenerateSliceParameters({ 0, 0, 0 });
+    m_sliceMaxZ = GenerateSliceParameters({ 0, 0, 255 });
+
+    m_figureX = GeneratePlotParameters();
     m_figureY = GeneratePlotParameters();
+    m_figureZ = GeneratePlotParameters();
+
     m_pipeActive = false;
     m_lastPoints.reserve(PointToAverageCount);
+}
+
+ViveExplore::ViveExplore(PlotStyle style)
+    : m_style(style)
+{
+    ViveExplore::Clear();
 }
 
 void ViveExplore::ProcessNewPoint(std::size_t curIndex)
@@ -71,6 +88,13 @@ void ViveExplore::UpdateAdaptiveRange()
         m_figureZ.DequeX, m_figureZ.DequeY,
         m_curMedian.z, m_lastPoint.z
     );
+
+    m_sliceMedianX.X[0] = m_sliceMedianY.X[0] = m_sliceMedianZ.X[0] = m_figureX.DequeX.front();
+    m_sliceMedianX.X[1] = m_sliceMedianY.X[1] = m_sliceMedianZ.X[1] = m_figureX.DequeX.back();
+
+    m_sliceMedianX.Y[0] = m_sliceMedianX.Y[1] = m_curMedian.x;
+    m_sliceMedianY.Y[0] = m_sliceMedianY.Y[1] = m_curMedian.y;
+    m_sliceMedianZ.Y[0] = m_sliceMedianZ.Y[1] = m_curMedian.z;
 }
 
 void ViveExplore::UpdateAdaptiveRangeFigure(std::deque<double>& x, std::deque<double>& y, 
@@ -178,8 +202,8 @@ void ViveExplore::InitializeFigures(Plotter::Plot& plot)
 {
     auto&& figures = plot.CreateFigure(1, 3);
     auto* figure1 = figures[0];
-    auto* figure2 = figures[0];
-    auto* figure3 = figures[0];
+    auto* figure2 = figures[1];
+    auto* figure3 = figures[2];
 
     if(m_style == PlotStyle::MinMaxFixed || m_style == PlotStyle::AllTimeFixed)
     {
@@ -248,16 +272,16 @@ void ViveExplore::ProcessKey(int keyCode)
 
 void ViveExplore::RunPipeThread()
 {
-    pipe = new Pipe();
+    m_pipe = new Pipe();
     m_pipeActive.store(true);
-    pipeThread = std::thread([this]
+    m_pipeThread = std::thread([this]
     {
         while(m_pipeActive.load(std::memory_order_acquire))
         {
-            m_point.Back->x = pipe->Read<float>();
-            m_point.Back->y = pipe->Read<float>();
-            m_point.Back->z = pipe->Read<float>();
-            m_point.Back->time = pipe->Read<float>();
+            m_point.Back->x = m_pipe->Read<float>();
+            m_point.Back->y = m_pipe->Read<float>();
+            m_point.Back->z = m_pipe->Read<float>();
+            m_point.Back->time = m_pipe->Read<float>();
             std::lock_guard lock(mu);
             m_point.Swap();
             added = true;
@@ -268,5 +292,6 @@ void ViveExplore::RunPipeThread()
 void ViveExplore::StopPipeThread()
 {
     m_pipeActive.store(false, std::memory_order_release);
-    pipeThread.join();
+    m_pipeThread.join();
+    m_pipe->Close();
 }

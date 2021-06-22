@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include <cassert>
+
 #include "Windows.h"
 
 class Pipe final
@@ -53,7 +55,7 @@ public:
 
     void Close()
     {
-        DisconnectNamedPipe(hPipe);
+        CloseHandle(hPipe);
         hPipe = INVALID_HANDLE_VALUE;
     }
 
