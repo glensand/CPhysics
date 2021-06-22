@@ -105,8 +105,8 @@ void CvFigure::Initialize()
 	m_minX = DBL_MAX;
 	m_minY = DBL_MAX;
 
-	m_maxX = -100000000000000000.0;
-	m_maxY = -100000000000000000.0;
+	m_maxX = -DBL_MAX;
+	m_maxY = -DBL_MAX;
 
 	for (const auto& graph : m_graphs)
 	{
