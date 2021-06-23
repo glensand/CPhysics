@@ -4,18 +4,6 @@
 namespace
 {
 
-const Matrix33 ZeroMatrix(
-    Vector3(0, 0, 0),
-    Vector3(0, 0, 0),
-    Vector3(0, 0, 0)
-);
-
-const Matrix33 EqualMatrix(
-    Vector3(1, 0, 0),
-    Vector3(0, 1, 0),
-    Vector3(0, 0, 1)
-);
-
 const Matrix33 AverageMatrix(
     Vector3(1, 4, 5),
     Vector3(5, 1, 4),
@@ -23,12 +11,6 @@ const Matrix33 AverageMatrix(
 );
 
 const auto AverageMatrixDet = -96;
-
-const Matrix33 AverageInverse(
-    Vector3(1, 4, 5),
-    Vector3(5, 1, 4),
-    Vector3(11, -4, 7)
-);
 
 }
 
@@ -74,5 +56,13 @@ TEST(MatrixTest, EqualMatrixDet)
 
 TEST(MatrixTest, AverageMatrixDet)
 {
-    OPEN_ASSERT(AverageMatrix.Det() == -96);
+    OPEN_ASSERT(AverageMatrix.Det() == AverageMatrixDet);
 }
+
+TEST(MatrixTest, AverageMatrixInverse)
+{
+    auto&& inv = AverageMatrix.Inv();
+    auto&& expectedEqual = inv * AverageMatrix;
+    OPEN_ASSERT(expectedEqual == EqualMatrix);
+}
+

@@ -117,4 +117,5 @@ private:
 
     std::atomic_bool m_pipeActive;
     constexpr static Key Calibrate{ 99, 67 };
+    constexpr static Key Undo{ 85, 117 };
 };

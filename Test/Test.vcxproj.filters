@@ -19,6 +19,9 @@
     <ClCompile Include="MatrixRecomputeTest.cpp">
       <Filter>Test</Filter>
     </ClCompile>
+    <ClCompile Include="VectorTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Test.h">

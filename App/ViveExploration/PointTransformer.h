@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include <cassert>
+
 #include "Matrix33.h"
 
 class PointTransformer final
@@ -18,27 +20,45 @@ public:
 
     template<typename PlaneList>
     void Initialize(const PlaneList& plane);
+
+    void Deinitialize() { m_initialized = false; }
+
     [[nodiscard]] bool IsInitialized() const { return m_initialized; }
+
     [[nodiscard]] Vector3 Transform(const Vector3& p) const;
 
 private:
     Vector3 m_zero;
+    Vector3 m_shift;
     Matrix33 m_transformMatrix;
     Matrix33 m_inverseTransformMatrix;
     bool m_initialized{ false };
+
+    constexpr static double Eps{ 0.000000000001 };
 };
 
 template <typename PlaneList>
 void PointTransformer::Initialize(const PlaneList& plane)
 {
-    auto&& x = plane[2] - plane[0];
-    auto&& y = plane[1] - plane[0];
+    auto&& x = plane[0] - plane[1];
+    auto&& y = plane[2] - plane[1];
 
-    y = y - x * (x * y / (x * x));
+    //y = y - x * (x * y / (x * x));
+
+    //assert(x * y < Eps);
+
     auto&& z = Cross(x, y);
-    x.Normalize();
-    y.Normalize();
-    z.Normalize();
+    y = Cross(x, z);
+    //assert(z * y < Eps);
+    //assert(z * x < Eps);
+
+    //x.Normalize();
+    //y.Normalize();
+    //z.Normalize();
+
+    //assert(z * y < Eps);
+    //assert(z * x < Eps);
+    //assert(x * y < Eps);
 
     m_transformMatrix = Matrix33(
         Vector3(x[0], y[0], z[0]),
@@ -48,7 +68,10 @@ void PointTransformer::Initialize(const PlaneList& plane)
 
     m_inverseTransformMatrix = m_transformMatrix.Inv();
 
-    m_zero = plane[0];
+    assert(m_inverseTransformMatrix * m_transformMatrix == EqualMatrix);
+
+    m_zero = plane[1];
+    m_shift = m_inverseTransformMatrix * m_zero;
 
     m_initialized = true;
 }

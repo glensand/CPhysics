@@ -14,8 +14,8 @@
 class Matrix33 final
 {
 public:
-	Matrix33(const Vector3& x, const Vector3& y, const Vector3& z);
-    Matrix33(Vector3* vec);
+	constexpr Matrix33(const Vector3& x, const Vector3& y, const Vector3& z);
+    constexpr Matrix33(Vector3* vec);
 	Matrix33() = default;
 	~Matrix33() = default;
 	
@@ -33,7 +33,7 @@ private:
 	Vector3 m_matrix[3];
 };
 
-inline
+constexpr
 Matrix33::Matrix33(const Vector3& x, const Vector3& y, const Vector3& z)
 {
 	m_matrix[0] = x;
@@ -41,7 +41,7 @@ Matrix33::Matrix33(const Vector3& x, const Vector3& y, const Vector3& z)
 	m_matrix[2] = z;
 }
 
-inline
+constexpr
 Matrix33::Matrix33(Vector3* vec)
     : m_matrix{vec[0], vec[1], vec[2]}
 {
@@ -85,7 +85,7 @@ Matrix33 Matrix33::Inv() const
 	auto&& det = Det();
 
 	auto&& row0 = result[0];
-	row0[0] = (m_matrix[1][1] * m_matrix[1][1] - m_matrix[1][2] * m_matrix[2][1]) / det;
+	row0[0] = (m_matrix[1][1] * m_matrix[2][2] - m_matrix[1][2] * m_matrix[2][1]) / det;
 	row0[1] = (m_matrix[0][2] * m_matrix[2][1] - m_matrix[0][1] * m_matrix[2][2]) / det;
 	row0[2] = (m_matrix[0][1] * m_matrix[1][2] - m_matrix[0][2] * m_matrix[1][1]) / det;
 
@@ -150,3 +150,15 @@ bool Matrix33::operator==(const Matrix33& rhs) const
     }
 	return equal;
 }
+
+static const inline Matrix33 ZeroMatrix(
+	Vector3(0, 0, 0),
+	Vector3(0, 0, 0),
+	Vector3(0, 0, 0)
+);
+
+static const inline Matrix33 EqualMatrix(
+	Vector3(1, 0, 0),
+	Vector3(0, 1, 0),
+	Vector3(0, 0, 1)
+);

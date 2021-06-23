@@ -8,8 +8,6 @@
 
 #pragma once
 
-#include <cassert>
-
 #include "Windows.h"
 
 class Pipe final

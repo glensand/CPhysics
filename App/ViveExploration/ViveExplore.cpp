@@ -1,6 +1,7 @@
 #include "ViveExplore.h"
 
 #include <iomanip>
+#include <iostream>
 #include <numeric>
 
 #include "Pipe.h"
@@ -262,11 +263,19 @@ void ViveExplore::ProcessKey(int keyCode)
     {
         m_planeList.emplace_back(m_lastPoint.x, m_lastPoint.y, m_lastPoint.z);
 
+        std::cout << "New point handled" << std::endl;
+
         if(m_planeList.size() == 3)
         {
             m_transformer.Initialize(m_planeList);
             m_planeList.clear();
+
+            std::cout << "Calibrated" << std::endl;
         }
+    }
+    else if(Undo == keyCode)
+    {
+        m_transformer.Deinitialize();
     }
 }
 

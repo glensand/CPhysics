@@ -9,12 +9,11 @@
 #pragma once
 
 #include <cmath>
-#include <limits>
 
 class Vector3 final
 {
 public:
-    Vector3(double x1 = 0.0, double x2 = 0.0, double x3 = 0.0);
+    constexpr Vector3(double x1 = 0.0, double x2 = 0.0, double x3 = 0.0);
 	~Vector3() = default;
 
 	[[nodiscard]] double At(size_t i) const { return m_x[i]; }
@@ -34,6 +33,7 @@ public:
 
 private:
 	double	m_x[3];
+	static constexpr double Eps{ 0.0000001 };
 };
 
 inline
@@ -72,7 +72,7 @@ Vector3 operator-(const Vector3& left, const Vector3& right)
 	return Vector3(right[0] - left[0], right[1] - left[1], right[2] - left[2]);
 }
 
-inline
+constexpr 
 Vector3::Vector3(double x1, double x2, double x3)
     : m_x{x1, x2, x3}
 {
@@ -87,10 +87,9 @@ double Vector3::Norm() const
 inline
 bool Vector3::operator==(const Vector3& rhs) const
 {
-	auto&& eps = std::numeric_limits<double>::epsilon();
-	return std::abs(m_x[0] - rhs[0]) < eps &&
-		   std::abs(m_x[1] - rhs[1]) < eps &&
-		   std::abs(m_x[2] - rhs[2]) < eps;
+	return std::abs(m_x[0] - rhs[0]) < Eps &&
+		   std::abs(m_x[1] - rhs[1]) < Eps &&
+		   std::abs(m_x[2] - rhs[2]) < Eps;
 }
 
 inline
