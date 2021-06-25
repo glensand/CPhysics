@@ -14,6 +14,8 @@
     <ClCompile Include="OneDimensionalIntegratorFacade.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="ViveExploration\PointTransformer.cpp" />
+    <ClCompile Include="ViveExploration\Stream\Pipe.cpp" />
+    <ClCompile Include="ViveExploration\Stream\TcpStream.cpp" />
     <ClCompile Include="ViveExploration\ViveExplore.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -42,9 +44,11 @@
     <ClInclude Include="task7.h" />
     <ClInclude Include="Task8.h" />
     <ClInclude Include="Task9.h" />
-    <ClInclude Include="ViveExploration\Pipe.h" />
     <ClInclude Include="ViveExploration\Point.h" />
     <ClInclude Include="ViveExploration\PointTransformer.h" />
+    <ClInclude Include="ViveExploration\Stream\Pipe.h" />
+    <ClInclude Include="ViveExploration\Stream\Stream.h" />
+    <ClInclude Include="ViveExploration\Stream\TcpStream.h" />
     <ClInclude Include="ViveExploration\ViveExplore.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -92,7 +96,7 @@
       <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(SolutionDir)\x64\Debug;%(AdditionalLibraryDirectories);$(OPENCV_DIR)\x64\vc15\lib;</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Plot.lib;CPhysics.lib;$(OPENCV_LIBd);</AdditionalDependencies>
+      <AdditionalDependencies>Plot.lib;CPhysics.lib;$(OPENCV_LIBd);ws2_32.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -109,7 +113,7 @@
       <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(SolutionDir)/x64/Release;</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>Plot.lib;CPhysics.lib</AdditionalDependencies>
+      <AdditionalDependencies>Plot.lib;CPhysics.lib;ws2_32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

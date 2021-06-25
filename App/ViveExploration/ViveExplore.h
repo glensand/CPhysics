@@ -17,7 +17,7 @@
 #include "PointTransformer.h"
 #include "../ITask.h"
 
-class Pipe;
+class Stream;
 
 enum class PlotStyle
 {
@@ -40,12 +40,13 @@ public:
     virtual ~ViveExplore() override = default;
 
     virtual void Run(const Params* params = nullptr) override;
+    void ClearPlot();
     virtual void Clear() override;
 private:
 
     void ProcessKey(int keyCode);
-    void RunPipeThread();
-    void StopPipeThread();
+    void RunStream();
+    void StopStream();
     void ProcessNewPoint(std::size_t curIndex);
     void UpdateAdaptiveRange();
     void UpdateAdaptiveRangeFigure(std::deque<double>& x, std::deque<double>& y, float& median, float curValue);
@@ -53,13 +54,13 @@ private:
     void UpdateAllTimeFixed();
     void InitializeFigures(Plotter::Plot& plot);
     void RunDrawing();
-    Plotter::GraphParameters GeneratePlotParameters();
+    Plotter::GraphParameters GeneratePlotParameters() const;
     Plotter::GraphParameters GenerateSliceParameters(const Plotter::Color& color);
 
     std::thread m_pipeThread;
-	Pipe* m_pipe{ nullptr };
-    std::mutex mu;
-    bool added{ false };
+	Stream* m_stream{ nullptr };
+    std::mutex m_mutex;
+    bool m_added{ false };
 
     struct PointBuffer final
     {
@@ -118,4 +119,5 @@ private:
     std::atomic_bool m_pipeActive;
     constexpr static Key Calibrate{ 99, 67 };
     constexpr static Key Undo{ 85, 117 };
+    constexpr static Key Reset{ 82, 114 };
 };

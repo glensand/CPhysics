@@ -4,20 +4,19 @@
 #include <iostream>
 #include <numeric>
 
-#include "Pipe.h"
-#include "CVPlot/CvPlot.h"
+#include "CvPlot/CvPlot.h"
 #include "Interface/Figure.h"
+#include "Stream/TcpStream.h"
 
 namespace
 {
 
 constexpr std::size_t PointsCount{ 1000 };
-constexpr std::size_t IndexBeginCompare{ 3000 };
 constexpr std::size_t PointToAverageCount{ 100 };
 
 }
 
-void ViveExplore::Clear()
+void ViveExplore::ClearPlot()
 {
     m_sliceMinX = GenerateSliceParameters({ 0, 255, 0 });
     m_sliceMedianX = GenerateSliceParameters({ 0, 0, 0 });
@@ -35,8 +34,16 @@ void ViveExplore::Clear()
     m_figureY = GeneratePlotParameters();
     m_figureZ = GeneratePlotParameters();
 
-    m_pipeActive = false;
+    m_curMedian = Point{ 0, 0,0 };
+
     m_lastPoints.reserve(PointToAverageCount);
+}
+
+void ViveExplore::Clear()
+{
+    ClearPlot();
+    m_transformer.Deinitialize();
+    m_pipeActive = false;
 }
 
 ViveExplore::ViveExplore(PlotStyle style)
@@ -49,8 +56,8 @@ void ViveExplore::ProcessNewPoint(std::size_t curIndex)
 {
     bool newAdded;
     {
-        std::lock_guard lock(mu);
-        newAdded = added;
+        std::lock_guard lock(m_mutex);
+        newAdded = m_added;
         m_lastPoint = *m_point.Front;
     }
 
@@ -166,7 +173,7 @@ void ViveExplore::UpdateAllTimeFixed()
     }
 }
 
-Plotter::GraphParameters ViveExplore::GeneratePlotParameters()
+Plotter::GraphParameters ViveExplore::GeneratePlotParameters() const
 {
     Plotter::GraphParameters graphParams;
     graphParams.PointRadius = 1;
@@ -225,6 +232,12 @@ void ViveExplore::InitializeFigures(Plotter::Plot& plot)
         figure3->AddGraph(&m_sliceMedianZ);
     }
 
+    Plotter::GridProperties grid;
+    grid.DrawAxis = false;
+
+    for (auto&& figure : figures)
+        figure->SetGridProperties(grid);
+
     figure1->AddGraph(&m_figureX);
     figure2->AddGraph(&m_figureY);
     figure3->AddGraph(&m_figureZ);
@@ -252,9 +265,9 @@ void ViveExplore::RunDrawing()
 
 void ViveExplore::Run(const Params* params)
 {
-    RunPipeThread();
+    RunStream();
     RunDrawing();
-    StopPipeThread();
+    StopStream();
 }
 
 void ViveExplore::ProcessKey(int keyCode)
@@ -270,37 +283,45 @@ void ViveExplore::ProcessKey(int keyCode)
             m_transformer.Initialize(m_planeList);
             m_planeList.clear();
 
-            std::cout << "Calibrated" << std::endl;
+            std::cout << "Calibrated" << std::endl; 
         }
     }
     else if(Undo == keyCode)
     {
         m_transformer.Deinitialize();
     }
+    else if(Reset == keyCode && m_style == PlotStyle::AdaptiveRange)
+    {
+        ClearPlot();
+    }
 }
 
-void ViveExplore::RunPipeThread()
+void ViveExplore::RunStream()
 {
-    m_pipe = new Pipe();
+    m_stream = new TcpStream("localhost", 11488);
+
+    m_stream->Connect();
+
     m_pipeActive.store(true);
     m_pipeThread = std::thread([this]
     {
         while(m_pipeActive.load(std::memory_order_acquire))
         {
-            m_point.Back->x = m_pipe->Read<float>();
-            m_point.Back->y = m_pipe->Read<float>();
-            m_point.Back->z = m_pipe->Read<float>();
-            m_point.Back->time = m_pipe->Read<float>();
-            std::lock_guard lock(mu);
+            m_point.Back->x = m_stream->Read<float>();
+            m_point.Back->y = m_stream->Read<float>();
+            m_point.Back->z = m_stream->Read<float>();
+            m_point.Back->time = m_stream->Read<float>();
+            std::lock_guard lock(m_mutex);
             m_point.Swap();
-            added = true;
+            m_added = true;
         }
     });
 }
 
-void ViveExplore::StopPipeThread()
+void ViveExplore::StopStream()
 {
     m_pipeActive.store(false, std::memory_order_release);
     m_pipeThread.join();
-    m_pipe->Close();
+    m_stream->Close(Stream::ClosingPolicy::ClearOperations);
+    delete m_stream;
 }

@@ -30,6 +30,12 @@
     <ClCompile Include="ViveExploration\PointTransformer.cpp">
       <Filter>Tasks\ViveExploartion</Filter>
     </ClCompile>
+    <ClCompile Include="ViveExploration\Stream\Pipe.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="ViveExploration\Stream\TcpStream.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OneDimensionalIntegratorFacade.h">
@@ -95,9 +101,6 @@
     <ClInclude Include="RuntimePlotExample.h">
       <Filter>Tasks</Filter>
     </ClInclude>
-    <ClInclude Include="ViveExploration\Pipe.h">
-      <Filter>Tasks\ViveExploartion</Filter>
-    </ClInclude>
     <ClInclude Include="ViveExploration\ViveExplore.h">
       <Filter>Tasks\ViveExploartion</Filter>
     </ClInclude>
@@ -119,5 +122,8 @@
     <ClInclude Include="PlotterTest\DoubleDoubleTest.h">
       <Filter>Tasks\PlotterTest</Filter>
     </ClInclude>
+    <ClInclude Include="ViveExploration\Stream\Pipe.h" />
+    <ClInclude Include="ViveExploration\Stream\Stream.h" />
+    <ClInclude Include="ViveExploration\Stream\TcpStream.h" />
   </ItemGroup>
 </Project>
