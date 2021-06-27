@@ -58,6 +58,9 @@ void CvFigure::AddGraph(const GraphParameters* params)
 void CvFigure::SetGridProperties(const GridProperties& gridProperties)
 {
 	m_gridProperties = gridProperties;
+
+	if (m_gridProperties.PrintRange)
+		m_rightGap = DefaultRightGap;
 }
 
 void CvFigure::Show()
@@ -67,6 +70,7 @@ void CvFigure::Show()
 	DrawGrid();
 	DrawPlots();
 	DrawLabels();
+	DrawRange();
 }
 
 std::string CvFigure::Format(float value) const
@@ -129,7 +133,7 @@ void CvFigure::Initialize()
 		m_maxY = m_maxY * 3 / 2;
 	}
 
-	m_scaleX = double(m_figureSize.width - m_borderXSize * 2) / (m_maxX - m_minX);
+	m_scaleX = double(m_figureSize.width - m_borderXSize * 2 - m_rightGap) / (m_maxX - m_minX);
 	m_scaleY = double(m_figureSize.height - m_borderYSize * 2) / range;
 }
 
@@ -145,7 +149,7 @@ void CvFigure::DrawAxis()
 
 	// x axis
 	cv::line(m_plot, { m_borderXSize + m_zero.X, xAxisPos },
-		{ m_figureSize.width + m_zero.X - m_borderXSize, xAxisPos },
+		{ m_figureSize.width + m_zero.X - m_borderXSize - m_rightGap, xAxisPos },
 		DEFAULT_AXIS_PROPERTIES.Color, DEFAULT_AXIS_PROPERTIES.Thickness);
 
 	// TODO:move y axis to (0; 0)
@@ -165,7 +169,7 @@ void CvFigure::DrawGrid()
 	for (int i{ 0 }; i < m_gridProperties.HorizonLinesCount + 2; ++i)
 	{
 		cv::line(m_plot, { m_borderXSize + m_zero.X, curY },
-			{ m_figureSize.width + m_zero.X - m_borderXSize, curY },
+			{ m_figureSize.width + m_zero.X - m_borderXSize - m_rightGap, curY },
 			gridColor, m_gridProperties.HorizonThickness);
 
 		DrawHorizonLineCoordinate(curY, i);
@@ -173,7 +177,7 @@ void CvFigure::DrawGrid()
 		curY += yStep;
 	}
 
-	const int xStep = (m_figureSize.width - 2 * m_borderXSize) / (m_gridProperties.VerticalLinesCount + 1);
+	const int xStep = (m_figureSize.width - 2 * m_borderXSize - m_rightGap) / (m_gridProperties.VerticalLinesCount + 1);
 	int curX = m_borderXSize + m_zero.X;
 
 	for (int i{ 0 }; i < m_gridProperties.VerticalLinesCount + 2; ++i)
@@ -237,6 +241,27 @@ void CvFigure::DrawPlots()
 void CvFigure::DrawLabels()
 {
 
+}
+
+void CvFigure::DrawRange() const
+{
+	if (!m_gridProperties.PrintRange)
+		return;
+
+	PutText("Min y: ", 10 + m_zero.X + m_figureSize.width - m_rightGap - m_borderXSize, m_zero.Y + 30);
+	PutText(Format(m_minY), 55 + m_zero.X + m_figureSize.width - m_rightGap - m_borderXSize, m_zero.Y + 30);
+
+	PutText("Max y: ", 10 + m_zero.X + m_figureSize.width - m_rightGap - m_borderXSize, m_zero.Y + 50);
+	PutText(Format(m_maxY), 55 + m_zero.X + m_figureSize.width - m_rightGap - m_borderXSize, m_zero.Y + 50);
+
+	PutText("Range y: ", 10 + m_zero.X + m_figureSize.width - m_rightGap - m_borderXSize, m_zero.Y + 70);
+	PutText(Format(m_maxY - m_minY), 70 + m_zero.X + m_figureSize.width - m_rightGap - m_borderXSize, m_zero.Y + 70);
+}
+
+void CvFigure::PutText(const std::string& text, int x, int y) const
+{
+	cv::putText(m_plot, text, cvPoint(x, y),
+		DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
 }
 
 Color CvFigure::GenerateColorRand()

@@ -41,6 +41,8 @@ private:
 	void			DrawVerticalLineCoordinate(int xPos, int lineIndex);
 	void			DrawPlots();
 	void			DrawLabels();
+	void			DrawRange() const;
+	void			PutText(const std::string& text, int x, int y) const;
 	Color			GenerateColorRand();
 	cv::Scalar		DeduceColor(const Color &color);
 	std::string		Format(float value) const;
@@ -53,6 +55,7 @@ private:
 	const Point m_zero;
 	const int m_borderXSize{ 55 };
 	const int m_borderYSize{ 10 };
+	int m_rightGap{ 0 };
 
 	double m_minX{ 0 };
 	double m_maxX{ 0 };
@@ -65,6 +68,8 @@ private:
 	GraphList m_graphs;
 	GridProperties m_gridProperties;
 	std::set<Color> m_usedColors;
+
+	constexpr static int DefaultRightGap{ 65 };
 };
 
 }

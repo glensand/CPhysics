@@ -28,6 +28,11 @@ public:
 	
 		graphParams.UseDeque = true;
 
+		Plotter::GridProperties gridProperties;
+		gridProperties.PrintRange = true;
+
+		figure1->SetGridProperties(gridProperties);
+
 		for(std::size_t i{ 0 }; i < 100; ++i)
 		{
 			graphParams.DequeX.push_back((double)i / 100);
