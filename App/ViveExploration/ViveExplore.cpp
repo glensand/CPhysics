@@ -36,6 +36,7 @@ void ViveExplore::ClearPlot()
 
     m_curMedian = Point{ 0, 0,0 };
 
+    m_lastPoints.clear();
     m_lastPoints.reserve(PointToAverageCount);
 }
 
@@ -301,7 +302,7 @@ void ViveExplore::ProcessKey(int keyCode)
     {
         m_transformer.Deinitialize();
     }
-    else if(Reset == keyCode && m_style == PlotStyle::AdaptiveRange)
+    else if(Reset == keyCode)
     {
         ClearPlot();
     }
