@@ -112,8 +112,8 @@ void ViveExplore::UpdateAdaptiveRangeFigure(std::deque<double>& x, std::deque<do
 
     if(x.size() < PointsCount)
     {
-        median = median / (x.size() + 1) * x.size();
-        median += pYMm / (x.size() > 0 ? x.size() : 1);
+        median = (float)x.size() * median / float(x.size() + 1);
+        median += pYMm / float(x.size() + 1);
     }
     else
     {
@@ -191,12 +191,6 @@ Plotter::GraphParameters ViveExplore::GeneratePlotParameters() const
     graphParams.Color = Plotter::Color{ 255, 0, 0 };
     graphParams.UseDeque = m_style != PlotStyle::AllTimeFixed;
 
-    //if(m_style != PlotStyle::AllTimeFixed)
-    //{
-    //    graphParams.DequeX.resize(PointsCount, 0);
-    //    graphParams.DequeY.resize(PointsCount, 0);
-    //}
-
     return graphParams;
 }
 
@@ -244,9 +238,16 @@ void ViveExplore::InitializeFigures(Plotter::Plot& plot)
 
     Plotter::GridProperties grid;
     grid.DrawAxis = false;
+    grid.PrintRange = true;
 
-    for (auto&& figure : figures)
-        figure->SetGridProperties(grid);
+    grid.FunctionName = "X axis";
+    figure1->SetGridProperties(grid);
+
+    grid.FunctionName = "Y axis";
+    figure2->SetGridProperties(grid);
+
+    grid.FunctionName = "Z axis";
+    figure3->SetGridProperties(grid);
 
     figure1->AddGraph(&m_figureX);
     figure2->AddGraph(&m_figureY);

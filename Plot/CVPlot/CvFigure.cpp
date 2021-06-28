@@ -195,16 +195,14 @@ void CvFigure::DrawGrid()
 void CvFigure::DrawHorizonLineCoordinate(int yPos, int lineIndex)
 {
 	const auto y = m_maxY - (float)lineIndex * (m_maxY - m_minY) / (float)(m_gridProperties.HorizonLinesCount + 1);
-	cv::putText(m_plot, Format(y), cvPoint(m_zero.X, yPos),
-		DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
+	PutText(Format(y), m_zero.X, yPos);
 }
 
 void CvFigure::DrawVerticalLineCoordinate(int xPos, int lineIndex)
 {
 	auto chh = 12;
 	const auto x = m_minX + (float)lineIndex * (m_maxX - m_minX) / (float)(m_gridProperties.VerticalLinesCount + 1);
-	cv::putText(m_plot, Format(x), cvPoint(xPos + 1, m_figureSize.height + m_zero.Y - m_borderYSize + chh + 3),
-		DEFAULT_FONT_PROPERTIES.Type, DEFAULT_FONT_PROPERTIES.Scale, DEFAULT_FONT_PROPERTIES.Color);
+	PutText(Format(x), xPos + 1, m_figureSize.height + m_zero.Y - m_borderYSize + chh + 3);
 }
 
 void CvFigure::DrawPlots()
@@ -248,14 +246,24 @@ void CvFigure::DrawRange() const
 	if (!m_gridProperties.PrintRange)
 		return;
 
-	PutText("Min y: ", 10 + m_zero.X + m_figureSize.width - m_rightGap - m_borderXSize, m_zero.Y + 30);
-	PutText(Format(m_minY), 55 + m_zero.X + m_figureSize.width - m_rightGap - m_borderXSize, m_zero.Y + 30);
 
-	PutText("Max y: ", 10 + m_zero.X + m_figureSize.width - m_rightGap - m_borderXSize, m_zero.Y + 50);
-	PutText(Format(m_maxY), 55 + m_zero.X + m_figureSize.width - m_rightGap - m_borderXSize, m_zero.Y + 50);
+	int yGap = 30;
+	if(!m_gridProperties.FunctionName.empty())
+	{
+		PutText(m_gridProperties.FunctionName, 10 + m_zero.X + m_figureSize.width - m_rightGap - m_borderXSize, m_zero.Y + yGap);
+		yGap += 20;
+	}
 
-	PutText("Range y: ", 10 + m_zero.X + m_figureSize.width - m_rightGap - m_borderXSize, m_zero.Y + 70);
-	PutText(Format(m_maxY - m_minY), 70 + m_zero.X + m_figureSize.width - m_rightGap - m_borderXSize, m_zero.Y + 70);
+	PutText("Min f: ", 10 + m_zero.X + m_figureSize.width - m_rightGap - m_borderXSize, m_zero.Y + yGap);
+	PutText(Format(m_minY), 55 + m_zero.X + m_figureSize.width - m_rightGap - m_borderXSize, m_zero.Y + yGap);
+	yGap += 20;
+
+	PutText("Max f: ", 10 + m_zero.X + m_figureSize.width - m_rightGap - m_borderXSize, m_zero.Y + yGap);
+	PutText(Format(m_maxY), 55 + m_zero.X + m_figureSize.width - m_rightGap - m_borderXSize, m_zero.Y + yGap);
+	yGap += 20;
+
+	PutText("Range f: ", 10 + m_zero.X + m_figureSize.width - m_rightGap - m_borderXSize, m_zero.Y + yGap);
+	PutText(Format(m_maxY - m_minY), 70 + m_zero.X + m_figureSize.width - m_rightGap - m_borderXSize, m_zero.Y + yGap);
 }
 
 void CvFigure::PutText(const std::string& text, int x, int y) const

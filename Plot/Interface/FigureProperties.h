@@ -56,6 +56,8 @@ struct Color final
 
 struct GridProperties final
 {
+	std::string FunctionName;
+
 	int HorizonThickness{ 1 };
 	int VerticalThickness{ 1 };
 	int HorizonLinesCount{ 10 };
