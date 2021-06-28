@@ -61,7 +61,7 @@ struct GridProperties final
 	int HorizonLinesCount{ 10 };
 	int VerticalLinesCount{ 10 };
     Color GridColor{ 200,203,200 };
-
+	bool PrintRange{ false };
 	bool DrawAxis{ true };
 };
 
@@ -83,7 +83,6 @@ struct GraphParameters final
 	size_t PointRadius{ 2 };
     unsigned LineThickness{ 1 };
     bool RandomColor{ true };
-
 	bool UseDeque{ false };
 };
 
