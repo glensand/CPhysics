@@ -109,12 +109,22 @@ void ViveExplore::UpdateAdaptiveRangeFigure(std::deque<double>& x, std::deque<do
     float& median, float curValue)
 {
     auto pYMm = curValue * 1000;
-    auto frontY = y.front();
 
-    x.pop_front();
-    y.pop_front();
-    median += curValue;
-    median -= frontY / 1000;
+    if(x.size() < PointsCount)
+    {
+        median = median / (x.size() + 1) * x.size();
+        median += pYMm / (x.size() > 0 ? x.size() : 1);
+    }
+    else
+    {
+        auto frontY = y.front();
+
+        x.pop_front();
+        y.pop_front();
+
+        median += curValue;
+        median -= frontY / 1000;
+    }
 
     x.push_back((double)m_lastPoint.time);
     y.push_back(pYMm);
@@ -181,11 +191,11 @@ Plotter::GraphParameters ViveExplore::GeneratePlotParameters() const
     graphParams.Color = Plotter::Color{ 255, 0, 0 };
     graphParams.UseDeque = m_style != PlotStyle::AllTimeFixed;
 
-    if(m_style != PlotStyle::AllTimeFixed)
-    {
-        graphParams.DequeX.resize(PointsCount, 0);
-        graphParams.DequeY.resize(PointsCount, 0);
-    }
+    //if(m_style != PlotStyle::AllTimeFixed)
+    //{
+    //    graphParams.DequeX.resize(PointsCount, 0);
+    //    graphParams.DequeY.resize(PointsCount, 0);
+    //}
 
     return graphParams;
 }
