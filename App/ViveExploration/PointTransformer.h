@@ -43,14 +43,8 @@ void PointTransformer::Initialize(const PlaneList& plane)
     auto&& x = plane[0] - plane[1];
     auto&& y = plane[2] - plane[1];
 
-   /* y = y - x * (x * y / (x * x));
-
-    assert(x * y < Eps);*/
-
     auto&& z = Cross(x, y);
     y = Cross(x, z);
-    //assert(z * y < Eps);
-    //assert(z * x < Eps);
 
     x.Normalize();
     y.Normalize();

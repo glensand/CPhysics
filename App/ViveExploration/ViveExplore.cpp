@@ -76,8 +76,10 @@ void ViveExplore::ProcessNewPoint(std::size_t curIndex)
 
         if (m_style == PlotStyle::AllTimeFixed)
             UpdateAllTimeFixed();
-        else
+        else if (m_style == PlotStyle::AdaptiveRange)
             UpdateAdaptiveRange();
+        else
+            UpdateMinMaxFixed();
     }
 }
 
@@ -184,6 +186,17 @@ void ViveExplore::UpdateAllTimeFixed()
     }
 }
 
+void ViveExplore::UpdateMinMaxFixed()
+{
+    m_figureX.DequeX.emplace_back(m_lastPoint.time);
+    m_figureY.DequeX.emplace_back(m_lastPoint.time);
+    m_figureZ.DequeX.emplace_back(m_lastPoint.time);
+
+    m_figureX.DequeY.emplace_back(m_lastPoint.x * 1000);
+    m_figureY.DequeY.emplace_back(m_lastPoint.y * 1000);
+    m_figureZ.DequeY.emplace_back(m_lastPoint.z * 1000);
+}
+
 Plotter::GraphParameters ViveExplore::GeneratePlotParameters() const
 {
     Plotter::GraphParameters graphParams;
@@ -218,7 +231,7 @@ void ViveExplore::InitializeFigures(Plotter::Plot& plot)
     auto* figure2 = figures[1];
     auto* figure3 = figures[2];
 
-    if(m_style == PlotStyle::MinMaxFixed || m_style == PlotStyle::AllTimeFixed)
+    if(m_style == PlotStyle::AllTimeFixed)
     {
         figure1->AddGraph(&m_sliceMaxX);
         figure1->AddGraph(&m_sliceMinX);
@@ -230,7 +243,7 @@ void ViveExplore::InitializeFigures(Plotter::Plot& plot)
         figure3->AddGraph(&m_sliceMinZ);
     }
 
-    if(m_style != PlotStyle::AllTimeFixed)
+    if(m_style == PlotStyle::AdaptiveRange)
     {
         figure1->AddGraph(&m_sliceMedianX);
         figure2->AddGraph(&m_sliceMedianY);

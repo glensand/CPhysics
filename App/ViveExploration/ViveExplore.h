@@ -52,6 +52,7 @@ private:
     void UpdateAdaptiveRangeFigure(std::deque<double>& x, std::deque<double>& y, float& median, float curValue);
     void AddSliceGraphPoint(Graph3Set&& graph, double averageT, const Point& point);
     void UpdateAllTimeFixed();
+    void UpdateMinMaxFixed();
     void InitializeFigures(Plotter::Plot& plot);
     void RunDrawing();
     Plotter::GraphParameters GeneratePlotParameters() const;
