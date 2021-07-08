@@ -8,26 +8,10 @@
 
 #pragma once
 
-#include <mutex>
-#include <thread>
-
-#include "Interface/FigureProperties.h"
-#include "Interface/Plot.h"
-#include "Point.h"
+#include "ViveExploration/ViveExploreBase.h"
 #include "PointTransformer.h"
-#include "../ITask.h"
 
-class Stream;
-
-enum class PlotStyle
-{
-    MinMaxFixed,
-    AdaptiveRange,
-    AllTimeFixed,
-    SlippingAverage,
-};
-
-class ViveExplore : public ITask
+class ViveExplore final : public ViveExploreBase
 {
     struct Graph3Set final
     {
@@ -39,54 +23,23 @@ class ViveExplore : public ITask
 public:
     ViveExplore(PlotStyle style = PlotStyle::AdaptiveRange);
     virtual ~ViveExplore() override = default;
-
-    virtual void Run(const Params* params = nullptr) override;
-    virtual void Clear() override;
+    
 private:
-	void ClearPlot();
-    void ProcessKey(int keyCode);
-    void RunStream();
-    void StopStream();
-    void ProcessNewPoint(std::size_t curIndex);
+	virtual void ClearPlot() override;
+    virtual void ProcessKeyImpl(int keyCode) override;
+    virtual void ProcessNewPointImpl(std::size_t curIndex) override;
+    virtual void InitializeFigures(Plotter::Plot& plot) override;
+
     void UpdateAdaptiveRange();
     void UpdateAdaptiveRangeFigure(std::deque<double>& x, std::deque<double>& y, float& median, float curValue);
     void AddSliceGraphPoint(Graph3Set&& graph, double averageT, const Point& point);
     void UpdateAllTimeFixed();
     void UpdateMinMaxFixed();
     void UpdateTrend(const Plotter::GraphParameters& graph, Plotter::GraphParameters& trend);
-    void InitializeFigures(Plotter::Plot& plot);
-    void RunDrawing();
-    Plotter::GraphParameters GeneratePlotParameters() const;
-    Plotter::GraphParameters GenerateSliceParameters(const Plotter::Color& color);
-
-    std::thread m_pipeThread;
-	Stream* m_stream{ nullptr };
-    std::mutex m_mutex;
-    bool m_added{ false };
-
-    struct PointBuffer final
-    {
-        Point Buffer1;
-        Point Buffer2;
-
-        Point* Front{ &Buffer1};
-        Point* Back{ &Buffer2 };
-
-        void Swap()
-        {
-            auto* temp = Front;
-            Front = Back;
-            Back = temp;
-        }
-    };
-
-    PlotStyle m_style;
-    PointBuffer m_point;
 
     Point m_curMedian{ 0, 0, 0 };
 
     std::vector<Point> m_lastPoints;
-    Point m_lastPoint;
     PointTransformer m_transformer;
     std::vector<Vector3> m_planeList;
 
@@ -110,20 +63,6 @@ private:
     Plotter::GraphParameters m_figureX;
     Plotter::GraphParameters m_figureZ;
 
-    constexpr static std::size_t SpaceCode{ 32 };
-
-    struct Key final
-    {
-        const int Key1;
-        const int Key2;
-        bool operator==(int key) const
-        {
-            return Key1 == key || Key2 == key;
-        }
-    };
-
-    std::atomic_bool m_pipeActive;
     constexpr static Key Calibrate{ 99, 67 };
     constexpr static Key Undo{ 85, 117 };
-    constexpr static Key Reset{ 82, 114 };
 };

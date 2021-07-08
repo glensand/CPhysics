@@ -17,6 +17,8 @@
     <ClCompile Include="ViveExploration\Stream\Pipe.cpp" />
     <ClCompile Include="ViveExploration\Stream\TcpStream.cpp" />
     <ClCompile Include="ViveExploration\ViveExplore.cpp" />
+    <ClCompile Include="ViveExploration\ViveExploreBase.cpp" />
+    <ClCompile Include="ViveExploration\ViveExploreFilter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bigtask17.h" />
@@ -50,6 +52,8 @@
     <ClInclude Include="ViveExploration\Stream\Stream.h" />
     <ClInclude Include="ViveExploration\Stream\TcpStream.h" />
     <ClInclude Include="ViveExploration\ViveExplore.h" />
+    <ClInclude Include="ViveExploration\ViveExploreBase.h" />
+    <ClInclude Include="ViveExploration\ViveExploreFilter.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CD15BFEF-65B6-409C-ABC9-B58EDA47B321}</ProjectGuid>
@@ -87,7 +91,7 @@
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)\App;$(SolutionDir)\CPhysics;$(OPENCV_DIR)\include;$(SolutionDir)\Plot;$(SolutionDir)\LinearAlgebra</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\App;$(SolutionDir)\CPhysics;$(OPENCV_DIR)\include;$(SolutionDir)\Plot;$(SolutionDir)\LinearAlgebra;$(SolutionDir)\Deps</AdditionalIncludeDirectories>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -104,7 +108,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DebugInformationFormat />
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)\App;$(SolutionDir)\CPhysics;$(OPENCV_DIR)\include;$(SolutionDir)\Plot;$(SolutionDir)\LinearAlgebra</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\App;$(SolutionDir)\CPhysics;$(OPENCV_DIR)\include;$(SolutionDir)\Plot;$(SolutionDir)\LinearAlgebra;$(SolutionDir)\Deps</AdditionalIncludeDirectories>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>

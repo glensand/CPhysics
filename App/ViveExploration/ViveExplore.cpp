@@ -1,12 +1,10 @@
 #include "ViveExplore.h"
 
-#include <iomanip>
-#include <iostream>
 #include <numeric>
+#include <iostream>
 
 #include "CvPlot/CvPlot.h"
 #include "Interface/Figure.h"
-#include "Stream/TcpStream.h"
 
 namespace
 {
@@ -14,7 +12,13 @@ namespace
 constexpr unsigned PointsCount{ 1000 };
 constexpr unsigned PointToAverageCount{ 100 };
 constexpr unsigned PointToTrendLine{ 100 };
- ;
+
+}
+
+ViveExplore::ViveExplore(PlotStyle style)
+    : ViveExploreBase(style)
+{
+    ViveExplore::Clear();
 }
 
 void ViveExplore::ClearPlot()
@@ -45,47 +49,25 @@ void ViveExplore::ClearPlot()
     m_lastPoints.reserve(PointToAverageCount);
 }
 
-void ViveExplore::Clear()
+void ViveExplore::ProcessNewPointImpl(std::size_t curIndex)
 {
-    ClearPlot();
-    m_transformer.Deinitialize();
-    m_pipeActive = false;
-}
-
-ViveExplore::ViveExplore(PlotStyle style)
-    : m_style(style)
-{
-    ViveExplore::Clear();
-}
-
-void ViveExplore::ProcessNewPoint(std::size_t curIndex)
-{
-    bool newAdded;
+    if(m_transformer.IsInitialized())
     {
-        std::lock_guard lock(m_mutex);
-        newAdded = m_added;
-        m_lastPoint = *m_point.Front;
+        auto&& transformed = m_transformer.Transform(
+            Vector3(m_lastPoint.x, m_lastPoint.y, m_lastPoint.z)
+        );
+        m_lastPoint.x = transformed[0];
+        m_lastPoint.y = transformed[1];
+        m_lastPoint.z = transformed[2];
     }
 
-    if(newAdded)
-    {
-        if(m_transformer.IsInitialized())
-        {
-            auto&& transformed = m_transformer.Transform(
-                Vector3(m_lastPoint.x, m_lastPoint.y, m_lastPoint.z)
-            );
-            m_lastPoint.x = transformed[0];
-            m_lastPoint.y = transformed[1];
-            m_lastPoint.z = transformed[2];
-        }
-
-        if (m_style == PlotStyle::AllTimeFixed)
-            UpdateAllTimeFixed();
-        else if (m_style == PlotStyle::AdaptiveRange)
-            UpdateAdaptiveRange();
-        else
-            UpdateMinMaxFixed();
-    }
+    if (m_style == PlotStyle::AllTimeFixed)
+        UpdateAllTimeFixed();
+    else if (m_style == PlotStyle::AdaptiveRange)
+        UpdateAdaptiveRange();
+    else
+        UpdateMinMaxFixed();
+    
 }
 
 void ViveExplore::UpdateAdaptiveRange()
@@ -235,33 +217,6 @@ void ViveExplore::UpdateTrend(const Plotter::GraphParameters& graph, Plotter::Gr
     trend.X[1] = graph.DequeX.back();
 }
 
-Plotter::GraphParameters ViveExplore::GeneratePlotParameters() const
-{
-    Plotter::GraphParameters graphParams;
-    graphParams.PointRadius = 1;
-    graphParams.Style = m_style != PlotStyle::AllTimeFixed ? Plotter::PlotStyle::POINT_LINE : Plotter::PlotStyle::LINE;
-    graphParams.Color = Plotter::Color{ 255, 0, 0 };
-    graphParams.UseDeque = m_style != PlotStyle::AllTimeFixed;
-
-    return graphParams;
-}
-
-Plotter::GraphParameters ViveExplore::GenerateSliceParameters(const Plotter::Color& color)
-{
-    Plotter::GraphParameters sliceParameters;
-    sliceParameters.Style = Plotter::PlotStyle::LINE;
-    sliceParameters.Color = color;
-
-    if(m_style != PlotStyle::AllTimeFixed)
-    {
-        sliceParameters.LineThickness = 2;
-        sliceParameters.X.resize(2, 0);
-        sliceParameters.Y.resize(2, 0);
-    }
-    
-    return sliceParameters;
-}
-
 void ViveExplore::InitializeFigures(Plotter::Plot& plot)
 {
     auto&& figures = plot.CreateFigure(1, 3);
@@ -313,34 +268,7 @@ void ViveExplore::InitializeFigures(Plotter::Plot& plot)
     figure3->AddGraph(&m_figureZ);
 }
 
-void ViveExplore::RunDrawing()
-{
-    Plotter::CvPlot plot;
-
-    InitializeFigures(plot);
-
-    std::size_t curIndex{ 0 };
-    int lastKey = 0;
-    while (lastKey != SpaceCode)
-    {
-        ProcessKey(lastKey);
-        ProcessNewPoint(curIndex);
-        curIndex++;
-        plot.Show(false);
-        lastKey = plot.GetLastKey();
-    }
-
-    plot.Close();
-}
-
-void ViveExplore::Run(const Params* params)
-{
-    RunStream();
-    RunDrawing();
-    StopStream();
-}
-
-void ViveExplore::ProcessKey(int keyCode)
+void ViveExplore::ProcessKeyImpl(int keyCode)
 {
     if(Calibrate == keyCode)
     {
@@ -360,39 +288,4 @@ void ViveExplore::ProcessKey(int keyCode)
     {
         m_transformer.Deinitialize();
     }
-    else if(Reset == keyCode)
-    {
-        ClearPlot();
-    }
-}
-
-void ViveExplore::RunStream()
-{
-    m_stream = new TcpStream("localhost", 11488);
-
-    m_stream->Connect();
-
-    m_pipeActive.store(true);
-    m_pipeThread = std::thread([this]
-    {
-        while(m_pipeActive.load(std::memory_order_acquire))
-        {
-            m_point.Back->x = m_stream->Read<float>();
-            m_point.Back->y = m_stream->Read<float>();
-            m_point.Back->z = m_stream->Read<float>();
-            m_point.Back->time = m_stream->Read<float>();
-            
-            std::lock_guard lock(m_mutex);
-            m_point.Swap();
-            m_added = true;
-        }
-    });
-}
-
-void ViveExplore::StopStream()
-{
-    m_pipeActive.store(false, std::memory_order_release);
-    m_pipeThread.join();
-    m_stream->Close(Stream::ClosingPolicy::ClearOperations);
-    delete m_stream;
 }

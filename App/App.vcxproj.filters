@@ -36,6 +36,12 @@
     <ClCompile Include="ViveExploration\Stream\TcpStream.cpp">
       <Filter>Tasks</Filter>
     </ClCompile>
+    <ClCompile Include="ViveExploration\ViveExploreBase.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="ViveExploration\ViveExploreFilter.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OneDimensionalIntegratorFacade.h">
@@ -125,5 +131,7 @@
     <ClInclude Include="ViveExploration\Stream\Pipe.h" />
     <ClInclude Include="ViveExploration\Stream\Stream.h" />
     <ClInclude Include="ViveExploration\Stream\TcpStream.h" />
+    <ClInclude Include="ViveExploration\ViveExploreBase.h" />
+    <ClInclude Include="ViveExploration\ViveExploreFilter.h" />
   </ItemGroup>
 </Project>
