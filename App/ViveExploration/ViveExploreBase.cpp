@@ -22,6 +22,7 @@ void ViveExploreBase::ProcessNewPoint(std::size_t curIndex)
     {
         std::lock_guard lock(m_spin_lock);
         newAdded = m_added;
+        m_added = false;
         m_lastPoint = *m_point.Front;
     }
 
