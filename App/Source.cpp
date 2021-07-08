@@ -41,6 +41,7 @@ int main()
 		std::make_shared<ViveExplore>(PlotStyle::AdaptiveRange),
 		std::make_shared<ViveExplore>(PlotStyle::AllTimeFixed),
 		std::make_shared<ViveExplore>(PlotStyle::MinMaxFixed),
+		std::make_shared<ViveExplore>(PlotStyle::SlippingAverage),
 	};
 	
 	for(;;)

@@ -11,9 +11,10 @@
 namespace
 {
 
-constexpr std::size_t PointsCount{ 1000 };
-constexpr std::size_t PointToAverageCount{ 100 };
-
+constexpr unsigned PointsCount{ 1000 };
+constexpr unsigned PointToAverageCount{ 100 };
+constexpr unsigned PointToTrendLine{ 100 };
+ ;
 }
 
 void ViveExplore::ClearPlot()
@@ -29,6 +30,10 @@ void ViveExplore::ClearPlot()
     m_sliceMinZ = GenerateSliceParameters({ 0, 255, 0 });
     m_sliceMedianZ = GenerateSliceParameters({ 0, 0, 0 });
     m_sliceMaxZ = GenerateSliceParameters({ 0, 0, 255 });
+
+    m_trendX = GenerateSliceParameters({ 0, 0, 255 });
+    m_trendY = GenerateSliceParameters({ 0, 0, 255 });
+    m_trendZ = GenerateSliceParameters({ 0, 0, 255 });
 
     m_figureX = GeneratePlotParameters();
     m_figureY = GeneratePlotParameters();
@@ -195,6 +200,39 @@ void ViveExplore::UpdateMinMaxFixed()
     m_figureX.DequeY.emplace_back(m_lastPoint.x * 1000);
     m_figureY.DequeY.emplace_back(m_lastPoint.y * 1000);
     m_figureZ.DequeY.emplace_back(m_lastPoint.z * 1000);
+
+    if(m_style == PlotStyle::SlippingAverage)
+    {
+        UpdateTrend(m_figureX, m_trendX);
+        UpdateTrend(m_figureY, m_trendY);
+        UpdateTrend(m_figureZ, m_trendZ);
+    }
+}
+
+void ViveExplore::UpdateTrend(const Plotter::GraphParameters& graph, Plotter::GraphParameters& trend)
+{
+    if (m_figureZ.DequeX.size() > PointToTrendLine)
+    {
+        auto PointsToPoint{ unsigned((double)m_figureZ.DequeX.size() / 4) };
+
+        double sum = 0;
+        for (unsigned i = 0; i < PointsToPoint; ++i)
+            sum += graph.DequeY[i];
+        trend.Y[0] = sum / PointsToPoint;
+
+        double sum2 = 0;
+        for (unsigned i = graph.DequeY.size() - PointsToPoint; i < graph.DequeY.size(); ++i)
+            sum2 += graph.DequeY[i];
+        trend.Y[1] = sum2 / PointsToPoint;
+    }
+    else
+    {
+        trend.Y[0] = graph.DequeY.front();
+        trend.Y[1] = graph.DequeY.back();
+    }
+
+    trend.X[0] = graph.DequeX.front();
+    trend.X[1] = graph.DequeX.back();
 }
 
 Plotter::GraphParameters ViveExplore::GeneratePlotParameters() const
@@ -248,6 +286,13 @@ void ViveExplore::InitializeFigures(Plotter::Plot& plot)
         figure1->AddGraph(&m_sliceMedianX);
         figure2->AddGraph(&m_sliceMedianY);
         figure3->AddGraph(&m_sliceMedianZ);
+    }
+
+    if(m_style == PlotStyle::SlippingAverage)
+    {
+        figure1->AddGraph(&m_trendX);
+        figure2->AddGraph(&m_trendY);
+        figure3->AddGraph(&m_trendZ);
     }
 
     Plotter::GridProperties grid;
@@ -336,6 +381,7 @@ void ViveExplore::RunStream()
             m_point.Back->y = m_stream->Read<float>();
             m_point.Back->z = m_stream->Read<float>();
             m_point.Back->time = m_stream->Read<float>();
+            
             std::lock_guard lock(m_mutex);
             m_point.Swap();
             m_added = true;

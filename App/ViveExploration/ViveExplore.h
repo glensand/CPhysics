@@ -24,6 +24,7 @@ enum class PlotStyle
     MinMaxFixed,
     AdaptiveRange,
     AllTimeFixed,
+    SlippingAverage,
 };
 
 class ViveExplore : public ITask
@@ -40,10 +41,9 @@ public:
     virtual ~ViveExplore() override = default;
 
     virtual void Run(const Params* params = nullptr) override;
-    void ClearPlot();
     virtual void Clear() override;
 private:
-
+	void ClearPlot();
     void ProcessKey(int keyCode);
     void RunStream();
     void StopStream();
@@ -53,6 +53,7 @@ private:
     void AddSliceGraphPoint(Graph3Set&& graph, double averageT, const Point& point);
     void UpdateAllTimeFixed();
     void UpdateMinMaxFixed();
+    void UpdateTrend(const Plotter::GraphParameters& graph, Plotter::GraphParameters& trend);
     void InitializeFigures(Plotter::Plot& plot);
     void RunDrawing();
     Plotter::GraphParameters GeneratePlotParameters() const;
@@ -88,6 +89,10 @@ private:
     Point m_lastPoint;
     PointTransformer m_transformer;
     std::vector<Vector3> m_planeList;
+
+    Plotter::GraphParameters m_trendY;
+    Plotter::GraphParameters m_trendX;
+    Plotter::GraphParameters m_trendZ;
 
     Plotter::GraphParameters m_sliceMinY;
     Plotter::GraphParameters m_sliceMinX;
