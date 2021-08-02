@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="OneDimensionalIntegratorFacade.cpp" />
+    <ClCompile Include="PolhemusExplore\PolhemusExplore.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="ViveExploration\PointTransformer.cpp" />
     <ClCompile Include="ViveExploration\Stream\Pipe.cpp" />
@@ -21,31 +21,12 @@
     <ClCompile Include="ViveExploration\ViveExploreFilter.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="bigtask17.h" />
-    <ClInclude Include="CVPlotExamples.h" />
-    <ClInclude Include="DTask2.h" />
-    <ClInclude Include="IntegratorsTaskBase.h" />
-    <ClInclude Include="OneDimensionalIntegratorFacade.h" />
     <ClInclude Include="ITask.h" />
     <ClInclude Include="PlotterTest\DoubleDoubleTest.h" />
     <ClInclude Include="PlotterTest\DoubleRowTestBase.h" />
     <ClInclude Include="PlotterTest\SinglePlotTest.h" />
-    <ClInclude Include="RuntimeMultiPlotExample.h" />
-    <ClInclude Include="RuntimePlotExample.h" />
+    <ClInclude Include="PolhemusExplore\PolhemusExplore.h" />
     <ClInclude Include="Steering.h" />
-    <ClInclude Include="Task10.h" />
-    <ClInclude Include="Task11.h" />
-    <ClInclude Include="Task12.h" />
-    <ClInclude Include="Task13.h" />
-    <ClInclude Include="Task14.h" />
-    <ClInclude Include="Task2.h" />
-    <ClInclude Include="Task3.h" />
-    <ClInclude Include="Task4.h" />
-    <ClInclude Include="Task5.h" />
-    <ClInclude Include="Task6.h" />
-    <ClInclude Include="task7.h" />
-    <ClInclude Include="Task8.h" />
-    <ClInclude Include="Task9.h" />
     <ClInclude Include="ViveExploration\Point.h" />
     <ClInclude Include="ViveExploration\PointTransformer.h" />
     <ClInclude Include="ViveExploration\Stream\Pipe.h" />
@@ -98,9 +79,9 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>$(SolutionDir)\x64\Debug;%(AdditionalLibraryDirectories);$(OPENCV_DIR)\x64\vc15\lib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\x64\Debug;%(AdditionalLibraryDirectories);$(SolutionDir)/Deps/PolhemusInput/lib</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Plot.lib;CPhysics.lib;$(OPENCV_LIBd);ws2_32.lib;</AdditionalDependencies>
+      <AdditionalDependencies>Plot.lib;CPhysics.lib;ws2_32.lib;PolhemusInputd.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -115,9 +96,9 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>$(SolutionDir)/x64/Release;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)/x64/Release;$(SolutionDir)/Deps/PolhemusInput/lib</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>Plot.lib;CPhysics.lib;ws2_32.lib</AdditionalDependencies>
+      <AdditionalDependencies>Plot.lib;CPhysics.lib;ws2_32.lib;PolhemusInput.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

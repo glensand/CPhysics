@@ -18,12 +18,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="OneDimensionalIntegratorFacade.cpp">
-      <Filter>Tasks</Filter>
-    </ClCompile>
-    <ClCompile Include="Source.cpp">
-      <Filter>Tasks</Filter>
-    </ClCompile>
     <ClCompile Include="ViveExploration\ViveExplore.cpp">
       <Filter>Tasks\ViveExploartion</Filter>
     </ClCompile>
@@ -42,71 +36,14 @@
     <ClCompile Include="ViveExploration\ViveExploreFilter.cpp">
       <Filter>Tasks</Filter>
     </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="PolhemusExplore\PolhemusExplore.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="OneDimensionalIntegratorFacade.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task2.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task3.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task4.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="task7.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="CVPlotExamples.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="ITask.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="IntegratorsTaskBase.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task5.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task6.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task8.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task9.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Steering.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task13.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task12.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task10.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task11.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="DTask2.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="bigtask17.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task14.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="RuntimePlotExample.h">
-      <Filter>Tasks</Filter>
-    </ClInclude>
     <ClInclude Include="ViveExploration\ViveExplore.h">
       <Filter>Tasks\ViveExploartion</Filter>
     </ClInclude>
@@ -115,9 +52,6 @@
     </ClInclude>
     <ClInclude Include="ViveExploration\Point.h">
       <Filter>Tasks\ViveExploartion</Filter>
-    </ClInclude>
-    <ClInclude Include="RuntimeMultiPlotExample.h">
-      <Filter>Tasks</Filter>
     </ClInclude>
     <ClInclude Include="PlotterTest\SinglePlotTest.h">
       <Filter>Tasks\PlotterTest</Filter>
@@ -133,5 +67,8 @@
     <ClInclude Include="ViveExploration\Stream\TcpStream.h" />
     <ClInclude Include="ViveExploration\ViveExploreBase.h" />
     <ClInclude Include="ViveExploration\ViveExploreFilter.h" />
+    <ClInclude Include="ITask.h" />
+    <ClInclude Include="Steering.h" />
+    <ClInclude Include="PolhemusExplore\PolhemusExplore.h" />
   </ItemGroup>
 </Project>
