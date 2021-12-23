@@ -27,6 +27,7 @@
     <ClInclude Include="PlotterTest\SinglePlotTest.h" />
     <ClInclude Include="PolhemusExplore\PolhemusExplore.h" />
     <ClInclude Include="Steering.h" />
+    <ClInclude Include="ViveExploration\Kalman.h" />
     <ClInclude Include="ViveExploration\Point.h" />
     <ClInclude Include="ViveExploration\PointTransformer.h" />
     <ClInclude Include="ViveExploration\Stream\Pipe.h" />

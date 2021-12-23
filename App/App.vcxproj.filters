@@ -70,5 +70,6 @@
     <ClInclude Include="ITask.h" />
     <ClInclude Include="Steering.h" />
     <ClInclude Include="PolhemusExplore\PolhemusExplore.h" />
+    <ClInclude Include="ViveExploration\Kalman.h" />
   </ItemGroup>
 </Project>

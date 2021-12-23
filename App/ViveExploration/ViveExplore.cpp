@@ -9,7 +9,6 @@
 namespace
 {
 
-constexpr unsigned PointsCount{ 1000 };
 constexpr unsigned PointToAverageCount{ 100 };
 constexpr unsigned PointToTrendLine{ 100 };
 
@@ -93,31 +92,6 @@ void ViveExplore::UpdateAdaptiveRange()
     m_sliceMedianX.Y[0] = m_sliceMedianX.Y[1] = m_curMedian.x;
     m_sliceMedianY.Y[0] = m_sliceMedianY.Y[1] = m_curMedian.y;
     m_sliceMedianZ.Y[0] = m_sliceMedianZ.Y[1] = m_curMedian.z;
-}
-
-void ViveExplore::UpdateAdaptiveRangeFigure(std::deque<double>& x, std::deque<double>& y, 
-    float& median, float curValue)
-{
-    auto pYMm = curValue * 1000;
-
-    if(x.size() < PointsCount)
-    {
-        median = (float)x.size() * median / float(x.size() + 1);
-        median += pYMm / float(x.size() + 1);
-    }
-    else
-    {
-        auto frontY = y.front();
-
-        x.pop_front();
-        y.pop_front();
-
-        median += curValue;
-        median -= frontY / 1000;
-    }
-
-    x.push_back((double)m_lastPoint.time);
-    y.push_back(pYMm);
 }
 
 void ViveExplore::AddSliceGraphPoint(Graph3Set&& graph, double averageT, const Point& point)

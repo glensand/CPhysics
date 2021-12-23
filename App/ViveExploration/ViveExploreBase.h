@@ -40,8 +40,9 @@ protected:
     virtual void ProcessKeyImpl(int keyCode) = 0;
     virtual void ProcessNewPointImpl(std::size_t index) = 0;
     virtual void InitializeFigures(Plotter::Plot& plot) = 0;
+    void UpdateAdaptiveRangeFigure(std::deque<double>& x, std::deque<double>& y, float& median, float curValue);
 
-    Plotter::GraphParameters GeneratePlotParameters() const;
+    Plotter::GraphParameters GeneratePlotParameters(const Plotter::Color& color = Plotter::Color{ 255, 0, 0 }) const;
     Plotter::GraphParameters GenerateSliceParameters(const Plotter::Color& color);
 
     struct Key final
@@ -54,6 +55,7 @@ protected:
         }
     };
 
+    Point m_curMedian{ 0, 0, 0 };
     Point m_lastPoint;
     PlotStyle m_style;
 

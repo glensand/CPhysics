@@ -8,12 +8,13 @@
 
 #pragma once
 
+#include "Kalman.h"
 #include "ViveExploration/ViveExploreBase.h"
 
 class ViveExploreFilter final : public ViveExploreBase
 {
 public:
-    ViveExploreFilter(PlotStyle style = PlotStyle::AdaptiveRange);
+    ViveExploreFilter();
     virtual ~ViveExploreFilter() override = default;
     
 private:
@@ -23,5 +24,14 @@ private:
     virtual void InitializeFigures(Plotter::Plot& plot) override;
 
     Plotter::GraphParameters m_figureY;
-    Plotter::GraphParameters m_figureYFiltered;
+    Plotter::GraphParameters m_figureX;
+    Plotter::GraphParameters m_figureZ;
+
+    Plotter::GraphParameters m_filteredFigureY;
+    Plotter::GraphParameters m_filteredFigureX;
+    Plotter::GraphParameters m_filteredFigureZ;
+
+    KalmanFilter m_x;
+    KalmanFilter m_y;
+    KalmanFilter m_z;
 };

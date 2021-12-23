@@ -31,13 +31,10 @@ private:
     virtual void InitializeFigures(Plotter::Plot& plot) override;
 
     void UpdateAdaptiveRange();
-    void UpdateAdaptiveRangeFigure(std::deque<double>& x, std::deque<double>& y, float& median, float curValue);
     void AddSliceGraphPoint(Graph3Set&& graph, double averageT, const Point& point);
     void UpdateAllTimeFixed();
     void UpdateMinMaxFixed();
     void UpdateTrend(const Plotter::GraphParameters& graph, Plotter::GraphParameters& trend);
-
-    Point m_curMedian{ 0, 0, 0 };
 
     std::vector<Point> m_lastPoints;
     PointTransformer m_transformer;

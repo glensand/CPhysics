@@ -4,6 +4,8 @@
 #include "CVPlot/CVPlot.h"
 #include "Stream/TcpStream.h"
 
+static constexpr unsigned PointsCount{ 1000 };
+
 ViveExploreBase::ViveExploreBase(PlotStyle style)
     : m_style(style)
 {
@@ -32,12 +34,12 @@ void ViveExploreBase::ProcessNewPoint(std::size_t curIndex)
     }
 }
 
-Plotter::GraphParameters ViveExploreBase::GeneratePlotParameters() const
+Plotter::GraphParameters ViveExploreBase::GeneratePlotParameters(const Plotter::Color& color) const
 {
     Plotter::GraphParameters graphParams;
     graphParams.PointRadius = 1;
     graphParams.Style = m_style != PlotStyle::AllTimeFixed ? Plotter::PlotStyle::POINT_LINE : Plotter::PlotStyle::LINE;
-    graphParams.Color = Plotter::Color{ 255, 0, 0 };
+    graphParams.Color = color;
     graphParams.UseDeque = m_style != PlotStyle::AllTimeFixed;
 
     return graphParams;
@@ -127,4 +129,29 @@ void ViveExploreBase::StopStream()
     m_pipeThread.join();
     m_stream->Close(Stream::ClosingPolicy::ClearOperations);
     delete m_stream;
+}
+
+void ViveExploreBase::UpdateAdaptiveRangeFigure(std::deque<double>& x, std::deque<double>& y,
+    float& median, float curValue)
+{
+    auto pYMm = curValue * 1000;
+
+    if (x.size() < PointsCount)
+    {
+        median = (float)x.size() * median / float(x.size() + 1);
+        median += pYMm / float(x.size() + 1);
+    }
+    else
+    {
+        auto frontY = y.front();
+
+        x.pop_front();
+        y.pop_front();
+
+        median += curValue;
+        median -= frontY / 1000;
+    }
+
+    x.push_back((double)m_lastPoint.time);
+    y.push_back(pYMm);
 }
